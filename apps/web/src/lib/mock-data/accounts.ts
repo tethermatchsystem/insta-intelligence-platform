@@ -1,0 +1,67 @@
+export const accountKpis = [
+  { label: "Monitored accounts", value: "128", detail: "+12 added this month", tone: "blue" },
+  { label: "Connected accounts", value: "42", detail: "official API access", tone: "emerald" },
+  { label: "Watchlisted competitors", value: "31", detail: "Business Discovery scope", tone: "violet" },
+  { label: "Avg provider confidence", value: "97.4%", detail: "official + licensed", tone: "slate" },
+  { label: "Need review", value: "7", detail: "freshness or permissions", tone: "amber" },
+];
+
+export const accountFilters = ["Account name", "Provider", "Status", "Confidence", "Freshness"];
+
+export const accountRows = [
+  {
+    account: "Example Brand",
+    handle: "@examplebrand",
+    type: "Business",
+    followers: "1.2M",
+    engagement: "5.8%",
+    provider: "Meta official API",
+    confidence: "100%",
+    freshness: "2m ago",
+    status: "Connected",
+  },
+  {
+    account: "Creator Studio",
+    handle: "@creator_studio",
+    type: "Creator",
+    followers: "284K",
+    engagement: "7.1%",
+    provider: "Business Discovery",
+    confidence: "97%",
+    freshness: "12m ago",
+    status: "Watchlisted",
+  },
+  {
+    account: "Agency Client",
+    handle: "@agency_client",
+    type: "Business",
+    followers: "92K",
+    engagement: "4.3%",
+    provider: "Meta official API",
+    confidence: "100%",
+    freshness: "8m ago",
+    status: "Connected",
+  },
+  {
+    account: "Northstar Apparel",
+    handle: "@northstar_apparel",
+    type: "Business",
+    followers: "418K",
+    engagement: "3.9%",
+    provider: "Licensed provider",
+    confidence: "92%",
+    freshness: "1h ago",
+    status: "Review",
+  },
+  {
+    account: "Launch Lab",
+    handle: "@launchlab",
+    type: "Creator",
+    followers: "63K",
+    engagement: "6.4%",
+    provider: "Manual CSV import",
+    confidence: "88%",
+    freshness: "1d ago",
+    status: "Imported",
+  },
+];
