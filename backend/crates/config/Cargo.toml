@@ -1,0 +1,9 @@
+[package]
+name = "insta-config"
+edition.workspace = true
+version.workspace = true
+license.workspace = true
+
+[lib]
+name = "insta_config"
+path = "src/lib.rs"

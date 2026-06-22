@@ -1,0 +1,1 @@
+CREATE TABLE IF NOT EXISTS ad_archive_items (tenant_id UInt64, ad_id String, advertiser_name String, first_seen_at DateTime64(3, 'UTC'), source_name LowCardinality(String), payload_json String) ENGINE = MergeTree ORDER BY (tenant_id, advertiser_name, first_seen_at);

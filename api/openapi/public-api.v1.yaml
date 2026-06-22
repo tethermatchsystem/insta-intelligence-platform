@@ -1,0 +1,34 @@
+openapi: 3.1.0
+info:
+  title: Insta Intelligence Public API
+  version: v1-batch0
+paths:
+  /health:
+    get:
+      summary: Health check
+      responses: { '200': { description: OK } }
+  /ready:
+    get:
+      summary: Readiness check
+      responses: { '200': { description: Ready } }
+  /v1/accounts:
+    get:
+      summary: List mock accounts
+      responses: { '200': { description: Mock accounts } }
+  /v1/accounts/{accountId}/timeline:
+    get:
+      summary: Mock account timeline
+      parameters:
+        - in: path
+          name: accountId
+          required: true
+          schema: { type: string }
+      responses: { '200': { description: Mock timeline } }
+  /v1/data-sources:
+    get:
+      summary: Mock data sources
+      responses: { '200': { description: Mock data sources } }
+  /v1/compliance/feature-policy:
+    get:
+      summary: Feature policy matrix
+      responses: { '200': { description: Feature policy } }

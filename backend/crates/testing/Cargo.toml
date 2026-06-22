@@ -1,0 +1,9 @@
+[package]
+name = "insta-testing"
+edition.workspace = true
+version.workspace = true
+license.workspace = true
+
+[lib]
+name = "insta_testing"
+path = "src/lib.rs"

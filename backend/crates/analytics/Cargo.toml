@@ -1,0 +1,9 @@
+[package]
+name = "insta-analytics"
+edition.workspace = true
+version.workspace = true
+license.workspace = true
+
+[lib]
+name = "insta_analytics"
+path = "src/lib.rs"

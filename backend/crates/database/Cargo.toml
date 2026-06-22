@@ -1,0 +1,9 @@
+[package]
+name = "insta-database"
+edition.workspace = true
+version.workspace = true
+license.workspace = true
+
+[lib]
+name = "insta_database"
+path = "src/lib.rs"

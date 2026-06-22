@@ -1,0 +1,3 @@
+CREATE TABLE IF NOT EXISTS data_subject_requests (id BIGSERIAL PRIMARY KEY, tenant_id BIGINT REFERENCES tenants(id) ON DELETE SET NULL, request_type TEXT NOT NULL, subject_ref TEXT NOT NULL, status TEXT NOT NULL DEFAULT 'queued', created_at TIMESTAMPTZ NOT NULL DEFAULT now());
+CREATE TABLE IF NOT EXISTS suppression_entries (id BIGSERIAL PRIMARY KEY, tenant_id BIGINT REFERENCES tenants(id) ON DELETE CASCADE, subject_ref TEXT NOT NULL, reason TEXT NOT NULL, created_at TIMESTAMPTZ NOT NULL DEFAULT now());
+CREATE TABLE IF NOT EXISTS retention_policies (id BIGSERIAL PRIMARY KEY, tenant_id BIGINT REFERENCES tenants(id) ON DELETE CASCADE, data_class TEXT NOT NULL, retention_days INT NOT NULL, created_at TIMESTAMPTZ NOT NULL DEFAULT now());

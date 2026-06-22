@@ -1,0 +1,2 @@
+use axum::{routing::get, Router};
+pub fn router() -> Router { Router::new().route("/health", get(crate::handlers::health)).route("/ready", get(crate::handlers::ready)).route("/v1/accounts", get(crate::handlers::accounts)).route("/v1/accounts/:account_id/timeline", get(crate::handlers::account_timeline)).route("/v1/data-sources", get(crate::handlers::data_sources)).route("/v1/compliance/feature-policy", get(crate::handlers::feature_policy)) }

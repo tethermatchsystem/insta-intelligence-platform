@@ -1,0 +1,1 @@
+CREATE TABLE IF NOT EXISTS audit_logs (id BIGSERIAL PRIMARY KEY, tenant_id BIGINT REFERENCES tenants(id) ON DELETE SET NULL, action TEXT NOT NULL, target_ref TEXT, metadata JSONB NOT NULL DEFAULT '{}'::jsonb, created_at TIMESTAMPTZ NOT NULL DEFAULT now());

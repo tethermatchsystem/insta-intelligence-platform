@@ -1,0 +1,9 @@
+[package]
+name = "insta-search"
+edition.workspace = true
+version.workspace = true
+license.workspace = true
+
+[lib]
+name = "insta_search"
+path = "src/lib.rs"

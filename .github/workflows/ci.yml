@@ -1,0 +1,11 @@
+name: CI Placeholder
+on:
+  pull_request:
+  push:
+    branches: [main]
+jobs:
+  batch0-placeholder:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: echo "Batch 0 CI placeholder. Future batches add frontend/backend checks."

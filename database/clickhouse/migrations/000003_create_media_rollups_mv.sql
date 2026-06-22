@@ -1,0 +1,1 @@
+CREATE MATERIALIZED VIEW IF NOT EXISTS mv_daily_media_rollups ENGINE = SummingMergeTree PARTITION BY toYYYYMM(metric_date) ORDER BY (tenant_id, media_item_id, metric_date) AS SELECT tenant_id, media_item_id, toDate(event_time) AS metric_date, count() AS event_count FROM analytics_events GROUP BY tenant_id, media_item_id, metric_date;

@@ -1,0 +1,7 @@
+{
+  "name": "@insta/policy",
+  "private": true,
+  "version": "0.0.0-batch0",
+  "main": "src/index.ts",
+  "types": "src/index.ts"
+}

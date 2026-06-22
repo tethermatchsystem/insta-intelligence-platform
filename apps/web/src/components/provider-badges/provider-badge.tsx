@@ -1,0 +1,1 @@
+export function ProviderBadge({ provider = "mock_provider" }: { provider?: string }) { return <span className="rounded-full bg-indigo-50 px-2.5 py-1 text-xs font-medium text-indigo-700">{provider}</span>; }

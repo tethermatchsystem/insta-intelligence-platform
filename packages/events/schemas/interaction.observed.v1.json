@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "interaction.observed.v1",
+  "type": "object",
+  "required": [
+    "id",
+    "occurredAt",
+    "sourceName"
+  ],
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "occurredAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "sourceName": {
+      "type": "string"
+    }
+  }
+}

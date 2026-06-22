@@ -1,0 +1,9 @@
+[package]
+name = "insta-meta-api"
+edition.workspace = true
+version.workspace = true
+license.workspace = true
+
+[lib]
+name = "insta_meta_api"
+path = "src/lib.rs"

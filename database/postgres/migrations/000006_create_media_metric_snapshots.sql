@@ -1,0 +1,1 @@
+CREATE TABLE IF NOT EXISTS media_metric_snapshots (id BIGSERIAL PRIMARY KEY, tenant_id BIGINT NOT NULL REFERENCES tenants(id) ON DELETE CASCADE, media_item_id BIGINT NOT NULL REFERENCES media_items(id) ON DELETE CASCADE, captured_at TIMESTAMPTZ NOT NULL, like_count BIGINT, comment_count BIGINT, view_count BIGINT, source_name TEXT NOT NULL);

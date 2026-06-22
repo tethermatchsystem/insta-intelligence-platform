@@ -1,0 +1,9 @@
+[package]
+name = "insta-tenancy"
+edition.workspace = true
+version.workspace = true
+license.workspace = true
+
+[lib]
+name = "insta_tenancy"
+path = "src/lib.rs"

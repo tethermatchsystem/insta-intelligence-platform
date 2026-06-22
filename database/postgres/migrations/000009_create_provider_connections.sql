@@ -1,0 +1,1 @@
+CREATE TABLE IF NOT EXISTS provider_connections (id BIGSERIAL PRIMARY KEY, tenant_id BIGINT NOT NULL REFERENCES tenants(id) ON DELETE CASCADE, provider_type TEXT NOT NULL, display_name TEXT NOT NULL, status TEXT NOT NULL DEFAULT 'mocked', config JSONB NOT NULL DEFAULT '{}'::jsonb, created_at TIMESTAMPTZ NOT NULL DEFAULT now());

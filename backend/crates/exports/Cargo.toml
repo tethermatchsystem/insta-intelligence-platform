@@ -1,0 +1,9 @@
+[package]
+name = "insta-exports"
+edition.workspace = true
+version.workspace = true
+license.workspace = true
+
+[lib]
+name = "insta_exports"
+path = "src/lib.rs"

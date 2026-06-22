@@ -1,0 +1,9 @@
+[package]
+name = "insta-policy"
+edition.workspace = true
+version.workspace = true
+license.workspace = true
+
+[lib]
+name = "insta_policy"
+path = "src/lib.rs"

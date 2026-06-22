@@ -1,0 +1,9 @@
+[package]
+name = "insta-providers"
+edition.workspace = true
+version.workspace = true
+license.workspace = true
+
+[lib]
+name = "insta_providers"
+path = "src/lib.rs"

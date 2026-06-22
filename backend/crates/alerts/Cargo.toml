@@ -1,0 +1,9 @@
+[package]
+name = "insta-alerts"
+edition.workspace = true
+version.workspace = true
+license.workspace = true
+
+[lib]
+name = "insta_alerts"
+path = "src/lib.rs"

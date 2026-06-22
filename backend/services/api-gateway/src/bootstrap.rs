@@ -1,0 +1,2 @@
+use std::net::SocketAddr;
+pub async fn run() -> anyhow::Result<()> { tracing_subscriber::fmt().with_env_filter("info").init(); let app = crate::routes::router(); let addr: SocketAddr = std::env::var("API_GATEWAY_BIND_ADDR").unwrap_or_else(|_| "127.0.0.1:8080".to_string()).parse()?; tracing::info!(%addr, "api-gateway mock server listening"); let listener = tokio::net::TcpListener::bind(addr).await?; axum::serve(listener, app).await?; Ok(()) }

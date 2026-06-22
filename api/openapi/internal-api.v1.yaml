@@ -1,0 +1,9 @@
+openapi: 3.1.0
+info:
+  title: Insta Intelligence Internal API
+  version: v1-batch0
+paths:
+  /internal/jobs:
+    get:
+      summary: Internal jobs placeholder
+      responses: { '200': { description: Placeholder } }

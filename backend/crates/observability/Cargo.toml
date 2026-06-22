@@ -1,0 +1,9 @@
+[package]
+name = "insta-observability"
+edition.workspace = true
+version.workspace = true
+license.workspace = true
+
+[lib]
+name = "insta_observability"
+path = "src/lib.rs"

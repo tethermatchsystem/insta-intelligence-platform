@@ -1,0 +1,9 @@
+[package]
+name = "insta-events"
+edition.workspace = true
+version.workspace = true
+license.workspace = true
+
+[lib]
+name = "insta_events"
+path = "src/lib.rs"
