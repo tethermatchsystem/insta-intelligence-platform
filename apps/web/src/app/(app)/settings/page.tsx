@@ -1,2 +1,5 @@
-import { DashboardPageScaffold } from "@/components/dashboards/page-scaffold";
-export default function Page() { return <DashboardPageScaffold title="Settings" description="Workspace settings placeholder." gated={false} gateStatus="official_safe" />; }
+import { SettingsPage } from "@/components/settings/settings-page";
+
+export default function Page() {
+  return <SettingsPage />;
+}

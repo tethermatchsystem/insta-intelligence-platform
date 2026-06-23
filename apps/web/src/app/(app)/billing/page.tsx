@@ -1,2 +1,5 @@
-import { DashboardPageScaffold } from "@/components/dashboards/page-scaffold";
-export default function Page() { return <DashboardPageScaffold title="Billing" description="Workspace billing and quota placeholder." gated={false} gateStatus="official_safe" />; }
+import { BillingPage } from "@/components/billing/billing-page";
+
+export default function Page() {
+  return <BillingPage />;
+}
