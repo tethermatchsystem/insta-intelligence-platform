@@ -1,2 +1,5 @@
-import { DashboardPageScaffold } from "@/components/dashboards/page-scaffold";
-export default function Page() { return <DashboardPageScaffold title="Competitors" description="Professional-account benchmarking placeholder." gated={false} gateStatus="official_safe" />; }
+import { CompetitorIntelligencePage } from "@/components/competitors/competitor-intelligence-page";
+
+export default function Page() {
+  return <CompetitorIntelligencePage />;
+}
