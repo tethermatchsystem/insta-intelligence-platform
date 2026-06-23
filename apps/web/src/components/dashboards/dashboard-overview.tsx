@@ -28,7 +28,7 @@ function DashboardKpiCard({ label, value, trend, tone }: { label: string; value:
         <p className="text-sm font-medium text-slate-500">{label}</p>
         <span className={`rounded-full px-2.5 py-1 text-[11px] font-semibold ring-1 ${toneClasses(tone)}`}>{trend}</span>
       </div>
-      <p className="mt-4 text-3xl font-semibold tracking-tight text-slate-950">{value}</p>
+      <p className="mt-4 text-2xl font-semibold tracking-tight text-slate-950 sm:text-3xl">{value}</p>
     </div>
   );
 }
@@ -48,7 +48,7 @@ function DashboardPanel({ title, subtitle, children }: { title: string; subtitle
 export function DashboardOverview() {
   return (
     <div className="space-y-6">
-      <header className="rounded-[2rem] border border-slate-200 bg-white p-6 shadow-sm">
+      <header className="rounded-[2rem] border border-slate-200 bg-white p-5 shadow-sm sm:p-6">
         <div className="flex flex-col gap-5 xl:flex-row xl:items-start xl:justify-between">
           <div>
             <div className="mb-3 flex flex-wrap gap-2">
@@ -56,8 +56,8 @@ export function DashboardOverview() {
               <span className="rounded-full bg-indigo-50 px-3 py-1 text-xs font-semibold text-indigo-700 ring-1 ring-indigo-100">Provider confidence 98.2%</span>
               <span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-700 ring-1 ring-slate-200">No live integrations yet</span>
             </div>
-            <h1 className="text-4xl font-semibold tracking-tight text-slate-950">Dashboard</h1>
-            <p className="mt-2 max-w-3xl text-base text-slate-600">Connected professional account intelligence across owned media, mentions, competitor benchmarks, and provider freshness.</p>
+            <h1 className="text-3xl font-semibold tracking-tight text-slate-950 sm:text-4xl">Dashboard</h1>
+            <p className="mt-2 max-w-3xl text-base leading-7 text-slate-600">Connected professional account intelligence across owned media, mentions, competitor benchmarks, and provider freshness.</p>
           </div>
           <div className="rounded-3xl border border-slate-200 bg-slate-50 p-4 text-sm text-slate-600 xl:w-80">
             <p className="font-semibold text-slate-900">Mock freshness note</p>
@@ -74,8 +74,8 @@ export function DashboardOverview() {
 
       <section className="grid gap-6 xl:grid-cols-[minmax(0,1.7fr)_minmax(360px,0.8fr)]">
         <DashboardPanel title="Audience and engagement trend" subtitle="Mock visual placeholder for followers, engagement, mentions, alerts, and provider confidence.">
-          <div className="rounded-3xl bg-gradient-to-br from-slate-950 via-slate-900 to-indigo-950 p-5 text-white">
-            <div className="flex h-72 items-end gap-4 rounded-2xl border border-white/10 bg-white/5 p-5">
+          <div className="overflow-x-auto rounded-3xl bg-gradient-to-br from-slate-950 via-slate-900 to-indigo-950 p-4 text-white sm:p-5">
+            <div className="flex h-64 min-w-[520px] items-end gap-4 rounded-2xl border border-white/10 bg-white/5 p-4 sm:h-72 sm:p-5">
               {dashboardTrendLabels.map((item) => (
                 <div key={item.label} className="flex flex-1 flex-col items-center gap-3">
                   <div className={`w-full rounded-t-2xl bg-white/80 shadow-lg shadow-indigo-950/30 ${item.height}`} />
@@ -147,7 +147,7 @@ export function DashboardOverview() {
       </section>
 
       <DashboardPanel title="Recent intelligence events" subtitle="Mock event stream prepared for future official provider ingestion.">
-        <div className="overflow-hidden rounded-2xl border border-slate-200">
+        <div className="overflow-x-auto rounded-2xl border border-slate-200">
           <table className="w-full min-w-[860px] text-left text-sm">
             <thead className="bg-slate-50 text-xs uppercase tracking-wide text-slate-500">
               <tr>

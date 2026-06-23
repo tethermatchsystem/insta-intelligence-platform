@@ -1,2 +1,6 @@
-import { DashboardPageScaffold } from "@/components/dashboards/page-scaffold";
-export default function Page() { return <DashboardPageScaffold title="Audit Logs" description="Immutable audit trail placeholder." gated={false} gateStatus="official_safe" />; }
+import { SettingsSubpage } from "@/components/settings/settings-subpage";
+import { settingsSubpagesMockData } from "@/lib/mock-data/settings-subpages";
+
+export default function Page() {
+  return <SettingsSubpage page={settingsSubpagesMockData.auditLogs} />;
+}
