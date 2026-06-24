@@ -4,12 +4,14 @@ import { EmptyState } from "@/components/empty-states/empty-state";
 import { FeatureGateNotice } from "@/components/feature-gates/feature-gate-notice";
 import { KpiCard } from "@/components/kpi-cards/kpi-card";
 import { SystemState, SystemStateBadge } from "@/components/system-states/system-state";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
 
 export function DashboardPageScaffold({ title, description, gated = false, gateStatus = "licensed_provider_only" }: { title: string; description: string; gated?: boolean; gateStatus?: string }) {
   return (
     <div className="space-y-6">
-      <header className="rounded-[2rem] border border-slate-200 bg-white p-5 shadow-sm sm:p-6">
-        <div className="flex flex-col gap-5 xl:flex-row xl:items-start xl:justify-between">
+      <Card className="rounded-[2rem] border-slate-200 bg-white/95 py-0 shadow-sm shadow-slate-200/70">
+        <CardHeader className="flex flex-col gap-5 p-5 sm:p-6 xl:flex-row xl:items-start xl:justify-between">
           <div>
             <div className="mb-4 flex flex-wrap gap-2">
               <SystemStateBadge badge={{ label: "Source: mock snapshot", tone: "info" }} />
@@ -17,26 +19,33 @@ export function DashboardPageScaffold({ title, description, gated = false, gateS
               <SystemStateBadge badge={{ label: "Freshness: static", tone: "neutral" }} />
               <SystemStateBadge badge={{ label: "No live integrations", tone: "warning" }} />
             </div>
-            <h1 className="text-3xl font-semibold tracking-tight text-slate-950 sm:text-4xl">{title}</h1>
-            <p className="mt-2 max-w-3xl text-base leading-7 text-slate-600">{description}</p>
+            <CardTitle className="text-3xl font-semibold tracking-tight text-slate-950 sm:text-4xl">{title}</CardTitle>
+            <CardDescription className="mt-2 max-w-3xl text-base leading-7 text-slate-600">{description}</CardDescription>
           </div>
           <div className="rounded-3xl border border-slate-200 bg-slate-50 p-4 text-sm leading-6 text-slate-600 xl:w-[28rem]">
             <p className="font-semibold text-slate-900">Placeholder-only enterprise state</p>
             <p className="mt-1">This route keeps premium empty, loading, restricted, and unavailable-state copy visible while live providers and backend writes remain disabled.</p>
           </div>
-        </div>
-      </header>
+        </CardHeader>
+      </Card>
 
-      <div className="rounded-3xl border border-slate-200 bg-white p-4 shadow-sm">
-        <div className="grid gap-3 md:grid-cols-3 xl:grid-cols-6">
-          {["Account", "Source", "Provider", "Confidence", "Date range", "Workspace"].map((filter) => (
-            <div key={filter} className="rounded-2xl border border-slate-100 bg-slate-50 p-3 text-sm text-slate-600">
-              <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-400">{filter}</p>
-              <p className="mt-2 font-medium text-slate-700">Placeholder filter</p>
-            </div>
-          ))}
-        </div>
-      </div>
+      <Card className="rounded-3xl border-slate-200 bg-white/95 py-0 shadow-sm shadow-slate-200/70">
+        <CardHeader className="p-4 pb-3">
+          <CardTitle className="text-sm font-semibold text-slate-950">Preview filters</CardTitle>
+          <CardDescription>Static filter controls for source, provider, confidence, date range, and workspace context.</CardDescription>
+        </CardHeader>
+        <Separator />
+        <CardContent className="p-4">
+          <div className="grid gap-3 md:grid-cols-3 xl:grid-cols-6">
+            {["Account", "Source", "Provider", "Confidence", "Date range", "Workspace"].map((filter) => (
+              <div key={filter} className="rounded-2xl border border-slate-100 bg-slate-50 p-3 text-sm text-slate-600 transition hover:bg-slate-100/80">
+                <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-400">{filter}</p>
+                <p className="mt-2 font-medium text-slate-700">Placeholder filter</p>
+              </div>
+            ))}
+          </div>
+        </CardContent>
+      </Card>
 
       {gated ? <FeatureGateNotice status={gateStatus} /> : null}
 

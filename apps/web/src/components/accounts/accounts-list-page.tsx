@@ -1,4 +1,9 @@
 import { accountFilters, accountKpis, accountRows } from "@/lib/mock-data/accounts";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 
 function toneClasses(tone: string) {
   const tones: Record<string, string> = {
@@ -25,31 +30,33 @@ function statusClasses(status: string) {
 
 function AccountKpiCard({ label, value, detail, tone }: { label: string; value: string; detail: string; tone: string }) {
   return (
-    <div className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">
+    <Card className="rounded-3xl border-slate-200 bg-white/95 py-0 shadow-sm shadow-slate-200/70">
+      <CardContent className="p-5">
       <p className="text-sm font-medium text-slate-500">{label}</p>
       <div className="mt-4 flex items-end justify-between gap-3">
         <p className="text-3xl font-semibold tracking-tight text-slate-950">{value}</p>
-        <span className={`rounded-full px-2.5 py-1 text-[11px] font-semibold ring-1 ${toneClasses(tone)}`}>{detail}</span>
+        <Badge variant="outline" className={`rounded-full px-2.5 py-1 text-[11px] font-semibold ring-1 ${toneClasses(tone)}`}>{detail}</Badge>
       </div>
-    </div>
+      </CardContent>
+    </Card>
   );
 }
 
 export function AccountsListPage() {
   return (
     <div className="space-y-6">
-      <header className="rounded-[2rem] border border-slate-200 bg-white p-5 shadow-sm sm:p-6">
-        <div className="flex flex-col gap-5 xl:flex-row xl:items-start xl:justify-between">
+      <Card className="rounded-[2rem] border-slate-200 bg-white/95 py-0 shadow-sm shadow-slate-200/70">
+        <CardHeader className="flex flex-col gap-5 p-5 sm:p-6 xl:flex-row xl:items-start xl:justify-between">
           <div>
             <div className="mb-3 flex flex-wrap gap-2">
-              <span className="rounded-full bg-emerald-50 px-3 py-1 text-xs font-semibold text-emerald-700 ring-1 ring-emerald-100">Official-safe accounts</span>
-              <span className="rounded-full bg-indigo-50 px-3 py-1 text-xs font-semibold text-indigo-700 ring-1 ring-indigo-100">Connected professional accounts</span>
-              <span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-700 ring-1 ring-slate-200">Mock data only</span>
+              <Badge variant="outline" className="rounded-full bg-emerald-50 px-3 py-1 text-xs font-semibold text-emerald-700 ring-emerald-100">Official-safe accounts</Badge>
+              <Badge variant="outline" className="rounded-full bg-indigo-50 px-3 py-1 text-xs font-semibold text-indigo-700 ring-indigo-100">Connected professional accounts</Badge>
+              <Badge variant="secondary" className="rounded-full px-3 py-1 text-xs font-semibold text-slate-700">Mock data only</Badge>
             </div>
-            <h1 className="text-3xl font-semibold tracking-tight text-slate-950 sm:text-4xl">Accounts</h1>
-            <p className="mt-2 max-w-3xl text-base leading-7 text-slate-600">
+            <CardTitle className="text-3xl font-semibold tracking-tight text-slate-950 sm:text-4xl">Accounts</CardTitle>
+            <CardDescription className="mt-2 max-w-3xl text-base leading-7 text-slate-600">
               Monitor connected business and creator accounts, professional-account watchlists, provider freshness, and review status from one intelligence surface.
-            </p>
+            </CardDescription>
           </div>
           <div className="rounded-3xl border border-slate-200 bg-slate-50 p-4 text-sm text-slate-600 xl:w-96">
             <p className="font-semibold text-slate-900">Provider and compliance notice</p>
@@ -57,8 +64,8 @@ export function AccountsListPage() {
               This mock view supports official APIs, connected accounts, manual imports, and licensed compliant providers only. Scraping and private account access are not implemented.
             </p>
           </div>
-        </div>
-      </header>
+        </CardHeader>
+      </Card>
 
       <section className="grid gap-4 md:grid-cols-2 xl:grid-cols-5">
         {accountKpis.map((kpi) => (
@@ -66,65 +73,65 @@ export function AccountsListPage() {
         ))}
       </section>
 
-      <section className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">
-        <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+      <Card className="rounded-3xl border-slate-200 bg-white/95 py-0 shadow-sm shadow-slate-200/70">
+        <CardHeader className="flex flex-col gap-3 p-5 pb-4 sm:flex-row sm:items-end sm:justify-between">
           <div>
-            <h2 className="text-base font-semibold text-slate-950">Search and filters</h2>
-            <p className="mt-1 text-sm text-slate-500">Placeholder controls for future live filtering and saved account views.</p>
+            <CardTitle className="text-base font-semibold text-slate-950">Search and filters</CardTitle>
+            <CardDescription className="mt-1 text-sm text-slate-500">Placeholder controls for future live filtering and saved account views.</CardDescription>
           </div>
-          <button type="button" className="w-full rounded-2xl border border-slate-200 bg-slate-950 px-4 py-2 text-sm font-medium text-white shadow-sm sm:w-auto">Preview account list workflow</button>
-        </div>
+          <Button type="button" className="w-full rounded-2xl bg-slate-950 px-4 text-sm font-medium text-white shadow-sm sm:w-auto">Preview account list workflow</Button>
+        </CardHeader>
+        <CardContent className="p-5 pt-0">
         <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-5">
           {accountFilters.map((filter) => (
             <label key={filter} className="block">
               <span className="mb-1 block text-xs font-semibold uppercase tracking-wide text-slate-400">{filter}</span>
-              <input className="h-11 w-full rounded-2xl border border-slate-200 bg-slate-50 px-3 text-sm outline-none placeholder:text-slate-400 focus:border-slate-400 focus:bg-white" placeholder={`Filter by ${filter.toLowerCase()}`} />
+              <Input className="h-11 rounded-2xl border-slate-200 bg-slate-50 px-3 shadow-sm" placeholder={`Filter by ${filter.toLowerCase()}`} />
             </label>
           ))}
         </div>
-      </section>
+        </CardContent>
+      </Card>
 
-      <section className="rounded-3xl border border-slate-200 bg-white shadow-sm">
-        <div className="flex flex-col gap-2 border-b border-slate-200 px-5 py-4 sm:flex-row sm:items-center sm:justify-between">
+      <Card className="overflow-hidden rounded-3xl border-slate-200 bg-white/95 py-0 shadow-sm shadow-slate-200/70">
+        <CardHeader className="flex flex-col gap-2 border-b border-slate-200 p-5 py-4 sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <h2 className="text-base font-semibold text-slate-950">Enterprise accounts table</h2>
-            <p className="mt-1 text-sm text-slate-500">Mock account intelligence rows with provider provenance and confidence signals.</p>
+            <CardTitle className="text-base font-semibold text-slate-950">Enterprise accounts table</CardTitle>
+            <CardDescription className="mt-1 text-sm text-slate-500">Mock account intelligence rows with provider provenance and confidence signals.</CardDescription>
           </div>
-          <span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-600 ring-1 ring-slate-200">{accountRows.length} mock rows</span>
-        </div>
-        <div className="overflow-x-auto">
-          <table className="w-full min-w-[920px] text-left text-sm">
-            <thead className="bg-slate-50 text-xs uppercase tracking-wide text-slate-500">
-              <tr>
-                <th className="px-5 py-3">Account</th>
-                <th className="px-5 py-3">Handle</th>
-                <th className="px-5 py-3">Type</th>
-                <th className="px-5 py-3">Followers</th>
-                <th className="px-5 py-3">Engagement</th>
-                <th className="px-5 py-3">Provider</th>
-                <th className="px-5 py-3">Confidence</th>
-                <th className="px-5 py-3">Freshness</th>
-                <th className="px-5 py-3">Status</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-slate-100 bg-white">
+          <Badge variant="secondary" className="rounded-full px-3 py-1 text-xs font-semibold text-slate-600">{accountRows.length} mock rows</Badge>
+        </CardHeader>
+          <Table className="min-w-[920px]">
+            <TableHeader className="bg-slate-50 text-xs uppercase tracking-wide text-slate-500">
+              <TableRow>
+                <TableHead className="px-5 py-3">Account</TableHead>
+                <TableHead className="px-5 py-3">Handle</TableHead>
+                <TableHead className="px-5 py-3">Type</TableHead>
+                <TableHead className="px-5 py-3">Followers</TableHead>
+                <TableHead className="px-5 py-3">Engagement</TableHead>
+                <TableHead className="px-5 py-3">Provider</TableHead>
+                <TableHead className="px-5 py-3">Confidence</TableHead>
+                <TableHead className="px-5 py-3">Freshness</TableHead>
+                <TableHead className="px-5 py-3">Status</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody className="divide-y divide-slate-100 bg-white">
               {accountRows.map((row) => (
-                <tr key={row.handle} className="hover:bg-slate-50/70">
-                  <td className="px-5 py-4 font-medium text-slate-950">{row.account}</td>
-                  <td className="px-5 py-4 text-slate-600">{row.handle}</td>
-                  <td className="px-5 py-4 text-slate-600">{row.type}</td>
-                  <td className="px-5 py-4 text-slate-600">{row.followers}</td>
-                  <td className="px-5 py-4 text-slate-600">{row.engagement}</td>
-                  <td className="px-5 py-4 text-slate-600">{row.provider}</td>
-                  <td className="px-5 py-4 text-slate-600">{row.confidence}</td>
-                  <td className="px-5 py-4 text-slate-600">{row.freshness}</td>
-                  <td className="px-5 py-4"><span className={`rounded-full px-2.5 py-1 text-xs font-semibold ring-1 ${statusClasses(row.status)}`}>{row.status}</span></td>
-                </tr>
+                <TableRow key={row.handle} className="hover:bg-slate-50/70">
+                  <TableCell className="px-5 py-4 font-medium text-slate-950">{row.account}</TableCell>
+                  <TableCell className="px-5 py-4 text-slate-600">{row.handle}</TableCell>
+                  <TableCell className="px-5 py-4 text-slate-600">{row.type}</TableCell>
+                  <TableCell className="px-5 py-4 text-slate-600">{row.followers}</TableCell>
+                  <TableCell className="px-5 py-4 text-slate-600">{row.engagement}</TableCell>
+                  <TableCell className="px-5 py-4 text-slate-600">{row.provider}</TableCell>
+                  <TableCell className="px-5 py-4 text-slate-600">{row.confidence}</TableCell>
+                  <TableCell className="px-5 py-4 text-slate-600">{row.freshness}</TableCell>
+                  <TableCell className="px-5 py-4"><Badge variant="outline" className={`rounded-full px-2.5 py-1 text-xs font-semibold ring-1 ${statusClasses(row.status)}`}>{row.status}</Badge></TableCell>
+                </TableRow>
               ))}
-            </tbody>
-          </table>
-        </div>
-      </section>
+            </TableBody>
+          </Table>
+      </Card>
 
       <section className="rounded-3xl border border-dashed border-slate-300 bg-slate-50 p-5 text-sm text-slate-600">
         <p className="font-semibold text-slate-900">Disabled until official source is connected</p>

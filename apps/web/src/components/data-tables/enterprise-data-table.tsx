@@ -1,50 +1,56 @@
 import { mockActivityEvents } from "@/lib/mock-data";
 import { EmptyState } from "@/components/empty-states/empty-state";
 import { SystemStateBadge } from "@/components/system-states/system-state";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 
 export function EnterpriseDataTable({ title = "Enterprise data table" }: { title?: string }) {
   const rows = mockActivityEvents;
 
   return (
-    <section className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
-      <div className="flex flex-col gap-3 border-b border-slate-200 px-5 py-4 lg:flex-row lg:items-start lg:justify-between">
+    <Card className="premium-card overflow-hidden rounded-3xl py-0">
+      <CardHeader className="flex flex-col gap-3 border-b border-white/10 p-5 lg:flex-row lg:items-start lg:justify-between">
         <div>
-          <h3 className="font-semibold text-slate-950">{title}</h3>
-          <p className="mt-1 text-sm text-slate-500">Enterprise table placeholder with source, confidence, freshness, and policy-safe mock rows.</p>
+          <CardTitle className="text-base font-semibold text-slate-50">{title}</CardTitle>
+          <CardDescription className="mt-1 text-sm text-slate-400">Enterprise table placeholder with source, confidence, freshness, and policy-safe mock rows.</CardDescription>
         </div>
-        <div className="flex flex-wrap gap-2">
+        <div className="flex flex-wrap items-center gap-2">
           <SystemStateBadge badge={{ label: "Columns placeholder", tone: "neutral" }} />
           <SystemStateBadge badge={{ label: "No live query", tone: "warning" }} />
+          <Button type="button" variant="outline" size="sm" disabled className="rounded-full border-white/10 bg-white/10 text-slate-300 disabled:opacity-100">
+            Columns preview
+          </Button>
         </div>
-      </div>
+      </CardHeader>
       {rows.length ? (
-        <div className="overflow-x-auto">
-          <table className="min-w-[640px] divide-y divide-slate-200 text-left text-sm">
-            <thead className="bg-slate-50 text-xs font-semibold uppercase tracking-wide text-slate-500">
-              <tr>
-                <th className="px-5 py-3">Event</th>
-                <th className="px-5 py-3">Source</th>
-                <th className="px-5 py-3">Confidence</th>
-                <th className="px-5 py-3">Freshness</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-slate-100 bg-white">
+        <div className="premium-table-wrap overflow-x-auto">
+        <Table className="min-w-[640px]">
+          <TableHeader className="bg-slate-950/70 text-xs font-semibold uppercase tracking-wide text-slate-400">
+            <TableRow>
+              <TableHead className="px-5 py-3">Event</TableHead>
+              <TableHead className="px-5 py-3">Source</TableHead>
+              <TableHead className="px-5 py-3">Confidence</TableHead>
+              <TableHead className="px-5 py-3">Freshness</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody className="divide-y divide-white/10 bg-slate-950/25">
               {rows.map((row) => (
-                <tr key={row.id} className="align-top">
-                  <td className="px-5 py-4 font-medium text-slate-950">{row.event}</td>
-                  <td className="px-5 py-4 text-slate-600">{row.source}</td>
-                  <td className="px-5 py-4 text-slate-600">{row.confidence}</td>
-                  <td className="px-5 py-4 text-slate-600">{row.freshness}</td>
-                </tr>
+                <TableRow key={row.id} className="align-top transition hover:bg-white/5">
+                  <TableCell className="px-5 py-4 font-medium text-slate-50">{row.event}</TableCell>
+                  <TableCell className="px-5 py-4 text-slate-300">{row.source}</TableCell>
+                  <TableCell className="px-5 py-4 text-slate-300">{row.confidence}</TableCell>
+                  <TableCell className="px-5 py-4 text-slate-300">{row.freshness}</TableCell>
+                </TableRow>
               ))}
-            </tbody>
-          </table>
+          </TableBody>
+        </Table>
         </div>
       ) : (
-        <div className="p-5">
+        <CardContent className="p-5">
           <EmptyState title="No table rows match this state" description="Adjust filters or connect an approved official data source in a future backend batch." />
-        </div>
+        </CardContent>
       )}
-    </section>
+    </Card>
   );
 }

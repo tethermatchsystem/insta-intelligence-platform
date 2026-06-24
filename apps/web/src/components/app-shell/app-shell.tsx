@@ -3,11 +3,11 @@ import { TopBar } from "@/components/navigation/top-bar";
 
 export function AppShell({ children }: { children: React.ReactNode }) {
   return (
-    <div className="min-h-screen bg-slate-100 text-slate-950">
+    <div className="premium-app-bg min-h-screen text-slate-100">
       <SidebarNavigation />
-      <div className="min-h-screen lg:pl-80">
+      <div className="premium-content-shell min-h-screen lg:pl-80">
         <TopBar />
-        <main className="mx-auto w-full max-w-[1600px] px-3 py-4 pb-28 sm:px-6 sm:py-5 lg:px-8 lg:pb-8">
+        <main className="mx-auto w-full max-w-[1600px] px-3 py-5 pb-28 sm:px-6 sm:py-6 lg:px-8 lg:py-8 lg:pb-10">
           {children}
         </main>
       </div>

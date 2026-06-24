@@ -1,4 +1,9 @@
 import { type ReactNode } from "react";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { Badge } from "@/components/ui/badge";
+import { Card, CardContent } from "@/components/ui/card";
+import { Skeleton } from "@/components/ui/skeleton";
+import { cn } from "@/lib/utils";
 
 export type SystemStateVariant = "empty" | "loading" | "error" | "restricted" | "placeholder";
 
@@ -63,7 +68,11 @@ function badgeClasses(tone: SystemStateBadgeTone = "neutral") {
 }
 
 export function SystemStateBadge({ badge }: { badge: SystemStateBadge }) {
-  return <span className={`rounded-full px-3 py-1 text-xs font-semibold ring-1 ${badgeClasses(badge.tone)}`}>{badge.label}</span>;
+  return (
+    <Badge variant="outline" className={cn("h-6 rounded-full border-transparent px-3 font-semibold ring-1", badgeClasses(badge.tone))}>
+      {badge.label}
+    </Badge>
+  );
 }
 
 export function SystemState({ variant = "placeholder", eyebrow, title, description, badges = [], checks = [], children, compact = false }: SystemStateProps) {
@@ -76,7 +85,7 @@ export function SystemState({ variant = "placeholder", eyebrow, title, descripti
       ];
 
   return (
-    <section className={`overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm ${compact ? "p-4" : "p-5"}`}>
+    <Card className={cn("overflow-hidden rounded-3xl border-slate-200 bg-white/95 py-0 shadow-sm shadow-slate-200/70", compact ? "p-3" : "p-4") }>
       <div className={`rounded-3xl bg-gradient-to-br ${copy.accent} p-5 text-white`}>
         <div className="flex flex-col gap-5 lg:flex-row lg:items-start lg:justify-between">
           <div className="max-w-3xl">
@@ -97,16 +106,16 @@ export function SystemState({ variant = "placeholder", eyebrow, title, descripti
         {checks.length ? (
           <div className="mt-5 grid gap-3 lg:grid-cols-3">
             {checks.map((check) => (
-              <div key={check} className="rounded-2xl border border-white/10 bg-white/10 p-3 text-xs leading-5 text-slate-200">
-                {check}
-              </div>
+              <Alert key={check} className="rounded-2xl border-white/10 bg-white/10 px-3 py-3 text-slate-200">
+                <AlertDescription className="text-xs leading-5 text-slate-200">{check}</AlertDescription>
+              </Alert>
             ))}
           </div>
         ) : null}
 
         {children ? <div className="mt-5">{children}</div> : null}
       </div>
-    </section>
+    </Card>
   );
 }
 
@@ -125,11 +134,13 @@ export function LoadingSkeletonState({ title = "Preparing enterprise workspace",
     >
       <div className="grid gap-3 md:grid-cols-3">
         {["Header", "KPI cards", "Enterprise table"].map((item) => (
-          <div key={item} className="rounded-2xl border border-white/10 bg-white/10 p-4">
-            <div className="h-3 w-24 rounded-full bg-white/20" />
-            <div className="mt-4 h-8 rounded-2xl bg-white/10" />
-            <div className="mt-3 h-3 w-3/4 rounded-full bg-white/10" />
-          </div>
+          <Card key={item} className="rounded-2xl border-white/10 bg-white/10 py-0 p-4 shadow-none ring-1 ring-white/10">
+            <CardContent className="px-0">
+              <Skeleton className="h-3 w-24 bg-white/20" />
+              <Skeleton className="mt-4 h-8 rounded-2xl bg-white/10" />
+              <Skeleton className="mt-3 h-3 w-3/4 bg-white/10" />
+            </CardContent>
+          </Card>
         ))}
       </div>
     </SystemState>

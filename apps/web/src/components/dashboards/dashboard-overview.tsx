@@ -7,6 +7,9 @@ import {
   recentCollectionJobs,
   recentIntelligenceEvents,
 } from "@/lib/mock-data/dashboard";
+import { Badge } from "@/components/ui/badge";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 
 function toneClasses(tone: string) {
   const tones: Record<string, string> = {
@@ -23,44 +26,51 @@ function toneClasses(tone: string) {
 
 function DashboardKpiCard({ label, value, trend, tone }: { label: string; value: string; trend: string; tone: string }) {
   return (
-    <div className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">
-      <div className="flex items-start justify-between gap-3">
-        <p className="text-sm font-medium text-slate-500">{label}</p>
-        <span className={`rounded-full px-2.5 py-1 text-[11px] font-semibold ring-1 ${toneClasses(tone)}`}>{trend}</span>
+    <Card className="premium-kpi-card rounded-3xl py-0">
+      <CardContent className="p-5">
+      <div className="relative">
+        <div className="flex items-start justify-between gap-3">
+          <p className="text-sm font-medium text-slate-400">{label}</p>
+          <Badge variant="outline" className={`rounded-full px-2.5 py-1 text-[11px] font-semibold ring-1 ${toneClasses(tone)}`}>{trend}</Badge>
+        </div>
+        <p className="mt-4 text-2xl font-semibold tracking-tight text-slate-50 sm:text-3xl">{value}</p>
+        <div className="mt-4 h-1.5 overflow-hidden rounded-full bg-white/10">
+          <div className="h-full w-2/3 rounded-full bg-gradient-to-r from-cyan-300 via-sky-300 to-emerald-300" />
+        </div>
       </div>
-      <p className="mt-4 text-2xl font-semibold tracking-tight text-slate-950 sm:text-3xl">{value}</p>
-    </div>
+      </CardContent>
+    </Card>
   );
 }
 
 function DashboardPanel({ title, subtitle, children }: { title: string; subtitle?: string; children: React.ReactNode }) {
   return (
-    <section className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">
-      <div className="mb-4">
-        <h2 className="text-base font-semibold text-slate-950">{title}</h2>
-        {subtitle ? <p className="mt-1 text-sm text-slate-500">{subtitle}</p> : null}
-      </div>
-      {children}
-    </section>
+    <Card className="premium-card rounded-3xl py-0">
+      <CardHeader className="p-5 pb-3">
+        <CardTitle className="text-base font-semibold text-slate-50">{title}</CardTitle>
+        {subtitle ? <CardDescription className="mt-1 text-sm text-slate-400">{subtitle}</CardDescription> : null}
+      </CardHeader>
+      <CardContent className="p-5 pt-1">{children}</CardContent>
+    </Card>
   );
 }
 
 export function DashboardOverview() {
   return (
     <div className="space-y-6">
-      <header className="rounded-[2rem] border border-slate-200 bg-white p-5 shadow-sm sm:p-6">
+      <header className="premium-header-surface rounded-[2rem] p-5 sm:p-6">
         <div className="flex flex-col gap-5 xl:flex-row xl:items-start xl:justify-between">
           <div>
             <div className="mb-3 flex flex-wrap gap-2">
-              <span className="rounded-full bg-emerald-50 px-3 py-1 text-xs font-semibold text-emerald-700 ring-1 ring-emerald-100">Official-safe workspace</span>
-              <span className="rounded-full bg-indigo-50 px-3 py-1 text-xs font-semibold text-indigo-700 ring-1 ring-indigo-100">Provider confidence 98.2%</span>
-              <span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-700 ring-1 ring-slate-200">No live integrations yet</span>
+              <Badge variant="outline" className="rounded-full bg-emerald-50 px-3 py-1 text-xs font-semibold text-emerald-700 ring-emerald-100">Official-safe workspace</Badge>
+              <Badge variant="outline" className="rounded-full bg-indigo-50 px-3 py-1 text-xs font-semibold text-indigo-700 ring-indigo-100">Provider confidence 98.2%</Badge>
+              <Badge variant="secondary" className="rounded-full px-3 py-1 text-xs font-semibold text-slate-700">No live integrations yet</Badge>
             </div>
-            <h1 className="text-3xl font-semibold tracking-tight text-slate-950 sm:text-4xl">Dashboard</h1>
-            <p className="mt-2 max-w-3xl text-base leading-7 text-slate-600">Connected professional account intelligence across owned media, mentions, competitor benchmarks, and provider freshness.</p>
+            <h1 className="text-3xl font-semibold tracking-tight text-slate-50 sm:text-4xl">Dashboard</h1>
+            <p className="mt-2 max-w-3xl text-base leading-7 text-slate-300">Connected professional account intelligence across owned media, mentions, competitor benchmarks, and provider freshness.</p>
           </div>
-          <div className="rounded-3xl border border-slate-200 bg-slate-50 p-4 text-sm text-slate-600 xl:w-80">
-            <p className="font-semibold text-slate-900">Mock freshness note</p>
+          <div className="rounded-3xl border border-white/10 bg-white/10 p-4 text-sm text-slate-300 xl:w-80">
+            <p className="font-semibold text-slate-50">Mock freshness note</p>
             <p className="mt-1 leading-6">Dashboard data is static Batch 1B mock data. Future batches will connect official Meta APIs and licensed compliant providers only.</p>
           </div>
         </div>
@@ -74,11 +84,11 @@ export function DashboardOverview() {
 
       <section className="grid gap-6 xl:grid-cols-[minmax(0,1.7fr)_minmax(360px,0.8fr)]">
         <DashboardPanel title="Audience and engagement trend" subtitle="Mock visual placeholder for followers, engagement, mentions, alerts, and provider confidence.">
-          <div className="overflow-x-auto rounded-3xl bg-gradient-to-br from-slate-950 via-slate-900 to-indigo-950 p-4 text-white sm:p-5">
-            <div className="flex h-64 min-w-[520px] items-end gap-4 rounded-2xl border border-white/10 bg-white/5 p-4 sm:h-72 sm:p-5">
+          <div className="overflow-x-auto rounded-3xl border border-white/10 bg-gradient-to-br from-slate-950 via-slate-900 to-cyan-950/80 p-4 text-white shadow-2xl shadow-black/25 sm:p-5">
+            <div className="premium-chart-grid flex h-64 min-w-[520px] items-end gap-4 rounded-2xl border border-white/10 p-4 sm:h-72 sm:p-5">
               {dashboardTrendLabels.map((item) => (
                 <div key={item.label} className="flex flex-1 flex-col items-center gap-3">
-                  <div className={`w-full rounded-t-2xl bg-white/80 shadow-lg shadow-indigo-950/30 ${item.height}`} />
+                  <div className={`w-full rounded-t-2xl bg-gradient-to-t from-cyan-300 via-sky-200 to-white shadow-lg shadow-cyan-950/30 ${item.height}`} />
                   <div className="text-center">
                     <p className="text-xs text-slate-300">{item.label}</p>
                     <p className="text-sm font-semibold">{item.value}</p>
@@ -104,7 +114,7 @@ export function DashboardOverview() {
               <div key={provider.name} className="rounded-2xl border border-slate-100 bg-slate-50 p-3">
                 <div className="flex items-center justify-between gap-3">
                   <p className="font-medium text-slate-900">{provider.name}</p>
-                  <span className="rounded-full bg-white px-2 py-1 text-xs font-semibold text-slate-600 ring-1 ring-slate-200">{provider.status}</span>
+                  <Badge variant="outline" className="rounded-full bg-white px-2 py-1 text-xs font-semibold text-slate-600 ring-slate-200">{provider.status}</Badge>
                 </div>
                 <p className="mt-1 text-xs text-slate-500">Freshness {provider.freshness} · Confidence {provider.confidence}</p>
               </div>
@@ -147,31 +157,31 @@ export function DashboardOverview() {
       </section>
 
       <DashboardPanel title="Recent intelligence events" subtitle="Mock event stream prepared for future official provider ingestion.">
-        <div className="overflow-x-auto rounded-2xl border border-slate-200">
-          <table className="w-full min-w-[860px] text-left text-sm">
-            <thead className="bg-slate-50 text-xs uppercase tracking-wide text-slate-500">
-              <tr>
-                <th className="px-4 py-3">Event</th>
-                <th className="px-4 py-3">Account</th>
-                <th className="px-4 py-3">Source</th>
-                <th className="px-4 py-3">Confidence</th>
-                <th className="px-4 py-3">Freshness</th>
-                <th className="px-4 py-3">Status</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-slate-100 bg-white">
+        <div className="premium-table-wrap rounded-2xl">
+          <Table className="min-w-[860px]">
+            <TableHeader className="bg-slate-950/70 text-xs uppercase tracking-wide text-slate-400">
+              <TableRow>
+                <TableHead className="px-4 py-3">Event</TableHead>
+                <TableHead className="px-4 py-3">Account</TableHead>
+                <TableHead className="px-4 py-3">Source</TableHead>
+                <TableHead className="px-4 py-3">Confidence</TableHead>
+                <TableHead className="px-4 py-3">Freshness</TableHead>
+                <TableHead className="px-4 py-3">Status</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody className="divide-y divide-white/10 bg-slate-950/25">
               {recentIntelligenceEvents.map((row) => (
-                <tr key={`${row.event}-${row.account}`}>
-                  <td className="px-4 py-4 font-medium text-slate-950">{row.event}</td>
-                  <td className="px-4 py-4 text-slate-600">{row.account}</td>
-                  <td className="px-4 py-4 text-slate-600">{row.source}</td>
-                  <td className="px-4 py-4 text-slate-600">{row.confidence}</td>
-                  <td className="px-4 py-4 text-slate-600">{row.freshness}</td>
-                  <td className="px-4 py-4"><span className="rounded-full bg-slate-100 px-2.5 py-1 text-xs font-semibold text-slate-700">{row.status}</span></td>
-                </tr>
+                <TableRow key={`${row.event}-${row.account}`} className="hover:bg-white/5">
+                  <TableCell className="px-4 py-4 font-medium text-slate-50">{row.event}</TableCell>
+                  <TableCell className="px-4 py-4 text-slate-300">{row.account}</TableCell>
+                  <TableCell className="px-4 py-4 text-slate-300">{row.source}</TableCell>
+                  <TableCell className="px-4 py-4 text-slate-300">{row.confidence}</TableCell>
+                  <TableCell className="px-4 py-4 text-slate-300">{row.freshness}</TableCell>
+                  <TableCell className="px-4 py-4"><Badge variant="secondary" className="rounded-full px-2.5 py-1 text-xs font-semibold text-slate-700">{row.status}</Badge></TableCell>
+                </TableRow>
               ))}
-            </tbody>
-          </table>
+            </TableBody>
+          </Table>
         </div>
         <p className="mt-4 rounded-2xl border border-dashed border-slate-300 bg-slate-50 p-4 text-sm text-slate-500">Future state: connect live official Meta API, Business Discovery, Ad Library, and licensed-provider events after provider adapters and compliance gates are implemented.</p>
       </DashboardPanel>
