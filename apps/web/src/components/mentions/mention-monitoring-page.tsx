@@ -122,17 +122,17 @@ function MentionsHeader() {
           <div className="mb-4 flex flex-wrap gap-2">
             <Badge className="bg-blue-50 text-blue-700 ring-blue-100">{mentionMonitoringProfile.sourceBadge}</Badge>
             <Badge className="bg-emerald-50 text-emerald-700 ring-emerald-100">{mentionMonitoringProfile.confidenceBadge}</Badge>
-            <Badge className="bg-cyan-50 text-cyan-700 ring-cyan-100">Fresh {mentionMonitoringProfile.freshnessBadge}</Badge>
+            <Badge className="bg-cyan-50 text-cyan-700 ring-cyan-100">{mentionMonitoringProfile.freshnessBadge}</Badge>
             <Badge className="bg-slate-100 text-slate-700 ring-slate-200">{mentionMonitoringProfile.integrationBadge}</Badge>
           </div>
-          <p className="text-sm font-semibold uppercase tracking-wide text-slate-400">Brand listening</p>
+          <p className="text-sm font-semibold uppercase tracking-wide text-slate-400">Mention preview</p>
           <h1 className="mt-2 text-4xl font-semibold tracking-tight text-slate-950">{mentionMonitoringProfile.title}</h1>
           <p className="mt-2 max-w-3xl text-base leading-7 text-slate-600">{mentionMonitoringProfile.description}</p>
         </div>
         <div className="rounded-3xl border border-slate-200 bg-slate-50 p-4 text-sm leading-6 text-slate-600 xl:w-[30rem]">
-          <p className="font-semibold text-slate-900">Mock-only mention monitoring view</p>
+          <p className="font-semibold text-slate-900">Alpha demo mention preview</p>
           <p className="mt-1">
-            Premium brand listening for public/professional mentions, connected owned-account mentions where applicable, response opportunities, and licensed-provider placeholders only.
+            Mock mention intelligence previews for public/professional mentions, connected owned-account mentions where applicable, response opportunities, and licensed-provider placeholders only. Listening is disabled in Alpha.
           </p>
         </div>
       </div>
@@ -146,7 +146,7 @@ function FilterPlaceholderBar() {
       <div className="flex flex-col gap-3 xl:flex-row xl:items-center xl:justify-between">
         <div>
           <p className="text-sm font-semibold text-slate-950">Mention filters</p>
-          <p className="mt-1 text-xs text-slate-500">Static placeholders for sentiment, channel/source, mention type, confidence, and policy-based triage views.</p>
+          <p className="mt-1 text-xs text-slate-500">Static Alpha placeholders for preview sentiment, channel/source, mention type, confidence, and policy-based triage views.</p>
         </div>
         <div className="flex flex-wrap gap-2">
           {mentionFilters.map((filter) => (
@@ -179,7 +179,7 @@ function SignalList({ items }: { items: MentionPanelItem[] }) {
 function IntelligencePanels() {
   return (
     <section className="grid gap-6 xl:grid-cols-4">
-      <MentionsPanel title="Sentiment trend placeholder" subtitle="Mock positive sentiment trend for brand listening review.">
+      <MentionsPanel title="Preview sentiment placeholder" subtitle="Mock sentiment trend for mention preview review.">
         <div className="rounded-3xl bg-gradient-to-br from-slate-950 via-slate-900 to-emerald-950 p-5 text-white">
           <div className="flex h-60 items-end gap-3 rounded-2xl border border-white/10 bg-white/5 p-4">
             {sentimentTrendPoints.map((point) => (
@@ -243,7 +243,7 @@ function MentionCardItem({ mention }: { mention: MentionCard }) {
       </div>
 
       <div className="mt-4 rounded-2xl border border-slate-100 bg-slate-50 p-3">
-        <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-400">Recommended action</p>
+        <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-400">Alpha demo next step</p>
         <p className="mt-2 text-sm leading-6 text-slate-600">{mention.recommendedAction}</p>
       </div>
 
@@ -301,14 +301,14 @@ function LicensedProviderPanel() {
 
 function ComplianceNotice() {
   return (
-    <MentionsPanel title={mentionComplianceNotice.title} subtitle="Public/professional monitoring, connected mentions where applicable, and licensed providers only.">
+    <MentionsPanel title={mentionComplianceNotice.title} subtitle="Mock mention intelligence, connected mention previews where applicable, and licensed providers only.">
       <div className="space-y-4 text-sm leading-6 text-slate-600">
         <p>{mentionComplianceNotice.description}</p>
         <div className="grid gap-3 lg:grid-cols-2">
-          <p className="rounded-2xl border border-emerald-200 bg-emerald-50 p-4 text-emerald-900">Official APIs and compliant licensed providers only for future live data.</p>
-          <p className="rounded-2xl border border-blue-200 bg-blue-50 p-4 text-blue-900">Public/professional mention monitoring with source, freshness, confidence, and policy badges.</p>
+          <p className="rounded-2xl border border-emerald-200 bg-emerald-50 p-4 text-emerald-900">Requires official source connection before any future private-beta data path.</p>
+          <p className="rounded-2xl border border-blue-200 bg-blue-50 p-4 text-blue-900">Public/professional mention preview with source, freshness, confidence, and policy badges.</p>
           <p className="rounded-2xl border border-cyan-200 bg-cyan-50 p-4 text-cyan-900">Connected account mentions are represented only where official account access is applicable.</p>
-          <p className="rounded-2xl border border-amber-200 bg-amber-50 p-4 text-amber-900">Deeper enrichment is licensed-provider-only and unavailable until configured.</p>
+          <p className="rounded-2xl border border-amber-200 bg-amber-50 p-4 text-amber-900">Deeper enrichment requires private-beta monitoring service review and remains unavailable.</p>
           <p className="rounded-2xl border border-slate-200 bg-slate-50 p-4 text-slate-700 lg:col-span-2">No scraping, private account access, hidden surveillance, or anti-bot bypass.</p>
         </div>
         <ul className="grid gap-2 lg:grid-cols-5">

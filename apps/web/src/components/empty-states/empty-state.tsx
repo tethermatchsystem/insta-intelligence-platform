@@ -1,8 +1,8 @@
 import { SystemState, type SystemStateBadge } from "@/components/system-states/system-state";
 
 export function EmptyState({
-  title = "No production data connected",
-  description = "Connect an official Meta API, owned/connected account workflow, manual import, or approved provider in a future backend batch.",
+  title = "No production data available in Alpha",
+  description = "Preview official Meta API, owned/connected account workflow, manual import, or approved provider setup in a future backend batch.",
   badges,
 }: {
   title?: string;

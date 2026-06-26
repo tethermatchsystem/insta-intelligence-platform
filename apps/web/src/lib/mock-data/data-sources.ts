@@ -98,19 +98,19 @@ export type DataSourceTableRow = {
 export const dataSourcesProfile = {
   title: "Data Sources",
   description:
-    "Manage official API providers, licensed provider readiness, freshness, coverage, permissions, and compliant source status using mock configuration data only.",
-  sourceBadge: "Official APIs and licensed providers",
-  confidenceBadge: "94% source readiness confidence",
-  freshnessBadge: "Daily source snapshot",
-  integrationBadge: "No live integrations",
+    "Review the Alpha source registry with preview/mock-only readiness for Instagram Graph API, Meta Marketing API, Meta Ad Library API, owned/connected account webhooks, manual imports, and licensed-provider evaluation. Real connections require the private-beta backend and official source approval.",
+  sourceBadge: "Alpha source registry preview",
+  confidenceBadge: "Mock readiness estimate",
+  freshnessBadge: "Static source snapshot",
+  integrationBadge: "Disabled in Alpha",
 };
 
 export const dataSourceFreshnessLabels: Record<DataSourceFreshness, string> = {
-  near_real_time: "Near real time",
-  hourly: "Hourly sync",
-  daily: "Daily snapshot",
-  weekly: "Weekly snapshot",
-  manual: "Manual review",
+  near_real_time: "Near real-time preview",
+  hourly: "Hourly preview cadence",
+  daily: "Daily preview snapshot",
+  weekly: "Weekly preview snapshot",
+  manual: "Manual review preview",
 };
 
 export const dataSourceConfidenceLabels: Record<DataSourceConfidence, string> = {
@@ -128,7 +128,7 @@ export const dataSourcePolicyLabels: Record<DataSourcePolicyClassification, stri
 };
 
 export const dataSourceTypeLabels: Record<DataSourceType, string> = {
-  meta_graph_api: "Meta Graph API",
+  meta_graph_api: "Instagram Graph API",
   meta_marketing_api: "Meta Marketing API",
   meta_ad_library_api: "Meta Ad Library API",
   owned_webhook: "Owned account webhook",
@@ -137,11 +137,11 @@ export const dataSourceTypeLabels: Record<DataSourceType, string> = {
 };
 
 export const dataSourceStatusLabels: Record<DataSourceStatus, string> = {
-  ready: "Ready",
-  configured: "Configured",
-  needs_review: "Needs review",
-  coverage_gap: "Coverage gap",
-  licensed_gated: "Licensed gated",
+  ready: "Provider preview",
+  configured: "Connection preview",
+  needs_review: "Official-source review required",
+  coverage_gap: "Requires private-beta backend",
+  licensed_gated: "Licensed-provider review required",
 };
 
 export const dataDomainLabels: Record<DataDomain, string> = {
@@ -160,41 +160,41 @@ export const dataDomainLabels: Record<DataDomain, string> = {
 export const dataSourceKpis: DataSourceKpi[] = [
   {
     id: "configured-sources",
-    label: "Configured sources",
+    label: "Preview sources",
     value: "12",
-    delta: "+3 staged",
+    delta: "Preview only",
     tone: "blue",
-    description: "Mock configured source inventory across official APIs, webhooks, manual imports, and licensed-provider placeholders.",
+    description: "Mock Alpha source registry across official APIs, webhooks, manual imports, and licensed-provider placeholders.",
   },
   {
     id: "official-api-sources",
     label: "Official API sources",
     value: "5",
-    delta: "safe path",
+    delta: "official strategy",
     tone: "green",
-    description: "Meta Graph, Marketing, Ad Library, and owned webhook source paths framed as official-first.",
+    description: "Allowed future source paths include Instagram Graph API, Meta Marketing API, Meta Ad Library API, and owned/connected webhooks.",
   },
   {
     id: "licensed-providers",
     label: "Licensed providers",
     value: "2",
-    delta: "evaluation",
+    delta: "review required",
     tone: "purple",
-    description: "Licensed provider adapters remain gated until provenance, contracts, and compliance review are complete.",
+    description: "Licensed provider adapters remain disabled in Alpha until provenance, contracts, and compliance review are complete.",
   },
   {
     id: "webhook-readiness",
-    label: "Webhook readiness",
+    label: "Webhook preview",
     value: "83%",
-    delta: "+9 pts",
+    delta: "private beta",
     tone: "cyan",
-    description: "Owned/connected account webhook readiness placeholders for compliant event workflows.",
+    description: "Owned/connected account webhook placeholders require private-beta backend enforcement before activation.",
   },
   {
     id: "coverage-gaps",
     label: "Coverage gaps",
     value: "6",
-    delta: "review",
+    delta: "backend required",
     tone: "amber",
     description: "Mock domain gaps requiring official API availability checks or licensed-provider evaluation.",
   },
@@ -202,17 +202,17 @@ export const dataSourceKpis: DataSourceKpi[] = [
     id: "sources-requiring-review",
     label: "Sources requiring review",
     value: "4",
-    delta: "policy queue",
+    delta: "review only",
     tone: "rose",
-    description: "Sources with policy, scope, confidence, or licensed-provider status requiring analyst review.",
+    description: "Alpha preview sources with policy, scope, confidence, or licensed-provider status requiring analyst review.",
   },
 ];
 
 export const dataSourceFilters: DataSourceFilterGroup[] = [
-  { id: "source-type", label: "Source type", options: ["All types", "Meta Graph API", "Meta Marketing API", "Meta Ad Library API", "Owned webhooks", "Licensed provider", "Manual import"] },
-  { id: "status", label: "Status", options: ["All statuses", "Ready", "Configured", "Needs review", "Coverage gap", "Licensed gated"] },
+  { id: "source-type", label: "Source type", options: ["All types", "Instagram Graph API", "Meta Marketing API", "Meta Ad Library API", "Owned webhooks", "Licensed provider", "Manual import"] },
+  { id: "status", label: "Status", options: ["All statuses", "Provider preview", "Connection preview", "Official-source review required", "Requires private-beta backend", "Licensed-provider review required"] },
   { id: "workspace-client", label: "Workspace/client", options: ["All workspaces", "Growth HQ", "Agency demo", "Enterprise retail", "Creator studio"] },
-  { id: "freshness", label: "Freshness", options: ["Any freshness", "Near real time", "Hourly", "Daily", "Weekly", "Manual"] },
+  { id: "freshness", label: "Freshness", options: ["Any freshness", "Near real-time preview", "Hourly preview", "Daily preview", "Weekly preview", "Manual review"] },
   { id: "confidence", label: "Confidence", options: ["Any confidence", "Verified", "High", "Medium", "Needs review"] },
   { id: "policy", label: "Policy classification", options: ["All policies", "Official safe", "Official safe limited", "Licensed provider only", "Disabled by default"] },
 ];
@@ -230,14 +230,14 @@ export const coverageByDomain: DataSourcePanelItem[] = [
     id: "coverage-owned",
     title: "Owned account analytics",
     value: "High",
-    detail: "Connected professional account metrics, comments, media, and engagement summaries are covered by official-safe paths.",
+    detail: "Connected professional account metrics, comments, media, and engagement summaries are represented as future official-safe paths.",
     tone: "green",
   },
   {
     id: "coverage-ads",
     title: "Ads and public ad visibility",
     value: "Medium",
-    detail: "Marketing API and Ad Library style public visibility are separated with source and policy metadata.",
+    detail: "Marketing API and Ad Library public visibility previews are separated with source and policy metadata.",
     tone: "blue",
   },
   {
@@ -253,22 +253,22 @@ export const freshnessSyncCadence: DataSourcePanelItem[] = [
   {
     id: "freshness-webhooks",
     title: "Owned webhooks",
-    value: "Hourly",
-    detail: "Mock webhook readiness for owned/connected accounts only where official access is applicable.",
+    value: "Preview cadence",
+    detail: "Mock webhook readiness for owned/connected accounts only; real event delivery requires the private-beta backend.",
     tone: "cyan",
   },
   {
     id: "freshness-graph",
-    title: "Graph API snapshots",
-    value: "Daily",
-    detail: "Connected account insight snapshots are represented as mock daily sync windows.",
+    title: "Instagram Graph API snapshots",
+    value: "Preview snapshot",
+    detail: "Connected account insight snapshots are represented as mock daily preview windows.",
     tone: "green",
   },
   {
     id: "freshness-licensed",
     title: "Licensed enrichment",
-    value: "Manual",
-    detail: "Licensed providers require review, provenance metadata, and approved rate-limit strategy before configuration.",
+    value: "Review required",
+    detail: "Licensed providers require review, provenance metadata, and approved rate-limit strategy before any private-beta configuration.",
     tone: "amber",
   },
 ];
@@ -300,7 +300,7 @@ export const permissionScopesPlaceholder: DataSourcePanelItem[] = [
 export const dataSourceCards: DataSourceCard[] = [
   {
     id: "source-001",
-    providerName: "Meta Graph API",
+    providerName: "Instagram Graph API",
     sourceType: "meta_graph_api",
     coveredDomains: ["account_insights", "audience", "engagement", "comments", "exports"],
     readinessStatus: "ready",
@@ -308,7 +308,7 @@ export const dataSourceCards: DataSourceCard[] = [
     confidence: "verified",
     confidenceScore: 97,
     policyClassification: "official_safe",
-    recommendedAction: "Keep as the primary path for connected professional account analytics and owned account summaries.",
+    recommendedAction: "Provider preview only: use as the primary future path after private-beta backend, official source approval, and connected professional account permissions.",
     tone: "green",
   },
   {
@@ -321,7 +321,7 @@ export const dataSourceCards: DataSourceCard[] = [
     confidence: "high",
     confidenceScore: 91,
     policyClassification: "official_safe",
-    recommendedAction: "Validate workspace permissions and keep paid media reporting separate from public ad visibility.",
+    recommendedAction: "Connection preview only: official-source review required before any private-beta paid media reporting backend.",
     tone: "blue",
   },
   {
@@ -334,7 +334,7 @@ export const dataSourceCards: DataSourceCard[] = [
     confidence: "high",
     confidenceScore: 88,
     policyClassification: "official_safe_limited",
-    recommendedAction: "Use only for public ad visibility style workflows and preserve public-source framing in UI copy.",
+    recommendedAction: "Official-source review required: use only for allowed public ad visibility workflows and preserve public-source framing in UI copy.",
     tone: "purple",
   },
   {
@@ -347,7 +347,7 @@ export const dataSourceCards: DataSourceCard[] = [
     confidence: "verified",
     confidenceScore: 94,
     policyClassification: "official_safe",
-    recommendedAction: "Continue readiness checks for owned/connected account webhook events and retry metadata.",
+    recommendedAction: "Connection preview only: owned/connected account webhooks require private-beta backend enforcement and official account access.",
     tone: "cyan",
   },
   {
@@ -360,7 +360,7 @@ export const dataSourceCards: DataSourceCard[] = [
     confidence: "needs_review",
     confidenceScore: 0,
     policyClassification: "licensed_provider_only",
-    recommendedAction: "Keep gated until contracts, provenance, allowed data domains, rate limits, and compliance review are approved.",
+    recommendedAction: "Licensed-provider review required; disabled in Alpha until contracts, provenance, allowed data domains, rate limits, and compliance review are approved.",
     tone: "rose",
   },
 ];
@@ -374,23 +374,23 @@ export const gatedLicensedProviderPanel: LicensedProviderEvaluationPanel = {
   confidence: "needs_review",
   confidenceScore: null,
   description:
-    "Provider evaluation for risky or proprietary data domains is not official-safe by default. This area remains unavailable until a compliant licensed provider is configured with contracts, provenance metadata, allowed-domain review, and rate-limit strategy.",
+    "Provider evaluation for risky or proprietary data domains is not official-safe by default. No provider is live in Alpha; this area remains unavailable until a compliant licensed provider is approved with contracts, provenance metadata, allowed-domain review, and rate-limit strategy.",
   unavailableReasons: [
-    "No scraping, fake login automation, private account access, hidden surveillance, or anti-bot bypass is represented.",
+    "Disabled in Alpha: no generated account farms, scraping, hidden browser automation, fake login automation, private account access, hidden surveillance, or anti-bot bypass is represented.",
     "Risky data domains require licensed provider approval with confidence, freshness, and policy metadata.",
-    "This mock page only frames official Meta APIs, owned/connected webhooks, manual imports, and licensed-provider placeholders.",
+    "This preview page only frames Instagram Graph API, Meta Marketing API, Meta Ad Library API, owned/connected webhooks, manual imports, and licensed-provider placeholders.",
   ],
 };
 
 export const dataSourceComplianceNotice = {
-  title: "Official-first source management",
+  title: "Alpha official-first source registry",
   description:
-    "This data sources page uses mock data for Meta Graph API, Meta Marketing API, Meta Ad Library API, owned/connected account webhooks, manual imports, and clearly gated licensed-provider evaluation only.",
+    "This data sources page is preview/mock-only. It models Instagram Graph API, Meta Marketing API, Meta Ad Library API, owned/connected account webhooks, manual imports, and clearly gated licensed-provider evaluation; real connections require the private-beta backend and official source approval.",
   bullets: [
-    "Official APIs and compliant licensed providers are the only future live-data paths represented here.",
+    "Allowed source strategy: Instagram Graph API, Meta Marketing API, Meta Ad Library API, owned/connected account webhooks, and licensed provider adapters.",
     "Owned/connected account webhooks are represented only where official account access is applicable.",
-    "No scraping, fake login automation, private account access, hidden surveillance, credential automation, or anti-bot bypass is implemented.",
-    "Risky data domains require licensed provider approval before configuration or downstream product exposure.",
+    "No generated account farm, scraping, hidden browser automation, fake login automation, private account access, hidden surveillance, credential automation, or anti-bot bypass is implemented.",
+    "Risky data domains require licensed provider approval before private-beta configuration or downstream product exposure.",
   ],
 };
 

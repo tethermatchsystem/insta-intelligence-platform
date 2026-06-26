@@ -1,12 +1,12 @@
 export const accountProfile = {
-  accountId: "demo",
+  accountId: "demo-account",
   displayName: "Example Brand",
   handle: "@examplebrand",
   accountType: "Business professional account",
-  provider: "Meta official API",
-  sourceClassification: "official_safe",
-  confidence: "100%",
-  freshness: "2m ago",
+  provider: "Mock preview · official-source required",
+  sourceClassification: "mock_preview / official_safe when connected",
+  confidence: "modeled preview",
+  freshness: "static Alpha demo",
   avatarInitials: "EB",
 };
 
@@ -20,14 +20,17 @@ export const accountOverviewKpis = [
 ];
 
 export const accountQuickLinks = [
-  { label: "Overview", href: "/accounts/demo" },
-  { label: "Timeline", href: "/accounts/demo/timeline" },
-  { label: "Posts", href: "/accounts/demo/posts" },
-  { label: "Comments", href: "/accounts/demo/comments" },
-  { label: "Followers", href: "/accounts/demo/followers" },
-  { label: "Following", href: "/accounts/demo/following" },
-  { label: "Engagement", href: "/accounts/demo/engagement" },
-  { label: "Ads", href: "/accounts/demo/ads" },
+  { label: "Overview", href: "/accounts/demo-account" },
+  { label: "Timeline", href: "/accounts/demo-account/timeline" },
+  { label: "Posts", href: "/accounts/demo-account/posts" },
+  { label: "Comments", href: "/accounts/demo-account/comments" },
+  { label: "Followers", href: "/accounts/demo-account/followers" },
+  { label: "Following", href: "/accounts/demo-account/following" },
+  { label: "Engagement", href: "/accounts/demo-account/engagement" },
+  { label: "Ads", href: "/accounts/demo-account/ads" },
+  { label: "Recent Follows", href: "/accounts/demo-account/recent-follows", badge: "Licensed-provider-only · Disabled Alpha" },
+  { label: "Recent Unfollows", href: "/accounts/demo-account/recent-unfollows", badge: "Licensed-provider-only · Disabled Alpha" },
+  { label: "Likes", href: "/accounts/demo-account/likes", badge: "Restricted · Disabled Alpha" },
 ];
 
 export const accountTrendPoints = [
@@ -40,9 +43,9 @@ export const accountTrendPoints = [
 ];
 
 export const providerHealth = [
-  { label: "Provider", value: "Meta official API", status: "Healthy" },
-  { label: "Webhook freshness", value: "2m ago", status: "Current" },
-  { label: "Permission scope", value: "Connected account", status: "Approved" },
+  { label: "Provider", value: "Mock official-source preview", status: "Mock only" },
+  { label: "Freshness", value: "Static Alpha demo data", status: "No live query" },
+  { label: "Permission scope", value: "Requires official source connection", status: "Not connected" },
 ];
 
 export const sourcePolicy = [
@@ -53,9 +56,9 @@ export const sourcePolicy = [
 ];
 
 export const recentCollectionJobs = [
-  { job: "Profile and insights refresh", source: "Meta official API", status: "Succeeded", freshness: "2m ago" },
-  { job: "Owned media metrics sync", source: "Meta official API", status: "Succeeded", freshness: "8m ago" },
-  { job: "Mention webhook normalization", source: "Meta webhooks", status: "Succeeded", freshness: "12m ago" },
+  { job: "Profile and insights preview", source: "Mock official-source plan", status: "Mock only", freshness: "Static Alpha" },
+  { job: "Owned media metrics preview", source: "Mock official-source plan", status: "Mock only", freshness: "Static Alpha" },
+  { job: "Mention workflow preview", source: "Mock webhook payload", status: "Mock only", freshness: "Static Alpha" },
 ];
 
 export const anomalyHighlights = [
@@ -65,9 +68,9 @@ export const anomalyHighlights = [
 ];
 
 export const recentActivity = [
-  { event: "Mention observed", direction: "Inbound", source: "Meta webhook", confidence: "100%", freshness: "2m", status: "Official safe" },
-  { event: "Media insights captured", direction: "Owned media", source: "Meta official API", confidence: "100%", freshness: "8m", status: "Synced" },
-  { event: "Comment workflow queued", direction: "Inbound", source: "Meta comments API", confidence: "100%", freshness: "12m", status: "Needs review" },
-  { event: "Audience snapshot stored", direction: "Snapshot", source: "Meta official API", confidence: "100%", freshness: "22m", status: "Stored" },
-  { event: "Alert rule evaluated", direction: "System", source: "Rules engine mock", confidence: "96%", freshness: "30m", status: "Mocked" },
+  { event: "Mention previewed", direction: "Inbound", source: "Mock webhook payload", confidence: "Modeled", freshness: "Static", status: "Mocked" },
+  { event: "Media insights previewed", direction: "Owned media", source: "Mock official-source plan", confidence: "Modeled", freshness: "Static", status: "Mocked" },
+  { event: "Comment workflow previewed", direction: "Inbound", source: "Mock comments payload", confidence: "Modeled", freshness: "Static", status: "Mocked" },
+  { event: "Audience snapshot previewed", direction: "Snapshot", source: "Mock official-source plan", confidence: "Modeled", freshness: "Static", status: "Mocked" },
+  { event: "Alert rule previewed", direction: "System", source: "Rules engine mock", confidence: "Modeled", freshness: "Static", status: "Mocked" },
 ];

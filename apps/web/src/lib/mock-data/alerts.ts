@@ -95,21 +95,21 @@ export type AlertTableRow = {
 };
 
 export const alertCenterProfile = {
-  title: "Alert Center",
+  title: "Alert preview",
   description:
-    "Triage compliant risk detection, opportunity alerts, and workflow notifications across owned/connected signals and public/professional monitoring using mock intelligence only.",
-  sourceBadge: "Connected and public/professional alerts",
-  confidenceBadge: "90% triage confidence",
-  freshnessBadge: "Hourly snapshot",
-  integrationBadge: "No live integrations",
+    "Preview mock alert rules, opportunity triage, and workflow notifications across owned/connected signals and public/professional placeholders. Detection is disabled in Alpha.",
+  sourceBadge: "Mock alert rule preview",
+  confidenceBadge: "90% mock triage confidence",
+  freshnessBadge: "Static preview",
+  integrationBadge: "No live monitoring is running",
 };
 
 export const alertFreshnessLabels: Record<AlertFreshness, string> = {
-  near_real_time: "Near real time",
-  hourly: "Hourly snapshot",
-  daily: "Daily snapshot",
-  weekly: "Weekly snapshot",
-  manual: "Manual import",
+  near_real_time: "Static near-real-time placeholder",
+  hourly: "Static hourly preview",
+  daily: "Static daily preview",
+  weekly: "Static weekly preview",
+  manual: "Manual preview",
 };
 
 export const alertConfidenceLabels: Record<AlertConfidence, string> = {
@@ -127,18 +127,18 @@ export const alertPolicyLabels: Record<AlertPolicyClassification, string> = {
 };
 
 export const alertStatusLabels: Record<AlertStatus, string> = {
-  open: "Open",
-  triaged: "Triaged",
-  in_progress: "In progress",
-  resolved: "Resolved",
+  open: "Mock open",
+  triaged: "Mock triaged",
+  in_progress: "Mock in progress",
+  resolved: "Mock resolved",
   licensed_gated: "Licensed gated",
 };
 
 export const alertPriorityLabels: Record<AlertPriority, string> = {
-  critical: "Critical",
-  high: "High priority",
-  medium: "Medium priority",
-  low: "Low priority",
+  critical: "Mock critical",
+  high: "Mock high priority",
+  medium: "Mock medium priority",
+  low: "Mock low priority",
   licensed_only: "Licensed only",
 };
 
@@ -154,41 +154,41 @@ export const alertTypeLabels: Record<AlertType, string> = {
 export const alertKpis: AlertKpi[] = [
   {
     id: "active-alerts",
-    label: "Active alerts",
+    label: "Alert previews",
     value: "42",
-    delta: "+8 today",
+    delta: "Alpha demo only",
     tone: "blue",
-    description: "Mock active alerts from owned/connected account signals and public/professional monitoring placeholders.",
+    description: "Mock alert previews from owned/connected account signals and public/professional placeholders. Detection disabled in Alpha.",
   },
   {
     id: "high-priority-alerts",
-    label: "High priority alerts",
+    label: "High-priority mock alerts",
     value: "9",
-    delta: "triage now",
+    delta: "review placeholder",
     tone: "rose",
-    description: "High-priority risk and workflow alerts queued for analyst review before response decisions.",
+    description: "High-priority mock rules staged for analyst review once an alert backend exists.",
   },
   {
     id: "opportunity-alerts",
-    label: "Opportunity alerts",
+    label: "Opportunity alert previews",
     value: "17",
-    delta: "+5 weekly",
+    delta: "Mock weekly",
     tone: "green",
     description: "Campaign, mention, and engagement opportunities surfaced with mock confidence metadata.",
   },
   {
     id: "risk-alerts",
-    label: "Risk alerts",
+    label: "Risk alert previews",
     value: "13",
-    delta: "review",
+    delta: "Mock review",
     tone: "amber",
     description: "Brand-safety, policy, and anomaly placeholders that require human triage.",
   },
   {
     id: "resolved-this-week",
-    label: "Resolved this week",
+    label: "Mock resolved previews",
     value: "68",
-    delta: "+14%",
+    delta: "Preview only",
     tone: "cyan",
     description: "Mock workflow throughput across assigned owners, response statuses, and escalation lanes.",
   },
@@ -203,10 +203,10 @@ export const alertKpis: AlertKpi[] = [
 ];
 
 export const alertFilters: AlertFilterGroup[] = [
-  { id: "priority", label: "Priority", options: ["All priorities", "Critical", "High", "Medium", "Low", "Licensed only"] },
+  { id: "priority", label: "Priority", options: ["All mock priorities", "Mock critical", "Mock high", "Mock medium", "Mock low", "Licensed only"] },
   { id: "alert-type", label: "Alert type", options: ["All types", "Risk", "Opportunity", "Anomaly", "Workflow", "Compliance"] },
-  { id: "status", label: "Status", options: ["All statuses", "Open", "Triaged", "In progress", "Resolved", "Licensed gated"] },
-  { id: "source", label: "Source", options: ["All sources", "Connected owned account", "Public professional monitoring", "Manual import", "Licensed provider"] },
+  { id: "status", label: "Status", options: ["All mock statuses", "Mock open", "Mock triaged", "Mock in progress", "Mock resolved", "Licensed gated"] },
+  { id: "source", label: "Source", options: ["All preview sources", "Connected owned account preview", "Public/professional placeholder", "Manual import preview", "Licensed provider"] },
   { id: "confidence", label: "Confidence", options: ["Any confidence", "Verified", "High", "Medium", "Needs review"] },
   { id: "policy", label: "Policy classification", options: ["All policies", "Official safe", "Official safe limited", "Licensed provider only", "Disabled by default"] },
 ];
@@ -226,21 +226,21 @@ export const priorityMix: AlertPanelItem[] = [
     id: "priority-high",
     title: "Critical and high",
     value: "21%",
-    detail: "Alerts requiring same-day triage before workflow recommendations are actioned.",
+    detail: "Mock alert rules requiring analyst review before any workflow recommendation is actioned.",
     tone: "rose",
   },
   {
     id: "priority-medium",
     title: "Medium priority",
     value: "46%",
-    detail: "Operational alerts suitable for normal queue review and owner assignment.",
+    detail: "Operational mock alerts suitable for preview queue review and owner assignment planning.",
     tone: "blue",
   },
   {
     id: "priority-low",
     title: "Low priority",
     value: "33%",
-    detail: "Informational alerts for planning, reporting, and weekly workflow summaries.",
+    detail: "Informational alert previews for planning, reporting, and weekly workflow summaries.",
     tone: "slate",
   },
 ];
@@ -249,15 +249,15 @@ export const riskCategories: AlertPanelItem[] = [
   {
     id: "risk-brand-safety",
     title: "Brand-safety review",
-    value: "6 alerts",
-    detail: "Mock public/professional and owned-signal alerts that require analyst context review.",
+    value: "6 previews",
+    detail: "Mock public/professional and owned-signal alert rules that require analyst context review.",
     tone: "amber",
   },
   {
     id: "risk-policy",
     title: "Policy classification",
-    value: "4 alerts",
-    detail: "Alerts where feature classification or data-source provenance must be checked first.",
+    value: "4 previews",
+    detail: "Mock alert rules where feature classification or data-source provenance must be checked first.",
     tone: "purple",
   },
   {
@@ -274,7 +274,7 @@ export const opportunityCategories: AlertPanelItem[] = [
     id: "opp-response",
     title: "Response opportunities",
     value: "17",
-    detail: "Mentions and comments with mock response intent and confidence metadata.",
+    detail: "Mock mentions and comments with preview response intent and confidence metadata.",
     tone: "green",
   },
   {
@@ -296,58 +296,58 @@ export const opportunityCategories: AlertPanelItem[] = [
 export const alertCards: AlertCard[] = [
   {
     id: "alert-001",
-    title: "High urgency product question spike",
-    description: "Connected owned comments show a short-term increase in product questions on the launch carousel.",
-    linkedSignal: "Connected owned account · Launch carousel comments",
+    title: "Mock product question spike preview",
+    description: "Preview scenario for connected owned comments showing a short-term increase in product questions on the launch carousel.",
+    linkedSignal: "Mock alert rule · Launch carousel comments",
     priority: "high",
     type: "opportunity",
-    sourceProvider: "Connected owned account insights",
+    sourceProvider: "Connected owned account preview",
     sourceType: "official_api",
     freshness: "hourly",
     confidence: "verified",
     confidenceScore: 97,
     policyClassification: "official_safe",
     status: "open",
-    recommendedAction: "Assign response owner, publish FAQ response guidance, and monitor the owned comment thread.",
+    recommendedAction: "Preview response owner assignment and draft FAQ guidance. Requires alert backend before any action runs.",
     tone: "green",
   },
   {
     id: "alert-002",
-    title: "Brand-safety claim needs review",
-    description: "A public/professional mention references a campaign claim that needs context review before resharing.",
-    linkedSignal: "Public professional mention placeholder · Claim context",
+    title: "Mock brand-safety claim review",
+    description: "A public/professional mention placeholder references a campaign claim that would need context review before resharing.",
+    linkedSignal: "Public/professional placeholder · Claim context",
     priority: "critical",
     type: "risk",
-    sourceProvider: "Public professional monitoring placeholder",
+    sourceProvider: "Public/professional placeholder",
     sourceType: "mock_provider",
     freshness: "daily",
     confidence: "high",
     confidenceScore: 89,
     policyClassification: "official_safe_limited",
     status: "triaged",
-    recommendedAction: "Hold response automation and route to brand-safety owner for manual provenance review.",
+    recommendedAction: "Preview brand-safety routing for manual provenance review. No automation or live alerting runs in Alpha.",
     tone: "rose",
   },
   {
     id: "alert-003",
-    title: "Engagement benchmark anomaly",
-    description: "Owned engagement is below the mock peer median for tutorial posts in the current weekly snapshot.",
-    linkedSignal: "Connected owned comparison · Tutorial post benchmark",
+    title: "Mock engagement benchmark anomaly",
+    description: "Preview scenario where owned engagement appears below the mock peer median for tutorial posts.",
+    linkedSignal: "Mock connected owned comparison · Tutorial post benchmark",
     priority: "medium",
     type: "anomaly",
-    sourceProvider: "Connected owned benchmark summary",
+    sourceProvider: "Connected owned benchmark preview",
     sourceType: "official_api",
     freshness: "daily",
     confidence: "verified",
     confidenceScore: 94,
     policyClassification: "official_safe",
     status: "in_progress",
-    recommendedAction: "Review tutorial creative structure and compare with approved public/professional benchmark summaries.",
+    recommendedAction: "Preview tutorial creative review and compare with approved public/professional benchmark summaries once official sources are connected.",
     tone: "blue",
   },
   {
     id: "alert-004",
-    title: "Policy classification review required",
+    title: "Mock policy classification review required",
     description: "A planned alert rule references enrichment that must remain licensed-provider-only until configured.",
     linkedSignal: "Workflow rule placeholder · Data-source policy review",
     priority: "medium",
@@ -359,13 +359,13 @@ export const alertCards: AlertCard[] = [
     confidenceScore: 82,
     policyClassification: "official_safe_limited",
     status: "triaged",
-    recommendedAction: "Keep the rule disabled until source provenance, confidence, and licensed-provider status are confirmed.",
+    recommendedAction: "Keep the mock rule disabled until source provenance, confidence, licensed-provider status, and alert backend support are confirmed.",
     tone: "amber",
   },
   {
     id: "alert-005",
-    title: "Private graph enrichment unavailable",
-    description: "Deeper cross-account alert correlation is unavailable without a compliant licensed provider.",
+    title: "Licensed enrichment unavailable in Alpha",
+    description: "Deeper cross-account alert correlation is unavailable without a compliant licensed provider and private-beta monitoring service.",
     linkedSignal: "Licensed enrichment placeholder · Unavailable",
     priority: "licensed_only",
     type: "licensed_only",
@@ -383,9 +383,9 @@ export const alertCards: AlertCard[] = [
 
 export const alertWorkflowSla: AlertWorkflowSla = {
   owner: "Growth ops queue · Mock owner",
-  responseStatus: "57 response opportunities ready for review",
-  escalationStatus: "9 high-priority alerts routed to analyst triage",
-  mockOnlyNotice: "Workflow/SLA state is static mock data only. No backend queue, automation, or live notification integration is connected.",
+  responseStatus: "57 response previews staged for review",
+  escalationStatus: "9 high-priority mock alerts staged for triage",
+  mockOnlyNotice: "Workflow/SLA state is static mock data only. No backend queue, automation, live monitoring, or live notification integration is connected.",
   items: [
     {
       id: "sla-owner",
@@ -397,14 +397,14 @@ export const alertWorkflowSla: AlertWorkflowSla = {
     {
       id: "sla-response",
       title: "Response status placeholder",
-      value: "Ready",
+      value: "Preview",
       detail: "Response opportunities are staged for human review, not automated engagement.",
       tone: "green",
     },
     {
       id: "sla-escalation",
       title: "Escalation status placeholder",
-      value: "Review lane",
+      value: "Mock review lane",
       detail: "Risk alerts route to analyst review before any external action is recommended.",
       tone: "amber",
     },
@@ -420,7 +420,7 @@ export const gatedAlertEnrichmentPanel: AlertLicensedPanel = {
   confidence: "needs_review",
   confidenceScore: null,
   description:
-    "Advanced cross-channel alert correlation, proprietary risk graphs, and deeper non-public enrichment are not official-safe by default. This area remains unavailable until a compliant licensed provider is configured with provenance, gating, and review workflows.",
+    "Advanced cross-channel alert correlation, proprietary risk graphs, and deeper non-public enrichment are not official-safe by default. This area remains unavailable until a compliant licensed provider and private-beta monitoring service are configured with provenance, gating, and review workflows.",
   unavailableReasons: [
     "No scraping, private account access, hidden surveillance, fake login automation, or anti-bot bypass is represented.",
     "Deeper alert enrichment must be licensed-provider-only with confidence, freshness, and policy metadata.",
@@ -429,12 +429,12 @@ export const gatedAlertEnrichmentPanel: AlertLicensedPanel = {
 };
 
 export const alertComplianceNotice = {
-  title: "Official-first alert center",
+  title: "Official-first alert preview",
   description:
-    "This alerts page uses mock data for owned/connected account alerts where applicable, public/professional monitoring placeholders, workflow triage, and clearly gated licensed-provider enrichment only.",
+    "This alerts page uses mock data for owned/connected account alert previews where applicable, public/professional placeholders, workflow triage, and clearly gated licensed-provider enrichment only. No live monitoring is running.",
   bullets: [
-    "Official APIs and compliant licensed providers are the only future live-data paths represented here.",
-    "Connected account and public/professional monitoring alerts require source, confidence, freshness, and policy metadata.",
+    "Official APIs and compliant licensed providers are the only future private-beta live-data paths represented here.",
+    "Connected account and public/professional alert previews require source, confidence, freshness, and policy metadata.",
     "No scraping, private account access, hidden surveillance, fake login automation, credential automation, or anti-bot bypass is implemented.",
     "Deeper enrichment remains licensed-provider-only and unavailable until a compliant provider is configured.",
   ],

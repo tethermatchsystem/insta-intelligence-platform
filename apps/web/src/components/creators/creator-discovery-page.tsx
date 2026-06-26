@@ -60,16 +60,16 @@ function CreatorsHeader() {
           <div className="mb-4 flex flex-wrap gap-2">
             <Badge className="bg-blue-50 text-blue-700 ring-blue-100">{creatorDiscoveryProfile.sourceBadge}</Badge>
             <Badge className="bg-emerald-50 text-emerald-700 ring-emerald-100">{creatorDiscoveryProfile.confidenceBadge}</Badge>
-            <Badge className="bg-cyan-50 text-cyan-700 ring-cyan-100">Fresh {creatorDiscoveryProfile.freshnessBadge}</Badge>
+            <Badge className="bg-cyan-50 text-cyan-700 ring-cyan-100">{creatorDiscoveryProfile.freshnessBadge}</Badge>
             <Badge className="bg-slate-100 text-slate-700 ring-slate-200">{creatorDiscoveryProfile.integrationBadge}</Badge>
           </div>
-          <p className="text-sm font-semibold uppercase tracking-wide text-slate-400">Creator intelligence</p>
+          <p className="text-sm font-semibold uppercase tracking-wide text-slate-400">Creator preview</p>
           <h1 className="mt-2 text-4xl font-semibold tracking-tight text-slate-950">{creatorDiscoveryProfile.title}</h1>
           <p className="mt-2 max-w-3xl text-base leading-7 text-slate-600">{creatorDiscoveryProfile.description}</p>
         </div>
         <div className="rounded-3xl border border-slate-200 bg-slate-50 p-4 text-sm leading-6 text-slate-600 xl:w-[29rem]">
-          <p className="font-semibold text-slate-900">Mock-only creator discovery view</p>
-          <p className="mt-1">Premium creator discovery for public/professional profiles, connected overlap summaries, and licensed-provider placeholders only. No live integrations are connected.</p>
+          <p className="font-semibold text-slate-900">Alpha demo creator preview</p>
+          <p className="mt-1">Mock creator profile previews for public/professional planning, connected overlap previews, and licensed-provider placeholders only. Discovery is disabled in Alpha.</p>
         </div>
       </div>
     </header>
@@ -82,7 +82,7 @@ function FilterPlaceholderBar() {
       <div className="flex flex-col gap-3 xl:flex-row xl:items-center xl:justify-between">
         <div>
           <p className="text-sm font-semibold text-slate-950">Creator filters</p>
-          <p className="mt-1 text-xs text-slate-500">Static placeholders for future discovery, vetting, and licensed enrichment views.</p>
+          <p className="mt-1 text-xs text-slate-500">Static Alpha placeholders for preview vetting and licensed enrichment review.</p>
         </div>
         <div className="flex flex-wrap gap-2">
           {creatorDiscoveryFilters.map((filter) => (
@@ -98,12 +98,12 @@ function FilterPlaceholderBar() {
 
 function ComplianceNotice() {
   return (
-    <CreatorsPanel title={creatorDiscoveryComplianceNotice.title} subtitle="Public/professional discovery and licensed providers only.">
+    <CreatorsPanel title={creatorDiscoveryComplianceNotice.title} subtitle="Mock public/professional creator previews and licensed providers only.">
       <div className="space-y-4 text-sm leading-6 text-slate-600">
         <p>{creatorDiscoveryComplianceNotice.description}</p>
         <div className="grid gap-3 lg:grid-cols-2">
-          <p className="rounded-2xl border border-emerald-200 bg-emerald-50 p-4 text-emerald-900">Public/professional creator discovery framing only.</p>
-          <p className="rounded-2xl border border-blue-200 bg-blue-50 p-4 text-blue-900">Official APIs and licensed providers only for future live data.</p>
+          <p className="rounded-2xl border border-emerald-200 bg-emerald-50 p-4 text-emerald-900">Mock creator preview framing only.</p>
+          <p className="rounded-2xl border border-blue-200 bg-blue-50 p-4 text-blue-900">Requires official source connection for any future private-beta data path.</p>
           <p className="rounded-2xl border border-amber-200 bg-amber-50 p-4 text-amber-900">Contact and enrichment data is licensed-provider-only and gated.</p>
           <p className="rounded-2xl border border-slate-200 bg-slate-50 p-4 text-slate-700">No scraping, private account access, hidden surveillance, or anti-bot bypass.</p>
         </div>

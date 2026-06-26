@@ -71,6 +71,12 @@ function statusClasses(status: AccountPostStatus) {
   return "bg-slate-100 text-slate-700 ring-slate-200";
 }
 
+function postStatusLabel(status: AccountPostStatus) {
+  if (["underperforming", "needs_review"].includes(status)) return "Preview review";
+  if (status === "monitoring") return "Alpha demo only";
+  return "Preview performance";
+}
+
 function Badge({ children, className }: { children: React.ReactNode; className: string }) {
   return <span className={`rounded-full px-3 py-1 text-xs font-semibold ring-1 ${className}`}>{children}</span>;
 }
@@ -108,16 +114,16 @@ function PostsHeader() {
           <div className="mb-4 flex flex-wrap gap-2">
             <Badge className="bg-blue-50 text-blue-700 ring-blue-100">{accountPostsProfile.sourceBadge}</Badge>
             <Badge className="bg-emerald-50 text-emerald-700 ring-emerald-100">{accountPostsProfile.confidenceBadge}</Badge>
-            <Badge className="bg-cyan-50 text-cyan-700 ring-cyan-100">Fresh {accountPostsProfile.freshnessBadge}</Badge>
+            <Badge className="bg-cyan-50 text-cyan-700 ring-cyan-100">{accountPostsProfile.freshnessBadge}</Badge>
             <Badge className="bg-slate-100 text-slate-700 ring-slate-200">{accountPostsProfile.integrationBadge}</Badge>
           </div>
-          <p className="text-sm font-semibold uppercase tracking-wide text-slate-400">Media intelligence</p>
-          <h1 className="mt-2 text-4xl font-semibold tracking-tight text-slate-950">{accountPostsProfile.name} posts</h1>
+          <p className="text-sm font-semibold uppercase tracking-wide text-slate-400">Post preview</p>
+          <h1 className="mt-2 text-4xl font-semibold tracking-tight text-slate-950">{accountPostsProfile.name} post preview</h1>
           <p className="mt-2 text-base text-slate-600">{accountPostsProfile.handle} · {accountPostsProfile.accountType}</p>
         </div>
         <div className="rounded-3xl border border-slate-200 bg-slate-50 p-4 text-sm leading-6 text-slate-600 xl:w-[28rem]">
-          <p className="font-semibold text-slate-900">Mock-only owned media view</p>
-          <p className="mt-1">Premium post intelligence prepared for official APIs and licensed providers only. No live integrations are connected.</p>
+          <p className="font-semibold text-slate-900">Mock post intelligence</p>
+          <p className="mt-1">Post collection disabled in Alpha. Preview performance only and requires official source connection.</p>
         </div>
       </div>
     </header>
@@ -166,10 +172,10 @@ function MediaCard({ post }: { post: AccountPost }) {
           <p className="mt-2 text-sm leading-6 text-slate-600">{post.captionPreview}</p>
         </div>
         <div className="grid grid-cols-2 gap-3">
-          <MetricPill label="Likes" value={post.metrics.likes} />
-          <MetricPill label="Comments" value={post.metrics.comments} />
-          <MetricPill label="Saves" value={post.metrics.saves} />
-          <MetricPill label="Shares" value={post.metrics.shares} />
+          <MetricPill label="Preview likes" value={post.metrics.likes} />
+          <MetricPill label="Preview comments" value={post.metrics.comments} />
+          <MetricPill label="Preview saves" value={post.metrics.saves} />
+          <MetricPill label="Preview shares" value={post.metrics.shares} />
         </div>
         <div className="flex flex-wrap gap-2">
           <Badge className="bg-violet-50 text-violet-700 ring-violet-100">{post.metrics.engagementRate} ER</Badge>
@@ -180,7 +186,7 @@ function MediaCard({ post }: { post: AccountPost }) {
         </div>
         <div className="flex items-center justify-between gap-3 border-t border-slate-100 pt-4">
           <p className="text-xs text-slate-500">{formatPublished(post.publishedAt)}</p>
-          <Badge className={statusClasses(post.status)}>{formatToken(post.status)}</Badge>
+          <Badge className={statusClasses(post.status)}>{postStatusLabel(post.status)}</Badge>
         </div>
       </div>
     </article>
@@ -207,10 +213,10 @@ function PerformanceList({ title, items }: { title: string; items: typeof topPer
 function PerformanceSection() {
   return (
     <section className="grid gap-6 xl:grid-cols-3">
-      <PostsPanel title="Top performing posts" subtitle="Mock winners ranked by owned engagement signals.">
+      <PostsPanel title="Preview performance highlights" subtitle="Mock winners ranked by owned engagement preview signals.">
         <PerformanceList title="High performers" items={topPerformingPosts} />
       </PostsPanel>
-      <PostsPanel title="Underperforming posts" subtitle="Mock posts below baseline or queued for review.">
+      <PostsPanel title="Preview review items" subtitle="Mock posts below demo baseline or queued for future review.">
         <PerformanceList title="Needs attention" items={underperformingPosts} />
       </PostsPanel>
       <PostsPanel title={postingCadence.title} subtitle="Cadence chart placeholder.">
@@ -230,7 +236,7 @@ function ComplianceNotice() {
         <p>{accountPostsComplianceNotice.description}</p>
         <div className="grid gap-3 lg:grid-cols-2">
           <p className="rounded-2xl border border-emerald-200 bg-emerald-50 p-4 text-emerald-900">Connected professional account media only.</p>
-          <p className="rounded-2xl border border-blue-200 bg-blue-50 p-4 text-blue-900">Official APIs and licensed providers only for future live data.</p>
+          <p className="rounded-2xl border border-blue-200 bg-blue-50 p-4 text-blue-900">Official APIs and licensed providers only for future approved data.</p>
           <p className="rounded-2xl border border-slate-200 bg-slate-50 p-4 text-slate-700">No scraping, fake login automation, or credential automation.</p>
           <p className="rounded-2xl border border-slate-200 bg-slate-50 p-4 text-slate-700">No private account access or hidden surveillance workflows.</p>
         </div>
@@ -246,7 +252,7 @@ function ComplianceNotice() {
 
 function PostsTable() {
   return (
-    <PostsPanel title="Enterprise posts table" subtitle="Mock post rows prepared for future official media ingestion.">
+    <PostsPanel title="Enterprise post preview table" subtitle="Static mock post rows only. No live post collection is running.">
       <div className="overflow-x-auto rounded-2xl border border-slate-200">
         <table className="w-full min-w-[980px] text-left text-sm">
           <thead className="bg-slate-50 text-xs uppercase tracking-wide text-slate-500">
@@ -271,7 +277,7 @@ function PostsTable() {
                 <td className="px-4 py-4 text-slate-600">{row.comments}</td>
                 <td className="px-4 py-4 text-slate-600">{row.source}</td>
                 <td className="px-4 py-4 text-slate-600">{row.confidence}</td>
-                <td className="px-4 py-4"><Badge className={statusClasses(row.status)}>{formatToken(row.status)}</Badge></td>
+                <td className="px-4 py-4"><Badge className={statusClasses(row.status)}>{postStatusLabel(row.status)}</Badge></td>
               </tr>
             ))}
           </tbody>
@@ -295,7 +301,7 @@ export function AccountPostsPage() {
       <FilterPlaceholderBar />
 
       <section className="grid gap-6 xl:grid-cols-[minmax(0,1.5fr)_minmax(340px,0.7fr)]">
-        <PostsPanel title="Media grid" subtitle="Mock post cards for connected professional account media.">
+        <PostsPanel title="Post preview grid" subtitle="Mock post cards for connected professional account media. No live post collection is running.">
           <div className="grid gap-4 lg:grid-cols-2">
             {accountPosts.map((post) => (
               <MediaCard key={post.id} post={post} />
@@ -303,7 +309,7 @@ export function AccountPostsPage() {
           </div>
         </PostsPanel>
 
-        <PostsPanel title="Provider/source badges" subtitle="Compliant source categories for media intelligence.">
+        <PostsPanel title="Provider/source badges" subtitle="Compliant future source categories for mock post intelligence.">
           <div className="space-y-3">
             {accountPostProviderBadges.map((provider) => (
               <div key={provider.id} className="rounded-2xl border border-slate-100 bg-slate-50 p-3">

@@ -18,9 +18,9 @@ const accountTimelineProfile = {
   name: "Catalyst Studio",
   handle: "@catalyst.studio",
   accountType: "Connected professional account",
-  freshness: "near_real_time" as TimelineFreshness,
+  freshness: "unavailable" as TimelineFreshness,
   providerId: "meta-graph-api",
-  confidenceLabel: "91% avg confidence",
+  confidenceLabel: "Alpha demo only",
 };
 
 function formatToken(value: string) {
@@ -75,6 +75,23 @@ function statusClasses(status: TimelineStatus) {
   if (["detected", "monitoring"].includes(status)) return "bg-blue-50 text-blue-700 ring-blue-100";
   if (["review", "gated"].includes(status)) return "bg-amber-50 text-amber-700 ring-amber-100";
   return "bg-slate-100 text-slate-700 ring-slate-200";
+}
+
+function statusLabel(status: TimelineStatus) {
+  return status === "gated" ? "Requires official source connection" : "Preview event";
+}
+
+function freshnessLabel(freshness: TimelineFreshness) {
+  const labels: Record<TimelineFreshness, string> = {
+    live: "Alpha demo only",
+    near_real_time: "Requires official source connection",
+    hourly: "Static preview",
+    daily: "Static preview",
+    manual: "Manual preview",
+    unavailable: "Unavailable in Alpha",
+  };
+
+  return labels[freshness];
 }
 
 function Badge({ children, className }: { children: React.ReactNode; className: string }) {
@@ -138,13 +155,13 @@ function TimelineEventCard({ event }: { event: (typeof accountTimelineEvents)[nu
           <h3 className="mt-2 text-lg font-semibold text-slate-950">{event.title}</h3>
           <p className="mt-2 max-w-3xl text-sm leading-6 text-slate-600">{event.description}</p>
         </div>
-        <Badge className={statusClasses(event.status)}>{formatToken(event.status)}</Badge>
+        <Badge className={statusClasses(event.status)}>{statusLabel(event.status)}</Badge>
       </div>
       <div className="mt-4 flex flex-wrap gap-2">
         <Badge className={directionClasses(event.direction)}>{formatToken(event.direction)}</Badge>
         <Badge className="bg-slate-100 text-slate-700 ring-slate-200">{event.sourceProvider}</Badge>
         <Badge className="bg-violet-50 text-violet-700 ring-violet-100">{confidenceText}</Badge>
-        <Badge className="bg-cyan-50 text-cyan-700 ring-cyan-100">{formatToken(event.freshness)}</Badge>
+        <Badge className="bg-cyan-50 text-cyan-700 ring-cyan-100">{freshnessLabel(event.freshness)}</Badge>
         <Badge className={policyClasses(event.policyClassification)}>{formatToken(event.policyClassification)}</Badge>
       </div>
       <p className="mt-3 text-xs leading-5 text-slate-500">{accountTimelineFreshnessValues[event.freshness]}</p>
@@ -175,7 +192,7 @@ function ComplianceNotice() {
 
 function TimelineTable() {
   return (
-    <TimelinePanel title="Enterprise event table" subtitle="Static mock rows prepared for future compliant provider ingestion.">
+    <TimelinePanel title="Enterprise preview event table" subtitle="Static mock rows only. Timeline ingestion disabled in Alpha.">
       <div className="overflow-x-auto rounded-2xl border border-slate-200">
         <table className="w-full min-w-[960px] text-left text-sm">
           <thead className="bg-slate-50 text-xs uppercase tracking-wide text-slate-500">
@@ -196,9 +213,9 @@ function TimelineTable() {
                 <td className="px-4 py-4"><Badge className={directionClasses(row.direction)}>{formatToken(row.direction)}</Badge></td>
                 <td className="px-4 py-4 text-slate-600">{row.provider}</td>
                 <td className="px-4 py-4 text-slate-600">{row.confidence}</td>
-                <td className="px-4 py-4 text-slate-600">{formatToken(row.freshness)}</td>
+                <td className="px-4 py-4 text-slate-600">{freshnessLabel(row.freshness)}</td>
                 <td className="px-4 py-4"><Badge className={policyClasses(row.policyClassification)}>{formatToken(row.policyClassification)}</Badge></td>
-                <td className="px-4 py-4"><Badge className={statusClasses(row.status)}>{formatToken(row.status)}</Badge></td>
+                <td className="px-4 py-4"><Badge className={statusClasses(row.status)}>{statusLabel(row.status)}</Badge></td>
               </tr>
             ))}
           </tbody>
@@ -216,18 +233,18 @@ function TimelineHeader() {
       <div className="flex flex-col gap-6 xl:flex-row xl:items-start xl:justify-between">
         <div>
           <div className="mb-4 flex flex-wrap gap-2">
-            <Badge className="bg-cyan-50 text-cyan-700 ring-cyan-100">Fresh {formatToken(accountTimelineProfile.freshness)}</Badge>
+            <Badge className="bg-cyan-50 text-cyan-700 ring-cyan-100">Timeline ingestion disabled in Alpha</Badge>
             <Badge className={toneClasses(activeProvider.tone)}>{activeProvider.label}</Badge>
             <Badge className="bg-violet-50 text-violet-700 ring-violet-100">{accountTimelineProfile.confidenceLabel}</Badge>
-            <Badge className="bg-slate-100 text-slate-700 ring-slate-200">No live integrations</Badge>
+            <Badge className="bg-slate-100 text-slate-700 ring-slate-200">No live timeline collection is running</Badge>
           </div>
-          <p className="text-sm font-semibold uppercase tracking-wide text-slate-400">Account activity timeline</p>
-          <h1 className="mt-2 text-4xl font-semibold tracking-tight text-slate-950">{accountTimelineProfile.name}</h1>
+          <p className="text-sm font-semibold uppercase tracking-wide text-slate-400">Timeline preview</p>
+          <h1 className="mt-2 text-4xl font-semibold tracking-tight text-slate-950">{accountTimelineProfile.name} timeline preview</h1>
           <p className="mt-2 text-base text-slate-600">{accountTimelineProfile.handle} · {accountTimelineProfile.accountType}</p>
         </div>
         <div className="rounded-3xl border border-slate-200 bg-slate-50 p-4 text-sm leading-6 text-slate-600 xl:w-[28rem]">
-          <p className="font-semibold text-slate-900">Premium mock timeline</p>
-          <p className="mt-1">No backend connection is active. Future live signals must use official APIs and licensed providers only.</p>
+          <p className="font-semibold text-slate-900">Mock activity timeline</p>
+          <p className="mt-1">Preview events only. Requires official source connection before any real timeline ingestion.</p>
         </div>
       </div>
     </header>
@@ -248,7 +265,7 @@ export function AccountTimelinePage() {
       <FilterPlaceholderBar />
 
       <section className="grid gap-6 xl:grid-cols-[minmax(0,1.5fr)_minmax(340px,0.7fr)]">
-        <TimelinePanel title="Timeline stream" subtitle="Mock account events ordered by observed timestamp.">
+        <TimelinePanel title="Mock activity timeline" subtitle="Preview events only. No live timeline collection is running.">
           <div className="relative ml-6 space-y-4 border-l border-slate-200 pl-6">
             {accountTimelineEvents.map((event) => (
               <TimelineEventCard key={event.id} event={event} />
@@ -256,7 +273,7 @@ export function AccountTimelinePage() {
           </div>
         </TimelinePanel>
 
-        <TimelinePanel title="Provider/source badges" subtitle="Allowed source categories represented in this mock view.">
+        <TimelinePanel title="Provider/source badges" subtitle="Allowed future source categories represented in this Alpha demo only.">
           <div className="space-y-3">
             {accountTimelineProviderBadges.map((provider) => (
               <div key={provider.id} className="rounded-2xl border border-slate-100 bg-slate-50 p-3">

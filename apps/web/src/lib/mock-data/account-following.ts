@@ -90,19 +90,19 @@ export const accountFollowingProfile = {
   name: "Catalyst Studio",
   handle: "@catalyst.studio",
   accountType: "Connected professional account",
-  sourceBadge: "Connected following summary",
-  confidenceBadge: "90% relationship confidence",
-  freshnessBadge: "Weekly snapshot",
-  integrationBadge: "No live integrations",
-  gatedBadge: "Identity-level following data gated",
+  sourceBadge: "Mock following intelligence",
+  confidenceBadge: "90% modeled relationship confidence",
+  freshnessBadge: "Static Alpha snapshot",
+  integrationBadge: "No live following collection",
+  gatedBadge: "Requires licensed provider review",
 };
 
 export const accountFollowingFreshnessLabels: Record<AccountFollowingFreshness, string> = {
-  near_real_time: "Near real time",
-  hourly: "Hourly refresh",
-  daily: "Daily snapshot",
-  weekly: "Weekly snapshot",
-  manual: "Manual import",
+  near_real_time: "Static preview, not live",
+  hourly: "Mock hourly preview",
+  daily: "Mock daily snapshot",
+  weekly: "Mock weekly snapshot",
+  manual: "Manual preview import",
 };
 
 export const accountFollowingConfidenceLabels: Record<AccountFollowingConfidence, string> = {
@@ -113,25 +113,25 @@ export const accountFollowingConfidenceLabels: Record<AccountFollowingConfidence
 };
 
 export const accountFollowingPolicyLabels: Record<AccountFollowingPolicyClassification, string> = {
-  official_safe: "Official safe",
-  official_safe_limited: "Official safe limited",
-  licensed_provider_only: "Licensed provider only",
-  disabled_by_default: "Disabled by default",
+  official_safe: "Official-safe preview",
+  official_safe_limited: "Official-safe limited preview",
+  licensed_provider_only: "Requires licensed provider review",
+  disabled_by_default: "Disabled in Alpha",
 };
 
 export const accountFollowingStatusLabels: Record<AccountFollowingStatus, string> = {
-  available: "Available",
-  monitoring: "Monitoring",
-  snapshot: "Snapshot",
-  gated: "Gated",
-  disabled_by_default: "Disabled by default",
+  available: "Preview only",
+  monitoring: "Mock preview",
+  snapshot: "Static preview",
+  gated: "Gated preview",
+  disabled_by_default: "Disabled in Alpha",
 };
 
 export const accountFollowingDirectionLabels: Record<AccountFollowingDirection, string> = {
-  added: "Added",
-  removed: "Removed",
-  stable: "Stable",
-  gated: "Gated",
+  added: "Preview add signal",
+  removed: "Preview remove signal",
+  stable: "Static preview",
+  gated: "Gated preview",
 };
 
 export const accountFollowingRelationshipLabels: Record<AccountFollowingRelationshipType, string> = {
@@ -145,19 +145,19 @@ export const accountFollowingRelationshipLabels: Record<AccountFollowingRelation
 export const accountFollowingKpis: AccountFollowingKpi[] = [
   {
     id: "total-following",
-    label: "Total following",
+    label: "Following preview total",
     value: "1,284",
     delta: "+38 net 90d",
     tone: "blue",
-    description: "Connected account following count summary modeled from mock snapshot data.",
+    description: "Connected account following count summary modeled from mock preview data.",
   },
   {
     id: "following-change",
-    label: "Following change",
+    label: "Preview relationship signal",
     value: "+4.1%",
     delta: "category mix",
     tone: "green",
-    description: "Aggregate category-level change only; no latest identity-level following list is exposed.",
+    description: "Aggregate category-level change only; no live following collection or identity-level list is exposed.",
   },
   {
     id: "creator-brand-categories",
@@ -177,7 +177,7 @@ export const accountFollowingKpis: AccountFollowingKpi[] = [
   },
   {
     id: "relationship-confidence",
-    label: "Relationship confidence",
+    label: "Mock relationship confidence",
     value: "90%",
     delta: "high",
     tone: "amber",
@@ -185,18 +185,18 @@ export const accountFollowingKpis: AccountFollowingKpi[] = [
   },
   {
     id: "gated-identity-signals",
-    label: "Gated identity signals",
+    label: "Following collection disabled in Alpha",
     value: "Disabled",
     delta: "licensed only",
     tone: "rose",
-    description: "Arbitrary recent following/unfollowing identity-level data is gated and disabled by default.",
+    description: "Arbitrary recent following/unfollowing identity-level data requires licensed provider review and remains disabled in Alpha.",
   },
 ];
 
 export const accountFollowingFilters: AccountFollowingFilterGroup[] = [
   { id: "category", label: "Category", options: ["All categories", "Creators", "Brands", "Publishers", "Communities"] },
   { id: "date-range", label: "Date range", options: ["Last 90 days", "Last 30 days", "Quarter", "Custom"] },
-  { id: "source", label: "Source", options: ["All sources", "Connected account summary", "Snapshot relationship model", "Licensed identity provider"] },
+  { id: "source", label: "Source", options: ["All sources", "Mock connected summary", "Mock relationship model", "Requires licensed provider review"] },
   { id: "confidence", label: "Confidence", options: ["Any confidence", "Verified", "High", "Medium", "Needs review"] },
   { id: "relationship-type", label: "Relationship type", options: ["All relationships", "Creator", "Brand", "Publisher", "Community"] },
   { id: "policy", label: "Policy classification", options: ["All policies", "Official safe", "Official safe limited", "Licensed provider only", "Disabled by default"] },
@@ -211,9 +211,9 @@ export const followingCategoryMix: AccountFollowingMixPoint[] = [
 ];
 
 export const relationshipClusters: AccountFollowingSummaryPanel[] = [
-  { id: "cluster-studio", title: "Studio workflow cluster", value: "312 follows", detail: "Creators and production teams related to campaign planning and studio operations.", tone: "purple" },
-  { id: "cluster-commerce", title: "Commerce partner cluster", value: "196 follows", detail: "Brands and retailers connected to launch, merchandising, and product storytelling themes.", tone: "green" },
-  { id: "cluster-publisher", title: "Design publishers", value: "104 follows", detail: "Editorial, design, and trend publications summarized at category level.", tone: "blue" },
+  { id: "cluster-studio", title: "Studio workflow cluster", value: "312 preview relationships", detail: "Creators and production teams related to campaign planning and studio operations.", tone: "purple" },
+  { id: "cluster-commerce", title: "Commerce partner cluster", value: "196 preview relationships", detail: "Brands and retailers connected to launch, merchandising, and product storytelling themes.", tone: "green" },
+  { id: "cluster-publisher", title: "Design publishers", value: "104 preview relationships", detail: "Editorial, design, and trend publications summarized at category level.", tone: "blue" },
 ];
 
 export const brandCreatorAffinity: AccountFollowingSummaryPanel[] = [
@@ -234,11 +234,11 @@ export const followingRelationshipCards: AccountFollowingRelationshipCard[] = [
     title: "Creator ecosystem relationships",
     relationshipType: "creator",
     share: "38%",
-    count: "488 followed accounts",
+    count: "488 preview relationships",
     change: "+22 net 90d",
     overlapEstimate: "28% overlap",
     description: "Aggregated relationship category for creators, studios, and production operators followed by the connected account.",
-    sourceProvider: "Connected account summary",
+    sourceProvider: "Mock connected summary",
     sourceType: "official_api",
     freshness: "weekly",
     confidence: "high",
@@ -252,11 +252,11 @@ export const followingRelationshipCards: AccountFollowingRelationshipCard[] = [
     title: "Brand and commerce relationships",
     relationshipType: "brand",
     share: "24%",
-    count: "308 followed accounts",
+    count: "308 preview relationships",
     change: "+9 net 90d",
     overlapEstimate: "21% overlap",
     description: "Category-level brand relationship placeholder for product, retail, and launch-adjacent followed accounts.",
-    sourceProvider: "Snapshot relationship model",
+    sourceProvider: "Mock relationship model",
     sourceType: "mock_provider",
     freshness: "weekly",
     confidence: "medium",
@@ -270,11 +270,11 @@ export const followingRelationshipCards: AccountFollowingRelationshipCard[] = [
     title: "Publisher and trend sources",
     relationshipType: "publisher",
     share: "17%",
-    count: "218 followed accounts",
+    count: "218 preview relationships",
     change: "+5 net 90d",
     overlapEstimate: "14% overlap",
     description: "Summary category for design publications, trend sources, and editorial accounts followed by the account.",
-    sourceProvider: "Connected account summary",
+    sourceProvider: "Mock connected summary",
     sourceType: "official_api",
     freshness: "weekly",
     confidence: "high",
@@ -286,18 +286,18 @@ export const followingRelationshipCards: AccountFollowingRelationshipCard[] = [
 ];
 
 export const gatedFollowingIdentityPanel: AccountFollowingGatedIdentityPanel = {
-  title: "Recent following identity-level data placeholder",
+  title: "Following collection disabled in Alpha",
   status: "disabled_by_default",
   policyClassification: "licensed_provider_only",
-  sourceProvider: "Licensed identity provider required",
+  sourceProvider: "Requires licensed provider review",
   freshness: "manual",
   confidence: "needs_review",
   confidenceScore: null,
   description:
-    "Arbitrary latest following or unfollowing identity-level data is not official-safe. This placeholder is unavailable until a compliant licensed provider is configured and the feature is explicitly gated.",
+    "No live following collection is running. Arbitrary latest following or unfollowing identity-level data is not official-safe and remains unavailable until a compliant licensed provider is reviewed and the feature is explicitly gated.",
   unavailableReasons: [
     "No individual latest followed-account identities are shown in this mock page.",
-    "Recent following/unfollowing identity-level data is licensed-provider-only and disabled by default.",
+    "Following collection disabled in Alpha; no live following collection is running.",
     "No scraping, private account access, hidden surveillance, or credential automation is represented.",
   ],
 };
@@ -305,10 +305,10 @@ export const gatedFollowingIdentityPanel: AccountFollowingGatedIdentityPanel = {
 export const accountFollowingComplianceNotice = {
   title: "Official-first following relationship intelligence",
   description:
-    "This following page uses mock data for connected professional account summaries and category-level relationship intelligence only. Live implementation must use official APIs and licensed providers only, with recent identity-level following data gated and disabled by default.",
+    "This following page uses mock data for connected professional account summaries and category-level relationship intelligence only. No live following collection is running; any future implementation requires official source connection and licensed provider review for gated identity-level features.",
   bullets: [
-    "Following counts, relationship clusters, and category summaries are modeled as connected account summary signals.",
-    "Arbitrary latest following or unfollowing identities are licensed-provider-only and must remain gated.",
+    "Following counts, relationship clusters, and category summaries are modeled as preview relationship signals.",
+    "Arbitrary latest following or unfollowing identities require licensed provider review and must remain gated.",
     "No scraping, fake login automation, credential automation, private account access, or hidden surveillance is represented.",
   ],
 };
@@ -318,9 +318,9 @@ export const accountFollowingTableRows: AccountFollowingTableRow[] = [
     id: "row-total-following",
     signal: "Total following count summary",
     direction: "stable",
-    count: "1,284 followed accounts",
+    count: "1,284 preview relationships",
     freshness: "weekly",
-    source: "Connected account summary",
+    source: "Mock connected summary",
     confidence: "93% High confidence",
     policy: "official_safe_limited",
     status: "snapshot",
@@ -329,9 +329,9 @@ export const accountFollowingTableRows: AccountFollowingTableRow[] = [
     id: "row-creators",
     signal: "Creator ecosystem category",
     direction: "added",
-    count: "488 followed accounts",
+    count: "488 preview relationships",
     freshness: "weekly",
-    source: "Connected account summary",
+    source: "Mock connected summary",
     confidence: "93% High confidence",
     policy: "official_safe_limited",
     status: "snapshot",
@@ -340,9 +340,9 @@ export const accountFollowingTableRows: AccountFollowingTableRow[] = [
     id: "row-brands",
     signal: "Brand and commerce category",
     direction: "added",
-    count: "308 followed accounts",
+    count: "308 preview relationships",
     freshness: "weekly",
-    source: "Snapshot relationship model",
+    source: "Mock relationship model",
     confidence: "86% Medium confidence",
     policy: "official_safe_limited",
     status: "monitoring",
@@ -351,20 +351,20 @@ export const accountFollowingTableRows: AccountFollowingTableRow[] = [
     id: "row-publishers",
     signal: "Publisher and trend source category",
     direction: "stable",
-    count: "218 followed accounts",
+    count: "218 preview relationships",
     freshness: "weekly",
-    source: "Connected account summary",
+    source: "Mock connected summary",
     confidence: "90% High confidence",
     policy: "official_safe_limited",
     status: "available",
   },
   {
     id: "row-identity-level",
-    signal: "Latest following identity-level placeholder",
+    signal: "Following collection disabled in Alpha",
     direction: "gated",
     count: "Unavailable",
     freshness: "manual",
-    source: "Licensed identity provider required",
+    source: "Requires licensed provider review",
     confidence: "Not scored",
     policy: "licensed_provider_only",
     status: "disabled_by_default",

@@ -56,7 +56,7 @@ function SignalList({ items }: { items: CreatorDiscoveryPanelItem[] }) {
 export function CreatorDiscoveryPanels() {
   return (
     <section className="grid gap-6 xl:grid-cols-4">
-      <DiscoveryPanel title="Creator category mix" subtitle="Mock category distribution for public/professional creator discovery.">
+      <DiscoveryPanel title="Creator category mix" subtitle="Mock category distribution for Alpha creator previews.">
         <div className="rounded-3xl bg-gradient-to-br from-slate-950 via-slate-900 to-indigo-950 p-5 text-white">
           <div className="flex h-60 items-end gap-3 rounded-2xl border border-white/10 bg-white/5 p-4">
             {creatorCategoryMix.map((point) => (
@@ -72,7 +72,7 @@ export function CreatorDiscoveryPanels() {
         </div>
       </DiscoveryPanel>
 
-      <DiscoveryPanel title="Audience fit segments" subtitle="Connected overlap and public signal fit placeholders.">
+      <DiscoveryPanel title="Audience preview segments" subtitle="Connected overlap previews and mock public-signal placeholders.">
         <SignalList items={audienceFitSegments} />
       </DiscoveryPanel>
 
@@ -80,7 +80,7 @@ export function CreatorDiscoveryPanels() {
         <SignalList items={brandSafetyOverview} />
       </DiscoveryPanel>
 
-      <DiscoveryPanel title="Growth/opportunity placeholder" subtitle="Mock opportunities for campaign planning.">
+      <DiscoveryPanel title="Planning opportunity preview" subtitle="Mock opportunities for campaign planning only.">
         <SignalList items={growthOpportunities} />
       </DiscoveryPanel>
     </section>

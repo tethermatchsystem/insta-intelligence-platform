@@ -50,9 +50,9 @@ function IntelligencePanel({ title, subtitle, items }: { title: string; subtitle
 export function AccountCommentIntelligencePanels() {
   return (
     <section className="grid gap-6 xl:grid-cols-3">
-      <IntelligencePanel title="Urgent comments" subtitle="High-priority mock comments for moderation or support triage." items={urgentComments} />
-      <IntelligencePanel title="Sales/support questions" subtitle="Commerce and support opportunities detected in owned comments." items={salesSupportQuestions} />
-      <IntelligencePanel title="Sentiment themes" subtitle="Mock themes summarizing comment tone and response strategy." items={sentimentThemes} />
+      <IntelligencePanel title="Preview moderation items" subtitle="High-priority mock comments; live moderation requires private-beta service." items={urgentComments} />
+      <IntelligencePanel title="Preview response opportunities" subtitle="Commerce and support opportunities shown as Alpha demo only." items={salesSupportQuestions} />
+      <IntelligencePanel title="Preview sentiment themes" subtitle="Mock themes summarizing comment tone and response strategy." items={sentimentThemes} />
     </section>
   );
 }

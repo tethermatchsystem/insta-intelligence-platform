@@ -3,15 +3,15 @@ import { AuthButton, AuthField, AuthLink, AuthNotice, AuthPageShell } from "@/co
 export default function Page() {
   return (
     <AuthPageShell
-      eyebrow="Secure workspace access"
-      title="Welcome back"
-      description="Sign in to the private Instagram intelligence workspace preview. This screen is static and does not connect to live authentication."
+      eyebrow="Alpha mock access preview"
+      title="Preview mock sign-in"
+      description="Preview mock sign-in for the private Instagram intelligence workspace. This form is static in Alpha and no credentials are submitted."
       sideTitle="Monitor official-safe Instagram intelligence from one executive workspace."
       sideDescription="A premium auth preview for connected professional account analytics, policy-gated providers, export controls, and compliance-first workflows."
-      activeMetric="Enterprise access"
+      activeMetric="Mock access only"
       primaryHrefLabel="New to the platform?"
       primaryHref="/signup"
-      secondaryHrefLabel="Need a reset?"
+      secondaryHrefLabel="Preview reset?"
       secondaryHref="/forgot-password"
     >
       <div className="space-y-5">
@@ -23,19 +23,19 @@ export default function Page() {
         <div className="flex items-center justify-between gap-4 text-sm">
           <label className="flex items-center gap-2 text-slate-600">
             <input type="checkbox" className="h-4 w-4 rounded border-slate-300 text-slate-950" />
-            Remember this workspace
+            Remember this workspace preview
           </label>
-          <AuthLink href="/forgot-password">Forgot password?</AuthLink>
+          <AuthLink href="/forgot-password">Preview reset workflow</AuthLink>
         </div>
 
-        <AuthButton>Sign in to workspace</AuthButton>
+        <AuthButton>Preview mock sign-in</AuthButton>
 
         <AuthNotice title="Security and compliance note" tone="emerald">
-          This mock sign-in keeps official-first boundaries visible: no scraping, no fake login automation, no credential capture, and no backend session is created.
+          This mock sign-in keeps official-first boundaries visible: no scraping, no fake login automation, no credential capture, and no backend session is created. Authentication backend is planned for private beta.
         </AuthNotice>
 
         <p className="text-center text-sm text-slate-500">
-          No account yet? <AuthLink href="/signup">Create a compliant workspace</AuthLink>
+          No live account yet? <AuthLink href="/signup">Preview mock workspace creation</AuthLink>
         </p>
       </div>
     </AuthPageShell>

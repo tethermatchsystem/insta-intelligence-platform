@@ -16,17 +16,17 @@ export function TopBar() {
             <p className="flex items-center gap-1.5 text-[11px] uppercase tracking-[0.2em] text-cyan-200/70">
               <Sparkles className="h-3 w-3" aria-hidden="true" /> Workspace
             </p>
-            <p className="truncate text-sm font-semibold text-slate-100">ACME Agency</p>
+            <p className="truncate text-sm font-semibold text-slate-100">ACME Agency · Alpha demo</p>
           </div>
           <Badge variant="outline" className="hidden h-11 rounded-2xl border-emerald-300/20 bg-emerald-300/10 px-4 text-sm text-emerald-100 shadow-sm sm:inline-flex">
             <Activity className="mr-2 h-4 w-4" aria-hidden="true" />
-            <span className="font-semibold">Mock freshness:</span> static preview
+            <span className="font-semibold">No live sync:</span> static preview
           </Badge>
         </div>
 
         <div className="grid w-full min-w-0 gap-3 sm:grid-cols-[minmax(0,1fr)_auto_auto] 2xl:w-[760px]">
           <label className="relative block">
-            <span className="sr-only">Search accounts</span>
+            <span className="sr-only">Search Alpha preview workspace</span>
             <Search className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-500" aria-hidden="true" />
             <Input
               readOnly

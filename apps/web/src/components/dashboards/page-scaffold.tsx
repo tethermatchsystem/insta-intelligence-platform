@@ -16,7 +16,7 @@ export function DashboardPageScaffold({ title, description, gated = false, gateS
             <div className="mb-4 flex flex-wrap gap-2">
               <SystemStateBadge badge={{ label: "Source: mock snapshot", tone: "info" }} />
               <SystemStateBadge badge={{ label: "Confidence: demo-grade", tone: "success" }} />
-              <SystemStateBadge badge={{ label: "Freshness: static", tone: "neutral" }} />
+              <SystemStateBadge badge={{ label: "Static freshness", tone: "neutral" }} />
               <SystemStateBadge badge={{ label: "No live integrations", tone: "warning" }} />
             </div>
             <CardTitle className="text-3xl font-semibold tracking-tight text-slate-950 sm:text-4xl">{title}</CardTitle>
@@ -53,7 +53,7 @@ export function DashboardPageScaffold({ title, description, gated = false, gateS
         <KpiCard label="Followers" value="1.2M" delta="+4.2%" />
         <KpiCard label="Engagement rate" value="5.8%" delta="+0.7%" />
         <KpiCard label="Mentions" value="842" delta="+12%" />
-        <KpiCard label="Provider confidence" value="98%" />
+        <KpiCard label="Mock provider confidence" value="98%" />
       </div>
 
       <ChartCard title={`${title} trend`} />
@@ -61,7 +61,7 @@ export function DashboardPageScaffold({ title, description, gated = false, gateS
       <SystemState
         variant={gated ? "restricted" : "placeholder"}
         title={gated ? "Restricted data remains unavailable" : "Future provider data is unavailable in this mock view"}
-        description="This state is intentionally static. Future batches may connect official APIs, owned-account webhooks, manual imports, or approved licensed-provider adapters after policy review."
+        description="This state is intentionally static. Future backend batches may enable official-source workflows, owned-account webhooks, manual imports, or approved licensed-provider adapters after policy review."
         badges={[
           { label: gated ? gateStatus : "placeholder-only", tone: gated ? "warning" : "neutral" },
           { label: "No live backend", tone: "warning" },
@@ -69,7 +69,7 @@ export function DashboardPageScaffold({ title, description, gated = false, gateS
         ]}
         checks={["No scraping or fake login automation", "No private account access or hidden surveillance", "No anti-bot bypass or live provider activation"]}
       />
-      <EmptyState title="No live integration data is connected" />
+      <EmptyState title="No live integration data available in Alpha" />
     </div>
   );
 }

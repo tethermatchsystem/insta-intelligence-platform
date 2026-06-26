@@ -93,27 +93,27 @@ export type MentionTableRow = {
 };
 
 export const mentionMonitoringProfile = {
-  title: "Mention Monitoring",
+  title: "Mention Preview",
   description:
-    "Monitor brand mentions, detect response opportunities, and review compliant public/professional listening signals using mock intelligence only.",
-  sourceBadge: "Public/professional mention monitoring",
-  confidenceBadge: "91% monitoring confidence",
-  freshnessBadge: "Daily snapshot",
-  integrationBadge: "No live integrations",
+    "Preview mock mention intelligence, response opportunities, and compliant public/professional signals. Listening is disabled in Alpha, and no live mention listening is running.",
+  sourceBadge: "Mock mention intelligence",
+  confidenceBadge: "Preview sentiment",
+  freshnessBadge: "Alpha demo only",
+  integrationBadge: "No live mention listening is running",
 };
 
 export const mentionFreshnessLabels: Record<MentionFreshness, string> = {
-  near_real_time: "Near real time",
-  hourly: "Hourly refresh",
-  daily: "Daily snapshot",
-  weekly: "Weekly snapshot",
-  manual: "Manual import",
+  near_real_time: "Alpha demo only",
+  hourly: "Alpha demo only",
+  daily: "Static preview snapshot",
+  weekly: "Static preview snapshot",
+  manual: "Manual preview import",
 };
 
 export const mentionConfidenceLabels: Record<MentionConfidence, string> = {
-  verified: "Verified",
-  high: "High confidence",
-  medium: "Medium confidence",
+  verified: "Preview sentiment",
+  high: "Preview sentiment",
+  medium: "Preview sentiment",
   needs_review: "Needs review",
 };
 
@@ -125,11 +125,11 @@ export const mentionPolicyLabels: Record<MentionPolicyClassification, string> = 
 };
 
 export const mentionStatusLabels: Record<MentionStatus, string> = {
-  open: "Open",
-  triaged: "Triaged",
-  response_ready: "Response ready",
+  open: "Preview open",
+  triaged: "Preview triaged",
+  response_ready: "Response preview",
   review_required: "Review required",
-  licensed_gated: "Licensed gated",
+  licensed_gated: "Requires private-beta monitoring service",
 };
 
 export const mentionSentimentLabels: Record<MentionSentiment, string> = {
@@ -160,27 +160,27 @@ export const mentionUrgencyLabels: Record<MentionUrgency, string> = {
 export const mentionKpis: MentionKpi[] = [
   {
     id: "tracked-mentions",
-    label: "Tracked mentions",
+    label: "Mention previews",
     value: "2.4K",
-    delta: "30d window",
+    delta: "Alpha demo only",
     tone: "blue",
-    description: "Mock public/professional and connected-account mention summaries for brand listening workflows.",
+    description: "Mock mention intelligence summaries for public/professional and connected-account preview workflows.",
   },
   {
     id: "new-mentions",
-    label: "New mentions",
+    label: "New mention previews",
     value: "184",
-    delta: "+21 today",
+    delta: "Preview only",
     tone: "cyan",
-    description: "New mock mentions entering review and response triage across allowed source types.",
+    description: "Mock mentions entering review and response preview across allowed source types.",
   },
   {
     id: "positive-mentions",
-    label: "Positive mentions",
+    label: "Preview sentiment",
     value: "68%",
     delta: "+5 pts",
     tone: "green",
-    description: "Positive sentiment share from mock owned and public/professional mention monitoring.",
+    description: "Positive sentiment share from mock owned and public/professional mention previews.",
   },
   {
     id: "negative-mentions",
@@ -209,9 +209,9 @@ export const mentionKpis: MentionKpi[] = [
 ];
 
 export const mentionFilters: MentionFilterGroup[] = [
-  { id: "sentiment", label: "Sentiment", options: ["All sentiment", "Positive", "Neutral", "Negative", "Mixed", "Needs review"] },
-  { id: "channel-source", label: "Channel/source", options: ["All sources", "Connected owned comments", "Public professional mentions", "Manual CSV", "Licensed provider"] },
-  { id: "date-range", label: "Date range", options: ["Last 30 days", "Last 7 days", "Today", "Quarter to date"] },
+  { id: "sentiment", label: "Preview sentiment", options: ["All preview sentiment", "Positive", "Neutral", "Negative", "Mixed", "Needs review"] },
+  { id: "channel-source", label: "Channel/source", options: ["All sources", "Requires official source connection", "Mock mention intelligence", "Manual CSV", "Requires private-beta monitoring service"] },
+  { id: "date-range", label: "Preview window", options: ["Static Alpha window", "Mock 7-day view", "Mock today view", "Mock quarter view"] },
   { id: "mention-type", label: "Mention type", options: ["All types", "Brand tag", "Campaign mention", "Product question", "Support issue", "Opportunity"] },
   { id: "confidence", label: "Confidence", options: ["Any confidence", "Verified", "High", "Medium", "Needs review"] },
   { id: "policy", label: "Policy classification", options: ["All policies", "Official safe", "Official safe limited", "Licensed provider only", "Disabled by default"] },
@@ -239,7 +239,7 @@ export const mentionSourceMix: MentionPanelItem[] = [
     id: "source-public",
     title: "Public professional references",
     value: "38%",
-    detail: "Public/professional mention monitoring placeholders for brand-listening review.",
+    detail: "Public/professional mention preview placeholders for brand review.",
     tone: "blue",
   },
   {
@@ -311,7 +311,7 @@ export const mentionCards: MentionCard[] = [
     sentiment: "positive",
     intent: "praise",
     urgency: "medium",
-    sourceProvider: "Connected owned comments",
+    sourceProvider: "Requires official source connection",
     sourceType: "official_api",
     freshness: "daily",
     confidence: "verified",
@@ -332,14 +332,14 @@ export const mentionCards: MentionCard[] = [
     sentiment: "positive",
     intent: "purchase_intent",
     urgency: "high",
-    sourceProvider: "Public professional mention monitoring",
+    sourceProvider: "Mock mention intelligence",
     sourceType: "mock_provider",
     freshness: "weekly",
     confidence: "high",
     confidenceScore: 90,
     policyClassification: "official_safe_limited",
     status: "open",
-    recommendedAction: "Route to response queue with product detail guidance and preserve source/freshness metadata.",
+    recommendedAction: "Review this Alpha demo only mention preview before any response planning; no live mention listening is running.",
     tone: "green",
   },
   {
@@ -353,7 +353,7 @@ export const mentionCards: MentionCard[] = [
     sentiment: "mixed",
     intent: "support",
     urgency: "medium",
-    sourceProvider: "Connected owned comments",
+    sourceProvider: "Requires official source connection",
     sourceType: "official_api",
     freshness: "daily",
     confidence: "verified",
@@ -395,14 +395,14 @@ export const mentionCards: MentionCard[] = [
     sentiment: "licensed_only",
     intent: "licensed_only",
     urgency: "licensed_only",
-    sourceProvider: "Licensed mention provider required",
+    sourceProvider: "Requires private-beta monitoring service",
     sourceType: "licensed_provider",
     freshness: "manual",
     confidence: "needs_review",
     confidenceScore: 0,
     policyClassification: "licensed_provider_only",
     status: "licensed_gated",
-    recommendedAction: "Keep deeper enrichment unavailable until a compliant licensed provider is configured and approved.",
+    recommendedAction: "Keep deeper enrichment unavailable until a compliant private-beta monitoring service is reviewed and approved.",
     tone: "rose",
   },
 ];
@@ -411,29 +411,29 @@ export const gatedMentionEnrichmentPanel: MentionLicensedPanel = {
   title: "Deeper mention enrichment placeholder",
   status: "licensed_gated",
   policyClassification: "licensed_provider_only",
-  sourceProvider: "Compliant licensed provider required",
+  sourceProvider: "Requires private-beta monitoring service",
   freshness: "manual",
   confidence: "needs_review",
   confidenceScore: null,
   description:
-    "Cross-channel identity enrichment, proprietary mention graphs, and deeper non-public listening datasets are not official-safe by default. This area remains unavailable until a compliant licensed provider is configured with provenance, gating, and review workflows.",
+    "Cross-channel identity enrichment, proprietary mention graphs, and deeper non-public listening datasets are not official-safe by default. This area remains unavailable until a compliant private-beta monitoring service is configured with provenance, gating, and review workflows.",
   unavailableReasons: [
     "No scraping, private account access, hidden surveillance, fake login automation, or anti-bot bypass is represented.",
     "Deeper mention enrichment must be licensed-provider-only with confidence, freshness, and policy metadata.",
-    "This mock page only frames public/professional monitoring and connected owned-account mentions where applicable.",
+    "This mock page only frames public/professional mention previews and connected owned-account mention previews where applicable.",
   ],
 };
 
 export const mentionComplianceNotice = {
-  title: "Official-first mention monitoring",
+  title: "Official-first mention preview",
   description:
-    "This mentions page uses mock data for public/professional mention monitoring, connected owned-account mentions where applicable, opportunity detection, response triage, and clearly gated licensed-provider placeholders only.",
+    "This mentions page uses Alpha demo only mock mention intelligence, connected owned-account mention previews where applicable, opportunity detection placeholders, response triage previews, and clearly gated licensed-provider placeholders. Listening is disabled in Alpha and no live mention listening is running.",
   bullets: [
-    "Official APIs and compliant licensed providers are the only future live-data paths represented here.",
-    "Public/professional mention monitoring is summary-level and requires source, confidence, freshness, and policy metadata.",
+    "Requires official source connection or compliant private-beta monitoring service before any future live-data path is represented here.",
+    "Public/professional mention previews are summary-level and require source, confidence, freshness, and policy metadata.",
     "Connected account mentions are represented only where official account access is applicable.",
     "No scraping, private account access, hidden surveillance, fake login automation, credential automation, or anti-bot bypass is implemented.",
-    "Deeper enrichment remains licensed-provider-only and unavailable until a compliant provider is configured.",
+    "Deeper enrichment remains licensed-provider-only and unavailable until a compliant provider is reviewed and configured.",
   ],
 };
 

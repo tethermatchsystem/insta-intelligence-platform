@@ -100,11 +100,11 @@ export type TimelineTableRow = {
 };
 
 export const accountTimelineFreshnessValues: Record<TimelineFreshness, string> = {
-  live: "Live signal from an active official source.",
-  near_real_time: "Updated within the latest monitoring window.",
-  hourly: "Refreshed on an hourly cadence.",
-  daily: "Refreshed during the daily account snapshot job.",
-  manual: "Imported or confirmed manually.",
+  live: "Alpha demo only; no live timeline collection is running.",
+  near_real_time: "Preview freshness only; requires official source connection for real updates.",
+  hourly: "Static Alpha preview cadence, not a running collection job.",
+  daily: "Static Alpha preview snapshot, not a running ingestion job.",
+  manual: "Manual or mock preview confirmation only.",
   unavailable: "Freshness is unavailable until a compliant provider is connected."
 };
 
@@ -152,9 +152,9 @@ export const accountTimelineProviderBadges: TimelineProviderBadge[] = [
 ];
 
 export const accountTimelineComplianceNotice = {
-  title: "Official-first timeline data",
+  title: "Official-first timeline preview",
   description:
-    "This mock timeline uses official-safe Meta data categories and clearly gates licensed-provider-only relationship placeholders. No scraping, credential automation, or private account access is represented.",
+    "This mock timeline uses official-safe Meta data categories and clearly gates licensed-provider-only relationship placeholders. No live timeline collection is running, and no scraping, credential automation, or private account access is represented.",
   bullets: [
     "Connected account snapshots, owned comments, mentions, posts, and ads are modeled as official-safe or official-safe-limited signals.",
     "Recent follow/unfollow activity is included only as a licensed-provider-only placeholder and should remain gated before implementation.",
@@ -165,23 +165,23 @@ export const accountTimelineComplianceNotice = {
 export const accountTimelineKpis: TimelineKpi[] = [
   {
     id: "events-24h",
-    label: "Events last 24h",
+    label: "Preview events",
     value: "42",
     delta: "+18%",
     tone: "blue",
-    description: "Mock count of compliant account timeline events observed today."
+    description: "Mock count of compliant account timeline preview events."
   },
   {
     id: "official-source-share",
-    label: "Official source share",
+    label: "Preview source mix",
     value: "88%",
     delta: "+6%",
     tone: "green",
-    description: "Share of events sourced from official Meta APIs."
+    description: "Modeled share of preview events that would require official Meta APIs."
   },
   {
     id: "avg-confidence",
-    label: "Avg confidence",
+    label: "Preview confidence",
     value: "91%",
     delta: "+3 pts",
     tone: "purple",
@@ -228,10 +228,10 @@ export const accountTimelineFilters: TimelineFilterGroup[] = [
     label: "Freshness",
     options: [
       { label: "Any freshness", value: "all" },
-      { label: "Live", value: "live" },
-      { label: "Near real time", value: "near_real_time" },
-      { label: "Hourly", value: "hourly" },
-      { label: "Daily", value: "daily" },
+      { label: "Alpha demo only", value: "live" },
+      { label: "Requires official source connection", value: "near_real_time" },
+      { label: "Static hourly preview", value: "hourly" },
+      { label: "Static daily preview", value: "daily" },
       { label: "Unavailable", value: "unavailable" }
     ]
   }
@@ -241,8 +241,8 @@ export const accountTimelineEvents: TimelineEvent[] = [
   {
     id: "evt-snapshot-refresh-001",
     type: "snapshot_refresh",
-    title: "Snapshot refresh completed",
-    description: "Daily account profile, media count, follower count, and insight snapshot refreshed.",
+    title: "Preview snapshot event",
+    description: "Daily account profile, media count, follower count, and insight snapshot represented as static Alpha preview data.",
     direction: "system",
     sourceProvider: "meta-insights-api",
     confidence: { label: "verified", score: 99 },
@@ -254,8 +254,8 @@ export const accountTimelineEvents: TimelineEvent[] = [
   {
     id: "evt-post-published-001",
     type: "post_published",
-    title: "Post published",
-    description: "Owned carousel media was published and indexed for timeline monitoring.",
+    title: "Preview post event",
+    description: "Owned carousel media is represented as a preview event. No live timeline collection is running.",
     direction: "outbound",
     sourceProvider: "meta-graph-api",
     confidence: { label: "verified", score: 98 },
@@ -267,8 +267,8 @@ export const accountTimelineEvents: TimelineEvent[] = [
   {
     id: "evt-comment-inbound-001",
     type: "comment_inbound",
-    title: "Inbound comment received",
-    description: "Owned media received a new comment available through approved account permissions.",
+    title: "Preview comment event",
+    description: "Owned media comment example shown as Alpha demo only; requires official source connection.",
     direction: "inbound",
     sourceProvider: "meta-graph-api",
     confidence: { label: "verified", score: 97 },
@@ -280,8 +280,8 @@ export const accountTimelineEvents: TimelineEvent[] = [
   {
     id: "evt-mention-inbound-001",
     type: "mention_inbound",
-    title: "Inbound mention detected",
-    description: "The connected professional account was mentioned in eligible public content.",
+    title: "Preview mention event",
+    description: "Eligible mention example shown as a static preview event, not live monitoring.",
     direction: "inbound",
     sourceProvider: "meta-graph-api",
     confidence: { label: "high", score: 94 },
@@ -293,8 +293,8 @@ export const accountTimelineEvents: TimelineEvent[] = [
   {
     id: "evt-engagement-spike-001",
     type: "engagement_spike",
-    title: "Engagement spike observed",
-    description: "Recent owned media engagement is trending above the seven-day baseline.",
+    title: "Preview engagement event",
+    description: "Owned media engagement trend represented as a mock preview above a demo baseline.",
     direction: "neutral",
     sourceProvider: "meta-insights-api",
     confidence: { label: "high", score: 92 },
@@ -306,8 +306,8 @@ export const accountTimelineEvents: TimelineEvent[] = [
   {
     id: "evt-ad-detected-001",
     type: "ad_detected",
-    title: "Ad detected",
-    description: "A compliant ad visibility signal was matched for the account workspace.",
+    title: "Preview ad event",
+    description: "Compliant ad visibility example shown as static Alpha preview data.",
     direction: "outbound",
     sourceProvider: "meta-marketing-api",
     confidence: { label: "medium", score: 86 },
@@ -319,8 +319,8 @@ export const accountTimelineEvents: TimelineEvent[] = [
   {
     id: "evt-follower-count-changed-001",
     type: "follower_count_changed",
-    title: "Follower count changed",
-    description: "Follower count changed by +128 since the previous official account snapshot.",
+    title: "Preview follower-count event",
+    description: "Follower count change represented from a static official account snapshot example.",
     direction: "neutral",
     sourceProvider: "meta-insights-api",
     confidence: { label: "verified", score: 99 },

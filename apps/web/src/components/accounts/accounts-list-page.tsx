@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { accountFilters, accountKpis, accountRows } from "@/lib/mock-data/accounts";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -55,13 +56,13 @@ export function AccountsListPage() {
             </div>
             <CardTitle className="text-3xl font-semibold tracking-tight text-slate-950 sm:text-4xl">Accounts</CardTitle>
             <CardDescription className="mt-2 max-w-3xl text-base leading-7 text-slate-600">
-              Monitor connected business and creator accounts, professional-account watchlists, provider freshness, and review status from one intelligence surface.
+              Preview the mock account intelligence layout for connected business and creator accounts, professional-account watchlists, provider readiness, and review status.
             </CardDescription>
           </div>
           <div className="rounded-3xl border border-slate-200 bg-slate-50 p-4 text-sm text-slate-600 xl:w-96">
             <p className="font-semibold text-slate-900">Provider and compliance notice</p>
             <p className="mt-1 leading-6">
-              This mock view supports official APIs, connected accounts, manual imports, and licensed compliant providers only. Scraping and private account access are not implemented.
+              This mock view opens a demo account preview only. Future live data requires official APIs, connected accounts, manual imports, or licensed compliant providers; scraping and private account access are not implemented.
             </p>
           </div>
         </CardHeader>
@@ -77,9 +78,11 @@ export function AccountsListPage() {
         <CardHeader className="flex flex-col gap-3 p-5 pb-4 sm:flex-row sm:items-end sm:justify-between">
           <div>
             <CardTitle className="text-base font-semibold text-slate-950">Search and filters</CardTitle>
-            <CardDescription className="mt-1 text-sm text-slate-500">Placeholder controls for future live filtering and saved account views.</CardDescription>
+            <CardDescription className="mt-1 text-sm text-slate-500">Mock-only controls for previewing filters and saved views; no live connected-account query runs in Alpha.</CardDescription>
           </div>
-          <Button type="button" className="w-full rounded-2xl bg-slate-950 px-4 text-sm font-medium text-white shadow-sm sm:w-auto">Preview account list workflow</Button>
+          <Button asChild className="w-full rounded-2xl bg-slate-950 px-4 text-sm font-medium text-white shadow-sm sm:w-auto">
+            <Link href="/accounts/demo-account">Open demo account preview</Link>
+          </Button>
         </CardHeader>
         <CardContent className="p-5 pt-0">
         <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-5">

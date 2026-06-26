@@ -86,19 +86,19 @@ export const accountFollowersProfile = {
   name: "Catalyst Studio",
   handle: "@catalyst.studio",
   accountType: "Connected professional account",
-  sourceBadge: "Meta audience insights",
-  confidenceBadge: "92% audience confidence",
-  freshnessBadge: "Daily snapshot",
-  integrationBadge: "No live integrations",
-  gatedBadge: "Identity-level follower data gated",
+  sourceBadge: "Mock audience intelligence",
+  confidenceBadge: "92% modeled confidence",
+  freshnessBadge: "Static Alpha snapshot",
+  integrationBadge: "No live follower collection",
+  gatedBadge: "Requires licensed provider review",
 };
 
 export const accountFollowerFreshnessLabels: Record<AccountFollowerFreshness, string> = {
-  near_real_time: "Near real time",
-  hourly: "Hourly refresh",
-  daily: "Daily snapshot",
-  weekly: "Weekly snapshot",
-  manual: "Manual import",
+  near_real_time: "Static preview, not live",
+  hourly: "Mock hourly preview",
+  daily: "Mock daily snapshot",
+  weekly: "Mock weekly snapshot",
+  manual: "Manual preview import",
 };
 
 export const accountFollowerConfidenceLabels: Record<AccountFollowerConfidence, string> = {
@@ -109,18 +109,18 @@ export const accountFollowerConfidenceLabels: Record<AccountFollowerConfidence, 
 };
 
 export const accountFollowerPolicyLabels: Record<AccountFollowerPolicyClassification, string> = {
-  official_safe: "Official safe",
-  official_safe_limited: "Official safe limited",
-  licensed_provider_only: "Licensed provider only",
-  disabled_by_default: "Disabled by default",
+  official_safe: "Official-safe preview",
+  official_safe_limited: "Official-safe limited preview",
+  licensed_provider_only: "Requires licensed provider review",
+  disabled_by_default: "Disabled in Alpha",
 };
 
 export const accountFollowerStatusLabels: Record<AccountFollowerStatus, string> = {
-  available: "Available",
-  monitoring: "Monitoring",
-  snapshot: "Snapshot",
-  gated: "Gated",
-  disabled_by_default: "Disabled by default",
+  available: "Preview only",
+  monitoring: "Mock preview",
+  snapshot: "Static preview",
+  gated: "Gated preview",
+  disabled_by_default: "Disabled in Alpha",
 };
 
 export const accountFollowerDirectionLabels: Record<AccountFollowerDirection, string> = {
@@ -133,31 +133,31 @@ export const accountFollowerDirectionLabels: Record<AccountFollowerDirection, st
 export const accountFollowerKpis: AccountFollowerKpi[] = [
   {
     id: "total-followers",
-    label: "Total followers",
+    label: "Follower preview total",
     value: "482.6K",
     delta: "+4.2% 30d",
     tone: "blue",
-    description: "Connected professional account audience total modeled as mock official-safe summary data.",
+    description: "Connected professional account audience total modeled as mock official-safe preview data.",
   },
   {
     id: "follower-growth",
-    label: "Follower growth",
+    label: "Follower preview growth",
     value: "+19.4K",
     delta: "30d net",
     tone: "green",
-    description: "Aggregated growth count from snapshot-based audience summaries.",
+    description: "Aggregated growth count from static preview audience summaries.",
   },
   {
     id: "estimated-new-followers",
-    label: "Estimated new followers",
+    label: "Preview new followers",
     value: "7.8K",
     delta: "7d estimate",
     tone: "cyan",
-    description: "Mock aggregate estimate only; no individual recent follower identities are exposed.",
+    description: "Mock aggregate estimate only; no live follower collection or individual identities are exposed.",
   },
   {
     id: "audience-confidence",
-    label: "Audience confidence",
+    label: "Mock audience confidence",
     value: "92%",
     delta: "high",
     tone: "purple",
@@ -165,7 +165,7 @@ export const accountFollowerKpis: AccountFollowerKpi[] = [
   },
   {
     id: "top-audience-segment",
-    label: "Top audience segment",
+    label: "Preview audience segment",
     value: "Creators",
     delta: "34% share",
     tone: "amber",
@@ -173,18 +173,18 @@ export const accountFollowerKpis: AccountFollowerKpi[] = [
   },
   {
     id: "gated-identity-signals",
-    label: "Gated identity signals",
+    label: "Follower collection disabled in Alpha",
     value: "Disabled",
     delta: "licensed only",
     tone: "rose",
-    description: "Arbitrary recent follower identity tracking is gated, placeholder-only, and disabled by default.",
+    description: "Arbitrary recent follower identity tracking requires licensed provider review and remains disabled in Alpha.",
   },
 ];
 
 export const accountFollowerFilters: AccountFollowerFilterGroup[] = [
   { id: "segment", label: "Segment", options: ["All segments", "Creators", "Operators", "Retail teams", "Students"] },
   { id: "date-range", label: "Date range", options: ["Last 30 days", "Last 7 days", "Quarter", "Custom"] },
-  { id: "source", label: "Source", options: ["All sources", "Meta audience insights", "Snapshot provider", "Licensed identity provider"] },
+  { id: "source", label: "Source", options: ["All sources", "Mock Meta audience preview", "Mock snapshot provider", "Requires licensed provider review"] },
   { id: "confidence", label: "Confidence", options: ["Any confidence", "Verified", "High", "Medium", "Needs review"] },
   { id: "growth-status", label: "Growth status", options: ["All statuses", "Growth", "Stable", "Decline", "Gated"] },
   { id: "policy", label: "Policy classification", options: ["All policies", "Official safe", "Official safe limited", "Licensed provider only", "Disabled by default"] },
@@ -225,7 +225,7 @@ export const followerSegmentCards: AccountFollowerSegmentCard[] = [
     count: "164K estimated followers",
     growth: "+6.8K 30d",
     description: "Aggregated audience segment interested in content production, campaign planning, and studio organization.",
-    sourceProvider: "Meta audience insights",
+    sourceProvider: "Mock Meta audience preview",
     sourceType: "official_api",
     freshness: "daily",
     confidence: "high",
@@ -241,7 +241,7 @@ export const followerSegmentCards: AccountFollowerSegmentCard[] = [
     count: "130K estimated followers",
     growth: "+4.1K 30d",
     description: "Summary segment for teams using the account as inspiration for workflow, launches, and measurement routines.",
-    sourceProvider: "Meta audience insights",
+    sourceProvider: "Mock Meta audience preview",
     sourceType: "official_api",
     freshness: "daily",
     confidence: "high",
@@ -257,7 +257,7 @@ export const followerSegmentCards: AccountFollowerSegmentCard[] = [
     count: "86K estimated followers",
     growth: "+2.9K 30d",
     description: "Aggregated segment with interest in product bundles, launch cadence, and owned media performance.",
-    sourceProvider: "Snapshot audience model",
+    sourceProvider: "Mock snapshot audience model",
     sourceType: "mock_provider",
     freshness: "weekly",
     confidence: "medium",
@@ -269,18 +269,18 @@ export const followerSegmentCards: AccountFollowerSegmentCard[] = [
 ];
 
 export const gatedIdentityPanel: AccountFollowerGatedIdentityPanel = {
-  title: "Recent follower identity-level data placeholder",
+  title: "Follower collection disabled in Alpha",
   status: "disabled_by_default",
   policyClassification: "licensed_provider_only",
-  sourceProvider: "Licensed identity provider required",
+  sourceProvider: "Requires licensed provider review",
   freshness: "manual",
   confidence: "needs_review",
   confidenceScore: null,
   description:
-    "Arbitrary recent follower identity tracking is not treated as official-safe. This placeholder remains unavailable until a compliant licensed provider is configured and the feature is explicitly gated.",
+    "No live follower collection is running. Arbitrary recent follower identity tracking is not official-safe and remains unavailable until a compliant licensed provider is reviewed and the feature is explicitly gated.",
   unavailableReasons: [
     "No individual recent follower identities are shown in this mock page.",
-    "Identity-level recent follower/unfollower data is licensed-provider-only and disabled by default.",
+    "Follower collection disabled in Alpha; no live follower collection is running.",
     "No scraping, private account access, hidden surveillance, or credential automation is represented.",
   ],
 };
@@ -288,10 +288,10 @@ export const gatedIdentityPanel: AccountFollowerGatedIdentityPanel = {
 export const accountFollowersComplianceNotice = {
   title: "Official-first audience intelligence",
   description:
-    "This followers page uses mock data for connected professional account audience summaries only. Live implementation must use official APIs and licensed providers only, with identity-level recent follower tracking gated, placeholder-only, and disabled by default.",
+    "This followers page uses mock data for connected professional account audience summaries only. No live follower collection is running; any future implementation requires official source connection and licensed provider review for gated identity-level features.",
   bullets: [
-    "Aggregated follower growth, demographics, and audience segments are modeled as connected account summaries.",
-    "Arbitrary recent follower or unfollower identities are licensed-provider-only and must remain gated.",
+    "Aggregated follower growth, demographics, and preview audience segments are modeled as connected account summaries.",
+    "Arbitrary recent follower or unfollower identities require licensed provider review and must remain gated.",
     "No scraping, fake login automation, credential automation, private account access, or hidden surveillance is represented.",
   ],
 };
@@ -303,7 +303,7 @@ export const accountFollowerTableRows: AccountFollowerTableRow[] = [
     direction: "growth",
     count: "+19.4K net followers",
     freshness: "daily",
-    source: "Meta audience insights",
+    source: "Mock Meta audience preview",
     confidence: "94% High confidence",
     policy: "official_safe",
     status: "available",
@@ -314,7 +314,7 @@ export const accountFollowerTableRows: AccountFollowerTableRow[] = [
     direction: "growth",
     count: "164K estimated followers",
     freshness: "daily",
-    source: "Meta audience insights",
+    source: "Mock Meta audience preview",
     confidence: "94% High confidence",
     policy: "official_safe",
     status: "available",
@@ -325,7 +325,7 @@ export const accountFollowerTableRows: AccountFollowerTableRow[] = [
     direction: "stable",
     count: "130K estimated followers",
     freshness: "daily",
-    source: "Meta audience insights",
+    source: "Mock Meta audience preview",
     confidence: "91% High confidence",
     policy: "official_safe_limited",
     status: "snapshot",
@@ -336,18 +336,18 @@ export const accountFollowerTableRows: AccountFollowerTableRow[] = [
     direction: "growth",
     count: "86K estimated followers",
     freshness: "weekly",
-    source: "Snapshot audience model",
+    source: "Mock snapshot audience model",
     confidence: "84% Medium confidence",
     policy: "official_safe_limited",
     status: "monitoring",
   },
   {
     id: "row-identity-level",
-    signal: "Recent follower identity-level placeholder",
+    signal: "Follower collection disabled in Alpha",
     direction: "gated",
     count: "Unavailable",
     freshness: "manual",
-    source: "Licensed identity provider required",
+    source: "Requires licensed provider review",
     confidence: "Not scored",
     policy: "licensed_provider_only",
     status: "disabled_by_default",

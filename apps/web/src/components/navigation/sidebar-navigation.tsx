@@ -34,7 +34,7 @@ const navigationIcons = {
   Reports: FileText,
   Exports: Download,
   "Data Sources": Database,
-  Billing: CreditCard,
+  "Billing preview": CreditCard,
   Settings: Settings,
   Compliance: ShieldCheck,
 } as const;
@@ -65,8 +65,8 @@ export function SidebarNavigation() {
             </div>
           </div>
           <div className="mt-4 grid grid-cols-[1fr_auto] items-center gap-3 rounded-2xl border border-white/10 bg-white/10 px-3 py-2.5 text-xs text-slate-200 shadow-inner shadow-black/10">
-            <span>ACME Agency · Enterprise workspace</span>
-            <span className="h-2 w-2 rounded-full bg-emerald-300 shadow-[0_0_18px_rgba(110,231,183,0.75)]" />
+            <span>ACME Agency · Alpha demo workspace</span>
+            <span className="h-2 w-2 rounded-full bg-cyan-300 shadow-[0_0_18px_rgba(103,232,249,0.65)]" aria-label="Alpha demo" />
           </div>
         </div>
 
@@ -106,7 +106,7 @@ export function SidebarNavigation() {
                         </span>
                         </span>
                       </span>
-                      <span className={active ? "h-2 w-2 shrink-0 rounded-full bg-emerald-300 shadow-[0_0_16px_rgba(110,231,183,0.85)]" : "h-2 w-2 shrink-0 rounded-full bg-slate-700 group-hover:bg-cyan-300/70"} />
+                      <span className={active ? "h-2 w-2 shrink-0 rounded-full bg-cyan-300 shadow-[0_0_16px_rgba(103,232,249,0.75)]" : "h-2 w-2 shrink-0 rounded-full bg-slate-700 group-hover:bg-cyan-300/70"} />
                     </Link>
                   );
                 })}
@@ -117,10 +117,10 @@ export function SidebarNavigation() {
 
         <div className="mt-5 rounded-3xl border border-emerald-300/20 bg-emerald-300/10 p-4 text-xs text-slate-300 shadow-inner shadow-emerald-950/20">
           <div className="flex items-center justify-between gap-2">
-            <p className="font-semibold text-slate-100">Compliance mode</p>
-            <Badge variant="outline" className="rounded-full border-emerald-300/25 bg-emerald-300/20 text-emerald-100">Safe</Badge>
+            <p className="font-semibold text-slate-100">Alpha compliance mode</p>
+            <Badge variant="outline" className="rounded-full border-emerald-300/25 bg-emerald-300/20 text-emerald-100">Alpha demo</Badge>
           </div>
-          <p className="mt-2 leading-5">Official APIs, consented data, and licensed providers only.</p>
+          <p className="mt-2 leading-5">Official APIs, consented data, and licensed providers only. No live sync is running.</p>
         </div>
       </aside>
 

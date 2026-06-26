@@ -88,15 +88,15 @@ function AdCreativeCard({ ad }: { ad: AccountAdCreative }) {
 
         <div className="grid grid-cols-3 gap-3">
           <div className="rounded-2xl bg-slate-50 p-3">
-            <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-400">CTA</p>
+            <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-400">Preview CTA</p>
             <p className="mt-1 text-sm font-semibold text-slate-950">{ad.cta}</p>
           </div>
           <div className="rounded-2xl bg-slate-50 p-3">
-            <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-400">First seen</p>
+            <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-400">Preview first seen</p>
             <p className="mt-1 text-sm font-semibold text-slate-950">{formatTimestamp(ad.firstSeen)}</p>
           </div>
           <div className="rounded-2xl bg-slate-50 p-3">
-            <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-400">Last seen</p>
+            <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-400">Preview last seen</p>
             <p className="mt-1 text-sm font-semibold text-slate-950">{formatTimestamp(ad.lastSeen)}</p>
           </div>
         </div>
@@ -116,8 +116,8 @@ function CompetitiveAdSignalsPanel() {
   return (
     <section className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">
       <div className="mb-4">
-        <h2 className="text-base font-semibold text-slate-950">Competitive ad signals</h2>
-        <p className="mt-1 text-sm text-slate-500">Mock-only public ad library style signals; no scraping or private tracking.</p>
+        <h2 className="text-base font-semibold text-slate-950">Competitive ads preview signals</h2>
+        <p className="mt-1 text-sm text-slate-500">Mock-only public ad library style signals; no live Ad Library ingestion, scraping, or private tracking.</p>
       </div>
 
       <div className="grid gap-4 xl:grid-cols-3">
@@ -125,7 +125,7 @@ function CompetitiveAdSignalsPanel() {
           <div key={signal.id} className="rounded-3xl border border-slate-100 bg-slate-50 p-4">
             <div className="flex items-start justify-between gap-3">
               <div>
-                <p className="text-xs font-semibold uppercase tracking-wide text-slate-400">Allowed signal placeholder</p>
+                <p className="text-xs font-semibold uppercase tracking-wide text-slate-400">Preview ad signal</p>
                 <h3 className="mt-2 font-semibold text-slate-950">{signal.title}</h3>
               </div>
               <Badge className={toneClasses(signal.tone)}>{signal.value}</Badge>
@@ -143,7 +143,7 @@ function CompetitiveAdSignalsPanel() {
       </div>
 
       <p className="mt-4 rounded-2xl border border-amber-200 bg-amber-50 p-4 text-sm leading-6 text-amber-900">
-        Competitive ad signals are mock-only and limited to allowed public Ad Library style summaries or licensed-provider placeholders. No scraping, private account access, hidden surveillance, or anti-bot bypass is implemented.
+        Competitive ad signals are mock-only and limited to preview public Ad Library style summaries or private-beta ads service placeholders. No live ad monitoring, Ad Library ingestion, scraping, private account access, hidden surveillance, or anti-bot bypass is implemented.
       </p>
     </section>
   );

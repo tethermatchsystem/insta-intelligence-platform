@@ -116,7 +116,7 @@ function ExportsHeader() {
           <div className="mb-4 flex flex-wrap gap-2">
             <Badge className="bg-blue-50 text-blue-700 ring-blue-100">{exportsProfile.sourceBadge}</Badge>
             <Badge className="bg-emerald-50 text-emerald-700 ring-emerald-100">{exportsProfile.confidenceBadge}</Badge>
-            <Badge className="bg-cyan-50 text-cyan-700 ring-cyan-100">Fresh {exportsProfile.freshnessBadge}</Badge>
+            <Badge className="bg-cyan-50 text-cyan-700 ring-cyan-100">Static {exportsProfile.freshnessBadge}</Badge>
             <Badge className="bg-slate-100 text-slate-700 ring-slate-200">{exportsProfile.integrationBadge}</Badge>
           </div>
           <p className="text-sm font-semibold uppercase tracking-wide text-slate-400">Audit-ready data delivery</p>
@@ -126,7 +126,7 @@ function ExportsHeader() {
         <div className="rounded-3xl border border-slate-200 bg-slate-50 p-4 text-sm leading-6 text-slate-600 xl:w-[30rem]">
           <p className="font-semibold text-slate-900">Mock-only export workspace</p>
           <p className="mt-1">
-            Premium export packaging for CSV, JSON, executive bundles, audit-ready deliveries, and licensed-provider placeholders only.
+            Preview-only export packaging for CSV, JSON, executive bundles, audit placeholders, and licensed-provider placeholders only. Download disabled in Alpha.
           </p>
         </div>
       </div>
@@ -140,7 +140,7 @@ function FilterPlaceholderBar() {
       <div className="flex flex-col gap-3 xl:flex-row xl:items-center xl:justify-between">
         <div>
           <p className="text-sm font-semibold text-slate-950">Export filters</p>
-          <p className="mt-1 text-xs text-slate-500">Static placeholders for export type, workspace/client, date range, format, status, and policy classification.</p>
+          <p className="mt-1 text-xs text-slate-500">Static placeholders for export type, workspace/client, date range, preview-only file format, status, and policy classification.</p>
         </div>
         <div className="flex flex-wrap gap-2">
           {exportFilters.map((filter) => (
@@ -173,7 +173,7 @@ function SignalList({ items }: { items: ExportPanelItem[] }) {
 function ExportPanels() {
   return (
     <section className="grid gap-6 xl:grid-cols-4">
-      <ExportsPanel title="Scheduled export cadence placeholder" subtitle="Mock cadence distribution for recurring CSV, JSON, and audit deliveries.">
+      <ExportsPanel title="Scheduled export preview" subtitle="Export jobs require backend; this is a static cadence placeholder only.">
         <div className="rounded-3xl bg-gradient-to-br from-slate-950 via-slate-900 to-cyan-950 p-5 text-white">
           <div className="flex h-60 items-end gap-3 rounded-2xl border border-white/10 bg-white/5 p-4">
             {scheduledExportCadence.map((point) => (
@@ -189,11 +189,11 @@ function ExportPanels() {
         </div>
       </ExportsPanel>
 
-      <ExportsPanel title="Format mix" subtitle="CSV, JSON, executive bundle, and audit package placeholders.">
+      <ExportsPanel title="Preview-only file format mix" subtitle="CSV, JSON, executive bundle, and audit package placeholders with no file creation.">
         <SignalList items={exportFormatMix} />
       </ExportsPanel>
 
-      <ExportsPanel title="Delivery readiness" subtitle="Mock stakeholder delivery status without a live backend.">
+      <ExportsPanel title="Delivery preview readiness" subtitle="Mock stakeholder delivery status; export jobs require backend.">
         <SignalList items={deliveryReadiness} />
       </ExportsPanel>
 
@@ -222,7 +222,7 @@ function ExportCardItem({ exportItem }: { exportItem: ExportCard }) {
       </div>
 
       <div className="mt-4 rounded-2xl border border-slate-100 bg-slate-50 p-3">
-        <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-400">Recommended action</p>
+        <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-400">Alpha preview action</p>
         <p className="mt-2 text-sm leading-6 text-slate-600">{exportItem.recommendedAction}</p>
       </div>
 
@@ -253,7 +253,7 @@ function DeliveryAuditPanel() {
     <section className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">
       <div className="flex flex-col gap-4 xl:flex-row xl:items-start xl:justify-between">
         <div>
-          <p className="text-xs font-semibold uppercase tracking-wide text-slate-400">Mock-only delivery and audit panel</p>
+          <p className="text-xs font-semibold uppercase tracking-wide text-slate-400">Mock-only delivery and download preview</p>
           <h2 className="mt-2 text-lg font-semibold text-slate-950">{deliveryAuditPreview.title}</h2>
           <p className="mt-2 max-w-4xl text-sm leading-6 text-slate-600">{deliveryAuditPreview.subtitle}</p>
         </div>
@@ -270,7 +270,7 @@ function DeliveryAuditPanel() {
 
       <div className="mt-4 grid gap-4 xl:grid-cols-2">
         <div>
-          <p className="mb-3 text-xs font-semibold uppercase tracking-wide text-slate-400">Mock delivery channels</p>
+          <p className="mb-3 text-xs font-semibold uppercase tracking-wide text-slate-400">Mock delivery/download channels</p>
           <SignalList items={deliveryAuditPreview.channels} />
         </div>
         <div>
@@ -314,13 +314,13 @@ function LicensedProviderPanel() {
 
 function ComplianceNotice() {
   return (
-    <ExportsPanel title={exportComplianceNotice.title} subtitle="Connected account exports, public/professional intelligence, and licensed providers only.">
+    <ExportsPanel title={exportComplianceNotice.title} subtitle="Connected account export previews, public/professional intelligence, and licensed providers only.">
       <div className="space-y-4 text-sm leading-6 text-slate-600">
         <p>{exportComplianceNotice.description}</p>
         <div className="grid gap-3 lg:grid-cols-2">
           <p className="rounded-2xl border border-emerald-200 bg-emerald-50 p-4 text-emerald-900">Official APIs and compliant licensed providers only for future live data.</p>
           <p className="rounded-2xl border border-blue-200 bg-blue-50 p-4 text-blue-900">Connected account and public/professional intelligence export framing with source, freshness, confidence, and policy badges.</p>
-          <p className="rounded-2xl border border-amber-200 bg-amber-50 p-4 text-amber-900">Deeper enrichment and export automation are licensed-provider-only and unavailable until configured.</p>
+          <p className="rounded-2xl border border-amber-200 bg-amber-50 p-4 text-amber-900">Deeper enrichment and export automation previews are licensed-provider-only and unavailable until configured.</p>
           <p className="rounded-2xl border border-slate-200 bg-slate-50 p-4 text-slate-700">No scraping, private account access, hidden surveillance, or anti-bot bypass.</p>
         </div>
         <ul className="grid gap-2 lg:grid-cols-4">

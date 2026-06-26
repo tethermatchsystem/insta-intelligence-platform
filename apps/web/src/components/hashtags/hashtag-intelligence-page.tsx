@@ -116,17 +116,17 @@ function HashtagsHeader() {
           <div className="mb-4 flex flex-wrap gap-2">
             <Badge className="bg-blue-50 text-blue-700 ring-blue-100">{hashtagIntelligenceProfile.sourceBadge}</Badge>
             <Badge className="bg-emerald-50 text-emerald-700 ring-emerald-100">{hashtagIntelligenceProfile.confidenceBadge}</Badge>
-            <Badge className="bg-cyan-50 text-cyan-700 ring-cyan-100">Fresh {hashtagIntelligenceProfile.freshnessBadge}</Badge>
+            <Badge className="bg-cyan-50 text-cyan-700 ring-cyan-100">{hashtagIntelligenceProfile.freshnessBadge}</Badge>
             <Badge className="bg-slate-100 text-slate-700 ring-slate-200">{hashtagIntelligenceProfile.integrationBadge}</Badge>
           </div>
-          <p className="text-sm font-semibold uppercase tracking-wide text-slate-400">Topic discovery</p>
+          <p className="text-sm font-semibold uppercase tracking-wide text-slate-400">Hashtag preview</p>
           <h1 className="mt-2 text-4xl font-semibold tracking-tight text-slate-950">{hashtagIntelligenceProfile.title}</h1>
           <p className="mt-2 max-w-3xl text-base leading-7 text-slate-600">{hashtagIntelligenceProfile.description}</p>
         </div>
         <div className="rounded-3xl border border-slate-200 bg-slate-50 p-4 text-sm leading-6 text-slate-600 xl:w-[30rem]">
-          <p className="font-semibold text-slate-900">Mock-only hashtag intelligence view</p>
+          <p className="font-semibold text-slate-900">Alpha demo hashtag preview</p>
           <p className="mt-1">
-            Premium hashtag discovery for public/professional topic intelligence, connected owned-account summaries, campaign planning, and licensed-provider placeholders only.
+            Mock hashtag intelligence previews for public/professional planning, connected owned-account summaries, campaign planning, and licensed-provider placeholders only. Tracking is disabled in Alpha.
           </p>
         </div>
       </div>
@@ -140,7 +140,7 @@ function FilterPlaceholderBar() {
       <div className="flex flex-col gap-3 xl:flex-row xl:items-center xl:justify-between">
         <div>
           <p className="text-sm font-semibold text-slate-950">Hashtag filters</p>
-          <p className="mt-1 text-xs text-slate-500">Static placeholders for category, market/language, source, confidence, and policy-based trend views.</p>
+          <p className="mt-1 text-xs text-slate-500">Static Alpha placeholders for category, market/language, source, preview trend, and policy-based review.</p>
         </div>
         <div className="flex flex-wrap gap-2">
           {hashtagFilters.map((filter) => (
@@ -173,7 +173,7 @@ function SignalList({ items }: { items: HashtagPanelItem[] }) {
 function AnalyticsPanels() {
   return (
     <section className="grid gap-6 xl:grid-cols-4">
-      <HashtagsPanel title="Trend momentum placeholder" subtitle="Mock momentum bars for owned wins and public/professional topic clusters.">
+      <HashtagsPanel title="Preview trend placeholder" subtitle="Mock momentum bars for owned wins and public/professional topic cluster previews.">
         <div className="rounded-3xl bg-gradient-to-br from-slate-950 via-slate-900 to-violet-950 p-5 text-white">
           <div className="flex h-60 items-end gap-3 rounded-2xl border border-white/10 bg-white/5 p-4">
             {hashtagTrendMomentum.map((point) => (
@@ -223,11 +223,11 @@ function HashtagCardItem({ hashtag }: { hashtag: HashtagCard }) {
 
       <div className="mt-4 grid grid-cols-3 gap-3">
         <div className="rounded-2xl bg-slate-50 p-3">
-          <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-400">Momentum</p>
+          <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-400">Preview trend</p>
           <p className="mt-1 text-sm font-semibold text-slate-950">{hashtag.estimatedMomentum}</p>
         </div>
         <div className="rounded-2xl bg-slate-50 p-3">
-          <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-400">Fit score</p>
+          <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-400">Preview fit</p>
           <p className="mt-1 text-sm font-semibold text-slate-950">{hashtag.campaignFitScore > 0 ? `${hashtag.campaignFitScore}%` : "Gated"}</p>
         </div>
         <div className="rounded-2xl bg-slate-50 p-3">
@@ -237,7 +237,7 @@ function HashtagCardItem({ hashtag }: { hashtag: HashtagCard }) {
       </div>
 
       <div className="mt-4 rounded-2xl border border-slate-100 bg-slate-50 p-3">
-        <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-400">Recommended action</p>
+        <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-400">Alpha demo next step</p>
         <p className="mt-2 text-sm leading-6 text-slate-600">{hashtag.recommendedAction}</p>
       </div>
 
@@ -295,13 +295,13 @@ function LicensedProviderPanel() {
 
 function ComplianceNotice() {
   return (
-    <HashtagsPanel title={hashtagComplianceNotice.title} subtitle="Public/professional hashtag intelligence, owned summaries, and licensed providers only.">
+    <HashtagsPanel title={hashtagComplianceNotice.title} subtitle="Mock hashtag intelligence, owned summary previews, and licensed providers only.">
       <div className="space-y-4 text-sm leading-6 text-slate-600">
         <p>{hashtagComplianceNotice.description}</p>
         <div className="grid gap-3 lg:grid-cols-2">
-          <p className="rounded-2xl border border-emerald-200 bg-emerald-50 p-4 text-emerald-900">Official APIs and compliant licensed providers only for future live data.</p>
+          <p className="rounded-2xl border border-emerald-200 bg-emerald-50 p-4 text-emerald-900">Requires official source connection before any future private-beta data path.</p>
           <p className="rounded-2xl border border-blue-200 bg-blue-50 p-4 text-blue-900">Public/professional hashtag intelligence framing with source, freshness, confidence, and policy badges.</p>
-          <p className="rounded-2xl border border-amber-200 bg-amber-50 p-4 text-amber-900">Deeper enrichment is licensed-provider-only and unavailable until configured.</p>
+          <p className="rounded-2xl border border-amber-200 bg-amber-50 p-4 text-amber-900">Deeper enrichment requires private-beta monitoring service review and remains unavailable.</p>
           <p className="rounded-2xl border border-slate-200 bg-slate-50 p-4 text-slate-700">No scraping, private account access, hidden surveillance, or anti-bot bypass.</p>
         </div>
         <ul className="grid gap-2 lg:grid-cols-4">

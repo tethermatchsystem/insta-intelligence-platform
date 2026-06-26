@@ -53,19 +53,19 @@ export function AdIntelligenceTable() {
   return (
     <section className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">
       <div className="mb-4">
-        <h2 className="text-base font-semibold text-slate-950">Enterprise ads table</h2>
-        <p className="mt-1 text-sm text-slate-500">Mock ads and campaigns prepared for official Ad Library, authorized Marketing API, and licensed-provider-safe analysis.</p>
+        <h2 className="text-base font-semibold text-slate-950">Enterprise ads preview table</h2>
+        <p className="mt-1 text-sm text-slate-500">Mock ads and campaigns prepared for future Meta Marketing API connection, Meta Ad Library review, and private-beta ads service checks.</p>
       </div>
 
       <div className="overflow-x-auto rounded-2xl border border-slate-200">
         <table className="w-full min-w-[1040px] text-left text-sm">
           <thead className="bg-slate-50 text-xs uppercase tracking-wide text-slate-500">
             <tr>
-              <th className="px-4 py-3">Ad or campaign</th>
+              <th className="px-4 py-3">Preview ad or campaign</th>
               <th className="px-4 py-3">Creative type</th>
-              <th className="px-4 py-3">Status</th>
-              <th className="px-4 py-3">First seen</th>
-              <th className="px-4 py-3">Last seen</th>
+              <th className="px-4 py-3">Preview status</th>
+              <th className="px-4 py-3">Preview first seen</th>
+              <th className="px-4 py-3">Preview last seen</th>
               <th className="px-4 py-3">Source</th>
               <th className="px-4 py-3">Confidence</th>
               <th className="px-4 py-3">Policy</th>

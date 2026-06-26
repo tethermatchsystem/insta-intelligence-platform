@@ -58,9 +58,9 @@ export function MentionMonitoringTable() {
   return (
     <section className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">
       <div className="mb-4">
-        <h2 className="text-base font-semibold text-slate-950">Enterprise mentions table</h2>
+        <h2 className="text-base font-semibold text-slate-950">Enterprise mention preview table</h2>
         <p className="mt-1 text-sm text-slate-500">
-          Mock mention rows for brand listening, response triage, opportunity detection, and compliant enrichment gating.
+          Mock mention intelligence rows for Alpha preview sentiment, response triage, opportunity detection, and compliant enrichment gating.
         </p>
       </div>
 
@@ -70,10 +70,10 @@ export function MentionMonitoringTable() {
             <tr>
               <th className="px-4 py-3">Mention</th>
               <th className="px-4 py-3">Source</th>
-              <th className="px-4 py-3">Sentiment</th>
+              <th className="px-4 py-3">Preview sentiment</th>
               <th className="px-4 py-3">Intent</th>
               <th className="px-4 py-3">Urgency</th>
-              <th className="px-4 py-3">Freshness</th>
+              <th className="px-4 py-3">Preview freshness</th>
               <th className="px-4 py-3">Confidence</th>
               <th className="px-4 py-3">Policy</th>
               <th className="px-4 py-3">Status</th>

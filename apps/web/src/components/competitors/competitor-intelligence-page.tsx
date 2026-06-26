@@ -115,17 +115,17 @@ function CompetitorsHeader() {
           <div className="mb-4 flex flex-wrap gap-2">
             <Badge className="bg-blue-50 text-blue-700 ring-blue-100">{competitorIntelligenceProfile.sourceBadge}</Badge>
             <Badge className="bg-emerald-50 text-emerald-700 ring-emerald-100">{competitorIntelligenceProfile.confidenceBadge}</Badge>
-            <Badge className="bg-cyan-50 text-cyan-700 ring-cyan-100">Fresh {competitorIntelligenceProfile.freshnessBadge}</Badge>
+            <Badge className="bg-cyan-50 text-cyan-700 ring-cyan-100">{competitorIntelligenceProfile.freshnessBadge}</Badge>
             <Badge className="bg-slate-100 text-slate-700 ring-slate-200">{competitorIntelligenceProfile.integrationBadge}</Badge>
           </div>
-          <p className="text-sm font-semibold uppercase tracking-wide text-slate-400">Benchmark intelligence</p>
+          <p className="text-sm font-semibold uppercase tracking-wide text-slate-400">Competitor preview</p>
           <h1 className="mt-2 text-4xl font-semibold tracking-tight text-slate-950">{competitorIntelligenceProfile.title}</h1>
           <p className="mt-2 max-w-3xl text-base leading-7 text-slate-600">{competitorIntelligenceProfile.description}</p>
         </div>
         <div className="rounded-3xl border border-slate-200 bg-slate-50 p-4 text-sm leading-6 text-slate-600 xl:w-[30rem]">
-          <p className="font-semibold text-slate-900">Mock-only competitor command center</p>
+          <p className="font-semibold text-slate-900">Alpha demo competitor preview</p>
           <p className="mt-1">
-            Premium benchmark tracking for public/professional competitors, connected owned-account comparison, public ad visibility, and licensed-provider placeholders only.
+            Mock competitor benchmark previews for public/professional planning, connected owned-account comparison, public ad visibility, and licensed-provider placeholders only. Monitoring is disabled in Alpha.
           </p>
         </div>
       </div>
@@ -139,7 +139,7 @@ function FilterPlaceholderBar() {
       <div className="flex flex-col gap-3 xl:flex-row xl:items-center xl:justify-between">
         <div>
           <p className="text-sm font-semibold text-slate-950">Competitor filters</p>
-          <p className="mt-1 text-xs text-slate-500">Static placeholders for category, market, source, confidence, and policy-based benchmark views.</p>
+          <p className="mt-1 text-xs text-slate-500">Static Alpha placeholders for category, market, source, preview benchmark, and policy-based review.</p>
         </div>
         <div className="flex flex-wrap gap-2">
           {competitorFilters.map((filter) => (
@@ -172,7 +172,7 @@ function SignalList({ items }: { items: CompetitorPanelItem[] }) {
 function BenchmarkPanels() {
   return (
     <section className="grid gap-6 xl:grid-cols-4">
-      <CompetitorsPanel title="Competitor growth placeholder" subtitle="Mock growth benchmark bars for owned, peer median, top peer, and new entrants.">
+      <CompetitorsPanel title="Competitor benchmark preview" subtitle="Mock growth benchmark bars for owned, peer median, top peer, and new entrant previews.">
         <div className="rounded-3xl bg-gradient-to-br from-slate-950 via-slate-900 to-blue-950 p-5 text-white">
           <div className="flex h-60 items-end gap-3 rounded-2xl border border-white/10 bg-white/5 p-4">
             {competitorGrowthBenchmarks.map((point) => (
@@ -188,15 +188,15 @@ function BenchmarkPanels() {
         </div>
       </CompetitorsPanel>
 
-      <CompetitorsPanel title="Engagement comparison" subtitle="Owned-vs-peer summary estimates with confidence metadata.">
+      <CompetitorsPanel title="Engagement preview comparison" subtitle="Owned-vs-peer mock summary estimates with preview benchmark metadata.">
         <SignalList items={engagementComparisonSignals} />
       </CompetitorsPanel>
 
-      <CompetitorsPanel title="Content cadence comparison" subtitle="Mock cadence benchmarks for compliant market monitoring.">
+      <CompetitorsPanel title="Content cadence preview" subtitle="Mock cadence benchmarks for Alpha planning only; no live competitor monitoring is running.">
         <SignalList items={contentCadenceComparison} />
       </CompetitorsPanel>
 
-      <CompetitorsPanel title="Public ad visibility placeholder" subtitle="Meta Ad Library style public ad visibility only.">
+      <CompetitorsPanel title="Public ad preview placeholder" subtitle="Meta Ad Library style public ad visibility preview only.">
         <SignalList items={publicAdVisibilitySignals} />
       </CompetitorsPanel>
     </section>
@@ -227,21 +227,21 @@ function CompetitorCardItem({ competitor }: { competitor: CompetitorCard }) {
 
       <div className="mt-4 grid grid-cols-3 gap-3">
         <div className="rounded-2xl bg-slate-50 p-3">
-          <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-400">Audience</p>
+          <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-400">Audience preview</p>
           <p className="mt-1 text-sm font-semibold text-slate-950">{competitor.audienceSizeEstimate}</p>
         </div>
         <div className="rounded-2xl bg-slate-50 p-3">
-          <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-400">Engagement</p>
+          <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-400">Engagement preview</p>
           <p className="mt-1 text-sm font-semibold text-slate-950">{competitor.engagementEstimate}</p>
         </div>
         <div className="rounded-2xl bg-slate-50 p-3">
-          <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-400">Public ads</p>
+          <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-400">Public ad preview</p>
           <p className="mt-1 text-sm font-semibold text-slate-950">{competitor.activePublicAds}</p>
         </div>
       </div>
 
       <div className="mt-4 rounded-2xl border border-slate-100 bg-slate-50 p-3">
-        <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-400">Recommended action</p>
+        <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-400">Alpha demo next step</p>
         <p className="mt-2 text-sm leading-6 text-slate-600">{competitor.recommendedAction}</p>
       </div>
 
@@ -301,13 +301,13 @@ function LicensedProviderPanel() {
 
 function ComplianceNotice() {
   return (
-    <CompetitorsPanel title={competitorComplianceNotice.title} subtitle="Public/professional benchmarks, owned comparisons, and licensed providers only.">
+    <CompetitorsPanel title={competitorComplianceNotice.title} subtitle="Mock competitor benchmarks, owned comparison previews, and licensed providers only.">
       <div className="space-y-4 text-sm leading-6 text-slate-600">
         <p>{competitorComplianceNotice.description}</p>
         <div className="grid gap-3 lg:grid-cols-2">
-          <p className="rounded-2xl border border-emerald-200 bg-emerald-50 p-4 text-emerald-900">Official APIs and compliant licensed providers only for future live data.</p>
+          <p className="rounded-2xl border border-emerald-200 bg-emerald-50 p-4 text-emerald-900">Requires official source connection before any future private-beta data path.</p>
           <p className="rounded-2xl border border-blue-200 bg-blue-50 p-4 text-blue-900">Public/professional competitor benchmark framing with source, freshness, confidence, and policy badges.</p>
-          <p className="rounded-2xl border border-amber-200 bg-amber-50 p-4 text-amber-900">Deeper enrichment is licensed-provider-only and unavailable until configured.</p>
+          <p className="rounded-2xl border border-amber-200 bg-amber-50 p-4 text-amber-900">Deeper enrichment requires private-beta provider service review and remains unavailable.</p>
           <p className="rounded-2xl border border-slate-200 bg-slate-50 p-4 text-slate-700">No scraping, private account access, hidden surveillance, or anti-bot bypass.</p>
         </div>
         <ul className="grid gap-2 lg:grid-cols-4">

@@ -1,2 +1,2 @@
 import { DashboardPageScaffold } from "@/components/dashboards/page-scaffold";
-export default function Page() { return <DashboardPageScaffold title="Recent Follows" description="High-risk public intelligence interface; licensed provider only." gated={true} gateStatus="licensed_provider_only" />; }
+export default function Page() { return <DashboardPageScaffold title="Recent Follows" description="Licensed-provider-only and Restricted placeholder. Disabled in Alpha; not available from normal official API access. No private account access or hidden surveillance is implemented." gated={true} gateStatus="licensed_provider_only" />; }

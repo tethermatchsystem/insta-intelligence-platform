@@ -91,27 +91,27 @@ export type CompetitorTableRow = {
 };
 
 export const competitorIntelligenceProfile = {
-  title: "Competitor Intelligence",
+  title: "Competitor Preview",
   description:
-    "Track peer sets, public/professional benchmarks, visible ad activity, and compliant market monitoring using mock intelligence only.",
-  sourceBadge: "Public/professional benchmarks",
-  confidenceBadge: "86% benchmark confidence",
-  freshnessBadge: "Weekly snapshot",
-  integrationBadge: "No live integrations",
+    "Preview mock competitor benchmarks for public/professional planning. Monitoring is disabled in Alpha, and no live competitor monitoring is running.",
+  sourceBadge: "Mock competitor benchmark",
+  confidenceBadge: "Preview benchmark",
+  freshnessBadge: "Alpha demo only",
+  integrationBadge: "No live competitor monitoring is running",
 };
 
 export const competitorFreshnessLabels: Record<CompetitorFreshness, string> = {
-  near_real_time: "Near real time",
-  hourly: "Hourly refresh",
-  daily: "Daily snapshot",
-  weekly: "Weekly snapshot",
-  manual: "Manual import",
+  near_real_time: "Alpha demo only",
+  hourly: "Alpha demo only",
+  daily: "Static preview snapshot",
+  weekly: "Static preview snapshot",
+  manual: "Manual preview import",
 };
 
 export const competitorConfidenceLabels: Record<CompetitorConfidence, string> = {
-  verified: "Verified",
-  high: "High confidence",
-  medium: "Medium confidence",
+  verified: "Preview benchmark",
+  high: "Preview benchmark",
+  medium: "Preview benchmark",
   needs_review: "Needs review",
 };
 
@@ -123,10 +123,10 @@ export const competitorPolicyLabels: Record<CompetitorPolicyClassification, stri
 };
 
 export const competitorStatusLabels: Record<CompetitorStatus, string> = {
-  tracking: "Tracking",
-  benchmarking: "Benchmarking",
+  tracking: "Monitoring disabled in Alpha",
+  benchmarking: "Preview benchmark",
   review_required: "Review required",
-  licensed_gated: "Licensed gated",
+  licensed_gated: "Requires private-beta provider service",
 };
 
 export const competitorCategoryLabels: Record<CompetitorCategory, string> = {
@@ -138,34 +138,34 @@ export const competitorCategoryLabels: Record<CompetitorCategory, string> = {
 };
 
 export const adVisibilityLabels: Record<PublicAdVisibility, string> = {
-  active: "Active public ads",
-  watching: "Watching",
-  quiet: "Quiet",
-  licensed_only: "Licensed only",
+  active: "Public ad preview",
+  watching: "Monitoring disabled in Alpha",
+  quiet: "Quiet preview",
+  licensed_only: "Requires private-beta provider service",
 };
 
 export const competitorKpis: CompetitorKpi[] = [
   {
     id: "tracked-competitors",
-    label: "Tracked competitors",
+    label: "Competitor previews",
     value: "24",
-    delta: "+4 this qtr",
+    delta: "Alpha demo only",
     tone: "blue",
-    description: "Mock peer set built for public/professional benchmark tracking and owned-account comparison.",
+    description: "Mock competitor benchmark set for public/professional planning and owned-account comparison previews.",
   },
   {
     id: "benchmark-signals",
-    label: "Benchmark signals",
+    label: "Preview benchmark signals",
     value: "1.8K",
-    delta: "weekly",
+    delta: "Preview benchmark",
     tone: "purple",
     description: "Summary-level growth, cadence, engagement, and market visibility signals from mock providers.",
   },
   {
     id: "active-public-ads",
-    label: "Active public ads",
+    label: "Public ad previews",
     value: "146",
-    delta: "public view",
+    delta: "Alpha demo only",
     tone: "green",
     description: "Meta Ad Library style public ad visibility placeholders without private targeting data.",
   },
@@ -189,18 +189,18 @@ export const competitorKpis: CompetitorKpi[] = [
     id: "licensed-only-signals",
     label: "Licensed-only signals",
     value: "Gated",
-    delta: "provider only",
+    delta: "provider review",
     tone: "rose",
-    description: "Deeper enrichment remains unavailable until a compliant licensed provider is configured.",
+    description: "Deeper enrichment requires private-beta provider service review before configuration.",
   },
 ];
 
 export const competitorFilters: CompetitorFilterGroup[] = [
   { id: "category", label: "Category", options: ["All categories", "Beauty", "Fitness", "Commerce", "Hospitality", "Creator tools"] },
   { id: "market", label: "Market", options: ["All markets", "UAE", "US", "UK", "Europe", "MENA"] },
-  { id: "date-range", label: "Date range", options: ["Last 30 days", "Last 7 days", "Quarter to date", "Last 12 months"] },
-  { id: "source", label: "Source", options: ["All sources", "Connected owned comparison", "Public professional profile", "Meta Ad Library style", "Licensed provider"] },
-  { id: "confidence", label: "Confidence", options: ["Any confidence", "Verified", "High", "Medium", "Needs review"] },
+  { id: "date-range", label: "Preview window", options: ["Static Alpha window", "Mock 7-day view", "Mock quarter view", "Mock annual view"] },
+  { id: "source", label: "Source", options: ["All sources", "Requires official source connection", "Mock competitor benchmark", "Meta Ad Library style preview", "Requires private-beta provider service"] },
+  { id: "confidence", label: "Preview benchmark", options: ["Any preview benchmark", "High preview", "Medium preview", "Needs review"] },
   { id: "policy", label: "Policy classification", options: ["All policies", "Official safe", "Official safe limited", "Licensed provider only", "Disabled by default"] },
 ];
 
@@ -240,7 +240,7 @@ export const contentCadenceComparison: CompetitorPanelItem[] = [
     id: "cadence-reels",
     title: "Short-form cadence",
     value: "4.2x/week",
-    detail: "Tracked peer set is publishing short-form content more frequently than the owned baseline.",
+    detail: "Mock peer set suggests more frequent short-form publishing than the owned baseline; monitoring is disabled in Alpha.",
     tone: "blue",
   },
   {
@@ -262,7 +262,7 @@ export const contentCadenceComparison: CompetitorPanelItem[] = [
 export const publicAdVisibilitySignals: CompetitorPanelItem[] = [
   {
     id: "ads-active",
-    title: "Active public ads visible",
+    title: "Public ad preview visible",
     value: "146",
     detail: "Meta Ad Library style placeholders for public ad visibility, not private targeting or spend data.",
     tone: "green",
@@ -295,14 +295,14 @@ export const competitorCards: CompetitorCard[] = [
     engagementEstimate: "4.9%",
     activePublicAds: "38",
     adVisibility: "active",
-    sourceProvider: "Public professional benchmark",
+    sourceProvider: "Mock competitor benchmark",
     sourceType: "mock_provider",
     freshness: "weekly",
     confidence: "high",
     confidenceScore: 90,
     policyClassification: "official_safe_limited",
     status: "tracking",
-    recommendedAction: "Compare tutorial and product-launch cadence against owned content plan for the next campaign cycle.",
+    recommendedAction: "Review this Alpha demo only benchmark against the owned content plan; no live competitor monitoring is running.",
     tone: "purple",
   },
   {
@@ -316,14 +316,14 @@ export const competitorCards: CompetitorCard[] = [
     engagementEstimate: "5.6%",
     activePublicAds: "21",
     adVisibility: "watching",
-    sourceProvider: "Connected owned comparison",
+    sourceProvider: "Connected owned comparison preview",
     sourceType: "official_api",
     freshness: "daily",
     confidence: "verified",
     confidenceScore: 96,
     policyClassification: "official_safe",
     status: "benchmarking",
-    recommendedAction: "Use owned connected-account performance gaps to refine benchmark targets for reels and saves.",
+    recommendedAction: "Use as a preview benchmark only; requires official source connection before any live workflow.",
     tone: "blue",
   },
   {
@@ -337,14 +337,14 @@ export const competitorCards: CompetitorCard[] = [
     engagementEstimate: "3.8%",
     activePublicAds: "64",
     adVisibility: "active",
-    sourceProvider: "Meta Ad Library style public visibility",
+    sourceProvider: "Meta Ad Library style preview",
     sourceType: "public_ad_library",
     freshness: "weekly",
     confidence: "high",
     confidenceScore: 88,
     policyClassification: "official_safe_limited",
     status: "tracking",
-    recommendedAction: "Review public ad creative themes and benchmark launch messaging against owned campaign calendar.",
+    recommendedAction: "Review public ad preview themes against the owned campaign calendar; no private targeting data is included.",
     tone: "green",
   },
   {
@@ -358,14 +358,14 @@ export const competitorCards: CompetitorCard[] = [
     engagementEstimate: "4.2%",
     activePublicAds: "9",
     adVisibility: "quiet",
-    sourceProvider: "Public professional benchmark",
+    sourceProvider: "Mock competitor benchmark",
     sourceType: "mock_provider",
     freshness: "weekly",
     confidence: "medium",
     confidenceScore: 78,
     policyClassification: "official_safe_limited",
     status: "review_required",
-    recommendedAction: "Validate market and category fit before adding to the executive peer benchmark set.",
+    recommendedAction: "Validate market and category fit before using this mock competitor benchmark in planning.",
     tone: "cyan",
   },
   {
@@ -379,14 +379,14 @@ export const competitorCards: CompetitorCard[] = [
     engagementEstimate: "Gated",
     activePublicAds: "Licensed",
     adVisibility: "licensed_only",
-    sourceProvider: "Licensed competitor provider required",
+    sourceProvider: "Requires private-beta provider service",
     sourceType: "licensed_provider",
     freshness: "manual",
     confidence: "needs_review",
     confidenceScore: 0,
     policyClassification: "licensed_provider_only",
     status: "licensed_gated",
-    recommendedAction: "Keep deeper enrichment unavailable until a compliant licensed provider is configured and approved.",
+    recommendedAction: "Keep deeper enrichment unavailable until a compliant private-beta provider service is reviewed and approved.",
     tone: "rose",
   },
 ];
@@ -395,12 +395,12 @@ export const gatedCompetitorEnrichmentPanel: CompetitorLicensedPanel = {
   title: "Deeper competitor enrichment placeholder",
   status: "licensed_gated",
   policyClassification: "licensed_provider_only",
-  sourceProvider: "Compliant licensed provider required",
+  sourceProvider: "Requires private-beta provider service",
   freshness: "manual",
   confidence: "needs_review",
   confidenceScore: null,
   description:
-    "Advanced competitor enrichment, proprietary market datasets, and deeper non-public signals are not official-safe by default. This area remains unavailable until a compliant licensed provider is configured with provenance, gating, and review workflows.",
+    "Advanced competitor enrichment, proprietary market datasets, and deeper non-public signals are not official-safe by default. This area remains unavailable until a compliant private-beta provider service is configured with provenance, gating, and review workflows.",
   unavailableReasons: [
     "No scraping, private account access, hidden surveillance, fake login automation, or anti-bot bypass is represented.",
     "Deeper enrichment must be licensed-provider-only with confidence, freshness, and policy metadata.",
@@ -409,14 +409,14 @@ export const gatedCompetitorEnrichmentPanel: CompetitorLicensedPanel = {
 };
 
 export const competitorComplianceNotice = {
-  title: "Official-first competitor intelligence",
+  title: "Official-first competitor preview",
   description:
-    "This competitors page uses mock data for public/professional competitor benchmarks, connected/owned account comparisons, Meta Ad Library style public ad visibility, and clearly gated licensed-provider placeholders only.",
+    "This competitors page uses Alpha demo only mock competitor benchmarks, connected/owned account comparison previews, Meta Ad Library style public ad visibility placeholders, and clearly gated licensed-provider placeholders. Monitoring is disabled in Alpha and no live competitor monitoring is running.",
   bullets: [
-    "Official APIs and compliant licensed providers are the only future live-data paths represented here.",
+    "Requires official source connection or compliant private-beta provider service before any future live-data path is represented here.",
     "Public/professional competitor benchmarks are summary-level and require source, confidence, freshness, and policy metadata.",
     "No scraping, private account access, hidden surveillance, fake login automation, credential automation, or anti-bot bypass is implemented.",
-    "Deeper enrichment remains licensed-provider-only and unavailable until a compliant provider is configured.",
+    "Deeper enrichment remains licensed-provider-only and unavailable until a compliant provider is reviewed and configured.",
   ],
 };
 

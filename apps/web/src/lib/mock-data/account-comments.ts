@@ -91,17 +91,17 @@ export const accountCommentsProfile = {
   name: "Catalyst Studio",
   handle: "@catalyst.studio",
   accountType: "Connected professional account",
-  sourceBadge: "Meta Graph API comments",
-  confidenceBadge: "93% avg confidence",
-  freshnessBadge: "Near real time",
-  integrationBadge: "No live integrations",
+  sourceBadge: "Mock comment intelligence",
+  confidenceBadge: "Preview sentiment",
+  freshnessBadge: "Comment monitoring disabled in Alpha",
+  integrationBadge: "No live comment monitoring is running",
 };
 
 export const accountCommentFreshnessLabels: Record<AccountCommentFreshness, string> = {
-  near_real_time: "Near real time",
-  hourly: "Hourly refresh",
-  daily: "Daily refresh",
-  manual: "Manual import",
+  near_real_time: "Alpha preview",
+  hourly: "Static preview",
+  daily: "Static preview",
+  manual: "Manual preview",
 };
 
 export const accountCommentConfidenceLabels: Record<AccountCommentConfidence, string> = {
@@ -135,41 +135,41 @@ export const accountCommentUrgencyLabels: Record<AccountCommentUrgency, string> 
 };
 
 export const accountCommentStatusLabels: Record<AccountCommentStatus, string> = {
-  new: "New",
-  queued: "Queued",
-  triaged: "Triaged",
-  responded: "Responded",
-  resolved: "Resolved",
+  new: "Preview item",
+  queued: "Preview queue",
+  triaged: "Preview triage",
+  responded: "Mock responded",
+  resolved: "Mock resolved",
 };
 
 export const accountCommentKpis: AccountCommentKpi[] = [
   {
     id: "total-comments",
-    label: "Total comments",
+    label: "Preview comments",
     value: "12.8K",
-    delta: "+18% 30d",
+    delta: "Alpha demo",
     tone: "blue",
-    description: "Owned comments modeled from connected professional account mock data.",
+    description: "Owned comments modeled from connected professional account mock data; no live monitoring is running.",
   },
   {
     id: "new-comments",
-    label: "New comments",
+    label: "Preview comments",
     value: "486",
-    delta: "last 24h",
+    delta: "Alpha demo",
     tone: "cyan",
-    description: "Fresh mock comments ready for triage in the moderation stream.",
+    description: "Mock comment items for preview triage only. Requires private-beta moderation service.",
   },
   {
     id: "questions-detected",
-    label: "Questions detected",
+    label: "Preview questions",
     value: "214",
     delta: "+31 open",
     tone: "purple",
-    description: "Product, shipping, and availability questions detected in owned comments.",
+    description: "Product, shipping, and availability questions modeled from owned comment previews.",
   },
   {
     id: "negative-sentiment",
-    label: "Negative sentiment",
+    label: "Preview sentiment",
     value: "8.6%",
     delta: "-1.2 pts",
     tone: "rose",
@@ -177,19 +177,19 @@ export const accountCommentKpis: AccountCommentKpi[] = [
   },
   {
     id: "moderation-queue",
-    label: "Moderation queue",
+    label: "Preview moderation queue",
     value: "38",
     delta: "7 urgent",
     tone: "amber",
-    description: "Comments requiring escalation, policy review, or brand-safe response handling.",
+    description: "Mock comments that would require escalation, policy review, or brand-safe response handling.",
   },
   {
     id: "response-opportunities",
-    label: "Response opportunities",
+    label: "Preview responses",
     value: "126",
     delta: "+19 sales",
     tone: "green",
-    description: "High-value replies suggested for support, commerce, and community moments.",
+    description: "Preview replies suggested for support, commerce, and community moments.",
   },
 ];
 
@@ -209,7 +209,7 @@ export const accountCommentProviderBadges: AccountCommentProviderBadge[] = [
     sourceType: "official_api",
     classification: "official_safe",
     tone: "blue",
-    description: "Owned comments for connected professional accounts when future live integrations are enabled.",
+    description: "Owned comments for connected professional accounts; requires official source connection before live use.",
   },
   {
     id: "meta-comments-insights",
@@ -225,7 +225,7 @@ export const accountCommentProviderBadges: AccountCommentProviderBadge[] = [
     sourceType: "licensed_provider",
     classification: "licensed_provider_only",
     tone: "amber",
-    description: "Optional compliant enrichment for sentiment and intent labels, clearly separated from official comment retrieval.",
+    description: "Optional compliant enrichment for preview sentiment and intent labels; requires private-beta moderation service.",
   },
 ];
 
@@ -248,7 +248,7 @@ export const accountComments: AccountComment[] = [
     sourceProvider: "Meta Graph API comments",
     providerType: "official_api",
     freshness: "near_real_time",
-    suggestedAction: "Prioritize an availability reply and route to the sales response queue.",
+    suggestedAction: "Preview recommendation only: would prioritize an availability reply after private-beta moderation review.",
     status: "new",
     policyClassification: "official_safe",
   },
@@ -270,7 +270,7 @@ export const accountComments: AccountComment[] = [
     sourceProvider: "Meta Graph API comments",
     providerType: "official_api",
     freshness: "near_real_time",
-    suggestedAction: "Escalate to customer support and request order details in a public-safe reply.",
+    suggestedAction: "Preview recommendation only: would escalate to support after private-beta moderation review.",
     status: "queued",
     policyClassification: "official_safe",
   },
@@ -292,7 +292,7 @@ export const accountComments: AccountComment[] = [
     sourceProvider: "Meta comments insights",
     providerType: "official_api",
     freshness: "hourly",
-    suggestedAction: "Like and reply with a community-building thank-you response.",
+    suggestedAction: "Preview recommendation only: would draft a community-building thank-you response.",
     status: "responded",
     policyClassification: "official_safe",
   },
@@ -314,7 +314,7 @@ export const accountComments: AccountComment[] = [
     sourceProvider: "Meta Graph API comments",
     providerType: "official_api",
     freshness: "hourly",
-    suggestedAction: "Answer with dimensions and tag the comment as a content idea for future posts.",
+    suggestedAction: "Preview recommendation only: would answer with dimensions and tag as a future content idea.",
     status: "triaged",
     policyClassification: "official_safe",
   },
@@ -336,7 +336,7 @@ export const accountComments: AccountComment[] = [
     sourceProvider: "Licensed sentiment provider",
     providerType: "licensed_provider",
     freshness: "daily",
-    suggestedAction: "Clarify bundle contents in the reply and queue caption copy feedback for review.",
+    suggestedAction: "Preview recommendation only: would clarify bundle contents and queue caption feedback for review.",
     status: "new",
     policyClassification: "licensed_provider_only",
   },
@@ -358,7 +358,7 @@ export const accountComments: AccountComment[] = [
     sourceProvider: "Meta Graph API comments",
     providerType: "official_api",
     freshness: "near_real_time",
-    suggestedAction: "Send to moderation queue for owned-comment cleanup and brand-safe acknowledgement.",
+    suggestedAction: "Preview recommendation only: would require private-beta moderation service before cleanup workflow.",
     status: "queued",
     policyClassification: "official_safe",
   },
@@ -368,8 +368,8 @@ export const urgentComments: AccountCommentInsightItem[] = [
   {
     id: "urgent-001",
     title: "Damaged order complaint",
-    value: "12 min old",
-    detail: "Support-intent comment with negative sentiment and same-day response expectation.",
+    value: "Preview item",
+    detail: "Support-intent comment preview with negative sentiment and response expectation.",
     tone: "rose",
   },
   {
@@ -437,9 +437,9 @@ export const sentimentThemes: AccountCommentInsightItem[] = [
 ];
 
 export const accountCommentsComplianceNotice = {
-  title: "Official-first comment intelligence",
+  title: "Official-first comment preview",
   description:
-    "This comments page uses mock data for connected professional account comments only. Future live implementation must use official APIs and licensed providers only, with no scraping, private account access, or hidden surveillance.",
+    "This comments page uses mock data for connected professional account comments only. Comment monitoring is disabled in Alpha; future approved implementation must use official APIs and licensed providers only, with no scraping, private account access, or hidden surveillance.",
   bullets: [
     "Owned comments and moderation state are modeled as official-safe connected account signals.",
     "Sentiment and intent enrichment must remain clearly classified when provided by licensed providers.",

@@ -59,16 +59,16 @@ function BillingHeader() {
               </Badge>
             ))}
           </div>
-          <p className="text-sm font-semibold uppercase tracking-wide text-slate-400">Billing operations</p>
-          <h1 className="mt-2 text-4xl font-semibold tracking-tight text-slate-950">Billing</h1>
+          <p className="text-sm font-semibold uppercase tracking-wide text-slate-400">Billing preview</p>
+          <h1 className="mt-2 text-4xl font-semibold tracking-tight text-slate-950">Billing preview</h1>
           <p className="mt-2 max-w-3xl text-base leading-7 text-slate-600">
-            Review plan, quotas, usage, invoices, provider credits, and client/workspace billing management in a premium mock-only billing workspace.
+            Review mock plan packaging, usage preview, invoice preview, provider credit placeholders, and client/workspace billing planning. No payment method is collected in Alpha and no subscription changes are saved in Alpha.
           </p>
         </div>
         <div className="rounded-3xl border border-amber-200 bg-amber-50 p-4 text-sm leading-6 text-amber-900 xl:w-[30rem]">
           <p className="font-semibold text-amber-950">No live payment processor connected</p>
           <p className="mt-1">
-            This page cannot charge cards, collect payments, change plans, update subscriptions, or write billing records. All values are static frontend mock data.
+            This page cannot charge cards, collect payments, change plans, update subscriptions, or write billing records. Upgrade is disabled in Alpha and requires billing backend plus payment processor integration.
           </p>
         </div>
       </div>
@@ -97,27 +97,27 @@ function CurrentPlanPanel() {
   const plan = billingMockData.currentPlan;
 
   return (
-    <BillingPanel title="Current plan and subscription placeholder" subtitle="Static plan summary with no live payment, subscription, or quota update controls.">
+    <BillingPanel title="Mock plan packaging and subscription preview" subtitle="Private beta pricing preview with no live payment, subscription, quota enforcement, or saved plan changes.">
       <div className="grid gap-4 xl:grid-cols-[1.2fr_0.8fr]">
         <div className="rounded-3xl bg-slate-950 p-5 text-white">
           <div className="flex flex-wrap items-start justify-between gap-3">
             <div>
-              <p className="text-sm text-slate-400">Plan name</p>
+              <p className="text-sm text-slate-400">Mock plan packaging</p>
               <h3 className="mt-2 text-2xl font-semibold tracking-tight">{plan.name}</h3>
             </div>
             <Badge className="bg-emerald-400/10 text-emerald-200 ring-emerald-300/20">{plan.status}</Badge>
           </div>
           <div className="mt-5 grid gap-3 md:grid-cols-3">
             <div className="rounded-2xl border border-white/10 bg-white/5 p-3">
-              <p className="text-xs uppercase tracking-wide text-slate-400">Renewal</p>
+              <p className="text-xs uppercase tracking-wide text-slate-400">Renewal preview</p>
               <p className="mt-2 text-sm font-semibold">{plan.renewalDate}</p>
             </div>
             <div className="rounded-2xl border border-white/10 bg-white/5 p-3">
-              <p className="text-xs uppercase tracking-wide text-slate-400">Seats</p>
+              <p className="text-xs uppercase tracking-wide text-slate-400">Mock seats</p>
               <p className="mt-2 text-sm font-semibold">{plan.seats}</p>
             </div>
             <div className="rounded-2xl border border-white/10 bg-white/5 p-3">
-              <p className="text-xs uppercase tracking-wide text-slate-400">Workspaces</p>
+              <p className="text-xs uppercase tracking-wide text-slate-400">Mock workspaces</p>
               <p className="mt-2 text-sm font-semibold">{plan.workspaces}</p>
             </div>
           </div>
@@ -138,14 +138,14 @@ function CurrentPlanPanel() {
 
 function UsageQuotaPanels() {
   return (
-    <BillingPanel title="Usage and quota panels" subtitle="Mock quota utilization for monitored accounts, reports, provider credits, alerts, and future API usage.">
+    <BillingPanel title="Usage preview and mock usage limits" subtitle="Static mock usage limit meters for monitored accounts, reports, provider credits, alerts, and future API metering.">
       <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-5">
         {billingMockData.usageQuotas.map((quota) => (
           <article key={quota.id} className="rounded-2xl border border-slate-100 bg-slate-50 p-4">
             <div className="flex items-start justify-between gap-3">
               <div>
                 <h3 className="text-sm font-semibold text-slate-950">{quota.label}</h3>
-                <p className="mt-1 text-xs text-slate-500">{quota.used} of {quota.limit}</p>
+                <p className="mt-1 text-xs text-slate-500">{quota.used} of {quota.limit} mock limit</p>
               </div>
               <Badge className={toneClasses(quota.tone)}>{quota.percent}%</Badge>
             </div>
@@ -167,7 +167,7 @@ function InvoiceCards() {
         <article key={invoice.id} className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">
           <div className="flex flex-wrap items-start justify-between gap-3">
             <div>
-              <p className="text-xs font-semibold uppercase tracking-wide text-slate-400">Invoice placeholder</p>
+              <p className="text-xs font-semibold uppercase tracking-wide text-slate-400">Invoice preview</p>
               <h3 className="mt-2 text-lg font-semibold text-slate-950">{invoice.invoiceNumber}</h3>
             </div>
             <Badge className={toneClasses(invoice.tone)}>{invoice.status}</Badge>
@@ -175,7 +175,7 @@ function InvoiceCards() {
           <p className="mt-5 text-3xl font-semibold tracking-tight text-slate-950">{invoice.amount}</p>
           <div className="mt-4 grid gap-3 text-sm text-slate-600">
             <p><span className="font-semibold text-slate-950">Period:</span> {invoice.period}</p>
-            <p><span className="font-semibold text-slate-950">Payment method:</span> {invoice.paymentMethod}</p>
+            <p><span className="font-semibold text-slate-950">Payment note:</span> {invoice.paymentMethod}</p>
           </div>
           <p className="mt-4 rounded-2xl border border-slate-100 bg-slate-50 p-3 text-xs leading-5 text-slate-500">{invoice.recommendedAction}</p>
         </article>
@@ -188,7 +188,7 @@ function LicensedProviderCostPanel() {
   const provider = billingMockData.licensedProviderCost;
 
   return (
-    <BillingPanel title={provider.title} subtitle="Provider enrichment usage is a mock-only preview for future licensed provider billing controls.">
+    <BillingPanel title={provider.title} subtitle="Provider enrichment usage is a mock-only preview; licensed provider approval and payment processor integration are required before billing controls exist.">
       <div className="rounded-3xl border border-amber-200 bg-amber-50 p-5">
         <div className="flex flex-col gap-4 xl:flex-row xl:items-start xl:justify-between">
           <div>
@@ -213,7 +213,7 @@ function LicensedProviderCostPanel() {
 
 function EnterpriseBillingTable() {
   return (
-    <BillingPanel title="Enterprise billing table" subtitle="Static billing inventory for item, type, period, amount or usage, status, owner, policy, and recommended action.">
+    <BillingPanel title="Enterprise billing preview table" subtitle="Static mock billing inventory for item, type, preview period, preview amount or mock usage, status, owner, policy, and disabled action copy.">
       <div className="overflow-hidden rounded-2xl border border-slate-200">
         <div className="overflow-x-auto">
           <table className="min-w-full divide-y divide-slate-200 text-sm">
@@ -222,11 +222,11 @@ function EnterpriseBillingTable() {
                 <th className="px-4 py-3">Item</th>
                 <th className="px-4 py-3">Type</th>
                 <th className="px-4 py-3">Period</th>
-                <th className="px-4 py-3">Amount or Usage</th>
+                <th className="px-4 py-3">Preview amount or mock usage</th>
                 <th className="px-4 py-3">Status</th>
                 <th className="px-4 py-3">Owner</th>
                 <th className="px-4 py-3">Policy</th>
-                <th className="px-4 py-3">Action</th>
+                <th className="px-4 py-3">Disabled action</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-100 bg-white">
@@ -256,14 +256,14 @@ function ComplianceNotice() {
   const notice = billingMockData.complianceNotice;
 
   return (
-    <BillingPanel title={notice.title} subtitle="No live charges, plan changes, payment updates, or provider billing actions are available from this page.">
+    <BillingPanel title={notice.title} subtitle="No live charges, plan changes, payment updates, upgrade actions, subscription changes, or provider billing actions are available from this page.">
       <div className="space-y-4 text-sm leading-6 text-slate-600">
         <p>{notice.body}</p>
         <div className="grid gap-3 lg:grid-cols-2">
-          <p className="rounded-2xl border border-emerald-200 bg-emerald-50 p-4 text-emerald-900">Billing state is mock-only until backend billing routes and a payment processor are connected.</p>
-          <p className="rounded-2xl border border-blue-200 bg-blue-50 p-4 text-blue-900">Plan and quota controls are future workflow placeholders with no live backend writes.</p>
+          <p className="rounded-2xl border border-emerald-200 bg-emerald-50 p-4 text-emerald-900">Billing preview requires backend billing routes and payment processor integration before any real payment behavior exists.</p>
+          <p className="rounded-2xl border border-blue-200 bg-blue-50 p-4 text-blue-900">Mock plan packaging and quota controls are future workflow placeholders with no live backend writes.</p>
           <p className="rounded-2xl border border-amber-200 bg-amber-50 p-4 text-amber-900">Provider costs require licensed provider configuration, procurement approval, and policy review.</p>
-          <p className="rounded-2xl border border-slate-200 bg-slate-50 p-4 text-slate-700">Audit-ready billing history and real invoice records will be implemented later.</p>
+          <p className="rounded-2xl border border-slate-200 bg-slate-50 p-4 text-slate-700">Preview-only invoice records and audit-ready billing history require future backend implementation.</p>
         </div>
         <ul className="grid gap-2 lg:grid-cols-4">
           {notice.bullets.map((item) => (

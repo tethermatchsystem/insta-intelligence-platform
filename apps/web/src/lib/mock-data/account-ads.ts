@@ -95,18 +95,18 @@ export const accountAdsProfile = {
   name: "Catalyst Studio",
   handle: "@catalyst.studio",
   accountType: "Connected professional account",
-  sourceBadge: "Meta Ad Library / Marketing API",
-  confidenceBadge: "91% ads confidence",
-  freshnessBadge: "Hourly snapshot",
-  integrationBadge: "No live integrations",
+  sourceBadge: "Mock ad intelligence",
+  confidenceBadge: "91% modeled ads confidence",
+  freshnessBadge: "Static Alpha snapshot",
+  integrationBadge: "No live ad monitoring",
 };
 
 export const accountAdFreshnessLabels: Record<AccountAdFreshness, string> = {
-  near_real_time: "Near real time",
-  hourly: "Hourly snapshot",
-  daily: "Daily snapshot",
-  weekly: "Weekly snapshot",
-  manual: "Manual import",
+  near_real_time: "Static preview, not live",
+  hourly: "Mock hourly preview",
+  daily: "Mock daily snapshot",
+  weekly: "Mock weekly snapshot",
+  manual: "Manual preview import",
 };
 
 export const accountAdConfidenceLabels: Record<AccountAdConfidence, string> = {
@@ -117,9 +117,9 @@ export const accountAdConfidenceLabels: Record<AccountAdConfidence, string> = {
 };
 
 export const accountAdPolicyLabels: Record<AccountAdPolicyClassification, string> = {
-  official_safe: "Official safe",
-  official_safe_limited: "Official safe limited",
-  licensed_provider_only: "Licensed provider only",
+  official_safe: "Official-safe preview",
+  official_safe_limited: "Requires Meta Ad Library review",
+  licensed_provider_only: "Requires private-beta ads service",
 };
 
 export const accountAdCreativeTypeLabels: Record<AccountAdCreativeType, string> = {
@@ -132,51 +132,51 @@ export const accountAdCreativeTypeLabels: Record<AccountAdCreativeType, string> 
 };
 
 export const accountAdStatusLabels: Record<AccountAdStatus, string> = {
-  active: "Active",
-  paused: "Paused",
-  inactive: "Inactive",
-  review_flag: "Review flag",
+  active: "Preview active signal",
+  paused: "Preview paused signal",
+  inactive: "Static preview",
+  review_flag: "Preview review flag",
   mock_only: "Mock only",
 };
 
 export const accountAdDirectionLabels: Record<AccountAdDirection, string> = {
-  new: "New",
-  up: "Up",
-  down: "Down",
-  stable: "Stable",
-  flagged: "Flagged",
-  licensed_only: "Licensed only",
+  new: "Preview new signal",
+  up: "Preview lift",
+  down: "Preview decline",
+  stable: "Static preview",
+  flagged: "Preview flag",
+  licensed_only: "Private-beta ads service",
 };
 
 export const accountAdMetricLabels: Record<AccountAdMetric, string> = {
-  active_ads: "Active ads",
-  campaigns: "Campaigns",
-  creative_variants: "Creative variants",
-  freshness: "Freshness",
-  review_flags: "Review flags",
-  licensed_signal: "Licensed signal",
+  active_ads: "Preview ad signals",
+  campaigns: "Preview campaigns",
+  creative_variants: "Preview variants",
+  freshness: "Static freshness",
+  review_flags: "Preview review flags",
+  licensed_signal: "Private-beta ads service",
 };
 
 export const accountAdKpis: AccountAdKpi[] = [
   {
     id: "active-ads",
-    label: "Active ads",
+    label: "Ads preview",
     value: "24",
-    delta: "+6 this week",
+    delta: "+6 preview",
     tone: "green",
-    description: "Mock active ads framed for Meta Ad Library and authorized Marketing API style sources.",
+    description: "Mock ad signals only; no live ad monitoring is running.",
   },
   {
     id: "campaigns",
-    label: "Detected campaigns",
+    label: "Preview campaigns",
     value: "8",
     delta: "3 themes",
     tone: "blue",
-    description: "Campaign groupings modeled from official/allowed ad intelligence placeholders.",
+    description: "Campaign groupings modeled from Alpha mock ad intelligence placeholders.",
   },
   {
     id: "creative-variants",
-    label: "Creative variants",
+    label: "Preview creative variants",
     value: "67",
     delta: "+14 variants",
     tone: "purple",
@@ -184,15 +184,15 @@ export const accountAdKpis: AccountAdKpi[] = [
   },
   {
     id: "freshness",
-    label: "Estimated ad freshness",
-    value: "3h",
-    delta: "avg age",
+    label: "Static ad freshness",
+    value: "Static",
+    delta: "Alpha snapshot",
     tone: "cyan",
-    description: "Estimated snapshot freshness for allowed public library and authorized owned-ad data.",
+    description: "Static preview freshness; requires approved Meta sources before any future data refresh.",
   },
   {
     id: "review-flags",
-    label: "Review flags",
+    label: "Preview review flags",
     value: "4",
     delta: "2 creative",
     tone: "amber",
@@ -200,19 +200,19 @@ export const accountAdKpis: AccountAdKpi[] = [
   },
   {
     id: "licensed-signals",
-    label: "Licensed-only signals",
+    label: "Requires private-beta ads service",
     value: "Gated",
     delta: "provider only",
     tone: "rose",
-    description: "Signals requiring licensed providers remain clearly separated and unavailable by default.",
+    description: "Signals requiring licensed providers remain clearly separated and unavailable in Alpha.",
   },
 ];
 
 export const accountAdFilters: AccountAdFilterGroup[] = [
-  { id: "status", label: "Status", options: ["All statuses", "Active", "Paused", "Inactive", "Review flag"] },
+  { id: "status", label: "Status", options: ["All preview statuses", "Preview active", "Preview paused", "Static preview", "Preview review flag"] },
   { id: "creative-type", label: "Creative type", options: ["All creatives", "Image", "Video", "Carousel", "Reel", "Story"] },
   { id: "date-range", label: "Date range", options: ["Last 30 days", "Last 7 days", "Quarter", "Custom"] },
-  { id: "source", label: "Source", options: ["All sources", "Meta Ad Library", "Authorized Marketing API", "Licensed provider"] },
+  { id: "source", label: "Source", options: ["All sources", "Requires Meta Ad Library review", "Requires Meta Marketing API connection", "Requires private-beta ads service"] },
   { id: "confidence", label: "Confidence", options: ["Any confidence", "Verified", "High", "Medium", "Needs review"] },
   { id: "policy", label: "Policy classification", options: ["All policies", "Official safe", "Official safe limited", "Licensed provider only"] },
 ];
@@ -228,20 +228,20 @@ export const activeAdsTrend: AccountAdTrendPoint[] = [
 
 export const creativeFormatMix: AccountAdPanelItem[] = [
   { id: "format-reels", title: "Reels and short video", value: "42%", detail: "Largest mock creative mix for launch and product-story campaigns.", tone: "purple" },
-  { id: "format-carousel", title: "Carousel explainers", value: "28%", detail: "Multi-frame product detail ads with strong testing coverage.", tone: "green" },
-  { id: "format-image", title: "Static image variants", value: "19%", detail: "Static creative variants used for retargeting and offer reminders.", tone: "blue" },
+  { id: "format-carousel", title: "Carousel explainers", value: "28%", detail: "Multi-frame product detail previews with mock testing coverage.", tone: "green" },
+  { id: "format-image", title: "Static image variants", value: "19%", detail: "Static creative variants used for preview retargeting and offer reminders.", tone: "blue" },
 ];
 
 export const campaignThemes: AccountAdPanelItem[] = [
-  { id: "theme-launch", title: "Summer editorial launch", value: "11 ads", detail: "Product storytelling campaign with reel and carousel variants.", tone: "purple" },
-  { id: "theme-workflow", title: "Studio workflow proof", value: "7 ads", detail: "Creative operations positioning around planning and production routines.", tone: "cyan" },
-  { id: "theme-offer", title: "Bundle offer reminders", value: "6 ads", detail: "Mock offer campaign with authorized owned-ad framing only.", tone: "amber" },
+  { id: "theme-launch", title: "Summer editorial launch", value: "11 preview ads", detail: "Product storytelling campaign preview with reel and carousel variants.", tone: "purple" },
+  { id: "theme-workflow", title: "Studio workflow proof", value: "7 preview ads", detail: "Creative operations positioning around planning and production routines.", tone: "cyan" },
+  { id: "theme-offer", title: "Bundle offer reminders", value: "6 preview ads", detail: "Mock offer campaign with authorized owned-ad preview framing only.", tone: "amber" },
 ];
 
 export const landingPageDomains: AccountAdPanelItem[] = [
-  { id: "domain-main", title: "catalyst.studio", value: "18 ads", detail: "Primary owned landing domain placeholder for authorized ad account summaries.", tone: "green" },
-  { id: "domain-shop", title: "shop.catalyst.studio", value: "5 ads", detail: "Mock commerce landing page grouping for campaign analysis.", tone: "blue" },
-  { id: "domain-review", title: "Review needed", value: "1 ad", detail: "Landing-page placeholder queued for analyst review, not scraping.", tone: "amber" },
+  { id: "domain-main", title: "catalyst.studio", value: "18 preview ads", detail: "Primary owned landing domain placeholder for future authorized ad account summaries.", tone: "green" },
+  { id: "domain-shop", title: "shop.catalyst.studio", value: "5 preview ads", detail: "Mock commerce landing page grouping for campaign preview analysis.", tone: "blue" },
+  { id: "domain-review", title: "Review needed", value: "1 preview ad", detail: "Landing-page placeholder queued for analyst review, not scraping.", tone: "amber" },
 ];
 
 export const accountAdCreatives: AccountAdCreative[] = [
@@ -253,11 +253,11 @@ export const accountAdCreatives: AccountAdCreative[] = [
     previewTone: "purple",
     headline: "Build the studio setup your campaigns deserve",
     copyPreview: "A compact workflow kit for product shoots, content reviews, and campaign planning.",
-    cta: "Shop now",
+    cta: "Preview CTA only",
     status: "active",
     firstSeen: "2026-06-10T08:00:00.000Z",
     lastSeen: "2026-06-23T14:30:00.000Z",
-    sourceProvider: "Meta Ad Library",
+    sourceProvider: "Requires Meta Ad Library review",
     sourceType: "meta_ad_library",
     freshness: "hourly",
     confidence: "verified",
@@ -272,11 +272,11 @@ export const accountAdCreatives: AccountAdCreative[] = [
     previewTone: "green",
     headline: "Five details that keep creative teams aligned",
     copyPreview: "Swipe through a mock product-detail ad built for official/authorized source previews.",
-    cta: "Learn more",
+    cta: "Preview CTA only",
     status: "active",
     firstSeen: "2026-06-14T11:20:00.000Z",
     lastSeen: "2026-06-23T12:05:00.000Z",
-    sourceProvider: "Authorized Marketing API",
+    sourceProvider: "Requires Meta Marketing API connection",
     sourceType: "authorized_marketing_api",
     freshness: "near_real_time",
     confidence: "high",
@@ -291,11 +291,11 @@ export const accountAdCreatives: AccountAdCreative[] = [
     previewTone: "amber",
     headline: "Bundle your studio essentials before Friday",
     copyPreview: "Mock static ad copy for owned/authorized campaign reporting and creative review.",
-    cta: "View offer",
+    cta: "Preview CTA only",
     status: "review_flag",
     firstSeen: "2026-06-18T09:45:00.000Z",
     lastSeen: "2026-06-22T19:10:00.000Z",
-    sourceProvider: "Licensed ads provider",
+    sourceProvider: "Requires private-beta ads service",
     sourceType: "licensed_provider",
     freshness: "daily",
     confidence: "medium",
@@ -307,10 +307,10 @@ export const accountAdCreatives: AccountAdCreative[] = [
 export const competitiveAdSignals: AccountAdCompetitiveSignal[] = [
   {
     id: "signal-library-frequency",
-    title: "Public ad library activity cluster",
-    value: "High activity",
-    description: "Mock public Ad Library style signal showing increased active creative volume in the category.",
-    sourceProvider: "Meta Ad Library style mock",
+    title: "Public ad library preview cluster",
+    value: "Preview activity",
+    description: "Mock public Ad Library style signal showing preview creative volume in the category.",
+    sourceProvider: "Requires Meta Ad Library review",
     freshness: "daily",
     confidence: "medium",
     confidenceScore: 84,
@@ -333,10 +333,10 @@ export const competitiveAdSignals: AccountAdCompetitiveSignal[] = [
   },
   {
     id: "signal-licensed-benchmark",
-    title: "Spend/benchmark placeholder",
+    title: "Preview spend/benchmark placeholder",
     value: "Licensed only",
-    description: "Any spend, delivery, or proprietary benchmark enrichment is licensed-provider-only and unavailable by default.",
-    sourceProvider: "Licensed provider required",
+    description: "Any spend, delivery, or proprietary benchmark enrichment requires a private-beta ads service and is unavailable in Alpha.",
+    sourceProvider: "Requires private-beta ads service",
     freshness: "manual",
     confidence: "needs_review",
     confidenceScore: 0,
@@ -349,11 +349,11 @@ export const competitiveAdSignals: AccountAdCompetitiveSignal[] = [
 export const accountAdsComplianceNotice = {
   title: "Official-first ads intelligence",
   description:
-    "This ads page uses mock data framed around Meta Ad Library style public signals, authorized Meta Marketing API summaries for owned ad accounts, and clearly separated licensed-provider placeholders only. No scraping, private account access, hidden surveillance, or anti-bot bypass is represented.",
+    "This ads page uses mock data framed around Alpha preview ad intelligence only. Ad monitoring disabled in Alpha; no live ad monitoring, Meta Marketing API calls, or Ad Library ingestion is running.",
   bullets: [
-    "Public ad visibility must use official Meta Ad Library APIs where applicable.",
-    "Owned performance and campaign data must use authorized Meta Marketing API access where applicable.",
-    "Licensed enrichment must remain classified as licensed-provider-only with provenance and gating.",
+    "Public ad visibility requires Meta Ad Library review before any future approved workflow.",
+    "Owned performance and campaign data requires Meta Marketing API connection before any future approved workflow.",
+    "Licensed enrichment requires a private-beta ads service and must remain classified, provenanced, and gated.",
   ],
 };
 

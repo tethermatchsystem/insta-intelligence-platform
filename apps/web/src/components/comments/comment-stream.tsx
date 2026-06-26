@@ -149,7 +149,7 @@ function CommentCard({ comment }: { comment: AccountComment }) {
         </div>
 
         <div className="rounded-3xl border border-slate-100 bg-white p-4">
-          <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-400">Suggested action</p>
+          <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-400">Preview recommendation</p>
           <p className="mt-2 text-sm leading-6 text-slate-600">{comment.suggestedAction}</p>
         </div>
       </div>

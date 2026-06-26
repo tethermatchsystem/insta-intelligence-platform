@@ -84,21 +84,21 @@ function CreatorCard({ creator }: { creator: CreatorDiscoveryCard }) {
 
       <div className="mt-4 grid grid-cols-3 gap-3">
         <div className="rounded-2xl bg-slate-50 p-3">
-          <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-400">Audience</p>
+          <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-400">Audience preview</p>
           <p className="mt-1 text-sm font-semibold text-slate-950">{creator.audienceSize}</p>
         </div>
         <div className="rounded-2xl bg-slate-50 p-3">
-          <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-400">Engagement</p>
+          <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-400">Engagement preview</p>
           <p className="mt-1 text-sm font-semibold text-slate-950">{creator.engagementEstimate}</p>
         </div>
         <div className="rounded-2xl bg-slate-50 p-3">
-          <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-400">Fit score</p>
+          <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-400">Preview score</p>
           <p className="mt-1 text-sm font-semibold text-slate-950">{creator.fitScore}%</p>
         </div>
       </div>
 
       <div className="mt-4 rounded-2xl border border-slate-100 bg-slate-50 p-3">
-        <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-400">Recommended action</p>
+        <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-400">Alpha demo next step</p>
         <p className="mt-2 text-sm leading-6 text-slate-600">{creator.recommendedAction}</p>
       </div>
 

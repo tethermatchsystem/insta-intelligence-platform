@@ -60,17 +60,17 @@ function FollowingHeader() {
           <div className="mb-4 flex flex-wrap gap-2">
             <Badge className="bg-blue-50 text-blue-700 ring-blue-100">{accountFollowingProfile.sourceBadge}</Badge>
             <Badge className="bg-emerald-50 text-emerald-700 ring-emerald-100">{accountFollowingProfile.confidenceBadge}</Badge>
-            <Badge className="bg-cyan-50 text-cyan-700 ring-cyan-100">Fresh {accountFollowingProfile.freshnessBadge}</Badge>
+            <Badge className="bg-cyan-50 text-cyan-700 ring-cyan-100">{accountFollowingProfile.freshnessBadge}</Badge>
             <Badge className="bg-slate-100 text-slate-700 ring-slate-200">{accountFollowingProfile.integrationBadge}</Badge>
             <Badge className="bg-amber-50 text-amber-700 ring-amber-100">{accountFollowingProfile.gatedBadge}</Badge>
           </div>
-          <p className="text-sm font-semibold uppercase tracking-wide text-slate-400">Following and relationship intelligence</p>
-          <h1 className="mt-2 text-4xl font-semibold tracking-tight text-slate-950">{accountFollowingProfile.name} following</h1>
+          <p className="text-sm font-semibold uppercase tracking-wide text-slate-400">Following preview</p>
+          <h1 className="mt-2 text-4xl font-semibold tracking-tight text-slate-950">{accountFollowingProfile.name} following preview</h1>
           <p className="mt-2 text-base text-slate-600">{accountFollowingProfile.handle} · {accountFollowingProfile.accountType}</p>
         </div>
         <div className="rounded-3xl border border-slate-200 bg-slate-50 p-4 text-sm leading-6 text-slate-600 xl:w-[29rem]">
-          <p className="font-semibold text-slate-900">Mock-only following summary view</p>
-          <p className="mt-1">Relationship intelligence prepared for connected account summaries and licensed providers only. Latest identity-level following signals are gated, placeholder-only, and disabled by default.</p>
+          <p className="font-semibold text-slate-900">Mock following intelligence</p>
+          <p className="mt-1">Following preview uses static Alpha mock data. No live following collection is running; official source connection and licensed provider review are required before any future relationship workflow.</p>
         </div>
       </div>
     </header>
@@ -82,8 +82,8 @@ function FilterPlaceholderBar() {
     <section className="rounded-3xl border border-slate-200 bg-white p-4 shadow-sm">
       <div className="flex flex-col gap-3 xl:flex-row xl:items-center xl:justify-between">
         <div>
-          <p className="text-sm font-semibold text-slate-950">Following filters</p>
-          <p className="mt-1 text-xs text-slate-500">Static placeholders for future category summaries, relationship clusters, and gated provider views.</p>
+          <p className="text-sm font-semibold text-slate-950">Following preview filters</p>
+          <p className="mt-1 text-xs text-slate-500">Static placeholders for preview relationship signals, category summaries, and gated provider views; no live following collection is running.</p>
         </div>
         <div className="flex flex-wrap gap-2">
           {accountFollowingFilters.map((filter) => (
@@ -99,14 +99,14 @@ function FilterPlaceholderBar() {
 
 function ComplianceNotice() {
   return (
-    <FollowingPanel title={accountFollowingComplianceNotice.title} subtitle="Official APIs, licensed providers, and connected account summaries only.">
+    <FollowingPanel title={accountFollowingComplianceNotice.title} subtitle="Following collection disabled in Alpha; official APIs, licensed providers, and connected account summaries only.">
       <div className="space-y-4 text-sm leading-6 text-slate-600">
         <p>{accountFollowingComplianceNotice.description}</p>
         <div className="grid gap-3 lg:grid-cols-2">
           <p className="rounded-2xl border border-emerald-200 bg-emerald-50 p-4 text-emerald-900">Connected professional account following summaries only.</p>
-          <p className="rounded-2xl border border-blue-200 bg-blue-50 p-4 text-blue-900">Official APIs and licensed providers only for future live data.</p>
-          <p className="rounded-2xl border border-amber-200 bg-amber-50 p-4 text-amber-900">Arbitrary recent following identity tracking is gated, licensed-provider-only, and disabled by default.</p>
-          <p className="rounded-2xl border border-slate-200 bg-slate-50 p-4 text-slate-700">No scraping, private account access, hidden surveillance, fake login automation, or credential automation.</p>
+          <p className="rounded-2xl border border-blue-200 bg-blue-50 p-4 text-blue-900">Requires official source connection before future approved data.</p>
+          <p className="rounded-2xl border border-amber-200 bg-amber-50 p-4 text-amber-900">Requires licensed provider review; identity-level following collection is disabled in Alpha.</p>
+          <p className="rounded-2xl border border-slate-200 bg-slate-50 p-4 text-slate-700">No live following collection is running; no scraping, private account access, hidden surveillance, fake login automation, or credential automation.</p>
         </div>
         <ul className="grid gap-2 lg:grid-cols-3">
           {accountFollowingComplianceNotice.bullets.map((item) => (

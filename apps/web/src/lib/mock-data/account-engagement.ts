@@ -84,18 +84,18 @@ export const accountEngagementProfile = {
   name: "Catalyst Studio",
   handle: "@catalyst.studio",
   accountType: "Connected professional account",
-  sourceBadge: "Meta engagement insights",
-  confidenceBadge: "95% engagement confidence",
-  freshnessBadge: "Near real time",
-  integrationBadge: "No live integrations",
+  sourceBadge: "Mock engagement intelligence",
+  confidenceBadge: "95% modeled confidence",
+  freshnessBadge: "Static Alpha snapshot",
+  integrationBadge: "No live engagement monitoring",
 };
 
 export const accountEngagementFreshnessLabels: Record<AccountEngagementFreshness, string> = {
-  near_real_time: "Near real time",
-  hourly: "Hourly refresh",
-  daily: "Daily snapshot",
-  weekly: "Weekly snapshot",
-  manual: "Manual import",
+  near_real_time: "Static preview, not live",
+  hourly: "Mock hourly preview",
+  daily: "Mock daily snapshot",
+  weekly: "Mock weekly snapshot",
+  manual: "Manual preview import",
 };
 
 export const accountEngagementConfidenceLabels: Record<AccountEngagementConfidence, string> = {
@@ -106,25 +106,25 @@ export const accountEngagementConfidenceLabels: Record<AccountEngagementConfiden
 };
 
 export const accountEngagementPolicyLabels: Record<AccountEngagementPolicyClassification, string> = {
-  official_safe: "Official safe",
-  official_safe_limited: "Official safe limited",
-  licensed_provider_only: "Licensed provider only",
+  official_safe: "Official-safe preview",
+  official_safe_limited: "Official-safe limited preview",
+  licensed_provider_only: "Requires licensed provider review",
 };
 
 export const accountEngagementDirectionLabels: Record<AccountEngagementDirection, string> = {
-  up: "Up",
-  down: "Down",
-  stable: "Stable",
-  spike: "Spike",
-  drop: "Drop",
-  watch: "Watch",
+  up: "Preview lift",
+  down: "Preview decline",
+  stable: "Static preview",
+  spike: "Preview spike",
+  drop: "Preview drop",
+  watch: "Watch preview",
 };
 
 export const accountEngagementStatusLabels: Record<AccountEngagementStatus, string> = {
-  healthy: "Healthy",
-  monitoring: "Monitoring",
-  needs_review: "Needs review",
-  anomaly: "Anomaly",
+  healthy: "Preview only",
+  monitoring: "Mock review",
+  needs_review: "Preview review",
+  anomaly: "Mock anomaly",
   mock_only: "Mock only",
 };
 
@@ -140,31 +140,31 @@ export const accountEngagementMetricLabels: Record<AccountEngagementMetric, stri
 export const accountEngagementKpis: AccountEngagementKpi[] = [
   {
     id: "engagement-rate",
-    label: "Engagement rate",
+    label: "Engagement preview rate",
     value: "5.8%",
     delta: "+0.7 pts",
     tone: "green",
-    description: "Mock engagement rate across connected professional account media summaries.",
+    description: "Mock engagement rate across connected professional account media summaries; no live monitoring.",
   },
   {
     id: "total-interactions",
-    label: "Total interactions",
+    label: "Preview interactions",
     value: "1.42M",
     delta: "+18% 30d",
     tone: "blue",
-    description: "Aggregated likes, comments, saves, and shares from official-safe mock insights.",
+    description: "Aggregated likes, comments, saves, and shares from official-safe mock engagement intelligence.",
   },
   {
     id: "comments",
-    label: "Comments",
+    label: "Preview comments",
     value: "12.8K",
-    delta: "+486 today",
+    delta: "+486 preview",
     tone: "purple",
     description: "Owned comment engagement summary prepared for future official provider ingestion.",
   },
   {
     id: "saves",
-    label: "Saves",
+    label: "Preview saves",
     value: "84.3K",
     delta: "+11%",
     tone: "cyan",
@@ -172,7 +172,7 @@ export const accountEngagementKpis: AccountEngagementKpi[] = [
   },
   {
     id: "shares",
-    label: "Shares",
+    label: "Preview shares",
     value: "31.7K",
     delta: "+9%",
     tone: "amber",
@@ -180,11 +180,11 @@ export const accountEngagementKpis: AccountEngagementKpi[] = [
   },
   {
     id: "anomalies",
-    label: "Engagement anomalies",
+    label: "Preview anomalies",
     value: "6",
     delta: "2 review",
     tone: "rose",
-    description: "Mock anomaly count for spikes, drops, and pattern placeholders without surveillance.",
+    description: "Mock anomaly count for preview engagement signals without surveillance or live monitoring.",
   },
 ];
 
@@ -192,7 +192,7 @@ export const accountEngagementFilters: AccountEngagementFilterGroup[] = [
   { id: "date-range", label: "Date range", options: ["Last 30 days", "Last 7 days", "Quarter", "Custom"] },
   { id: "media-type", label: "Media type", options: ["All media", "Images", "Reels", "Carousels", "Videos"] },
   { id: "metric", label: "Metric", options: ["All metrics", "Engagement rate", "Comments", "Saves", "Shares"] },
-  { id: "source", label: "Source", options: ["All sources", "Meta engagement insights", "Meta media insights", "Licensed benchmark provider"] },
+  { id: "source", label: "Source", options: ["All sources", "Mock Meta engagement preview", "Mock Meta media preview", "Requires licensed provider review"] },
   { id: "confidence", label: "Confidence", options: ["Any confidence", "Verified", "High", "Medium", "Needs review"] },
   { id: "anomaly-status", label: "Anomaly status", options: ["All statuses", "Healthy", "Monitoring", "Needs review", "Anomaly"] },
 ];
@@ -233,7 +233,7 @@ export const engagementInsightCards: AccountEngagementInsightCard[] = [
     direction: "up",
     description: "Carousels and product-detail imagery are producing durable intent signals in aggregate engagement summaries.",
     suggestedAction: "Prioritize carousel follow-ups and add pinned replies for common product research questions.",
-    sourceProvider: "Meta media insights",
+    sourceProvider: "Mock Meta media preview",
     freshness: "hourly",
     confidence: "high",
     confidenceScore: 94,
@@ -245,11 +245,11 @@ export const engagementInsightCards: AccountEngagementInsightCard[] = [
     id: "insight-comment-quality",
     title: "Comment quality rising on launch posts",
     metric: "comments",
-    value: "+486 new",
+    value: "+486 preview",
     direction: "up",
-    description: "Mock comment volume includes more questions and purchase-intent replies on recent launch media.",
-    suggestedAction: "Route sales/support questions into response opportunities and monitor sentiment themes.",
-    sourceProvider: "Meta engagement insights",
+    description: "Mock comment-volume preview includes more questions and purchase-intent replies on recent launch media.",
+    suggestedAction: "Preview sales/support response opportunities and review mock sentiment themes.",
+    sourceProvider: "Mock Meta engagement preview",
     freshness: "near_real_time",
     confidence: "verified",
     confidenceScore: 97,
@@ -265,7 +265,7 @@ export const engagementInsightCards: AccountEngagementInsightCard[] = [
     direction: "down",
     description: "Static teaser formats are underperforming against recent account-level engagement baselines.",
     suggestedAction: "Convert teaser concepts into short reels or carousel explainers before the next campaign push.",
-    sourceProvider: "Licensed benchmark provider",
+    sourceProvider: "Requires licensed provider review",
     freshness: "daily",
     confidence: "medium",
     confidenceScore: 86,
@@ -308,9 +308,9 @@ export const engagementAnomalies: AccountEngagementAnomaly[] = [
 export const accountEngagementComplianceNotice = {
   title: "Official-first engagement analytics",
   description:
-    "This engagement page uses mock data for connected professional account engagement summaries only. Future live implementation must use official APIs and licensed providers only, with no scraping, private account access, hidden surveillance, or anti-bot bypass.",
+    "This engagement page uses mock data for connected professional account engagement summaries only. Engagement monitoring disabled in Alpha; no live engagement monitoring is running, and any future implementation requires official source connection and approved provider review.",
   bullets: [
-    "Engagement rate, interactions, comments, saves, and shares are modeled as connected account summary signals.",
+    "Engagement rate, interactions, comments, saves, and shares are modeled as preview engagement signals.",
     "Licensed benchmark enrichment must remain clearly classified and separated from official provider summaries.",
     "No scraping, fake login automation, credential automation, private account access, hidden surveillance, or anti-bot bypass is represented.",
   ],
@@ -324,7 +324,7 @@ export const accountEngagementTableRows: AccountEngagementTableRow[] = [
     direction: "up",
     value: "5.8%",
     freshness: "hourly",
-    source: "Meta engagement insights",
+    source: "Mock Meta engagement preview",
     confidence: "95% High confidence",
     status: "healthy",
   },
@@ -335,7 +335,7 @@ export const accountEngagementTableRows: AccountEngagementTableRow[] = [
     direction: "up",
     value: "1.42M interactions",
     freshness: "hourly",
-    source: "Meta media insights",
+    source: "Mock Meta media preview",
     confidence: "97% Verified",
     status: "healthy",
   },
@@ -346,7 +346,7 @@ export const accountEngagementTableRows: AccountEngagementTableRow[] = [
     direction: "spike",
     value: "+24% saves",
     freshness: "hourly",
-    source: "Meta media insights",
+    source: "Mock Meta media preview",
     confidence: "94% High confidence",
     status: "monitoring",
   },
@@ -357,7 +357,7 @@ export const accountEngagementTableRows: AccountEngagementTableRow[] = [
     direction: "drop",
     value: "-18% ER",
     freshness: "daily",
-    source: "Licensed benchmark provider",
+    source: "Requires licensed provider review",
     confidence: "86% Medium confidence",
     status: "needs_review",
   },

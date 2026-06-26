@@ -105,7 +105,7 @@ function ReportsHeader() {
           <div className="mb-4 flex flex-wrap gap-2">
             <Badge className="bg-blue-50 text-blue-700 ring-blue-100">{reportsProfile.sourceBadge}</Badge>
             <Badge className="bg-emerald-50 text-emerald-700 ring-emerald-100">{reportsProfile.confidenceBadge}</Badge>
-            <Badge className="bg-cyan-50 text-cyan-700 ring-cyan-100">Fresh {reportsProfile.freshnessBadge}</Badge>
+            <Badge className="bg-cyan-50 text-cyan-700 ring-cyan-100">Static {reportsProfile.freshnessBadge}</Badge>
             <Badge className="bg-slate-100 text-slate-700 ring-slate-200">{reportsProfile.integrationBadge}</Badge>
           </div>
           <p className="text-sm font-semibold uppercase tracking-wide text-slate-400">Executive insight packaging</p>
@@ -115,7 +115,7 @@ function ReportsHeader() {
         <div className="rounded-3xl border border-slate-200 bg-slate-50 p-4 text-sm leading-6 text-slate-600 xl:w-[30rem]">
           <p className="font-semibold text-slate-900">Mock-only reporting workspace</p>
           <p className="mt-1">
-            Premium report packaging for connected account summaries, public/professional intelligence, client-ready exports, and licensed-provider placeholders only.
+            Mock report previews for connected account summaries, public/professional intelligence, client export previews, and licensed-provider placeholders only. Generation disabled in Alpha.
           </p>
         </div>
       </div>
@@ -162,7 +162,7 @@ function SignalList({ items }: { items: ReportPanelItem[] }) {
 function ReportLibraryPanels() {
   return (
     <section className="grid gap-6 xl:grid-cols-4">
-      <ReportsPanel title="Scheduled report cadence placeholder" subtitle="Mock cadence distribution for recurring report workflows.">
+      <ReportsPanel title="Scheduled delivery preview" subtitle="Scheduled delivery requires backend; this is a static cadence placeholder only.">
         <div className="rounded-3xl bg-gradient-to-br from-slate-950 via-slate-900 to-violet-950 p-5 text-white">
           <div className="flex h-60 items-end gap-3 rounded-2xl border border-white/10 bg-white/5 p-4">
             {scheduledReportCadence.map((point) => (
@@ -178,11 +178,11 @@ function ReportLibraryPanels() {
         </div>
       </ReportsPanel>
 
-      <ReportsPanel title="Report type mix" subtitle="Executive, client export, and benchmark report placeholders.">
+      <ReportsPanel title="Report type mix" subtitle="Mock report templates, client export previews, and benchmark placeholders.">
         <SignalList items={reportTypeMix} />
       </ReportsPanel>
 
-      <ReportsPanel title="Export readiness" subtitle="Client-ready export status without a live backend.">
+      <ReportsPanel title="Export preview readiness" subtitle="Preview-only export status; export jobs require backend.">
         <SignalList items={exportReadiness} />
       </ReportsPanel>
 
@@ -210,7 +210,7 @@ function ReportCardItem({ report }: { report: ReportCard }) {
       </div>
 
       <div className="mt-4 rounded-2xl border border-slate-100 bg-slate-50 p-3">
-        <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-400">Recommended action</p>
+        <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-400">Alpha preview action</p>
         <p className="mt-2 text-sm leading-6 text-slate-600">{report.recommendedAction}</p>
       </div>
 
@@ -301,13 +301,13 @@ function LicensedProviderPanel() {
 
 function ComplianceNotice() {
   return (
-    <ReportsPanel title={reportComplianceNotice.title} subtitle="Connected account reports, public/professional intelligence, and licensed providers only.">
+    <ReportsPanel title={reportComplianceNotice.title} subtitle="Connected account report previews, public/professional intelligence, and licensed providers only.">
       <div className="space-y-4 text-sm leading-6 text-slate-600">
         <p>{reportComplianceNotice.description}</p>
         <div className="grid gap-3 lg:grid-cols-2">
           <p className="rounded-2xl border border-emerald-200 bg-emerald-50 p-4 text-emerald-900">Official APIs and compliant licensed providers only for future live data.</p>
           <p className="rounded-2xl border border-blue-200 bg-blue-50 p-4 text-blue-900">Connected account and public/professional intelligence framing with source, freshness, confidence, and policy badges.</p>
-          <p className="rounded-2xl border border-amber-200 bg-amber-50 p-4 text-amber-900">Deeper enrichment and export automation are licensed-provider-only and unavailable until configured.</p>
+          <p className="rounded-2xl border border-amber-200 bg-amber-50 p-4 text-amber-900">Deeper enrichment and export automation previews are licensed-provider-only and unavailable until configured.</p>
           <p className="rounded-2xl border border-slate-200 bg-slate-50 p-4 text-slate-700">No scraping, private account access, hidden surveillance, or anti-bot bypass.</p>
         </div>
         <ul className="grid gap-2 lg:grid-cols-4">

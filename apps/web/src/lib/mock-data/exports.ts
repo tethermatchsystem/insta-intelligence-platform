@@ -97,15 +97,15 @@ export type ExportTableRow = {
 export const exportsProfile = {
   title: "Exports",
   description:
-    "Package CSV, JSON, executive report bundles, and audit-ready stakeholder deliveries from connected account data, public/professional intelligence, and clearly gated licensed-provider placeholders.",
-  sourceBadge: "Connected and public/professional exports",
-  confidenceBadge: "93% export confidence",
+    "Preview mock export packages for CSV, JSON, executive report bundles, and audit-ready stakeholder delivery placeholders from connected account data, public/professional intelligence, and clearly gated licensed-provider placeholders.",
+  sourceBadge: "Export preview sources",
+  confidenceBadge: "93% preview confidence",
   freshnessBadge: "Weekly snapshot",
-  integrationBadge: "No live integrations",
+  integrationBadge: "No live export jobs",
 };
 
 export const exportFreshnessLabels: Record<ExportFreshness, string> = {
-  near_real_time: "Near real time",
+  near_real_time: "Near real time preview",
   hourly: "Hourly snapshot",
   daily: "Daily snapshot",
   weekly: "Weekly snapshot",
@@ -127,63 +127,63 @@ export const exportPolicyLabels: Record<ExportPolicyClassification, string> = {
 };
 
 export const exportStatusLabels: Record<ExportStatus, string> = {
-  ready: "Ready",
-  scheduled: "Scheduled",
-  draft: "Draft",
+  ready: "Preview ready",
+  scheduled: "Schedule preview",
+  draft: "Mock draft",
   review_required: "Review required",
-  licensed_gated: "Licensed gated",
+  licensed_gated: "Requires private-beta export service",
 };
 
 export const exportTypeLabels: Record<ExportType, string> = {
-  csv_dataset: "CSV dataset",
-  json_package: "JSON package",
-  executive_package: "Executive package",
-  audit_delivery: "Audit delivery",
-  scheduled_export: "Scheduled export",
-  licensed_only: "Licensed only",
+  csv_dataset: "CSV dataset preview",
+  json_package: "JSON package preview",
+  executive_package: "Executive package preview",
+  audit_delivery: "Audit delivery preview",
+  scheduled_export: "Scheduled export preview",
+  licensed_only: "Private-beta export service",
 };
 
 export const exportFormatLabels: Record<ExportFormat, string> = {
-  csv: "CSV",
-  json: "JSON",
-  pdf_package: "PDF package",
-  xlsx: "XLSX",
-  zip_bundle: "ZIP bundle",
-  licensed_only: "Licensed only",
+  csv: "CSV preview",
+  json: "JSON preview",
+  pdf_package: "PDF package preview",
+  xlsx: "XLSX preview",
+  zip_bundle: "ZIP bundle preview",
+  licensed_only: "Private-beta export service",
 };
 
 export const exportKpis: ExportKpi[] = [
   {
     id: "ready-exports",
-    label: "Ready exports",
+    label: "Export previews",
     value: "38",
-    delta: "+9 weekly",
+    delta: "download disabled",
     tone: "green",
-    description: "Mock export packages ready for stakeholder delivery after source and policy review.",
+    description: "Mock export packages ready for preview only; download disabled in Alpha.",
   },
   {
     id: "scheduled-exports",
-    label: "Scheduled exports",
+    label: "Schedule previews",
     value: "22",
-    delta: "weekly cadence",
+    delta: "requires backend",
     tone: "purple",
-    description: "Static schedule placeholders for recurring CSV, JSON, report, and audit deliveries.",
+    description: "Static schedule placeholders only; export jobs require backend support.",
   },
   {
     id: "csv-packages",
-    label: "CSV packages",
+    label: "CSV previews",
     value: "19",
-    delta: "dataset ready",
+    delta: "preview-only format",
     tone: "blue",
-    description: "CSV export packages for connected/owned account summaries and manual review workflows.",
+    description: "CSV export package previews for connected/owned account summaries and manual review workflows.",
   },
   {
     id: "json-packages",
-    label: "JSON packages",
+    label: "JSON previews",
     value: "14",
-    delta: "API-ready",
+    delta: "preview-only format",
     tone: "cyan",
-    description: "JSON payload placeholders with source, freshness, confidence, and policy metadata.",
+    description: "JSON payload placeholders with source, freshness, confidence, and policy metadata; no live API delivery.",
   },
   {
     id: "review-required",
@@ -191,7 +191,7 @@ export const exportKpis: ExportKpi[] = [
     value: "7",
     delta: "manual review",
     tone: "amber",
-    description: "Exports requiring compliance, source, policy, or stakeholder-readiness review.",
+    description: "Export previews requiring compliance, source, policy, or stakeholder-readiness review before any private-beta export service.",
   },
   {
     id: "licensed-only-exports",
@@ -199,16 +199,16 @@ export const exportKpis: ExportKpi[] = [
     value: "Gated",
     delta: "provider only",
     tone: "rose",
-    description: "Deeper enrichment and export automation remain unavailable until compliant providers are configured.",
+    description: "Deeper enrichment and export automation remain unavailable until compliant providers and private-beta export services are configured.",
   },
 ];
 
 export const exportFilters: ExportFilterGroup[] = [
-  { id: "export-type", label: "Export type", options: ["All types", "CSV dataset", "JSON package", "Executive package", "Audit delivery", "Scheduled export"] },
+  { id: "export-type", label: "Export type", options: ["All types", "CSV dataset preview", "JSON package preview", "Executive package preview", "Audit delivery preview", "Scheduled export preview"] },
   { id: "workspace-client", label: "Workspace/client", options: ["All workspaces", "Growth HQ", "Agency demo", "Enterprise retail", "Creator studio"] },
   { id: "date-range", label: "Date range", options: ["Last 30 days", "Last 7 days", "Quarter to date", "Last 12 months"] },
-  { id: "format", label: "Format", options: ["All formats", "CSV", "JSON", "PDF package", "XLSX", "ZIP bundle"] },
-  { id: "status", label: "Status", options: ["All statuses", "Ready", "Scheduled", "Draft", "Review required", "Licensed gated"] },
+  { id: "format", label: "Preview-only file format", options: ["All formats", "CSV preview", "JSON preview", "PDF package preview", "XLSX preview", "ZIP bundle preview"] },
+  { id: "status", label: "Status", options: ["All statuses", "Preview ready", "Schedule preview", "Mock draft", "Review required", "Requires private-beta export service"] },
   { id: "policy", label: "Policy classification", options: ["All policies", "Official safe", "Official safe limited", "Licensed provider only", "Disabled by default"] },
 ];
 
@@ -223,23 +223,23 @@ export const scheduledExportCadence: ExportCadencePoint[] = [
 export const exportFormatMix: ExportPanelItem[] = [
   {
     id: "format-csv",
-    title: "CSV packages",
+    title: "CSV preview packages",
     value: "36%",
-    detail: "Mock tabular exports for connected account summaries, campaign rows, and review workflows.",
+    detail: "Mock tabular export previews for connected account summaries, campaign rows, and review workflows.",
     tone: "blue",
   },
   {
     id: "format-json",
-    title: "JSON packages",
+    title: "JSON preview packages",
     value: "27%",
-    detail: "Structured payload placeholders for API-ready delivery and downstream analytics.",
+    detail: "Structured payload placeholders for downstream analytics previews; no API delivery in Alpha.",
     tone: "cyan",
   },
   {
     id: "format-report",
-    title: "Executive bundles",
+    title: "Executive bundle previews",
     value: "21%",
-    detail: "Report and stakeholder packages with source, confidence, freshness, and policy metadata.",
+    detail: "Mock report and stakeholder package previews with source, confidence, freshness, and policy metadata.",
     tone: "purple",
   },
 ];
@@ -247,16 +247,16 @@ export const exportFormatMix: ExportPanelItem[] = [
 export const deliveryReadiness: ExportPanelItem[] = [
   {
     id: "delivery-ready",
-    title: "Ready for delivery",
+    title: "Delivery preview ready",
     value: "38",
-    detail: "Exports ready after source provenance, freshness, and policy metadata checks.",
+    detail: "Export previews are ready for review only; download disabled in Alpha.",
     tone: "green",
   },
   {
     id: "delivery-approval",
-    title: "Approval pending",
+    title: "Approval placeholder",
     value: "11",
-    detail: "Exports waiting for stakeholder approval before delivery placeholders are marked complete.",
+    detail: "Export previews waiting for stakeholder approval before delivery placeholders are marked complete.",
     tone: "amber",
   },
   {
@@ -273,7 +273,7 @@ export const exportComplianceQueue: ExportPanelItem[] = [
     id: "review-source",
     title: "Source review",
     value: "4 exports",
-    detail: "Exports needing source provenance and freshness review before stakeholder delivery.",
+    detail: "Export previews needing source provenance and freshness review before any private-beta delivery service.",
     tone: "amber",
   },
   {
@@ -295,7 +295,7 @@ export const exportComplianceQueue: ExportPanelItem[] = [
 export const exportCards: ExportCard[] = [
   {
     id: "export-001",
-    title: "Owned Engagement CSV Export",
+    title: "Owned Engagement CSV Export Preview",
     type: "csv_dataset",
     format: "csv",
     linkedWorkspace: "Growth HQ · Connected owned account",
@@ -307,12 +307,12 @@ export const exportCards: ExportCard[] = [
     confidence: "verified",
     confidenceScore: 97,
     policyClassification: "official_safe",
-    recommendedAction: "Approve CSV delivery after stakeholder review and preserve source/freshness metadata.",
+    recommendedAction: "Review the CSV preview package; download disabled in Alpha and source/freshness metadata remains static.",
     tone: "blue",
   },
   {
     id: "export-002",
-    title: "Campaign Insights JSON Package",
+    title: "Campaign Insights JSON Preview Package",
     type: "json_package",
     format: "json",
     linkedWorkspace: "Agency demo · Launch campaign",
@@ -324,12 +324,12 @@ export const exportCards: ExportCard[] = [
     confidence: "high",
     confidenceScore: 92,
     policyClassification: "official_safe",
-    recommendedAction: "Keep scheduled weekly and validate JSON schema placeholders before stakeholder handoff.",
+    recommendedAction: "Treat as a scheduled export preview; export jobs require backend and schema validation remains placeholder only.",
     tone: "cyan",
   },
   {
     id: "export-003",
-    title: "Executive Report ZIP Bundle",
+    title: "Executive Report ZIP Preview Bundle",
     type: "executive_package",
     format: "zip_bundle",
     linkedWorkspace: "Enterprise retail · Executive workspace",
@@ -341,12 +341,12 @@ export const exportCards: ExportCard[] = [
     confidence: "high",
     confidenceScore: 89,
     policyClassification: "official_safe_limited",
-    recommendedAction: "Review public/professional benchmark framing before sending the executive package.",
+    recommendedAction: "Review public/professional benchmark framing before any private-beta export service sends an executive package.",
     tone: "purple",
   },
   {
     id: "export-004",
-    title: "Audit Evidence XLSX Package",
+    title: "Audit Evidence XLSX Preview Package",
     type: "audit_delivery",
     format: "xlsx",
     linkedWorkspace: "Creator studio · Compliance review",
@@ -358,12 +358,12 @@ export const exportCards: ExportCard[] = [
     confidence: "medium",
     confidenceScore: 82,
     policyClassification: "official_safe_limited",
-    recommendedAction: "Finalize audit notes and validate policy labels before marking delivery ready.",
+    recommendedAction: "Finalize audit notes and validate policy labels before marking the mock delivery preview ready.",
     tone: "amber",
   },
   {
     id: "export-005",
-    title: "Licensed Enrichment Export Automation",
+    title: "Licensed Enrichment Export Automation Placeholder",
     type: "licensed_only",
     format: "licensed_only",
     linkedWorkspace: "Global portfolio · Unavailable automation",
@@ -375,7 +375,7 @@ export const exportCards: ExportCard[] = [
     confidence: "needs_review",
     confidenceScore: 0,
     policyClassification: "licensed_provider_only",
-    recommendedAction: "Keep deeper enrichment and export automation unavailable until a compliant provider is configured.",
+    recommendedAction: "Keep deeper enrichment and export automation unavailable until a compliant provider and private-beta export service are configured.",
     tone: "rose",
   },
 ];
@@ -388,9 +388,9 @@ export const deliveryAuditPreview: DeliveryAuditPreview = {
     {
       id: "channel-download",
       title: "Secure download placeholder",
-      value: "Ready",
-      detail: "Mock stakeholder download channel for approved exports only.",
-      tone: "green",
+      value: "Disabled",
+      detail: "Download disabled in Alpha; no real export file is created.",
+      tone: "slate",
     },
     {
       id: "channel-email",
@@ -411,15 +411,15 @@ export const deliveryAuditPreview: DeliveryAuditPreview = {
     {
       id: "audit-log",
       title: "Audit log placeholder",
-      value: "Queued",
+      value: "Preview only",
       detail: "Audit events would record requester, source, policy, and approval metadata in a real backend.",
       tone: "purple",
     },
     {
       id: "audit-approval",
       title: "Approval state placeholder",
-      value: "Review",
-      detail: "Exports requiring review stay gated until source and policy checks are complete.",
+      value: "Preview",
+      detail: "Export previews requiring review stay gated until source and policy checks are complete.",
       tone: "amber",
     },
     {
@@ -441,23 +441,23 @@ export const gatedExportEnrichmentPanel: ExportLicensedPanel = {
   confidence: "needs_review",
   confidenceScore: null,
   description:
-    "Advanced enrichment, proprietary data packages, automated delivery, and deeper export workflows are not official-safe by default. This area remains unavailable until a compliant licensed provider is configured with provenance, gating, and review workflows.",
+    "Advanced enrichment, proprietary data packages, automated delivery, download creation, and deeper export workflows are not official-safe by default. This area remains unavailable until a compliant licensed provider and private-beta export service are configured with provenance, gating, and review workflows.",
   unavailableReasons: [
     "No scraping, private account access, hidden surveillance, fake login automation, or anti-bot bypass is represented.",
-    "Deeper enrichment and export automation must be licensed-provider-only with confidence, freshness, and policy metadata.",
+    "Deeper enrichment and export automation must be licensed-provider-only with confidence, freshness, policy metadata, and private-beta backend services.",
     "This mock page only frames connected account exports and public/professional intelligence exports where applicable.",
   ],
 };
 
 export const exportComplianceNotice = {
-  title: "Official-first export center",
+  title: "Official-first export previews",
   description:
-    "This exports page uses mock data for connected/owned account exports where applicable, public/professional intelligence exports, audit-ready delivery placeholders, and clearly gated licensed-provider enrichment/export automation only.",
+    "This exports page uses mock data for connected/owned account export previews where applicable, public/professional intelligence exports, audit-ready delivery placeholders, and clearly gated licensed-provider enrichment/export automation only.",
   bullets: [
     "Official APIs and compliant licensed providers are the only future live-data paths represented here.",
-    "Connected account and public/professional intelligence exports require source, confidence, freshness, and policy metadata.",
+    "Connected account and public/professional intelligence export previews require source, confidence, freshness, and policy metadata.",
     "No exports contain scraping, private account access, hidden surveillance, fake login automation, credential automation, or anti-bot bypass data.",
-    "Deeper enrichment and export automation remain licensed-provider-only and unavailable until a compliant provider is configured.",
+    "Deeper enrichment, download creation, scheduled delivery, and export automation remain licensed-provider-only and unavailable until a compliant provider and backend service are configured.",
   ],
 };
 

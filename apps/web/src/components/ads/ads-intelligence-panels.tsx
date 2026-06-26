@@ -56,7 +56,7 @@ function SignalList({ items }: { items: AccountAdPanelItem[] }) {
 export function AdsIntelligencePanels() {
   return (
     <section className="grid gap-6 xl:grid-cols-4">
-      <AdsPanel title="Active ads trend" subtitle="Mock active ad count trend from allowed source framing.">
+      <AdsPanel title="Ads preview trend" subtitle="Mock ad count trend only; no live ad monitoring is running.">
         <div className="rounded-3xl bg-gradient-to-br from-slate-950 via-slate-900 to-indigo-950 p-5 text-white">
           <div className="flex h-60 items-end gap-3 rounded-2xl border border-white/10 bg-white/5 p-4">
             {activeAdsTrend.map((point) => (
@@ -72,15 +72,15 @@ export function AdsIntelligencePanels() {
         </div>
       </AdsPanel>
 
-      <AdsPanel title="Creative format mix" subtitle="Mock creative distribution across active ad variants.">
+      <AdsPanel title="Creative format mix" subtitle="Mock creative distribution across preview ad variants.">
         <SignalList items={creativeFormatMix} />
       </AdsPanel>
 
-      <AdsPanel title="Campaign themes" subtitle="Theme summaries from public/authorized ad intelligence placeholders.">
+      <AdsPanel title="Campaign themes" subtitle="Preview ad signal summaries; requires approved ad sources for future use.">
         <SignalList items={campaignThemes} />
       </AdsPanel>
 
-      <AdsPanel title="Landing page/domain placeholder" subtitle="Owned landing-page groupings without scraping.">
+      <AdsPanel title="Landing page/domain placeholder" subtitle="Owned landing-page preview groupings without scraping or live monitoring.">
         <SignalList items={landingPageDomains} />
       </AdsPanel>
     </section>

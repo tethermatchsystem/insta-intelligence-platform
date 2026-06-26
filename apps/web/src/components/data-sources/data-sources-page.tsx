@@ -112,17 +112,17 @@ function DataSourcesHeader() {
           <div className="mb-4 flex flex-wrap gap-2">
             <Badge className="bg-blue-50 text-blue-700 ring-blue-100">{dataSourcesProfile.sourceBadge}</Badge>
             <Badge className="bg-emerald-50 text-emerald-700 ring-emerald-100">{dataSourcesProfile.confidenceBadge}</Badge>
-            <Badge className="bg-cyan-50 text-cyan-700 ring-cyan-100">Fresh {dataSourcesProfile.freshnessBadge}</Badge>
+            <Badge className="bg-cyan-50 text-cyan-700 ring-cyan-100">{dataSourcesProfile.freshnessBadge}</Badge>
             <Badge className="bg-slate-100 text-slate-700 ring-slate-200">{dataSourcesProfile.integrationBadge}</Badge>
           </div>
-          <p className="text-sm font-semibold uppercase tracking-wide text-slate-400">Provider readiness</p>
+          <p className="text-sm font-semibold uppercase tracking-wide text-slate-400">Provider preview</p>
           <h1 className="mt-2 text-4xl font-semibold tracking-tight text-slate-950">{dataSourcesProfile.title}</h1>
           <p className="mt-2 max-w-3xl text-base leading-7 text-slate-600">{dataSourcesProfile.description}</p>
         </div>
         <div className="rounded-3xl border border-slate-200 bg-slate-50 p-4 text-sm leading-6 text-slate-600 xl:w-[30rem]">
-          <p className="font-semibold text-slate-900">Mock-only source management</p>
+          <p className="font-semibold text-slate-900">Alpha source registry preview</p>
           <p className="mt-1">
-            Premium source readiness for Meta official APIs, owned/connected account webhooks, licensed provider evaluation, permissions, and compliance metadata only.
+            Preview/mock-only readiness for Instagram Graph API, Meta Marketing API, Meta Ad Library API, owned/connected account webhooks, licensed provider review, permissions, and compliance metadata. Real connections require private-beta backend and official source approval.
           </p>
         </div>
       </div>
@@ -169,7 +169,7 @@ function SignalList({ items }: { items: DataSourcePanelItem[] }) {
 function ProviderReadinessPanels() {
   return (
     <section className="grid gap-6 xl:grid-cols-4">
-      <DataSourcesPanel title="Official API readiness" subtitle="Mock readiness across Meta APIs, owned webhooks, and manual import paths.">
+      <DataSourcesPanel title="Official API preview readiness" subtitle="Mock readiness across Instagram Graph API, Meta APIs, owned webhooks, and manual import paths.">
         <div className="rounded-3xl bg-gradient-to-br from-slate-950 via-slate-900 to-emerald-950 p-5 text-white">
           <div className="flex h-60 items-end gap-3 rounded-2xl border border-white/10 bg-white/5 p-4">
             {officialApiReadiness.map((point) => (
@@ -189,7 +189,7 @@ function ProviderReadinessPanels() {
         <SignalList items={coverageByDomain} />
       </DataSourcesPanel>
 
-      <DataSourcesPanel title="Freshness and sync cadence" subtitle="Mock sync windows and provider freshness placeholders.">
+      <DataSourcesPanel title="Freshness preview cadence" subtitle="Mock sync windows only; real provider freshness requires private-beta backend enforcement.">
         <SignalList items={freshnessSyncCadence} />
       </DataSourcesPanel>
 
@@ -279,14 +279,14 @@ function LicensedProviderPanel() {
 
 function ComplianceNotice() {
   return (
-    <DataSourcesPanel title={dataSourceComplianceNotice.title} subtitle="Official APIs, owned webhooks, manual imports, and licensed providers only.">
+    <DataSourcesPanel title={dataSourceComplianceNotice.title} subtitle="Official APIs, owned webhooks, manual imports, and licensed-provider review only.">
       <div className="space-y-4 text-sm leading-6 text-slate-600">
         <p>{dataSourceComplianceNotice.description}</p>
         <div className="grid gap-3 lg:grid-cols-2">
-          <p className="rounded-2xl border border-emerald-200 bg-emerald-50 p-4 text-emerald-900">Meta Graph API, Meta Marketing API, Meta Ad Library API, and compliant licensed providers only.</p>
+          <p className="rounded-2xl border border-emerald-200 bg-emerald-50 p-4 text-emerald-900">Instagram Graph API, Meta Marketing API, Meta Ad Library API, and compliant licensed-provider review only.</p>
           <p className="rounded-2xl border border-blue-200 bg-blue-50 p-4 text-blue-900">Owned/connected account webhooks only where official account access is applicable.</p>
-          <p className="rounded-2xl border border-amber-200 bg-amber-50 p-4 text-amber-900">Risky data domains require licensed provider approval before configuration.</p>
-          <p className="rounded-2xl border border-slate-200 bg-slate-50 p-4 text-slate-700">No scraping, fake login automation, private account access, hidden surveillance, or anti-bot bypass.</p>
+          <p className="rounded-2xl border border-amber-200 bg-amber-50 p-4 text-amber-900">Risky data domains require licensed provider approval before private-beta configuration.</p>
+          <p className="rounded-2xl border border-slate-200 bg-slate-50 p-4 text-slate-700">No generated account farm, scraping, hidden browser automation, fake login automation, private account access, hidden surveillance, or anti-bot bypass.</p>
         </div>
         <ul className="grid gap-2 lg:grid-cols-4">
           {dataSourceComplianceNotice.bullets.map((item) => (

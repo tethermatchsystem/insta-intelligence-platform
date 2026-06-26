@@ -1,5 +1,5 @@
-import { CompliancePage } from "@/components/compliance/compliance-page";
+import { ComplianceSettingsPage } from "@/components/settings/compliance-settings-page";
 
 export default function Page() {
-  return <CompliancePage />;
+  return <ComplianceSettingsPage />;
 }

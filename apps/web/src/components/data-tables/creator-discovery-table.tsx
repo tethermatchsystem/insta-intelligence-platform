@@ -42,8 +42,8 @@ export function CreatorDiscoveryTable() {
   return (
     <section className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">
       <div className="mb-4">
-        <h2 className="text-base font-semibold text-slate-950">Enterprise creators table</h2>
-        <p className="mt-1 text-sm text-slate-500">Mock creator discovery rows prepared for public/professional discovery and compliant enrichment workflows.</p>
+        <h2 className="text-base font-semibold text-slate-950">Enterprise creator preview table</h2>
+        <p className="mt-1 text-sm text-slate-500">Mock creator profile rows for Alpha preview, source review, and compliant enrichment gating.</p>
       </div>
 
       <div className="overflow-x-auto rounded-2xl border border-slate-200">
@@ -52,9 +52,9 @@ export function CreatorDiscoveryTable() {
             <tr>
               <th className="px-4 py-3">Creator</th>
               <th className="px-4 py-3">Category</th>
-              <th className="px-4 py-3">Audience</th>
-              <th className="px-4 py-3">Engagement</th>
-              <th className="px-4 py-3">Fit score</th>
+              <th className="px-4 py-3">Audience preview</th>
+              <th className="px-4 py-3">Engagement preview</th>
+              <th className="px-4 py-3">Preview score</th>
               <th className="px-4 py-3">Source</th>
               <th className="px-4 py-3">Confidence</th>
               <th className="px-4 py-3">Policy</th>

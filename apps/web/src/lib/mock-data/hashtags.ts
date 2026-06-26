@@ -89,27 +89,27 @@ export type HashtagTableRow = {
 };
 
 export const hashtagIntelligenceProfile = {
-  title: "Hashtag Intelligence",
+  title: "Hashtag Preview",
   description:
-    "Discover campaign topics, plan hashtag sets, and monitor compliant public/professional trend signals using mock intelligence only.",
-  sourceBadge: "Public/professional topic intelligence",
-  confidenceBadge: "88% trend confidence",
-  freshnessBadge: "Weekly snapshot",
-  integrationBadge: "No live integrations",
+    "Preview mock hashtag intelligence for campaign planning. Tracking is disabled in Alpha, and no live hashtag tracking is running.",
+  sourceBadge: "Mock hashtag intelligence",
+  confidenceBadge: "Preview trend",
+  freshnessBadge: "Alpha demo only",
+  integrationBadge: "No live hashtag tracking is running",
 };
 
 export const hashtagFreshnessLabels: Record<HashtagFreshness, string> = {
-  near_real_time: "Near real time",
-  hourly: "Hourly refresh",
-  daily: "Daily snapshot",
-  weekly: "Weekly snapshot",
-  manual: "Manual import",
+  near_real_time: "Alpha demo only",
+  hourly: "Alpha demo only",
+  daily: "Static preview snapshot",
+  weekly: "Static preview snapshot",
+  manual: "Manual preview import",
 };
 
 export const hashtagConfidenceLabels: Record<HashtagConfidence, string> = {
-  verified: "Verified",
-  high: "High confidence",
-  medium: "Medium confidence",
+  verified: "Preview trend",
+  high: "Preview trend",
+  medium: "Preview trend",
   needs_review: "Needs review",
 };
 
@@ -121,11 +121,11 @@ export const hashtagPolicyLabels: Record<HashtagPolicyClassification, string> = 
 };
 
 export const hashtagStatusLabels: Record<HashtagStatus, string> = {
-  tracking: "Tracking",
-  opportunity: "Opportunity",
-  campaign_ready: "Campaign ready",
+  tracking: "Tracking disabled in Alpha",
+  opportunity: "Preview trend",
+  campaign_ready: "Planning preview",
   review_required: "Review required",
-  licensed_gated: "Licensed gated",
+  licensed_gated: "Requires private-beta monitoring service",
 };
 
 export const hashtagTopicLabels: Record<HashtagTopic, string> = {
@@ -147,11 +147,11 @@ export const hashtagRiskLabels: Record<HashtagRisk, string> = {
 export const hashtagKpis: HashtagKpi[] = [
   {
     id: "tracked-hashtags",
-    label: "Tracked hashtags",
+    label: "Hashtag previews",
     value: "312",
-    delta: "+28 this month",
+    delta: "Alpha demo only",
     tone: "blue",
-    description: "Mock hashtag set for public/professional topic discovery and campaign planning workflows.",
+    description: "Mock hashtag intelligence for public/professional topic previews and campaign planning workflows.",
   },
   {
     id: "opportunity-hashtags",
@@ -163,11 +163,11 @@ export const hashtagKpis: HashtagKpi[] = [
   },
   {
     id: "rising-topics",
-    label: "Rising topics",
+    label: "Preview trends",
     value: "18",
-    delta: "+7 weekly",
+    delta: "Preview trend",
     tone: "purple",
-    description: "Topic clusters with positive mock momentum for compliant trend monitoring.",
+    description: "Topic clusters with positive mock momentum. No live hashtag tracking is running.",
   },
   {
     id: "campaign-matches",
@@ -189,18 +189,18 @@ export const hashtagKpis: HashtagKpi[] = [
     id: "licensed-only-signals",
     label: "Licensed-only signals",
     value: "Gated",
-    delta: "provider only",
+    delta: "provider review",
     tone: "rose",
-    description: "Deeper trend enrichment remains unavailable until a compliant licensed provider is configured.",
+    description: "Deeper trend enrichment requires private-beta monitoring service review before configuration.",
   },
 ];
 
 export const hashtagFilters: HashtagFilterGroup[] = [
   { id: "category", label: "Category", options: ["All categories", "Beauty", "Fitness", "Commerce", "Travel", "Creator ops", "Education"] },
   { id: "market-language", label: "Market/language", options: ["All markets/languages", "UAE / English", "MENA / Arabic", "US / English", "Europe / English"] },
-  { id: "date-range", label: "Date range", options: ["Last 30 days", "Last 7 days", "Quarter to date", "Last 12 months"] },
-  { id: "source", label: "Source", options: ["All sources", "Connected owned performance", "Public content access", "Public/professional topics", "Licensed provider"] },
-  { id: "confidence", label: "Confidence", options: ["Any confidence", "Verified", "High", "Medium", "Needs review"] },
+  { id: "date-range", label: "Preview window", options: ["Static Alpha window", "Mock 7-day view", "Mock quarter view", "Mock annual view"] },
+  { id: "source", label: "Source", options: ["All sources", "Requires official source connection", "Mock hashtag intelligence", "Public content preview", "Requires private-beta monitoring service"] },
+  { id: "confidence", label: "Preview trend", options: ["Any preview trend", "High preview", "Medium preview", "Needs review"] },
   { id: "policy", label: "Policy classification", options: ["All policies", "Official safe", "Official safe limited", "Licensed provider only", "Disabled by default"] },
 ];
 
@@ -294,7 +294,7 @@ export const hashtagCards: HashtagCard[] = [
     estimatedMomentum: "+18% weekly",
     campaignFitScore: 94,
     riskLevel: "low",
-    sourceProvider: "Public/professional topic intelligence",
+    sourceProvider: "Mock hashtag intelligence",
     sourceType: "mock_provider",
     freshness: "weekly",
     confidence: "high",
@@ -313,7 +313,7 @@ export const hashtagCards: HashtagCard[] = [
     estimatedMomentum: "+14% weekly",
     campaignFitScore: 89,
     riskLevel: "low",
-    sourceProvider: "Connected owned performance",
+    sourceProvider: "Requires official source connection",
     sourceType: "official_api",
     freshness: "daily",
     confidence: "verified",
@@ -332,14 +332,14 @@ export const hashtagCards: HashtagCard[] = [
     estimatedMomentum: "+9% weekly",
     campaignFitScore: 86,
     riskLevel: "moderate",
-    sourceProvider: "Public content access placeholder",
+    sourceProvider: "Public content preview placeholder",
     sourceType: "public_content_access",
     freshness: "weekly",
     confidence: "high",
     confidenceScore: 88,
     policyClassification: "official_safe_limited",
     status: "tracking",
-    recommendedAction: "Pair with commerce creative themes and route through brand-safety review before publishing.",
+    recommendedAction: "Review this Alpha demo only hashtag preview before any campaign planning; no live hashtag tracking is running.",
     tone: "green",
   },
   {
@@ -351,7 +351,7 @@ export const hashtagCards: HashtagCard[] = [
     estimatedMomentum: "+6% weekly",
     campaignFitScore: 78,
     riskLevel: "review",
-    sourceProvider: "Public/professional topic intelligence",
+    sourceProvider: "Mock hashtag intelligence",
     sourceType: "mock_provider",
     freshness: "weekly",
     confidence: "medium",
@@ -370,14 +370,14 @@ export const hashtagCards: HashtagCard[] = [
     estimatedMomentum: "Licensed",
     campaignFitScore: 0,
     riskLevel: "licensed_only",
-    sourceProvider: "Licensed hashtag provider required",
+    sourceProvider: "Requires private-beta monitoring service",
     sourceType: "licensed_provider",
     freshness: "manual",
     confidence: "needs_review",
     confidenceScore: 0,
     policyClassification: "licensed_provider_only",
     status: "licensed_gated",
-    recommendedAction: "Keep deeper enrichment unavailable until a compliant licensed provider is configured and approved.",
+    recommendedAction: "Keep deeper enrichment unavailable until a compliant private-beta monitoring service is reviewed and approved.",
     tone: "rose",
   },
 ];
@@ -386,12 +386,12 @@ export const gatedHashtagEnrichmentPanel: HashtagLicensedPanel = {
   title: "Deeper hashtag enrichment placeholder",
   status: "licensed_gated",
   policyClassification: "licensed_provider_only",
-  sourceProvider: "Compliant licensed provider required",
+  sourceProvider: "Requires private-beta monitoring service",
   freshness: "manual",
   confidence: "needs_review",
   confidenceScore: null,
   description:
-    "Advanced trend enrichment, proprietary hashtag graphs, and deeper non-public topic datasets are not official-safe by default. This placeholder remains unavailable until a compliant licensed provider is configured with provenance, gating, and review workflows.",
+    "Advanced trend enrichment, proprietary hashtag graphs, and deeper non-public topic datasets are not official-safe by default. This placeholder remains unavailable until a compliant private-beta monitoring service is configured with provenance, gating, and review workflows.",
   unavailableReasons: [
     "No scraping, private account access, hidden surveillance, fake login automation, or anti-bot bypass is represented.",
     "Deeper hashtag enrichment must be licensed-provider-only with confidence, freshness, and policy metadata.",
@@ -400,14 +400,14 @@ export const gatedHashtagEnrichmentPanel: HashtagLicensedPanel = {
 };
 
 export const hashtagComplianceNotice = {
-  title: "Official-first hashtag intelligence",
+  title: "Official-first hashtag preview",
   description:
-    "This hashtags page uses mock data for public/professional topic intelligence, connected owned-account hashtag performance summaries, campaign planning, and clearly gated licensed-provider placeholders only.",
+    "This hashtags page uses Alpha demo only mock hashtag intelligence, connected owned-account preview summaries, campaign planning placeholders, and clearly gated licensed-provider placeholders. Tracking is disabled in Alpha and no live hashtag tracking is running.",
   bullets: [
-    "Official APIs and compliant licensed providers are the only future live-data paths represented here.",
+    "Requires official source connection or compliant private-beta monitoring service before any future live-data path is represented here.",
     "Public/professional hashtag intelligence is summary-level and requires source, confidence, freshness, and policy metadata.",
     "No scraping, private account access, hidden surveillance, fake login automation, credential automation, or anti-bot bypass is implemented.",
-    "Deeper enrichment remains licensed-provider-only and unavailable until a compliant provider is configured.",
+    "Deeper enrichment remains licensed-provider-only and unavailable until a compliant provider is reviewed and configured.",
   ],
 };
 

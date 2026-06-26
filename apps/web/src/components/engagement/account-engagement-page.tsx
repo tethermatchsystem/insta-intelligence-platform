@@ -60,16 +60,16 @@ function EngagementHeader() {
           <div className="mb-4 flex flex-wrap gap-2">
             <Badge className="bg-blue-50 text-blue-700 ring-blue-100">{accountEngagementProfile.sourceBadge}</Badge>
             <Badge className="bg-emerald-50 text-emerald-700 ring-emerald-100">{accountEngagementProfile.confidenceBadge}</Badge>
-            <Badge className="bg-cyan-50 text-cyan-700 ring-cyan-100">Fresh {accountEngagementProfile.freshnessBadge}</Badge>
+            <Badge className="bg-cyan-50 text-cyan-700 ring-cyan-100">{accountEngagementProfile.freshnessBadge}</Badge>
             <Badge className="bg-slate-100 text-slate-700 ring-slate-200">{accountEngagementProfile.integrationBadge}</Badge>
           </div>
-          <p className="text-sm font-semibold uppercase tracking-wide text-slate-400">Engagement analytics</p>
-          <h1 className="mt-2 text-4xl font-semibold tracking-tight text-slate-950">{accountEngagementProfile.name} engagement</h1>
+          <p className="text-sm font-semibold uppercase tracking-wide text-slate-400">Engagement preview</p>
+          <h1 className="mt-2 text-4xl font-semibold tracking-tight text-slate-950">{accountEngagementProfile.name} engagement preview</h1>
           <p className="mt-2 text-base text-slate-600">{accountEngagementProfile.handle} · {accountEngagementProfile.accountType}</p>
         </div>
         <div className="rounded-3xl border border-slate-200 bg-slate-50 p-4 text-sm leading-6 text-slate-600 xl:w-[29rem]">
-          <p className="font-semibold text-slate-900">Mock-only engagement summary view</p>
-          <p className="mt-1">Premium engagement analytics prepared for official APIs and licensed providers only. No live integrations are connected.</p>
+          <p className="font-semibold text-slate-900">Mock engagement intelligence</p>
+          <p className="mt-1">Engagement monitoring disabled in Alpha. No live engagement monitoring is running; official source connection is required before any future engagement workflow.</p>
         </div>
       </div>
     </header>
@@ -81,8 +81,8 @@ function FilterPlaceholderBar() {
     <section className="rounded-3xl border border-slate-200 bg-white p-4 shadow-sm">
       <div className="flex flex-col gap-3 xl:flex-row xl:items-center xl:justify-between">
         <div>
-          <p className="text-sm font-semibold text-slate-950">Engagement filters</p>
-          <p className="mt-1 text-xs text-slate-500">Static placeholders for future engagement analytics views and anomaly queues.</p>
+          <p className="text-sm font-semibold text-slate-950">Engagement preview filters</p>
+          <p className="mt-1 text-xs text-slate-500">Static placeholders for preview engagement signals and anomaly queues; no live engagement monitoring is running.</p>
         </div>
         <div className="flex flex-wrap gap-2">
           {accountEngagementFilters.map((filter) => (
@@ -98,13 +98,13 @@ function FilterPlaceholderBar() {
 
 function ComplianceNotice() {
   return (
-    <EngagementPanel title={accountEngagementComplianceNotice.title} subtitle="Official APIs, licensed providers, and connected engagement summaries only.">
+    <EngagementPanel title={accountEngagementComplianceNotice.title} subtitle="Engagement monitoring disabled in Alpha; official APIs, licensed providers, and connected engagement summaries only.">
       <div className="space-y-4 text-sm leading-6 text-slate-600">
         <p>{accountEngagementComplianceNotice.description}</p>
         <div className="grid gap-3 lg:grid-cols-2">
-          <p className="rounded-2xl border border-emerald-200 bg-emerald-50 p-4 text-emerald-900">Connected professional account engagement summaries only.</p>
-          <p className="rounded-2xl border border-blue-200 bg-blue-50 p-4 text-blue-900">Official APIs and licensed providers only for future live data.</p>
-          <p className="rounded-2xl border border-slate-200 bg-slate-50 p-4 text-slate-700">No scraping, fake login automation, credential automation, or anti-bot bypass.</p>
+          <p className="rounded-2xl border border-emerald-200 bg-emerald-50 p-4 text-emerald-900">Connected professional account engagement summaries only; no live monitoring.</p>
+          <p className="rounded-2xl border border-blue-200 bg-blue-50 p-4 text-blue-900">Requires official source connection before future approved data.</p>
+          <p className="rounded-2xl border border-slate-200 bg-slate-50 p-4 text-slate-700">No live engagement monitoring is running; no scraping, fake login automation, credential automation, or anti-bot bypass.</p>
           <p className="rounded-2xl border border-slate-200 bg-slate-50 p-4 text-slate-700">No private account access, hidden surveillance, or arbitrary personal tracking.</p>
         </div>
         <ul className="grid gap-2 lg:grid-cols-3">

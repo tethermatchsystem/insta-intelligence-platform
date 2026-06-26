@@ -72,8 +72,8 @@ export function AccountOverviewPage() {
             <div>
               <div className="mb-3 flex flex-wrap gap-2">
                 <span className="rounded-full bg-indigo-50 px-3 py-1 text-xs font-semibold text-indigo-700 ring-1 ring-indigo-100">{accountProfile.provider}</span>
-                <span className="rounded-full bg-emerald-50 px-3 py-1 text-xs font-semibold text-emerald-700 ring-1 ring-emerald-100">{accountProfile.confidence} confidence</span>
-                <span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-700 ring-1 ring-slate-200">Fresh {accountProfile.freshness}</span>
+                <span className="rounded-full bg-emerald-50 px-3 py-1 text-xs font-semibold text-emerald-700 ring-1 ring-emerald-100">Mock confidence: {accountProfile.confidence}</span>
+                <span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-700 ring-1 ring-slate-200">Freshness: {accountProfile.freshness}</span>
               </div>
               <h1 className="text-4xl font-semibold tracking-tight text-slate-950">{accountProfile.displayName}</h1>
               <p className="mt-2 text-base text-slate-600">{accountProfile.handle} · {accountProfile.accountType}</p>
@@ -83,7 +83,7 @@ export function AccountOverviewPage() {
 
           <div className="rounded-3xl border border-slate-200 bg-slate-50 p-4 text-sm text-slate-600 xl:w-96">
             <p className="font-semibold text-slate-900">Official-first account intelligence</p>
-            <p className="mt-1 leading-6">Mock overview for connected professional-account analytics. Future live data must come from official APIs or licensed compliant providers only.</p>
+            <p className="mt-1 leading-6">Alpha demo data is mock/preview only. Live data requires an official source connection, and restricted identity-level features require licensed provider review.</p>
           </div>
         </div>
       </header>
@@ -97,11 +97,18 @@ export function AccountOverviewPage() {
               key={link.label}
               href={link.href}
               className={[
-                "whitespace-nowrap rounded-2xl px-4 py-2 text-sm font-medium transition",
+                "flex whitespace-nowrap rounded-2xl px-4 py-2 text-sm font-medium transition",
                 active ? "bg-slate-950 text-white shadow-sm" : "text-slate-600 hover:bg-slate-100 hover:text-slate-950",
               ].join(" ")}
             >
-              {link.label}
+              <span className="flex items-center gap-2">
+                {link.label}
+                {link.badge ? (
+                  <span className={active ? "rounded-full bg-white/15 px-2 py-0.5 text-[10px] font-semibold text-white" : "rounded-full bg-amber-50 px-2 py-0.5 text-[10px] font-semibold text-amber-700 ring-1 ring-amber-100"}>
+                    {link.badge}
+                  </span>
+                ) : null}
+              </span>
             </Link>
           );
         })}
@@ -130,10 +137,10 @@ export function AccountOverviewPage() {
           </div>
         </AccountPanel>
 
-        <AccountPanel title="Source and policy notice" subtitle="No scraping or private account access.">
+        <AccountPanel title="Source and policy notice" subtitle="Mock preview only; no scraping or private account access.">
           <div className="space-y-3 text-sm">
-            <p className="rounded-2xl border border-emerald-200 bg-emerald-50 p-4 text-emerald-900">Official APIs and licensed providers only. This account overview uses mock data and does not connect to a backend.</p>
-            <p className="rounded-2xl border border-amber-200 bg-amber-50 p-4 text-amber-900">Private account access, scraping, anti-bot bypass, fake login automation, and hidden surveillance are not implemented.</p>
+            <p className="rounded-2xl border border-emerald-200 bg-emerald-50 p-4 text-emerald-900">This account overview uses Alpha mock data and does not connect to a backend. Live data requires official APIs or approved licensed providers only.</p>
+            <p className="rounded-2xl border border-amber-200 bg-amber-50 p-4 text-amber-900">Restricted identity-level features remain disabled in Alpha pending licensed provider review. Private account access, scraping, anti-bot bypass, fake login automation, and hidden surveillance are not implemented.</p>
           </div>
         </AccountPanel>
       </section>
@@ -161,7 +168,7 @@ export function AccountOverviewPage() {
           </ul>
         </AccountPanel>
 
-        <AccountPanel title="Recent collection jobs">
+        <AccountPanel title="Mock collection job previews">
           <div className="space-y-3">
             {recentCollectionJobs.map((job) => (
               <div key={`${job.job}-${job.freshness}`} className="rounded-2xl border border-slate-100 bg-slate-50 p-3">

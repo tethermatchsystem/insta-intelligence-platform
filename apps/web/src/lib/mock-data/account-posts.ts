@@ -82,18 +82,18 @@ export const accountPostsProfile = {
   name: "Catalyst Studio",
   handle: "@catalyst.studio",
   accountType: "Connected professional account",
-  sourceBadge: "Meta Graph API media",
-  confidenceBadge: "94% verified confidence",
-  freshnessBadge: "Near real time",
-  integrationBadge: "No live integrations",
+  sourceBadge: "Mock post intelligence",
+  confidenceBadge: "Preview performance",
+  freshnessBadge: "Post collection disabled in Alpha",
+  integrationBadge: "No live post collection is running",
 };
 
 export const accountPostFreshnessLabels: Record<AccountPostFreshness, string> = {
-  live: "Live",
-  near_real_time: "Near real time",
-  hourly: "Hourly",
-  daily: "Daily",
-  manual: "Manual",
+  live: "Alpha demo only",
+  near_real_time: "Alpha preview",
+  hourly: "Static preview",
+  daily: "Static preview",
+  manual: "Manual preview",
 };
 
 export const accountPostConfidenceLabels: Record<AccountPostConfidence, string> = {
@@ -131,11 +131,11 @@ export const accountPostProviderBadges: AccountPostProviderBadge[] = [
 ];
 
 export const accountPostKpis: AccountPostKpi[] = [
-  { id: "total-posts", label: "Total posts", value: "184", delta: "+12 this month", tone: "blue", description: "Owned media indexed from mock official-safe data." },
+  { id: "total-posts", label: "Preview posts", value: "184", delta: "Alpha demo", tone: "blue", description: "Owned media preview from mock official-safe data. Post collection disabled in Alpha." },
   { id: "reels", label: "Reels", value: "46", delta: "25% mix", tone: "purple", description: "Short-form video posts in the current media catalog." },
   { id: "carousels", label: "Carousels", value: "58", delta: "32% mix", tone: "green", description: "Multi-image or mixed-media carousel posts." },
-  { id: "avg-engagement", label: "Average engagement", value: "4.8%", delta: "+0.6 pts", tone: "blue", description: "Mock engagement rate across recent owned media." },
-  { id: "top-engagement", label: "Top post engagement", value: "12.4%", delta: "reel", tone: "purple", description: "Best observed media engagement in this mock set." },
+  { id: "avg-engagement", label: "Preview engagement", value: "4.8%", delta: "+0.6 pts", tone: "blue", description: "Mock engagement rate across preview owned media." },
+  { id: "top-engagement", label: "Preview top performance", value: "12.4%", delta: "reel", tone: "purple", description: "Best preview performance in this mock set." },
   { id: "needs-review", label: "Posts needing review", value: "3", delta: "manual QA", tone: "amber", description: "Items flagged for content or metric review." },
 ];
 
@@ -145,13 +145,13 @@ export const accountPostFilters: AccountPostFilterGroup[] = [
   { id: "engagement", label: "Engagement", options: ["Any engagement", "Top 10%", "Below baseline", "Needs review"] },
   { id: "provider", label: "Provider", options: ["All providers", "Meta Graph API", "Meta Insights", "Licensed provider"] },
   { id: "confidence", label: "Confidence", options: ["Any confidence", "Verified", "High", "Medium", "Needs review"] },
-  { id: "status", label: "Status", options: ["All statuses", "Published", "Monitoring", "Top performer", "Underperforming"] },
+  { id: "status", label: "Status", options: ["All statuses", "Preview post", "Alpha demo only", "Preview performance", "Preview review"] },
 ];
 
 export const accountPostsComplianceNotice = {
-  title: "Official-first media intelligence",
+  title: "Official-first post preview",
   description:
-    "This posts page uses mock data for connected professional account media only. Live implementation must rely on official APIs and licensed providers only, with no scraping and no private account access.",
+    "This posts page uses mock data for connected professional account media only. No live post collection is running; future implementation must rely on official APIs and licensed providers only, with no scraping and no private account access.",
   bullets: [
     "Owned media, captions, and engagement metrics are modeled as official-safe connected account signals.",
     "Licensed provider enrichment must remain clearly classified and gated where required.",
@@ -169,7 +169,7 @@ export const accountPosts: AccountPost[] = [
     thumbnailTone: "purple",
     metrics: { likes: "18.4K", comments: "642", saves: "2.1K", shares: "1.4K", engagementRate: "12.4%" },
     freshness: "near_real_time",
-    provider: "Meta Graph API",
+    provider: "Requires official source connection",
     confidence: "verified",
     confidenceScore: 98,
     status: "top_performer",
@@ -184,7 +184,7 @@ export const accountPosts: AccountPost[] = [
     thumbnailTone: "green",
     metrics: { likes: "9.7K", comments: "314", saves: "1.8K", shares: "520", engagementRate: "7.8%" },
     freshness: "hourly",
-    provider: "Meta Insights",
+    provider: "Requires official source connection",
     confidence: "high",
     confidenceScore: 94,
     status: "monitoring",
@@ -199,7 +199,7 @@ export const accountPosts: AccountPost[] = [
     thumbnailTone: "blue",
     metrics: { likes: "5.2K", comments: "118", saves: "740", shares: "204", engagementRate: "4.1%" },
     freshness: "daily",
-    provider: "Meta Graph API",
+    provider: "Requires official source connection",
     confidence: "verified",
     confidenceScore: 97,
     status: "published",
@@ -214,7 +214,7 @@ export const accountPosts: AccountPost[] = [
     thumbnailTone: "amber",
     metrics: { likes: "3.1K", comments: "86", saves: "244", shares: "91", engagementRate: "2.2%" },
     freshness: "daily",
-    provider: "Licensed media provider",
+    provider: "Licensed provider placeholder",
     confidence: "medium",
     confidenceScore: 82,
     status: "underperforming",
@@ -223,7 +223,7 @@ export const accountPosts: AccountPost[] = [
 ];
 
 export const topPerformingPosts: AccountPostPerformanceItem[] = [
-  { id: "top-001", title: "Launch reel: summer editorial", detail: "Best save and share velocity in the last 30 days.", value: "12.4% ER", tone: "purple" },
+  { id: "top-001", title: "Launch reel: summer editorial", detail: "Preview save and share velocity in the demo 30-day window.", value: "12.4% ER", tone: "purple" },
   { id: "top-002", title: "Carousel: product detail story", detail: "High saves indicate durable product research intent.", value: "1.8K saves", tone: "green" },
   { id: "top-003", title: "Image: workspace setup", detail: "Steady comment quality and official-safe engagement.", value: "4.1% ER", tone: "blue" },
 ];
@@ -236,7 +236,7 @@ export const underperformingPosts: AccountPostPerformanceItem[] = [
 export const postingCadence = {
   title: "Posting cadence placeholder",
   value: "4.6 posts/week",
-  description: "Mock cadence based on connected professional account media only. Future charts should use official media timestamps and owned insights.",
+  description: "Mock cadence based on connected professional account media only. Post collection disabled in Alpha; future charts require official media timestamps and owned insights.",
 };
 
 export const accountPostTableRows: AccountPostTableRow[] = accountPosts.map((post) => ({

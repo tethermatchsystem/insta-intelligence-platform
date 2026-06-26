@@ -75,16 +75,16 @@ function CommentsHeader() {
           <div className="mb-4 flex flex-wrap gap-2">
             <Badge className="bg-blue-50 text-blue-700 ring-blue-100">{accountCommentsProfile.sourceBadge}</Badge>
             <Badge className="bg-emerald-50 text-emerald-700 ring-emerald-100">{accountCommentsProfile.confidenceBadge}</Badge>
-            <Badge className="bg-cyan-50 text-cyan-700 ring-cyan-100">Fresh {accountCommentsProfile.freshnessBadge}</Badge>
+            <Badge className="bg-cyan-50 text-cyan-700 ring-cyan-100">{accountCommentsProfile.freshnessBadge}</Badge>
             <Badge className="bg-slate-100 text-slate-700 ring-slate-200">{accountCommentsProfile.integrationBadge}</Badge>
           </div>
-          <p className="text-sm font-semibold uppercase tracking-wide text-slate-400">Comment intelligence and moderation</p>
-          <h1 className="mt-2 text-4xl font-semibold tracking-tight text-slate-950">{accountCommentsProfile.name} comments</h1>
+          <p className="text-sm font-semibold uppercase tracking-wide text-slate-400">Comment preview</p>
+          <h1 className="mt-2 text-4xl font-semibold tracking-tight text-slate-950">{accountCommentsProfile.name} comment preview</h1>
           <p className="mt-2 text-base text-slate-600">{accountCommentsProfile.handle} · {accountCommentsProfile.accountType}</p>
         </div>
         <div className="rounded-3xl border border-slate-200 bg-slate-50 p-4 text-sm leading-6 text-slate-600 xl:w-[28rem]">
-          <p className="font-semibold text-slate-900">Mock-only owned comments view</p>
-          <p className="mt-1">Premium comment intelligence prepared for official APIs and licensed providers only. No live integrations are connected.</p>
+          <p className="font-semibold text-slate-900">Mock comment intelligence</p>
+          <p className="mt-1">Comment monitoring disabled in Alpha. Preview sentiment requires official source connection and private-beta moderation service.</p>
         </div>
       </div>
     </header>
@@ -113,7 +113,7 @@ function FilterPlaceholderBar() {
 
 function ProviderSourcePanel() {
   return (
-    <CommentsPanel title="Provider/source readiness" subtitle="Compliant future sources for comment intelligence.">
+    <CommentsPanel title="Provider/source readiness" subtitle="Requires official source connection or private-beta moderation service before any live monitoring.">
       <div className="space-y-3">
         {accountCommentProviderBadges.map((provider) => (
           <div key={provider.id} className="rounded-2xl border border-slate-100 bg-slate-50 p-3">
@@ -139,7 +139,7 @@ function ComplianceNotice() {
         <p>{accountCommentsComplianceNotice.description}</p>
         <div className="grid gap-3 lg:grid-cols-2">
           <p className="rounded-2xl border border-emerald-200 bg-emerald-50 p-4 text-emerald-900">Connected professional account comments only.</p>
-          <p className="rounded-2xl border border-blue-200 bg-blue-50 p-4 text-blue-900">Official APIs and licensed providers only for future live data.</p>
+          <p className="rounded-2xl border border-blue-200 bg-blue-50 p-4 text-blue-900">Official APIs and licensed providers only for future approved data.</p>
           <p className="rounded-2xl border border-slate-200 bg-slate-50 p-4 text-slate-700">No scraping, fake login automation, credential automation, or anti-bot bypass.</p>
           <p className="rounded-2xl border border-slate-200 bg-slate-50 p-4 text-slate-700">No private account access, hidden surveillance, or arbitrary personal tracking.</p>
         </div>
@@ -167,7 +167,7 @@ export function AccountCommentsPage() {
       <FilterPlaceholderBar />
 
       <section className="grid gap-6 xl:grid-cols-[minmax(0,1.45fr)_minmax(340px,0.75fr)]">
-        <CommentsPanel title="Comment stream" subtitle="Mock owned comments with sentiment, intent, urgency, confidence, source, and suggested action metadata.">
+        <CommentsPanel title="Comment preview stream" subtitle="Mock owned comments with preview sentiment, intent, urgency, confidence, source, and recommendation metadata.">
           <CommentStream />
         </CommentsPanel>
 

@@ -41,9 +41,9 @@ export function CompetitorIntelligenceTable() {
   return (
     <section className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">
       <div className="mb-4">
-        <h2 className="text-base font-semibold text-slate-950">Enterprise competitor table</h2>
+        <h2 className="text-base font-semibold text-slate-950">Enterprise competitor preview table</h2>
         <p className="mt-1 text-sm text-slate-500">
-          Mock peer-set rows for compliant benchmark tracking, public ad visibility review, and licensed-provider gating.
+          Mock peer-set rows for Alpha preview benchmarks, public ad visibility review, and licensed-provider gating.
         </p>
       </div>
 
@@ -53,9 +53,9 @@ export function CompetitorIntelligenceTable() {
             <tr>
               <th className="px-4 py-3">Competitor</th>
               <th className="px-4 py-3">Category</th>
-              <th className="px-4 py-3">Audience</th>
-              <th className="px-4 py-3">Engagement</th>
-              <th className="px-4 py-3">Public ads</th>
+              <th className="px-4 py-3">Audience preview</th>
+              <th className="px-4 py-3">Engagement preview</th>
+              <th className="px-4 py-3">Public ad preview</th>
               <th className="px-4 py-3">Source</th>
               <th className="px-4 py-3">Confidence</th>
               <th className="px-4 py-3">Policy</th>

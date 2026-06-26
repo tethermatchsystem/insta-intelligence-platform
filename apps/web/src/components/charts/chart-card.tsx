@@ -12,7 +12,7 @@ export function ChartCard({ title = "Analytics chart" }: { title?: string }) {
           <CardDescription className="mt-1 text-sm text-slate-400">Premium chart placeholder prepared for official-safe analytics and mock provider snapshots.</CardDescription>
         </div>
         <div className="flex flex-wrap gap-2">
-          <SystemStateBadge badge={{ label: "Chart-ready", tone: "info" }} />
+          <SystemStateBadge badge={{ label: "Chart preview", tone: "info" }} />
           <SystemStateBadge badge={{ label: "No live query", tone: "warning" }} />
         </div>
       </CardHeader>
@@ -28,13 +28,13 @@ export function ChartCard({ title = "Analytics chart" }: { title?: string }) {
           </div>
           <div className="mt-4 grid gap-3 text-xs leading-5 text-slate-300 md:grid-cols-3">
             <p className="rounded-2xl border border-white/10 bg-white/10 p-3">Empty/loading chart states retain context and source posture.</p>
-            <p className="rounded-2xl border border-white/10 bg-white/10 p-3">Live provider integrations remain disabled in this frontend batch.</p>
+            <p className="rounded-2xl border border-white/10 bg-white/10 p-3">No live provider integrations run in this Alpha frontend batch.</p>
             <p className="rounded-2xl border border-white/10 bg-white/10 p-3">Use official APIs, owned account webhooks, or approved providers only.</p>
           </div>
         </div>
         <div className="mt-4 flex flex-wrap gap-2">
-          <Badge variant="secondary" className="rounded-full bg-emerald-300/10 text-emerald-100">Instagram Graph API-ready</Badge>
-          <Badge variant="outline" className="rounded-full border-cyan-300/20 bg-cyan-300/10 text-cyan-100">Meta Marketing API-ready</Badge>
+          <Badge variant="secondary" className="rounded-full bg-emerald-300/10 text-emerald-100">Instagram Graph API preview</Badge>
+          <Badge variant="outline" className="rounded-full border-cyan-300/20 bg-cyan-300/10 text-cyan-100">Meta Marketing API preview</Badge>
           <Badge variant="outline" className="rounded-full border-amber-300/20 bg-amber-300/10 text-amber-100">Licensed provider adapter only where required</Badge>
         </div>
       </CardContent>

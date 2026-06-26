@@ -60,16 +60,16 @@ function AdsHeader() {
           <div className="mb-4 flex flex-wrap gap-2">
             <Badge className="bg-blue-50 text-blue-700 ring-blue-100">{accountAdsProfile.sourceBadge}</Badge>
             <Badge className="bg-emerald-50 text-emerald-700 ring-emerald-100">{accountAdsProfile.confidenceBadge}</Badge>
-            <Badge className="bg-cyan-50 text-cyan-700 ring-cyan-100">Fresh {accountAdsProfile.freshnessBadge}</Badge>
+            <Badge className="bg-cyan-50 text-cyan-700 ring-cyan-100">{accountAdsProfile.freshnessBadge}</Badge>
             <Badge className="bg-slate-100 text-slate-700 ring-slate-200">{accountAdsProfile.integrationBadge}</Badge>
           </div>
-          <p className="text-sm font-semibold uppercase tracking-wide text-slate-400">Ads intelligence</p>
-          <h1 className="mt-2 text-4xl font-semibold tracking-tight text-slate-950">{accountAdsProfile.name} ads</h1>
+          <p className="text-sm font-semibold uppercase tracking-wide text-slate-400">Ads preview</p>
+          <h1 className="mt-2 text-4xl font-semibold tracking-tight text-slate-950">{accountAdsProfile.name} ads preview</h1>
           <p className="mt-2 text-base text-slate-600">{accountAdsProfile.handle} · {accountAdsProfile.accountType}</p>
         </div>
         <div className="rounded-3xl border border-slate-200 bg-slate-50 p-4 text-sm leading-6 text-slate-600 xl:w-[29rem]">
-          <p className="font-semibold text-slate-900">Mock-only ads intelligence view</p>
-          <p className="mt-1">Premium ad intelligence framed for Meta Ad Library, authorized Marketing API access, and licensed providers only. No live integrations are connected.</p>
+          <p className="font-semibold text-slate-900">Mock ad intelligence</p>
+          <p className="mt-1">Ad monitoring disabled in Alpha. No live ad monitoring is running; future workflows require Meta Marketing API connection, Meta Ad Library review, and a private-beta ads service.</p>
         </div>
       </div>
     </header>
@@ -81,8 +81,8 @@ function FilterPlaceholderBar() {
     <section className="rounded-3xl border border-slate-200 bg-white p-4 shadow-sm">
       <div className="flex flex-col gap-3 xl:flex-row xl:items-center xl:justify-between">
         <div>
-          <p className="text-sm font-semibold text-slate-950">Ads filters</p>
-          <p className="mt-1 text-xs text-slate-500">Static placeholders for future official ad library, authorized owned-ad, and licensed-provider views.</p>
+          <p className="text-sm font-semibold text-slate-950">Ads preview filters</p>
+          <p className="mt-1 text-xs text-slate-500">Static placeholders for preview ad signals, future Meta Ad Library review, authorized owned-ad views, and private-beta ads service checks.</p>
         </div>
         <div className="flex flex-wrap gap-2">
           {accountAdFilters.map((filter) => (
@@ -98,14 +98,14 @@ function FilterPlaceholderBar() {
 
 function ComplianceNotice() {
   return (
-    <AdsPanel title={accountAdsComplianceNotice.title} subtitle="Meta Ad Library, authorized Marketing API, and licensed providers only.">
+    <AdsPanel title={accountAdsComplianceNotice.title} subtitle="Ad monitoring disabled in Alpha; Meta Marketing API connection, Meta Ad Library review, and private-beta ads service required.">
       <div className="space-y-4 text-sm leading-6 text-slate-600">
         <p>{accountAdsComplianceNotice.description}</p>
         <div className="grid gap-3 lg:grid-cols-2">
-          <p className="rounded-2xl border border-emerald-200 bg-emerald-50 p-4 text-emerald-900">Use Meta Ad Library API where applicable for allowed public ad visibility.</p>
-          <p className="rounded-2xl border border-blue-200 bg-blue-50 p-4 text-blue-900">Use authorized Meta Marketing API access for owned ad accounts where applicable.</p>
-          <p className="rounded-2xl border border-amber-200 bg-amber-50 p-4 text-amber-900">Licensed provider enrichment remains classified and gated where required.</p>
-          <p className="rounded-2xl border border-slate-200 bg-slate-50 p-4 text-slate-700">No scraping, private account access, hidden surveillance, or anti-bot bypass.</p>
+          <p className="rounded-2xl border border-emerald-200 bg-emerald-50 p-4 text-emerald-900">Requires Meta Ad Library review before any allowed public ad visibility workflow.</p>
+          <p className="rounded-2xl border border-blue-200 bg-blue-50 p-4 text-blue-900">Requires Meta Marketing API connection for future owned ad account summaries.</p>
+          <p className="rounded-2xl border border-amber-200 bg-amber-50 p-4 text-amber-900">Requires private-beta ads service for any licensed provider enrichment.</p>
+          <p className="rounded-2xl border border-slate-200 bg-slate-50 p-4 text-slate-700">No live ad monitoring is running; no scraping, private account access, hidden surveillance, or anti-bot bypass.</p>
         </div>
         <ul className="grid gap-2 lg:grid-cols-3">
           {accountAdsComplianceNotice.bullets.map((item) => (

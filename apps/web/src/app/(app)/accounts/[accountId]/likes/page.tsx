@@ -1,2 +1,2 @@
 import { DashboardPageScaffold } from "@/components/dashboards/page-scaffold";
-export default function Page() { return <DashboardPageScaffold title="Likes" description="Owned-account or approved-provider likes intelligence placeholder." gated={true} gateStatus="restricted" />; }
+export default function Page() { return <DashboardPageScaffold title="Likes" description="Restricted and Licensed-provider-only placeholder. Disabled in Alpha; not available from normal official API access. No private account access or hidden surveillance is implemented, and arbitrary personal like history is not exposed." gated={true} gateStatus="restricted" />; }
