@@ -32,7 +32,7 @@ export function DashboardPageScaffold({ title, description, gated = false, gateS
       <Card className="rounded-3xl border-slate-200 bg-white/95 py-0 shadow-sm shadow-slate-200/70">
         <CardHeader className="p-4 pb-3">
           <CardTitle className="text-sm font-semibold text-slate-950">Preview filters</CardTitle>
-          <CardDescription>Static filter controls for source, provider, confidence, date range, and workspace context.</CardDescription>
+          <CardDescription>Static filter preview labels for source, provider, confidence, date range, and workspace context; no live query is running and no changes are saved in Alpha.</CardDescription>
         </CardHeader>
         <Separator />
         <CardContent className="p-4">
@@ -40,7 +40,7 @@ export function DashboardPageScaffold({ title, description, gated = false, gateS
             {["Account", "Source", "Provider", "Confidence", "Date range", "Workspace"].map((filter) => (
               <div key={filter} className="rounded-2xl border border-slate-100 bg-slate-50 p-3 text-sm text-slate-600 transition hover:bg-slate-100/80">
                 <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-400">{filter}</p>
-                <p className="mt-2 font-medium text-slate-700">Placeholder filter</p>
+                <p className="mt-2 font-medium text-slate-700">Filter preview</p>
               </div>
             ))}
           </div>

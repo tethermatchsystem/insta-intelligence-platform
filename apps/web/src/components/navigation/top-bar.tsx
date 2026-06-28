@@ -26,12 +26,12 @@ export function TopBar() {
 
         <div className="grid w-full min-w-0 gap-3 sm:grid-cols-[minmax(0,1fr)_auto_auto] 2xl:w-[760px]">
           <label className="relative block">
-            <span className="sr-only">Search Alpha preview workspace</span>
+            <span className="sr-only">Preview search field; no live query is running</span>
             <Search className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-500" aria-hidden="true" />
             <Input
               readOnly
               className="h-11 rounded-2xl border-white/10 bg-white/10 pl-11 pr-4 text-slate-200 shadow-sm placeholder:text-slate-500 focus-visible:ring-cyan-300/40"
-              placeholder="Search preview: accounts, creators, campaigns..."
+              placeholder="Preview search only — no live query is running"
             />
           </label>
           <Button type="button" variant="outline" disabled className="h-11 rounded-2xl border-white/10 bg-white/10 px-4 text-sm font-medium text-slate-300 shadow-sm disabled:opacity-100">

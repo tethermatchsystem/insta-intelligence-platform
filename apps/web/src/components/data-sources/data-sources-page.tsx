@@ -189,7 +189,7 @@ function ProviderReadinessPanels() {
         <SignalList items={coverageByDomain} />
       </DataSourcesPanel>
 
-      <DataSourcesPanel title="Freshness preview cadence" subtitle="Mock sync windows only; real provider freshness requires private-beta backend enforcement.">
+      <DataSourcesPanel title="Freshness preview cadence" subtitle="Mock freshness windows only; real provider freshness requires private-beta backend enforcement.">
         <SignalList items={freshnessSyncCadence} />
       </DataSourcesPanel>
 
@@ -230,7 +230,7 @@ function DataSourceCardItem({ source }: { source: DataSourceCard }) {
       </div>
 
       <div className="mt-4 rounded-2xl border border-slate-100 bg-slate-50 p-3">
-        <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-400">Recommended action</p>
+        <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-400">Connection preview guidance</p>
         <p className="mt-2 text-sm leading-6 text-slate-600">{source.recommendedAction}</p>
       </div>
     </article>

@@ -68,7 +68,7 @@ export function ExportCenterTable() {
               <th className="px-4 py-3">Status</th>
               <th className="px-4 py-3">Source</th>
               <th className="px-4 py-3">Policy</th>
-              <th className="px-4 py-3">Action</th>
+              <th className="px-4 py-3">Disabled Alpha guidance</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-slate-100 bg-white">

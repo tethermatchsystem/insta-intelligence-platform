@@ -48,7 +48,7 @@ export function EnterpriseDataTable({ title = "Enterprise data table" }: { title
         </div>
       ) : (
         <CardContent className="p-5">
-          <EmptyState title="No table rows match this state" description="Adjust preview filters or review an approved official source connection in a future backend batch." />
+          <EmptyState title="No table rows match this state" description="Filter preview is static; no live query is running and official source connections require a future backend batch." />
         </CardContent>
       )}
     </Card>

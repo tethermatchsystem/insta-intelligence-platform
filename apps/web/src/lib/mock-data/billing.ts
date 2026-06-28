@@ -219,7 +219,7 @@ export const invoiceCards: InvoiceCard[] = [
     status: "Requires provider approval",
     period: "Future provider billing preview",
     paymentMethod: "Requires billing backend",
-    recommendedAction: "Approve licensed provider configuration before any provider cost attribution or billing integration.",
+    recommendedAction: "Requires provider approval before any provider cost attribution or billing integration.",
     tone: "warning",
   },
 ];
@@ -303,7 +303,7 @@ export const billingTableRows: BillingTableRow[] = [
     status: "Requires billing backend",
     owner: "Platform Operations",
     policy: "consented_only",
-    action: "Connect backend meter later",
+    action: "Requires backend meter preview",
   },
 ];
 

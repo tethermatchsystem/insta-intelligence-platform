@@ -6,7 +6,7 @@ export default function Page() {
       eyebrow="Alpha mock access preview"
       title="Preview mock sign-in"
       description="Preview mock sign-in for the private Instagram intelligence workspace. This form is static in Alpha and no credentials are submitted."
-      sideTitle="Monitor official-safe Instagram intelligence from one executive workspace."
+      sideTitle="Review official-source Instagram intelligence from one executive workspace."
       sideDescription="A premium auth preview for connected professional account analytics, policy-gated providers, export controls, and compliance-first workflows."
       activeMetric="Mock access only"
       primaryHrefLabel="New to the platform?"

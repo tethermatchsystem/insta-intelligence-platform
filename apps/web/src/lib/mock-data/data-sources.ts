@@ -106,7 +106,7 @@ export const dataSourcesProfile = {
 };
 
 export const dataSourceFreshnessLabels: Record<DataSourceFreshness, string> = {
-  near_real_time: "Near real-time preview",
+  near_real_time: "Static Alpha preview",
   hourly: "Hourly preview cadence",
   daily: "Daily preview snapshot",
   weekly: "Weekly preview snapshot",
@@ -212,7 +212,7 @@ export const dataSourceFilters: DataSourceFilterGroup[] = [
   { id: "source-type", label: "Source type", options: ["All types", "Instagram Graph API", "Meta Marketing API", "Meta Ad Library API", "Owned webhooks", "Licensed provider", "Manual import"] },
   { id: "status", label: "Status", options: ["All statuses", "Provider preview", "Connection preview", "Official-source review required", "Requires private-beta backend", "Licensed-provider review required"] },
   { id: "workspace-client", label: "Workspace/client", options: ["All workspaces", "Growth HQ", "Agency demo", "Enterprise retail", "Creator studio"] },
-  { id: "freshness", label: "Freshness", options: ["Any freshness", "Near real-time preview", "Hourly preview", "Daily preview", "Weekly preview", "Manual review"] },
+  { id: "freshness", label: "Freshness", options: ["Any freshness", "Static Alpha preview", "Hourly preview", "Daily preview", "Weekly preview", "Manual review"] },
   { id: "confidence", label: "Confidence", options: ["Any confidence", "Verified", "High", "Medium", "Needs review"] },
   { id: "policy", label: "Policy classification", options: ["All policies", "Official safe", "Official safe limited", "Licensed provider only", "Disabled by default"] },
 ];
@@ -290,7 +290,7 @@ export const permissionScopesPlaceholder: DataSourcePanelItem[] = [
   },
   {
     id: "scope-private",
-    title: "Private access",
+    title: "Restricted scopes",
     value: "Disabled",
     detail: "No fake login automation, private account access, hidden surveillance, scraping, or anti-bot bypass scopes exist.",
     tone: "rose",

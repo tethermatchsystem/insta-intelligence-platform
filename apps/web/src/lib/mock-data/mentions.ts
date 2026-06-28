@@ -360,7 +360,7 @@ export const mentionCards: MentionCard[] = [
     confidenceScore: 95,
     policyClassification: "official_safe",
     status: "triaged",
-    recommendedAction: "Create a support response and add reporting examples to the next content brief.",
+    recommendedAction: "Preview support response guidance and reporting examples for the next content brief.",
     tone: "blue",
   },
   {

@@ -103,7 +103,7 @@ export const reportsProfile = {
 };
 
 export const reportFreshnessLabels: Record<ReportFreshness, string> = {
-  near_real_time: "Near real time preview",
+  near_real_time: "Static Alpha preview",
   hourly: "Hourly snapshot",
   daily: "Daily snapshot",
   weekly: "Weekly snapshot",
@@ -275,7 +275,7 @@ export const reviewComplianceQueue: ReportPanelItem[] = [
   },
   {
     id: "review-disabled",
-    title: "Private/scraped signals",
+    title: "Prohibited signals",
     value: "Disabled",
     detail: "No report is based on scraping, private access, hidden surveillance, or anti-bot bypass.",
     tone: "slate",
@@ -367,7 +367,7 @@ export const reportCards: ReportCard[] = [
 
 export const executiveSummaryPreview: ExecutiveSummaryPreview = {
   title: "Mock executive summary preview",
-  subtitle: "Client-ready insight style with no live backend, no private access, and no scraped signals.",
+  subtitle: "Client-ready preview style with no live backend and no prohibited collection signals.",
   dateRange: "Last 30 days · Growth HQ portfolio",
   notice: "This preview is static mock content for insight packaging only. It does not generate reports from live systems or automate exports.",
   bullets: [

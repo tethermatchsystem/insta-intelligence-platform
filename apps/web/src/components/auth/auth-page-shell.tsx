@@ -36,10 +36,20 @@ const proofPoints = [
 ];
 
 const assuranceRows = [
-  { label: "Live auth", value: "Not connected" },
+  { label: "Auth preview", value: "Requires backend" },
   { label: "Backend writes", value: "Disabled" },
   { label: "Feature gate", value: "official_safe" },
 ];
+
+const authPreviewLinkLabels: Record<string, string> = {
+  "/login": "Open sign-in preview",
+  "/signup": "Open workspace preview",
+  "/forgot-password": "Open reset preview",
+};
+
+function getAuthPreviewLinkLabel(href: string) {
+  return authPreviewLinkLabels[href] ?? "Open preview";
+}
 
 function AuthBadge({ children }: { children: ReactNode }) {
   return (
@@ -192,12 +202,12 @@ export function AuthPageShell({
 
               <div className="mt-6 flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-sm text-slate-500">
                 <span>{primaryHrefLabel}</span>
-                <AuthLink href={primaryHref}>{primaryHref.replace("/", "") || "login"}</AuthLink>
+                <AuthLink href={primaryHref}>{getAuthPreviewLinkLabel(primaryHref)}</AuthLink>
                 {secondaryHref && secondaryHrefLabel ? (
                   <>
                     <span className="text-slate-300">•</span>
                     <span>{secondaryHrefLabel}</span>
-                    <AuthLink href={secondaryHref}>{secondaryHref.replace("/", "")}</AuthLink>
+                    <AuthLink href={secondaryHref}>{getAuthPreviewLinkLabel(secondaryHref)}</AuthLink>
                   </>
                 ) : null}
               </div>

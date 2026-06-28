@@ -105,7 +105,7 @@ export const alertCenterProfile = {
 };
 
 export const alertFreshnessLabels: Record<AlertFreshness, string> = {
-  near_real_time: "Static near-real-time placeholder",
+  near_real_time: "Static Alpha placeholder",
   hourly: "Static hourly preview",
   daily: "Static daily preview",
   weekly: "Static weekly preview",

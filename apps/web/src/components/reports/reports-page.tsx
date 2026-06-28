@@ -210,7 +210,7 @@ function ReportCardItem({ report }: { report: ReportCard }) {
       </div>
 
       <div className="mt-4 rounded-2xl border border-slate-100 bg-slate-50 p-3">
-        <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-400">Alpha preview action</p>
+        <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-400">Preview guidance</p>
         <p className="mt-2 text-sm leading-6 text-slate-600">{report.recommendedAction}</p>
       </div>
 

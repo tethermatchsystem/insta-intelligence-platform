@@ -105,7 +105,7 @@ export const exportsProfile = {
 };
 
 export const exportFreshnessLabels: Record<ExportFreshness, string> = {
-  near_real_time: "Near real time preview",
+  near_real_time: "Static Alpha preview",
   hourly: "Hourly snapshot",
   daily: "Daily snapshot",
   weekly: "Weekly snapshot",
@@ -285,7 +285,7 @@ export const exportComplianceQueue: ExportPanelItem[] = [
   },
   {
     id: "review-disabled",
-    title: "Private/scraped signals",
+    title: "Prohibited signals",
     value: "Disabled",
     detail: "No export contains scraping, private access, hidden surveillance, or anti-bot bypass data.",
     tone: "slate",
@@ -424,9 +424,9 @@ export const deliveryAuditPreview: DeliveryAuditPreview = {
     },
     {
       id: "audit-private",
-      title: "Private/scraped data",
+      title: "Prohibited data",
       value: "Excluded",
-      detail: "Exports do not include private, scraped, hidden-surveillance, or anti-bot bypass data.",
+      detail: "Exports do not include prohibited collection, hidden-surveillance, or anti-bot bypass data.",
       tone: "rose",
     },
   ],

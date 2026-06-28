@@ -213,7 +213,7 @@ function LicensedProviderCostPanel() {
 
 function EnterpriseBillingTable() {
   return (
-    <BillingPanel title="Enterprise billing preview table" subtitle="Static mock billing inventory for item, type, preview period, preview amount or mock usage, status, owner, policy, and disabled action copy.">
+    <BillingPanel title="Enterprise billing preview table" subtitle="Static mock billing inventory for item, type, preview period, preview amount or mock usage, status, owner, policy, and disabled Alpha guidance copy.">
       <div className="overflow-hidden rounded-2xl border border-slate-200">
         <div className="overflow-x-auto">
           <table className="min-w-full divide-y divide-slate-200 text-sm">
@@ -226,7 +226,7 @@ function EnterpriseBillingTable() {
                 <th className="px-4 py-3">Status</th>
                 <th className="px-4 py-3">Owner</th>
                 <th className="px-4 py-3">Policy</th>
-                <th className="px-4 py-3">Disabled action</th>
+                <th className="px-4 py-3">Disabled Alpha guidance</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-100 bg-white">

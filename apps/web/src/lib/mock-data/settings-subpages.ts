@@ -137,14 +137,14 @@ export const settingsSubpagesMockData = {
       { label: "Mock team members", value: "8", change: "4 role previews", description: "Mock members show role preview, status, and access scope badges.", tone: "info" },
       { label: "Pending invites", value: "2", change: "Placeholder", description: "Invite controls are non-functional and do not send email.", tone: "warning" },
       { label: "Admin seats", value: "3", change: "Approval-gated", description: "Owner and compliance admin access is shown as governed.", tone: "success" },
-      { label: "Live auth writes", value: "0", change: "Disabled", description: "No users, sessions, invites, or passwords are changed.", tone: "neutral" },
+      { label: "Auth writes", value: "0", change: "Requires backend", description: "No users, sessions, invites, or passwords are changed.", tone: "neutral" },
     ],
     summary: {
       eyebrow: "Invite placeholder",
       title: "Invitation preview — no emails sent",
       description: "A premium invite preview for enterprise buyers: domain restrictions, role defaults, and approval routing are visible but inactive.",
       badges: [
-        { label: "No live auth", tone: "warning" },
+        { label: "Auth disabled", tone: "warning" },
         { label: "Email disabled", tone: "neutral" },
         { label: "Approval preview", tone: "info" },
       ],
@@ -169,12 +169,12 @@ export const settingsSubpagesMockData = {
     tableColumns: ["Member", "Role", "Status", "Access scope", "Auth posture"],
     tableRows: [
       ["Mock team member — Maya Rahman", { label: "Workspace Owner", tone: "purple" }, { label: "Mock active", tone: "success" }, "All workspace settings", { label: "Mock SSO", tone: "info" }],
-      ["Mock team member — Omar Haddad", { label: "Compliance Admin", tone: "warning" }, { label: "Mock active", tone: "success" }, "Policy and audit metadata", { label: "No live auth", tone: "neutral" }],
+      ["Mock team member — Omar Haddad", { label: "Compliance Admin", tone: "warning" }, { label: "Mock active", tone: "success" }, "Policy and audit metadata", { label: "Auth disabled", tone: "neutral" }],
       ["Mock team member — Nora Jensen", { label: "Analyst", tone: "info" }, { label: "Mock active", tone: "success" }, "Approved analytics datasets", { label: "Mock session", tone: "cyan" }],
       ["Mock pending invite", { label: "Campaign Manager", tone: "info" }, { label: "Invite disabled", tone: "warning" }, "Connected account reporting", { label: "Email disabled", tone: "neutral" }],
     ],
     noticeTitle: "Team compliance notice",
-    noticeBody: "This team page does not connect to live authentication, create accounts, modify roles, send invites, revoke sessions, or update identity provider configuration.",
+    noticeBody: "This team page does not connect to an authentication backend, create accounts, modify roles, send invites, revoke sessions, or update identity provider configuration.",
     noticeBullets: commonNoticeBullets,
   },
   roles: {
@@ -211,7 +211,7 @@ export const settingsSubpagesMockData = {
     cards: [
       { eyebrow: "Admin", title: "Workspace Owner", description: "Preview permission set for workspace administration, billing visibility, source approvals, and settings review.", badges: [{ label: "Approval-gated", tone: "warning" }, { label: "Preview permission", tone: "purple" }], bullets: ["Preview workspace metadata access", "Review source preference placeholders", "View mock billing and exports"] },
       { eyebrow: "Governance", title: "Compliance Admin", description: "Policy gates, provider approval review, audit export placeholders, and retention settings oversight.", badges: [{ label: "Policy owner", tone: "success" }, { label: "Provider review", tone: "warning" }], bullets: ["Review feature classifications", "Review licensed-provider readiness", "Preview audit evidence export"] },
-      { eyebrow: "Analytics", title: "Analyst", description: "Connected account dashboards, reports, alerts, comments, ads, and governed exports.", badges: [{ label: "Analytics scope", tone: "info" }, { label: "No settings admin", tone: "neutral" }], bullets: ["View approved datasets", "Create mock reports", "Review alerts"] },
+      { eyebrow: "Analytics", title: "Analyst", description: "Connected account dashboards, reports, alerts, comments, ads, and governed exports.", badges: [{ label: "Analytics scope", tone: "info" }, { label: "No settings admin", tone: "neutral" }], bullets: ["View approved datasets", "Preview mock reports", "Review alerts"] },
       { eyebrow: "Campaign", title: "Campaign Manager", description: "Campaign reporting, ad intelligence, engagement trends, and owned media review.", badges: [{ label: "Connected accounts", tone: "cyan" }, { label: "Official APIs", tone: "success" }], bullets: ["View ad reporting", "Review mock campaign alerts", "Read export summaries"] },
       { eyebrow: "Executive", title: "Read-only Executive", description: "Executive dashboards, KPI snapshots, and scheduled reporting with no write access.", badges: [{ label: "Read-only", tone: "neutral" }, { label: "Aggregated data", tone: "info" }], bullets: ["View KPI cards", "Preview scheduled reports", "No user or provider writes"] },
     ],

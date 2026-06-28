@@ -201,7 +201,7 @@ function AuditReadinessPanel() {
 
 function EnterpriseComplianceTable() {
   return (
-    <CompliancePanel title="Enterprise compliance table" subtitle="Control inventory for domain, classification, source policy, permission scope, audit status, owner, and required action.">
+    <CompliancePanel title="Enterprise compliance table" subtitle="Control inventory for domain, classification, source policy, permission scope, audit status, owner, and required policy guidance.">
       <div className="overflow-hidden rounded-2xl border border-slate-200">
         <div className="overflow-x-auto">
           <table className="min-w-full divide-y divide-slate-200 text-sm">
@@ -214,7 +214,7 @@ function EnterpriseComplianceTable() {
                 <th className="px-4 py-3">Permission scope</th>
                 <th className="px-4 py-3">Audit status</th>
                 <th className="px-4 py-3">Owner</th>
-                <th className="px-4 py-3">Action</th>
+                <th className="px-4 py-3">Policy guidance</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-100 bg-white">
