@@ -190,3 +190,57 @@ This alpha frontend remains mock-only and compliance-first. No backend/live inte
 - `/page` behavior after fix: `/page` was kept working unchanged; no redirect was added because preserving the existing route is harmless and avoids extra routing logic.
 - Remaining marketing/public route items: `/about` and `/contact` route files remain absent and were not created in this batch; a future public marketing batch can decide whether to add them.
 - Compliance confirmation: homepage copy remains mock/static and official-source oriented through the shared scaffold; no live Instagram data, scraping, private tracking, real billing/auth/provider behavior, backend writes, database calls, or live API calls were added.
+
+## ALPHA-2W Public About and Contact Placeholder Routes
+
+- Routes added: `/about` and `/contact` under the existing `(marketing)` route group.
+- Files changed: added `apps/web/src/app/(marketing)/about/page.tsx`, added `apps/web/src/app/(marketing)/contact/page.tsx`, and appended this QA report section.
+- Safety copy added: `/about` now frames the platform as an Alpha preview for private beta official-source intelligence, states official source connection is required, states provider approval is required where applicable, and says no live Instagram data is collected in Alpha.
+- Contact/request-access safety copy added: `/contact` now frames request access as a private beta placeholder, says no contact form is submitted in Alpha, no backend action runs, no provider connection is opened, and access review requires official source connection plus provider approval where applicable.
+- Remaining public marketing/contact/backend items: real public marketing content, real request-access form handling, CRM/email routing, backend contact routes, audit records, and provider/account onboarding remain deferred.
+- Compliance confirmation: no real contact submission, auth, billing, provider integration, live API call, scraping, fake login automation, private account access, hidden surveillance, generated account farm behavior, anti-bot bypass, database call, or backend action was added.
+
+## ALPHA-2X Public Marketing Link Wiring Safety
+
+- Marketing pages reviewed: `/`, `/page`, `/pricing`, `/about`, and `/contact` route files under `apps/web/src/app/(marketing)`.
+- Public links added: a tiny text link row now appears on `/` and `/page` through the shared `page/page.tsx` implementation, plus `/pricing`, `/about`, and `/contact`.
+- Public destinations wired: `/`, `/pricing`, `/about`, and `/contact`. `/login` was not added because these public marketing placeholders did not already link to auth preview routes.
+- Alpha-safe CTA wording used: `Alpha home`, `Open pricing preview`, `About the Alpha`, `Contact preview`, plus the safety note `No live Instagram data is collected in Alpha · No contact form is submitted in Alpha · Billing is preview-only`.
+- Remaining public marketing/contact/backend items: a future public marketing batch can add a real marketing layout, richer copy, analytics-safe lead capture, CRM/email routing, backend contact routes, audit records, and onboarding workflows after approval.
+- Compliance confirmation: no real contact submission, auth, billing action, provider integration, live API call, scraping, fake login automation, private account access, hidden surveillance, generated account farm behavior, anti-bot bypass, database call, or backend action was added.
+
+## ALPHA-2Y Public Marketing Metadata and Page Title Safety
+
+- Marketing pages reviewed: `/`, `/page`, `/pricing`, `/about`, and `/contact` route files under `apps/web/src/app/(marketing)`.
+- Metadata/title copy added or confirmed: `/` now re-exports the safe metadata from the `/page` implementation; `/page`, `/pricing`, `/about`, and `/contact` now export explicit Next.js metadata with Alpha/private-beta-safe titles and descriptions.
+- Public page title copy adjusted: the shared root/`/page` heading now uses `Insta Intelligence Platform` with Alpha preview, private beta, official-source Instagram intelligence, no live Instagram data collected in Alpha, no scraping/private tracking, and provider approval wording.
+- Unsafe public claims avoided: no `real-time monitoring`, scraping capability, private tracking, unlimited data, instant access, live account monitoring, payment-now, or submit-contact-form claims were added.
+- Remaining public marketing/backend/contact/billing items: richer public SEO copy, real marketing layout, analytics-safe lead capture, CRM/email routing, backend contact routes, billing activation, provider onboarding, and audit records remain deferred.
+- Compliance confirmation: no real contact submission, auth, billing action, provider integration, live API call, scraping, fake login automation, private account access, hidden surveillance, generated account farm behavior, anti-bot bypass, database call, or backend action was added.
+
+## ALPHA-2Z Public Marketing Final Preview Safety Sweep
+
+- Marketing pages reviewed: `/`, `/page`, `/pricing`, `/about`, and `/contact` route files under `apps/web/src/app/(marketing)`.
+- Tiny consistency/safety fixes made: aligned metadata and root page copy to say access requires official source connection plus provider approval, clarified `/about` metadata to say no live Instagram data is collected in Alpha, and expanded the repeated public safety note to include `Requires official source connection` and `Requires provider approval`.
+- Public links confirmed: the public marketing link row continues to wire `/`, `/pricing`, `/about`, and `/contact`; `/` still reuses the `/page` implementation and `/page` remains available.
+- Unsafe public claims avoided: no real-time monitoring, scraping capability, private tracking, unlimited data, instant access, live account monitoring, payment-now wording, submit-contact-form wording, real billing, or provider activation claims were added.
+- Remaining public marketing/backend/contact/billing items: real marketing layout, richer public content, analytics-safe lead capture, CRM/email routing, backend contact routes, billing activation, provider onboarding, and audit records remain deferred.
+- Compliance confirmation: no real contact submission, auth, billing action, provider integration, live API call, scraping, fake login automation, private account access, hidden surveillance, generated account farm behavior, anti-bot bypass, database call, or backend action was added.
+
+## ALPHA-3A Public Homepage Alpha Copy and Layout Upgrade
+
+- Homepage routes reviewed: `/` and `/page`; `/` continues to re-export the `/page` implementation.
+- Copy/layout upgraded: replaced the basic shared scaffold placeholder with a purpose-built public Alpha marketing preview containing a hero section, product positioning, CTA row, four feature cards, Alpha safety posture panel, and private beta readiness notice.
+- Safety claims preserved: copy states `Alpha preview`, `Private beta`, `Official-source Instagram intelligence`, `No live Instagram data is collected in Alpha`, `Requires official source connection`, `Requires provider approval where applicable`, and no scraping/private account access/hidden surveillance/anti-bot bypass.
+- CTA links kept preview-safe: `/pricing` uses `Open pricing preview`, `/about` uses `About the Alpha`, and `/contact` uses `Contact preview`; no real contact, billing, provider, auth, or backend action was added.
+- Remaining public marketing/backend/provider/contact items: richer marketing content, real request-access workflow, CRM/email routing, billing activation, provider onboarding, backend contact routes, analytics-safe lead capture, and audit records remain deferred.
+- Compliance confirmation: no real contact submission, auth, billing action, provider integration, live API call, scraping, fake login automation, private account access, hidden surveillance, generated account farm behavior, anti-bot bypass, database call, or backend action was added.
+
+## ALPHA-3B Public Pricing Page Copy and Layout Upgrade
+
+- Pricing route reviewed: `/pricing` under the public marketing route group.
+- Copy/layout upgraded: replaced the basic scaffold placeholder with a purpose-built pricing preview page containing a hero section, pricing positioning, three preview cards for `Alpha Preview`, `Agency Private Beta`, and `Enterprise Review`, a billing safety panel, a compliance boundary notice, and the existing public marketing link row.
+- Billing/payment safety preserved: page states `Pricing preview`, `Private beta`, `Billing is preview-only`, `No payment method is collected in Alpha`, `No subscription changes are saved in Alpha`, `Requires billing backend`, `Requires payment processor integration`, `Requires official source connection`, and `Requires provider approval where applicable`.
+- CTA links kept preview-safe: `/contact`, `/about`, and `/` are linked with preview/Alpha-safe labels only; no subscription change, checkout, payment flow, or provider enablement was added.
+- Remaining public marketing/backend/billing/provider items: final pricing model, real billing backend routes, payment processor integration, subscription changes, invoice generation, official source connection UX, provider approval workflow, backend enforcement, audit records, and policy-backed billing/provider gates remain deferred.
+- Compliance confirmation: no real contact submission, auth, billing action, payment processor behavior, provider integration, live API call, scraping, fake login automation, private account access, hidden surveillance, generated account farm behavior, anti-bot bypass, database call, or backend action was added.
