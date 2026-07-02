@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+
+import { MarketingBadge, MarketingCtaLink, MarketingLinkRow, MarketingSafetyList } from "@/components/marketing/marketing-shared";
 
 export const metadata: Metadata = {
   title: "Pricing preview | Insta Intelligence Platform",
@@ -69,89 +70,74 @@ const marketingLinks = [
   { href: "/contact", label: "Contact preview" },
 ];
 
-function MarketingLinkRow() {
-  return (
-    <nav aria-label="Public marketing preview links" className="rounded-3xl border border-slate-200 bg-white/95 p-4 text-sm shadow-sm shadow-slate-200/70">
-      <div className="flex flex-wrap gap-3">
-        {marketingLinks.map((link) => (
-          <Link key={link.href} href={link.href} className="rounded-full border border-slate-200 px-3 py-2 font-medium text-slate-700 transition hover:bg-slate-50">
-            {link.label}
-          </Link>
-        ))}
-      </div>
-      <p className="mt-3 text-xs font-medium text-slate-500">No live Instagram data is collected in Alpha · No contact form is submitted in Alpha · Billing is preview-only · Requires official source connection · Requires provider approval</p>
-    </nav>
-  );
-}
-
 export default function Page() {
   return (
-    <main className="space-y-8">
-      <section className="overflow-hidden rounded-[2rem] border border-slate-200 bg-white shadow-sm shadow-slate-200/80">
-        <div className="grid gap-8 p-6 sm:p-8 lg:grid-cols-[1.2fr_0.8fr] lg:p-10">
-          <div className="space-y-6">
-            <div className="inline-flex rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-slate-600">
-              Pricing preview · Private beta
+    <main className="mx-auto max-w-7xl space-y-8 px-4 py-4 sm:space-y-10 sm:px-6 sm:py-10 lg:px-8">
+      <section className="relative overflow-hidden rounded-[2rem] border border-slate-800 bg-slate-950 shadow-2xl shadow-slate-950/20 sm:rounded-[2.5rem]">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(16,185,129,0.20),transparent_32%),radial-gradient(circle_at_82%_10%,rgba(59,130,246,0.16),transparent_30%),linear-gradient(135deg,rgba(15,23,42,0.92),rgba(15,23,42,1))]" aria-hidden="true" />
+        <div className="absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-white/30 to-transparent" aria-hidden="true" />
+        <div className="relative grid gap-8 p-5 sm:gap-10 sm:p-8 lg:grid-cols-[1.12fr_0.88fr] lg:p-12 xl:p-14">
+          <div className="space-y-7 sm:space-y-8">
+            <div className="flex flex-wrap gap-2 text-[0.7rem] font-semibold uppercase tracking-[0.14em] sm:text-xs sm:tracking-[0.18em]">
+              <MarketingBadge tone="solid">Alpha preview</MarketingBadge>
+              <MarketingBadge>Private beta</MarketingBadge>
+              <MarketingBadge tone="emerald">Official-source Instagram intelligence</MarketingBadge>
             </div>
-            <div className="space-y-4">
-              <h1 className="max-w-3xl text-4xl font-semibold tracking-tight text-slate-950 sm:text-5xl">
+
+            <div className="space-y-5">
+              <h1 className="max-w-4xl text-4xl font-semibold leading-tight tracking-[-0.045em] text-white sm:text-5xl sm:leading-[1.05] lg:text-6xl">
                 Pricing preview for compliance-first Instagram intelligence.
               </h1>
-              <p className="max-w-3xl text-base leading-7 text-slate-600 sm:text-lg">
+              <p className="max-w-3xl text-base leading-7 text-slate-300 sm:text-lg sm:leading-8">
                 These packages preview how Alpha and private-beta access may be organized for brands,
                 agencies, and enterprise teams. Billing is preview-only, no payment method is collected in
                 Alpha, and future access requires official source connection plus provider approval where
                 applicable.
               </p>
             </div>
-            <div className="flex flex-wrap gap-3">
-              <Link href="/contact" className="rounded-full bg-slate-950 px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-slate-800">
+            <nav aria-label="Pricing preview page links" className="grid gap-3 sm:flex sm:flex-wrap">
+              <MarketingCtaLink href="/contact">
                 Contact preview
-              </Link>
-              <Link href="/about" className="rounded-full border border-slate-200 px-5 py-3 text-sm font-semibold text-slate-800 transition hover:bg-slate-50">
+              </MarketingCtaLink>
+              <MarketingCtaLink href="/about" variant="secondary">
                 About the Alpha
-              </Link>
-              <Link href="/" className="rounded-full border border-slate-200 px-5 py-3 text-sm font-semibold text-slate-800 transition hover:bg-slate-50">
+              </MarketingCtaLink>
+              <MarketingCtaLink href="/" variant="secondary">
                 Alpha home
-              </Link>
-            </div>
+              </MarketingCtaLink>
+            </nav>
           </div>
 
-          <aside className="rounded-3xl border border-slate-200 bg-slate-50 p-5">
-            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-slate-500">Billing safety</p>
-            <h2 className="mt-3 text-2xl font-semibold tracking-tight text-slate-950">Preview-only commercial flow</h2>
-            <p className="mt-3 text-sm leading-6 text-slate-600">
+          <aside className="rounded-[2rem] border border-white/15 bg-white/[0.08] p-5 shadow-2xl shadow-slate-950/20 backdrop-blur sm:p-6">
+            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-emerald-100">Billing safety</p>
+            <h2 className="mt-3 text-xl font-semibold leading-7 tracking-tight text-white sm:text-2xl">Preview-only commercial flow</h2>
+            <p className="mt-3 text-sm leading-6 text-slate-300">
               Pricing content is informational for Alpha review. Subscription management, payment method
               collection, invoice generation, and plan changes require future backend and payment processor work.
             </p>
-            <div className="mt-5 grid gap-2">
-              {safetyItems.map((item) => (
-                <div key={item} className="rounded-2xl border border-slate-200 bg-white px-3 py-2 text-sm font-medium text-slate-700">
-                  {item}
-                </div>
-              ))}
-            </div>
+            <MarketingSafetyList items={safetyItems} density="compact" />
           </aside>
         </div>
       </section>
 
-      <section aria-labelledby="pricing-preview-plans" className="space-y-4">
+      <section aria-labelledby="pricing-preview-plans" className="space-y-6 rounded-[2rem] border border-white/10 bg-slate-950/85 p-5 shadow-xl shadow-slate-950/20 sm:p-6 lg:p-7">
         <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
           <div>
-            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-slate-500">Plan packaging</p>
-            <h2 id="pricing-preview-plans" className="mt-2 text-2xl font-semibold tracking-tight text-slate-950">
+            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-emerald-200">Plan packaging</p>
+            <h2 id="pricing-preview-plans" className="mt-2 text-2xl font-semibold tracking-tight text-white">
               Private-beta pricing preview cards
             </h2>
           </div>
-          <p className="max-w-2xl text-sm leading-6 text-slate-600">
+          <p className="max-w-2xl text-sm leading-6 text-slate-300">
             Plan names, packaging, and limits are placeholders for review only. No subscription changes are
             saved in Alpha, and payment processor or provider enablement remains future backend work.
           </p>
         </div>
 
-        <div className="grid gap-4 lg:grid-cols-3">
+        <div className="grid gap-4 sm:gap-5 lg:grid-cols-3">
           {pricingPreviewPlans.map((plan) => (
-            <article key={plan.name} className="flex h-full flex-col rounded-3xl border border-slate-200 bg-white p-6 shadow-sm shadow-slate-200/70">
+            <article key={plan.name} className="relative flex h-full flex-col overflow-hidden rounded-[2rem] border border-slate-200/90 bg-gradient-to-b from-white to-slate-50 p-5 shadow-xl shadow-slate-950/15 sm:p-6">
+              <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-slate-900 via-emerald-500 to-sky-500 opacity-80" aria-hidden="true" />
               <div className="flex items-center justify-between gap-3">
                 <span className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-xs font-semibold uppercase tracking-[0.16em] text-slate-600">
                   {plan.eyebrow}
@@ -159,7 +145,7 @@ export default function Page() {
               </div>
               <div className="mt-5 space-y-3">
                 <h3 className="text-xl font-semibold tracking-tight text-slate-950">{plan.name}</h3>
-                <p className="text-3xl font-semibold tracking-tight text-slate-950">{plan.price}</p>
+                <p className="text-2xl font-semibold tracking-tight text-slate-950 sm:text-3xl">{plan.price}</p>
                 <p className="text-sm leading-6 text-slate-600">{plan.description}</p>
               </div>
               <ul className="mt-6 flex-1 space-y-3 text-sm text-slate-700">
@@ -170,7 +156,7 @@ export default function Page() {
                   </li>
                 ))}
               </ul>
-              <p className="mt-6 rounded-2xl border border-slate-200 bg-slate-50 p-3 text-xs font-medium leading-5 text-slate-600">
+              <p className="mt-6 break-words rounded-2xl border border-slate-200 bg-slate-50 p-3 text-xs font-medium leading-5 text-slate-600">
                 {plan.note}
               </p>
             </article>
@@ -178,13 +164,13 @@ export default function Page() {
         </div>
       </section>
 
-      <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm shadow-slate-200/70">
+      <section className="overflow-hidden rounded-[2rem] border border-amber-200 bg-gradient-to-r from-amber-50 via-white to-slate-50 p-5 text-sm leading-6 text-amber-950 shadow-lg shadow-amber-100/70 sm:p-7">
         <div className="grid gap-4 lg:grid-cols-[0.8fr_1.2fr] lg:items-center">
           <div>
-            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-slate-500">Compliance boundary</p>
+            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-amber-700">Compliance boundary</p>
             <h2 className="mt-2 text-2xl font-semibold tracking-tight text-slate-950">Official-source access first</h2>
           </div>
-          <p className="text-sm leading-6 text-slate-600">
+          <p className="break-words">
             Future pricing and packaging must map to approved sources such as official Meta APIs,
             connected professional accounts, customer-owned uploads, and licensed provider adapters where
             permitted. This page does not add contact submission, billing, payment processing, provider
@@ -193,7 +179,10 @@ export default function Page() {
         </div>
       </section>
 
-      <MarketingLinkRow />
+      <MarketingLinkRow
+        links={marketingLinks}
+        note="No live Instagram data is collected in Alpha · No contact form is submitted in Alpha · Billing is preview-only · Requires official source connection · Requires provider approval where applicable"
+      />
     </main>
   );
 }

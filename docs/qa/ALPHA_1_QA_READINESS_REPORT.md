@@ -253,3 +253,54 @@ This alpha frontend remains mock-only and compliance-first. No backend/live inte
 - CTA links kept preview-safe: `/`, `/pricing`, and `/contact` are linked with Alpha/preview-safe labels only; no contact submission, connect-now behavior, provider enablement, or backend action was added.
 - Remaining public marketing/backend/provider/contact items: richer public marketing content, real request-access workflow, CRM/email routing, backend contact routes, official source connection UX, provider approval workflow, analytics-safe lead capture, audit records, and policy-backed provider gates remain deferred.
 - Compliance confirmation: no real contact submission, auth, billing action, payment processor behavior, provider integration, live API call, scraping, fake login automation, private account access, hidden surveillance, generated account farm behavior, anti-bot bypass, database call, or backend action was added.
+
+## ALPHA-3D Public Homepage Visual Design Fix
+
+- Visual issue fixed: `/` and `/page` used the shared homepage implementation but looked too flat, too wide, and unfinished because content stretched across the available width and cards read as plain white placeholder blocks.
+- Homepage layout improvements: added a centered `max-w-7xl` container, stronger vertical spacing, a more intentional dark gradient hero surface, larger hero type, clearer CTA row styling, elevated safety panel, premium feature cards with subtle gradients/borders/shadows, and a more polished private beta readiness notice.
+- Safety copy preserved: homepage still includes `Alpha preview`, `Private beta`, `Official-source Instagram intelligence`, `No live Instagram data is collected in Alpha`, `Requires official source connection`, `Requires provider approval where applicable`, and `No scraping, private account access, hidden surveillance, or anti-bot bypass`.
+- Validation result: `pnpm --filter web build` passed after this visual-only update.
+- Compliance confirmation: no real contact submission, auth, billing action, payment processor behavior, provider integration, live API call, scraping, fake login automation, private account access, hidden surveillance, generated account farm behavior, anti-bot bypass, database call, or backend action was added.
+
+## ALPHA-3E Public Homepage Contrast and Readability Polish
+
+- Contrast/readability issue fixed: `/` and `/page` share the homepage implementation, and the `Built to feel governed from day one.` section heading could appear too dark against the dark marketing background. The platform preview section now uses a dark surface with high-contrast heading, eyebrow, and supporting text.
+- Small spacing/visual polish made: tightened the platform preview card grid gap, added a subtle bordered section surface around the feature-card group, and strengthened feature-card shadows while keeping the current premium layout.
+- Safety copy preserved: homepage still includes `Alpha preview`, `Private beta`, `Official-source Instagram intelligence`, `No live Instagram data is collected in Alpha`, `Requires official source connection`, `Requires provider approval where applicable`, and `No scraping, private account access, hidden surveillance, or anti-bot bypass`.
+- Validation result: `pnpm --filter web build` passed after this contrast-only update.
+- Compliance confirmation: no real contact submission, auth, billing action, payment processor behavior, provider integration, live API call, scraping, fake login automation, private account access, hidden surveillance, generated account farm behavior, anti-bot bypass, database call, or backend action was added.
+
+## ALPHA-3F Public Contact Page Copy and Layout Upgrade
+
+- Contact route reviewed: `/contact` under the public marketing route group.
+- Copy/layout upgraded: replaced the basic scaffold placeholder with a professional static request-access preview page containing a dark hero, private-beta badges, four request-access information cards, a preview-only request path panel, an activation-boundary notice, and simple CTA links to `/`, `/pricing`, and `/about`.
+- Request-access safety preserved: page states `Request access preview`, `Private beta`, `Official-source Instagram intelligence`, `No contact form is submitted in Alpha`, `No backend action runs from this page`, `Requires official source connection`, `Requires provider approval where applicable`, `No live Instagram data is collected in Alpha`, and `No scraping, private account access, hidden surveillance, or anti-bot bypass`.
+- Remaining public marketing/backend/contact/provider items: real request-access form handling, CRM/email routing, backend contact routes, official source connection UX, provider approval workflow, private-beta onboarding, analytics-safe lead capture, audit records, and policy-backed provider gates remain deferred.
+- Validation result: `pnpm --filter web build` passed after this contact-page update.
+- Compliance confirmation: no real contact submission, auth, billing action, payment processor behavior, provider integration, live API call, scraping, fake login automation, private account access, hidden surveillance, generated account farm behavior, anti-bot bypass, database call, or backend action was added.
+
+## ALPHA-3G Public Marketing Cross-Page Visual Consistency Polish
+
+- Marketing routes reviewed: `/pricing`, `/about`, and `/contact` under the public marketing route group, compared against the improved homepage Alpha/private-beta style.
+- Small visual consistency fixes made: aligned page containers to the centered `max-w-7xl` marketing shell, upgraded pricing/about hero surfaces to the same dark gradient language, aligned badge and CTA button treatment, strengthened card borders/shadows/gradients, wrapped key card groups in dark section surfaces, improved footer safety note consistency, and kept responsive spacing simple.
+- Safety wording preserved: public marketing pages continue to show `Alpha preview`, `Private beta`, `Official-source Instagram intelligence`, `No live Instagram data is collected in Alpha`, `No contact form is submitted in Alpha` on contact, `Billing is preview-only` on pricing, `Requires official source connection`, `Requires provider approval where applicable`, and `No scraping, private account access, hidden surveillance, or anti-bot bypass` where relevant.
+- Remaining public marketing/backend/contact/billing/provider items: real request-access form handling, CRM/email routing, backend contact routes, real billing backend routes, payment processor integration, official source connection UX, provider approval workflow, private-beta onboarding, analytics-safe lead capture, audit records, and policy-backed billing/provider gates remain deferred.
+- Validation result: `pnpm --filter web build` passed after this cross-page visual consistency polish.
+- Compliance confirmation: no real contact submission, auth, billing action, payment processor behavior, provider integration, live API call, scraping, fake login automation, private account access, hidden surveillance, generated account farm behavior, anti-bot bypass, database call, or backend action was added.
+
+## ALPHA-3H Public Marketing Shared Shell Cleanup
+
+- Marketing routes reviewed: `/`, `/page`, `/pricing`, `/about`, and `/contact` under the public marketing route group.
+- Shared helpers/components created: added `apps/web/src/components/marketing/marketing-shared.tsx` with small `MarketingBadge`, `MarketingCtaLink`, `MarketingSafetyList`, and `MarketingLinkRow` helpers for repeated public marketing shell patterns.
+- Duplicated markup reduced: homepage, pricing, about, and contact pages now reuse shared badge, CTA, safety-list, and footer link-row helpers where safe while preserving the approved Alpha/private-beta visual direction and route structure.
+- Safety wording preserved: public marketing pages continue to show `Alpha preview`, `Private beta`, `Official-source Instagram intelligence`, `No live Instagram data is collected in Alpha`, `No contact form is submitted in Alpha`, `Billing is preview-only`, `Requires official source connection`, `Requires provider approval where applicable`, and `No scraping, private account access, hidden surveillance, or anti-bot bypass` where relevant.
+- Remaining public marketing/backend/contact/billing/provider items: real request-access form handling, CRM/email routing, backend contact routes, real billing backend routes, payment processor integration, official source connection UX, provider approval workflow, private-beta onboarding, analytics-safe lead capture, audit records, and policy-backed billing/provider gates remain deferred.
+- Validation result: `pnpm --filter web build` passed after this shared shell cleanup.
+- Compliance confirmation: no real contact submission, auth, billing action, payment processor behavior, provider integration, live API call, scraping, fake login automation, private account access, hidden surveillance, generated account farm behavior, anti-bot bypass, database call, or backend action was added.
+
+## ALPHA-3I Public Marketing Mobile and Accessibility Polish
+
+- Marketing routes reviewed: `/`, `/page`, `/pricing`, `/about`, and `/contact` under the public marketing route group.
+- Mobile/accessibility fixes made: tightened mobile outer spacing and hero padding, reduced mobile hero line-height and section heading size where text could wrap tightly, made public CTA links and footer link-row links full-width tap targets on small screens, added visible focus outlines to shared marketing links, improved wrapping for long badges, safety notes, pricing notes, and compliance notices, improved footer link-row mobile stacking, added a screen-reader heading to the contact preview card section, and corrected repeated card headings to keep page heading hierarchy cleaner.
+- Safety wording preserved: public marketing pages continue to show `Alpha preview`, `Private beta`, `Official-source Instagram intelligence`, `No live Instagram data is collected in Alpha`, `No contact form is submitted in Alpha`, `Billing is preview-only`, `Requires official source connection`, `Requires provider approval where applicable`, and `No scraping, private account access, hidden surveillance, or anti-bot bypass` where relevant.
+- Remaining public marketing/backend/contact/billing/provider items: real request-access form handling, CRM/email routing, backend contact routes, real billing backend routes, payment processor integration, official source connection UX, provider approval workflow, private-beta onboarding, analytics-safe lead capture, audit records, route-level smoke tests, and policy-backed billing/provider gates remain deferred.
