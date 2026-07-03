@@ -79,13 +79,22 @@ function statusClasses(status: ExportStatus) {
   return "bg-rose-50 text-rose-700 ring-rose-100";
 }
 
+const alphaExportSafetyBadges = [
+  "Preview-only exports",
+  "No export file is created in Alpha",
+  "No backend action runs from this page",
+  "No live Instagram data is collected in Alpha",
+  "Requires official source connection",
+  "Requires provider approval where applicable",
+];
+
 function Badge({ children, className }: { children: React.ReactNode; className: string }) {
   return <span className={`rounded-full px-3 py-1 text-xs font-semibold ring-1 ${className}`}>{children}</span>;
 }
 
 function ExportsPanel({ title, subtitle, children }: { title: string; subtitle?: string; children: React.ReactNode }) {
   return (
-    <section className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">
+    <section className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm shadow-slate-200/70">
       <div className="mb-4">
         <h2 className="text-base font-semibold text-slate-950">{title}</h2>
         {subtitle ? <p className="mt-1 text-sm text-slate-500">{subtitle}</p> : null}
@@ -97,7 +106,7 @@ function ExportsPanel({ title, subtitle, children }: { title: string; subtitle?:
 
 function KpiCard({ label, value, delta, tone, description }: (typeof exportKpis)[number]) {
   return (
-    <div className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">
+    <div className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm shadow-slate-200/70">
       <p className="text-sm font-medium text-slate-500">{label}</p>
       <div className="mt-4 flex items-end justify-between gap-3">
         <p className="text-3xl font-semibold tracking-tight text-slate-950">{value}</p>
@@ -110,24 +119,36 @@ function KpiCard({ label, value, delta, tone, description }: (typeof exportKpis)
 
 function ExportsHeader() {
   return (
-    <header className="rounded-[2rem] border border-slate-200 bg-white p-6 shadow-sm">
+    <header className="overflow-hidden rounded-[2rem] border border-slate-800 bg-slate-950 p-6 shadow-sm shadow-slate-950/20">
       <div className="flex flex-col gap-6 xl:flex-row xl:items-start xl:justify-between">
-        <div>
+        <div className="max-w-4xl">
           <div className="mb-4 flex flex-wrap gap-2">
-            <Badge className="bg-blue-50 text-blue-700 ring-blue-100">{exportsProfile.sourceBadge}</Badge>
-            <Badge className="bg-emerald-50 text-emerald-700 ring-emerald-100">{exportsProfile.confidenceBadge}</Badge>
-            <Badge className="bg-cyan-50 text-cyan-700 ring-cyan-100">Static {exportsProfile.freshnessBadge}</Badge>
-            <Badge className="bg-slate-100 text-slate-700 ring-slate-200">{exportsProfile.integrationBadge}</Badge>
+            <Badge className="bg-white/10 text-white ring-white/15">Preview-only exports</Badge>
+            <Badge className="bg-blue-400/10 text-blue-100 ring-blue-300/20">{exportsProfile.sourceBadge}</Badge>
+            <Badge className="bg-emerald-400/10 text-emerald-100 ring-emerald-300/20">{exportsProfile.confidenceBadge}</Badge>
+            <Badge className="bg-cyan-400/10 text-cyan-100 ring-cyan-300/20">Static {exportsProfile.freshnessBadge}</Badge>
+            <Badge className="bg-slate-100/10 text-slate-200 ring-white/15">{exportsProfile.integrationBadge}</Badge>
           </div>
-          <p className="text-sm font-semibold uppercase tracking-wide text-slate-400">Audit-ready data delivery</p>
-          <h1 className="mt-2 text-4xl font-semibold tracking-tight text-slate-950">{exportsProfile.title}</h1>
-          <p className="mt-2 max-w-3xl text-base leading-7 text-slate-600">{exportsProfile.description}</p>
+          <p className="text-sm font-semibold uppercase tracking-wide text-cyan-200">Audit-ready data delivery</p>
+          <h1 className="mt-2 text-4xl font-semibold tracking-tight text-white md:text-5xl">{exportsProfile.title}</h1>
+          <p className="mt-3 max-w-3xl text-base leading-7 text-slate-300">{exportsProfile.description}</p>
+          <div className="mt-5 flex flex-wrap gap-2">
+            {alphaExportSafetyBadges.map((badge) => (
+              <span key={badge} className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-semibold text-slate-200">
+                {badge}
+              </span>
+            ))}
+          </div>
         </div>
-        <div className="rounded-3xl border border-slate-200 bg-slate-50 p-4 text-sm leading-6 text-slate-600 xl:w-[30rem]">
-          <p className="font-semibold text-slate-900">Mock-only export workspace</p>
+        <div className="rounded-3xl border border-white/10 bg-white/5 p-4 text-sm leading-6 text-slate-300 xl:w-[31rem]">
+          <p className="font-semibold text-white">Alpha export boundary</p>
           <p className="mt-1">
-            Preview-only export packaging for CSV, JSON, executive bundles, audit placeholders, and licensed-provider placeholders only. Download disabled in Alpha.
+            Preview-only export packaging for CSV, JSON, executive bundles, audit placeholders, and licensed-provider placeholders only.
           </p>
+          <div className="mt-4 grid gap-2 sm:grid-cols-2">
+            <span className="rounded-2xl border border-white/10 bg-slate-950/40 p-3 text-xs font-medium text-slate-200">Download disabled in Alpha</span>
+            <span className="rounded-2xl border border-white/10 bg-slate-950/40 p-3 text-xs font-medium text-slate-200">No file, storage, or delivery job</span>
+          </div>
         </div>
       </div>
     </header>
@@ -136,19 +157,27 @@ function ExportsHeader() {
 
 function FilterPlaceholderBar() {
   return (
-    <section className="rounded-3xl border border-slate-200 bg-white p-4 shadow-sm">
+    <section className="rounded-3xl border border-slate-200 bg-white p-4 shadow-sm shadow-slate-200/70">
       <div className="flex flex-col gap-3 xl:flex-row xl:items-center xl:justify-between">
         <div>
           <p className="text-sm font-semibold text-slate-950">Export filters</p>
-          <p className="mt-1 text-xs text-slate-500">Static placeholders for export type, workspace/client, date range, preview-only file format, status, and policy classification.</p>
+          <p className="mt-1 text-xs text-slate-500">
+            Static placeholders for export type, workspace/client, date range, preview-only file format, status, and policy classification. No live query or saved filter runs.
+          </p>
         </div>
         <div className="flex flex-wrap gap-2">
+          <Badge className="bg-amber-50 text-amber-700 ring-amber-100">Preview-only controls</Badge>
           {exportFilters.map((filter) => (
             <Badge key={filter.id} className="bg-slate-100 text-slate-700 ring-slate-200">
               {filter.label}: {filter.options[0]}
             </Badge>
           ))}
         </div>
+      </div>
+      <div className="mt-4 flex flex-wrap gap-2 rounded-2xl border border-slate-200 bg-slate-50 p-3 text-xs font-medium text-slate-600">
+        <span className="rounded-full bg-white px-3 py-1 ring-1 ring-slate-200">Disabled in Alpha</span>
+        <span className="rounded-full bg-white px-3 py-1 ring-1 ring-slate-200">No backend action runs from this page</span>
+        <span className="rounded-full bg-white px-3 py-1 ring-1 ring-slate-200">No export file is created in Alpha</span>
       </div>
     </section>
   );
@@ -159,7 +188,7 @@ function SignalList({ items }: { items: ExportPanelItem[] }) {
     <div className="space-y-3">
       {items.map((item) => (
         <div key={item.id} className="rounded-2xl border border-slate-100 bg-slate-50 p-3">
-          <div className="flex items-center justify-between gap-3">
+          <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
             <p className="font-medium text-slate-950">{item.title}</p>
             <Badge className={toneClasses(item.tone)}>{item.value}</Badge>
           </div>
@@ -172,9 +201,13 @@ function SignalList({ items }: { items: ExportPanelItem[] }) {
 
 function ExportPanels() {
   return (
-    <section className="grid gap-6 xl:grid-cols-4">
+    <section className="grid gap-4 lg:grid-cols-2 2xl:grid-cols-4">
       <ExportsPanel title="Scheduled export preview" subtitle="Export jobs require backend; this is a static cadence placeholder only.">
         <div className="rounded-3xl bg-gradient-to-br from-slate-950 via-slate-900 to-cyan-950 p-5 text-white">
+          <div className="mb-4 flex flex-wrap items-center justify-between gap-2">
+            <p className="text-xs font-semibold uppercase tracking-wide text-slate-300">Static schedule model</p>
+            <span className="rounded-full border border-white/10 bg-white/10 px-3 py-1 text-xs font-semibold text-slate-200">No job runs</span>
+          </div>
           <div className="flex h-60 items-end gap-3 rounded-2xl border border-white/10 bg-white/5 p-4">
             {scheduledExportCadence.map((point) => (
               <div key={point.label} className="flex flex-1 flex-col items-center gap-3">
@@ -193,11 +226,11 @@ function ExportPanels() {
         <SignalList items={exportFormatMix} />
       </ExportsPanel>
 
-      <ExportsPanel title="Delivery preview readiness" subtitle="Mock stakeholder delivery status; export jobs require backend.">
+      <ExportsPanel title="Delivery preview readiness" subtitle="Mock stakeholder delivery status; export jobs require backend and no delivery is sent.">
         <SignalList items={deliveryReadiness} />
       </ExportsPanel>
 
-      <ExportsPanel title="Compliance review queue" subtitle="Source, policy, and audit-readiness review placeholders.">
+      <ExportsPanel title="Compliance review queue" subtitle="Source, policy, and audit-readiness review placeholders with no audit write.">
         <SignalList items={exportComplianceQueue} />
       </ExportsPanel>
     </section>
@@ -206,13 +239,16 @@ function ExportPanels() {
 
 function ExportCardItem({ exportItem }: { exportItem: ExportCard }) {
   return (
-    <article className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">
-      <div className="flex items-start justify-between gap-4">
+    <article className="rounded-3xl border border-slate-200 bg-gradient-to-br from-white to-slate-50 p-5 shadow-sm shadow-slate-200/70">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
         <div>
           <h3 className="text-lg font-semibold text-slate-950">{exportItem.title}</h3>
           <p className="mt-2 text-sm leading-6 text-slate-600">{exportItem.linkedWorkspace}</p>
         </div>
-        <Badge className={statusClasses(exportItem.status)}>{exportStatusLabels[exportItem.status]}</Badge>
+        <div className="flex flex-wrap gap-2 sm:justify-end">
+          <Badge className="bg-slate-100 text-slate-700 ring-slate-200">Preview-only export</Badge>
+          <Badge className={statusClasses(exportItem.status)}>{exportStatusLabels[exportItem.status]}</Badge>
+        </div>
       </div>
 
       <div className="mt-4 flex flex-wrap gap-2">
@@ -221,7 +257,7 @@ function ExportCardItem({ exportItem }: { exportItem: ExportCard }) {
         <Badge className="bg-slate-100 text-slate-700 ring-slate-200">{exportItem.dateRange}</Badge>
       </div>
 
-      <div className="mt-4 rounded-2xl border border-slate-100 bg-slate-50 p-3">
+      <div className="mt-4 rounded-2xl border border-slate-200 bg-white p-3">
         <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-400">Disabled Alpha guidance</p>
         <p className="mt-2 text-sm leading-6 text-slate-600">{exportItem.recommendedAction}</p>
       </div>
@@ -234,23 +270,52 @@ function ExportCardItem({ exportItem }: { exportItem: ExportCard }) {
         </Badge>
         <Badge className={policyClasses(exportItem.policyClassification)}>{exportPolicyLabels[exportItem.policyClassification]}</Badge>
       </div>
+
+      <div className="mt-4 rounded-2xl border border-slate-200 bg-white p-3">
+        <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+          <button
+            type="button"
+            disabled
+            aria-disabled="true"
+            className="w-full cursor-not-allowed rounded-full border border-slate-200 bg-slate-100 px-3 py-2 text-xs font-semibold text-slate-400 sm:w-auto"
+          >
+            Export download disabled
+          </button>
+          <p className="text-xs leading-5 text-slate-500">No export file is created in Alpha; no backend action runs.</p>
+        </div>
+      </div>
     </article>
   );
 }
 
 function ExportCardsGrid() {
   return (
-    <section className="grid gap-4 xl:grid-cols-2 2xl:grid-cols-5">
-      {exportCards.map((exportItem) => (
-        <ExportCardItem key={exportItem.id} exportItem={exportItem} />
-      ))}
+    <section className="space-y-4">
+      <div className="flex flex-col gap-3 lg:flex-row lg:items-end lg:justify-between">
+        <div>
+          <p className="text-xs font-semibold uppercase tracking-wide text-slate-400">Export package previews</p>
+          <h2 className="mt-1 text-xl font-semibold text-slate-950">Dataset and delivery cards</h2>
+          <p className="mt-1 max-w-3xl text-sm leading-6 text-slate-500">
+            Static export packaging cards for review only. Download, file creation, delivery, storage, and provider execution remain disabled in Alpha.
+          </p>
+        </div>
+        <div className="flex flex-wrap gap-2">
+          <Badge className="bg-amber-50 text-amber-700 ring-amber-100">Preview-only exports</Badge>
+          <Badge className="bg-slate-100 text-slate-700 ring-slate-200">No backend export job</Badge>
+        </div>
+      </div>
+      <div className="grid gap-4 xl:grid-cols-2 2xl:grid-cols-5">
+        {exportCards.map((exportItem) => (
+          <ExportCardItem key={exportItem.id} exportItem={exportItem} />
+        ))}
+      </div>
     </section>
   );
 }
 
 function DeliveryAuditPanel() {
   return (
-    <section className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">
+    <section className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm shadow-slate-200/70">
       <div className="flex flex-col gap-4 xl:flex-row xl:items-start xl:justify-between">
         <div>
           <p className="text-xs font-semibold uppercase tracking-wide text-slate-400">Mock-only delivery and download preview</p>
@@ -260,6 +325,7 @@ function DeliveryAuditPanel() {
         <div className="flex flex-wrap gap-2 xl:justify-end">
           <Badge className="bg-blue-50 text-blue-700 ring-blue-100">Audit log placeholder</Badge>
           <Badge className="bg-amber-50 text-amber-700 ring-amber-100">Approval state placeholder</Badge>
+          <Badge className="bg-amber-50 text-amber-700 ring-amber-100">No export file is created</Badge>
           <Badge className="bg-slate-100 text-slate-700 ring-slate-200">No live backend</Badge>
         </div>
       </div>
@@ -294,6 +360,8 @@ function LicensedProviderPanel() {
         <div className="flex flex-wrap gap-2 xl:justify-end">
           <Badge className={policyClasses(gatedExportEnrichmentPanel.policyClassification)}>{exportPolicyLabels[gatedExportEnrichmentPanel.policyClassification]}</Badge>
           <Badge className={statusClasses(gatedExportEnrichmentPanel.status)}>{exportStatusLabels[gatedExportEnrichmentPanel.status]}</Badge>
+          <Badge className="bg-white text-amber-800 ring-amber-200">Requires official source connection</Badge>
+          <Badge className="bg-white text-amber-800 ring-amber-200">Requires provider approval where applicable</Badge>
         </div>
       </div>
 
@@ -314,14 +382,14 @@ function LicensedProviderPanel() {
 
 function ComplianceNotice() {
   return (
-    <ExportsPanel title={exportComplianceNotice.title} subtitle="Connected account export previews, public/professional intelligence, and licensed providers only.">
+    <ExportsPanel title={exportComplianceNotice.title} subtitle="Preview-only exports for connected account summaries, public/professional intelligence, and licensed-provider placeholders only.">
       <div className="space-y-4 text-sm leading-6 text-slate-600">
         <p>{exportComplianceNotice.description}</p>
         <div className="grid gap-3 lg:grid-cols-2">
-          <p className="rounded-2xl border border-emerald-200 bg-emerald-50 p-4 text-emerald-900">Official APIs and compliant licensed providers only for future live data.</p>
+          <p className="rounded-2xl border border-amber-200 bg-amber-50 p-4 text-amber-900">Preview-only exports: no export file is created in Alpha and no backend action runs from this page.</p>
+          <p className="rounded-2xl border border-emerald-200 bg-emerald-50 p-4 text-emerald-900">Official APIs and compliant licensed providers only for future live data. Requires official source connection.</p>
           <p className="rounded-2xl border border-blue-200 bg-blue-50 p-4 text-blue-900">Connected account and public/professional intelligence export framing with source, freshness, confidence, and policy badges.</p>
-          <p className="rounded-2xl border border-amber-200 bg-amber-50 p-4 text-amber-900">Deeper enrichment and export automation previews are licensed-provider-only and unavailable until configured.</p>
-          <p className="rounded-2xl border border-slate-200 bg-slate-50 p-4 text-slate-700">No scraping, private account access, hidden surveillance, or anti-bot bypass.</p>
+          <p className="rounded-2xl border border-slate-200 bg-slate-50 p-4 text-slate-700">No live Instagram data is collected in Alpha. No scraping, private account access, hidden surveillance, or anti-bot bypass.</p>
         </div>
         <ul className="grid gap-2 lg:grid-cols-4">
           {exportComplianceNotice.bullets.map((item) => (
@@ -335,7 +403,7 @@ function ComplianceNotice() {
 
 export function ExportsPage() {
   return (
-    <div className="space-y-6">
+    <div className="space-y-8">
       <ExportsHeader />
 
       <section className="grid gap-4 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-6">

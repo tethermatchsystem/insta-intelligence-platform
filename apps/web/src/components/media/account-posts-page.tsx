@@ -77,13 +77,46 @@ function postStatusLabel(status: AccountPostStatus) {
   return "Preview performance";
 }
 
+const postPreviewBadges = [
+  "Preview-only content intelligence",
+  "Mock post metrics",
+  "No live Instagram data is collected in Alpha",
+];
+
+const postOperationalCards = [
+  {
+    title: "Content ingestion boundary",
+    detail: "Post cards and metrics are static Alpha previews. No content ingestion, refresh job, download, or backend action runs from this page.",
+    badge: "No content ingestion runs in Alpha",
+    tone: "slate" as AccountPostTone,
+  },
+  {
+    title: "Official source readiness",
+    detail: "Owned media, captions, comments, and insights require approved official sources before any private-beta collection is enabled.",
+    badge: "Requires official source connection",
+    tone: "green" as AccountPostTone,
+  },
+  {
+    title: "Provider approval boundary",
+    detail: "Any non-official enrichment remains gated and review-only until provider approval and policy review are complete.",
+    badge: "Requires provider approval where applicable",
+    tone: "amber" as AccountPostTone,
+  },
+];
+
+const postSafetyChecks = [
+  "No content ingestion runs in Alpha",
+  "No backend action runs from this page",
+  "No scraping, private account access, hidden surveillance, or anti-bot bypass",
+];
+
 function Badge({ children, className }: { children: React.ReactNode; className: string }) {
   return <span className={`rounded-full px-3 py-1 text-xs font-semibold ring-1 ${className}`}>{children}</span>;
 }
 
 function PostsPanel({ title, subtitle, children }: { title: string; subtitle?: string; children: React.ReactNode }) {
   return (
-    <section className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">
+    <section className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm shadow-slate-200/70">
       <div className="mb-4">
         <h2 className="text-base font-semibold text-slate-950">{title}</h2>
         {subtitle ? <p className="mt-1 text-sm text-slate-500">{subtitle}</p> : null}
@@ -95,35 +128,47 @@ function PostsPanel({ title, subtitle, children }: { title: string; subtitle?: s
 
 function KpiCard({ label, value, delta, tone, description }: (typeof accountPostKpis)[number]) {
   return (
-    <div className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">
+    <div className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm shadow-slate-200/70 transition hover:-translate-y-0.5 hover:shadow-md hover:shadow-slate-200/80">
       <p className="text-sm font-medium text-slate-500">{label}</p>
-      <div className="mt-4 flex items-end justify-between gap-3">
+      <div className="mt-4 flex flex-wrap items-end justify-between gap-3">
         <p className="text-3xl font-semibold tracking-tight text-slate-950">{value}</p>
         <Badge className={toneClasses(tone)}>{delta}</Badge>
       </div>
       <p className="mt-3 text-xs leading-5 text-slate-500">{description}</p>
+      <p className="mt-3 text-xs font-medium text-slate-400">Static Alpha preview · mock post metric</p>
     </div>
   );
 }
 
 function PostsHeader() {
   return (
-    <header className="rounded-[2rem] border border-slate-200 bg-white p-6 shadow-sm">
-      <div className="flex flex-col gap-6 xl:flex-row xl:items-start xl:justify-between">
-        <div>
-          <div className="mb-4 flex flex-wrap gap-2">
-            <Badge className="bg-blue-50 text-blue-700 ring-blue-100">{accountPostsProfile.sourceBadge}</Badge>
-            <Badge className="bg-emerald-50 text-emerald-700 ring-emerald-100">{accountPostsProfile.confidenceBadge}</Badge>
-            <Badge className="bg-cyan-50 text-cyan-700 ring-cyan-100">{accountPostsProfile.freshnessBadge}</Badge>
-            <Badge className="bg-slate-100 text-slate-700 ring-slate-200">{accountPostsProfile.integrationBadge}</Badge>
+    <header className="overflow-hidden rounded-[2rem] border border-slate-200 bg-white shadow-sm shadow-slate-200/70">
+      <div className="bg-gradient-to-br from-slate-950 via-slate-900 to-indigo-950 p-5 text-white sm:p-7">
+        <div className="flex flex-col gap-6 xl:flex-row xl:items-start xl:justify-between">
+          <div className="min-w-0">
+            <div className="mb-4 flex flex-wrap gap-2">
+              {postPreviewBadges.map((badge) => (
+                <Badge key={badge} className="bg-white/10 text-slate-100 ring-white/10">{badge}</Badge>
+              ))}
+              <Badge className="bg-cyan-400/10 text-cyan-100 ring-cyan-300/20">Content ingestion disabled in Alpha</Badge>
+            </div>
+            <p className="text-sm font-semibold uppercase tracking-wide text-slate-400">Post preview</p>
+            <h1 className="mt-2 break-words text-3xl font-semibold tracking-tight text-white sm:text-4xl">{accountPostsProfile.name} post preview</h1>
+            <p className="mt-2 text-base text-slate-300">{accountPostsProfile.handle} · {accountPostsProfile.accountType}</p>
           </div>
-          <p className="text-sm font-semibold uppercase tracking-wide text-slate-400">Post preview</p>
-          <h1 className="mt-2 text-4xl font-semibold tracking-tight text-slate-950">{accountPostsProfile.name} post preview</h1>
-          <p className="mt-2 text-base text-slate-600">{accountPostsProfile.handle} · {accountPostsProfile.accountType}</p>
-        </div>
-        <div className="rounded-3xl border border-slate-200 bg-slate-50 p-4 text-sm leading-6 text-slate-600 xl:w-[28rem]">
-          <p className="font-semibold text-slate-900">Mock post intelligence</p>
-          <p className="mt-1">Post collection disabled in Alpha. Preview performance only and requires official source connection.</p>
+          <div className="rounded-3xl border border-white/10 bg-white/10 p-4 text-sm leading-6 text-slate-200 shadow-sm shadow-slate-950/20 xl:w-[29rem]">
+            <p className="font-semibold text-white">Mock post intelligence</p>
+            <p className="mt-1">Post collection is disabled in Alpha. Preview performance only; future workflows require official source connection and provider approval where applicable.</p>
+            <button disabled className="mt-4 w-full cursor-not-allowed rounded-2xl border border-white/10 bg-white/10 px-4 py-2 text-sm font-semibold text-slate-300">
+              Content ingestion disabled in Alpha
+            </button>
+            <div className="mt-4 flex flex-wrap gap-2">
+              <Badge className="bg-blue-400/10 text-blue-100 ring-blue-300/20">{accountPostsProfile.sourceBadge}</Badge>
+              <Badge className="bg-emerald-400/10 text-emerald-100 ring-emerald-300/20">{accountPostsProfile.confidenceBadge}</Badge>
+              <Badge className="bg-cyan-400/10 text-cyan-100 ring-cyan-300/20">{accountPostsProfile.freshnessBadge}</Badge>
+              <Badge className="bg-slate-400/10 text-slate-100 ring-slate-300/20">{accountPostsProfile.integrationBadge}</Badge>
+            </div>
+          </div>
         </div>
       </div>
     </header>
@@ -132,18 +177,23 @@ function PostsHeader() {
 
 function FilterPlaceholderBar() {
   return (
-    <section className="rounded-3xl border border-slate-200 bg-white p-4 shadow-sm">
-      <div className="flex flex-col gap-3 xl:flex-row xl:items-center xl:justify-between">
+    <section className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm shadow-slate-200/70">
+      <div className="flex flex-col gap-4 xl:flex-row xl:items-start xl:justify-between">
         <div>
-          <p className="text-sm font-semibold text-slate-950">Post filters</p>
-          <p className="mt-1 text-xs text-slate-500">Static placeholders for future media filtering and saved views.</p>
+          <p className="text-sm font-semibold text-slate-950">Static post filters</p>
+          <p className="mt-1 max-w-2xl text-xs leading-5 text-slate-500">Static placeholders for future media filtering and saved views. No live query runs, no saved view changes are persisted, and no backend action runs from this page.</p>
         </div>
-        <div className="flex flex-wrap gap-2">
-          {accountPostFilters.map((filter) => (
-            <Badge key={filter.id} className="bg-slate-100 text-slate-700 ring-slate-200">
-              {filter.label}: {filter.options[0]}
-            </Badge>
-          ))}
+        <div className="flex w-full flex-col gap-2 xl:w-auto xl:items-end">
+          <button disabled className="w-full cursor-not-allowed rounded-2xl border border-slate-200 bg-slate-50 px-4 py-2 text-sm font-semibold text-slate-400 xl:w-auto">
+            Post collection disabled in Alpha
+          </button>
+          <div className="flex flex-wrap gap-2">
+            {accountPostFilters.map((filter) => (
+              <Badge key={filter.id} className="bg-slate-100 text-slate-700 ring-slate-200">
+                {filter.label}: {filter.options[0]}
+              </Badge>
+            ))}
+          </div>
         </div>
       </div>
     </section>
@@ -161,9 +211,9 @@ function MetricPill({ label, value }: { label: string; value: string }) {
 
 function MediaCard({ post }: { post: AccountPost }) {
   return (
-    <article className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
+    <article className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm shadow-slate-200/70 transition hover:-translate-y-0.5 hover:shadow-md hover:shadow-slate-200/80">
       <div className={`flex h-48 items-end justify-between bg-gradient-to-br p-4 ${toneClasses(post.thumbnailTone)}`}>
-        <div className="rounded-2xl bg-white/85 px-3 py-2 text-xs font-semibold text-slate-900 shadow-sm">Mock thumbnail</div>
+        <div className="rounded-2xl bg-white/85 px-3 py-2 text-xs font-semibold text-slate-900 shadow-sm">Mock thumbnail · preview-only</div>
         <Badge className={mediaTypeClasses(post.mediaType)}>{formatToken(post.mediaType)}</Badge>
       </div>
       <div className="space-y-4 p-5">
@@ -179,12 +229,13 @@ function MediaCard({ post }: { post: AccountPost }) {
         </div>
         <div className="flex flex-wrap gap-2">
           <Badge className="bg-violet-50 text-violet-700 ring-violet-100">{post.metrics.engagementRate} ER</Badge>
+          <Badge className="bg-slate-100 text-slate-700 ring-slate-200">Mock post metrics</Badge>
           <Badge className="bg-cyan-50 text-cyan-700 ring-cyan-100">{accountPostFreshnessLabels[post.freshness]}</Badge>
           <Badge className="bg-slate-100 text-slate-700 ring-slate-200">{post.provider}</Badge>
           <Badge className="bg-emerald-50 text-emerald-700 ring-emerald-100">{post.confidenceScore}% {accountPostConfidenceLabels[post.confidence]}</Badge>
           <Badge className={policyClasses(post.policyClassification)}>{formatToken(post.policyClassification)}</Badge>
         </div>
-        <div className="flex items-center justify-between gap-3 border-t border-slate-100 pt-4">
+        <div className="flex flex-wrap items-center justify-between gap-3 border-t border-slate-100 pt-4">
           <p className="text-xs text-slate-500">{formatPublished(post.publishedAt)}</p>
           <Badge className={statusClasses(post.status)}>{postStatusLabel(post.status)}</Badge>
         </div>
@@ -235,10 +286,10 @@ function ComplianceNotice() {
       <div className="space-y-4 text-sm leading-6 text-slate-600">
         <p>{accountPostsComplianceNotice.description}</p>
         <div className="grid gap-3 lg:grid-cols-2">
-          <p className="rounded-2xl border border-emerald-200 bg-emerald-50 p-4 text-emerald-900">Connected professional account media only.</p>
-          <p className="rounded-2xl border border-blue-200 bg-blue-50 p-4 text-blue-900">Official APIs and licensed providers only for future approved data.</p>
-          <p className="rounded-2xl border border-slate-200 bg-slate-50 p-4 text-slate-700">No scraping, fake login automation, or credential automation.</p>
-          <p className="rounded-2xl border border-slate-200 bg-slate-50 p-4 text-slate-700">No private account access or hidden surveillance workflows.</p>
+          <p className="rounded-2xl border border-emerald-200 bg-emerald-50 p-4 text-emerald-900">Connected professional account media only. No live Instagram data is collected in Alpha.</p>
+          <p className="rounded-2xl border border-blue-200 bg-blue-50 p-4 text-blue-900">Official APIs and licensed providers only for future approved data. Requires official source connection.</p>
+          <p className="rounded-2xl border border-slate-200 bg-slate-50 p-4 text-slate-700">No content ingestion, provider job, download, or backend action runs from this page.</p>
+          <p className="rounded-2xl border border-slate-200 bg-slate-50 p-4 text-slate-700">No scraping, fake login automation, credential automation, private account access, hidden surveillance, or anti-bot bypass.</p>
         </div>
         <ul className="grid gap-2 lg:grid-cols-3">
           {accountPostsComplianceNotice.bullets.map((item) => (
@@ -292,6 +343,16 @@ export function AccountPostsPage() {
     <div className="space-y-6">
       <PostsHeader />
 
+      <section className="grid gap-4 lg:grid-cols-3">
+        {postOperationalCards.map((card) => (
+          <div key={card.title} className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm shadow-slate-200/70">
+            <Badge className={toneClasses(card.tone)}>{card.badge}</Badge>
+            <h2 className="mt-4 text-base font-semibold text-slate-950">{card.title}</h2>
+            <p className="mt-2 text-sm leading-6 text-slate-600">{card.detail}</p>
+          </div>
+        ))}
+      </section>
+
       <section className="grid gap-4 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-6">
         {accountPostKpis.map((kpi) => (
           <KpiCard key={kpi.id} {...kpi} />
@@ -302,6 +363,13 @@ export function AccountPostsPage() {
 
       <section className="grid gap-6 xl:grid-cols-[minmax(0,1.5fr)_minmax(340px,0.7fr)]">
         <PostsPanel title="Post preview grid" subtitle="Mock post cards for connected professional account media. No live post collection is running.">
+          <div className="mb-4 grid gap-2 sm:grid-cols-3">
+            {postSafetyChecks.map((item) => (
+              <p key={item} className="rounded-2xl border border-slate-100 bg-slate-50 px-3 py-2 text-xs font-medium leading-5 text-slate-600">
+                {item}
+              </p>
+            ))}
+          </div>
           <div className="grid gap-4 lg:grid-cols-2">
             {accountPosts.map((post) => (
               <MediaCard key={post.id} post={post} />

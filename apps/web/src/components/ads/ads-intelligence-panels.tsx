@@ -27,7 +27,7 @@ function Badge({ children, className }: { children: React.ReactNode; className: 
 
 function AdsPanel({ title, subtitle, children }: { title: string; subtitle: string; children: React.ReactNode }) {
   return (
-    <section className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">
+    <section className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm shadow-slate-200/70">
       <div className="mb-4">
         <h2 className="text-base font-semibold text-slate-950">{title}</h2>
         <p className="mt-1 text-sm text-slate-500">{subtitle}</p>
@@ -58,9 +58,13 @@ export function AdsIntelligencePanels() {
     <section className="grid gap-6 xl:grid-cols-4">
       <AdsPanel title="Ads preview trend" subtitle="Mock ad count trend only; no live ad monitoring is running.">
         <div className="rounded-3xl bg-gradient-to-br from-slate-950 via-slate-900 to-indigo-950 p-5 text-white">
-          <div className="flex h-60 items-end gap-3 rounded-2xl border border-white/10 bg-white/5 p-4">
+          <div className="mb-4 flex flex-wrap gap-2">
+            <Badge className="bg-white/10 text-slate-100 ring-white/10">Preview-only ad intelligence</Badge>
+            <Badge className="bg-white/10 text-slate-100 ring-white/10">No ad monitoring runs</Badge>
+          </div>
+          <div className="flex h-60 items-end gap-3 overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-4">
             {activeAdsTrend.map((point) => (
-              <div key={point.label} className="flex flex-1 flex-col items-center gap-3">
+              <div key={point.label} className="flex min-w-0 flex-1 flex-col items-center gap-3">
                 <div className="w-full rounded-t-2xl bg-white/80 shadow-lg shadow-indigo-950/30" style={{ height: `${point.height}%` }} />
                 <div className="text-center">
                   <p className="text-xs text-slate-300">{point.label}</p>

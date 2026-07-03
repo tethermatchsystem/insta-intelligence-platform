@@ -3,12 +3,12 @@ import { AuthButton, AuthField, AuthLink, AuthNotice, AuthPageShell } from "@/co
 export default function Page() {
   return (
     <AuthPageShell
-      eyebrow="Alpha reset preview"
-      title="Preview reset workflow only"
-      description="Enter your work email to preview the password reset experience. This form is static in Alpha and does not send email or call an auth backend."
-      sideTitle="Recover workspace access without leaving the compliance-first preview."
-      sideDescription="A controlled reset screen for enterprise buyers to review access flows, mock security copy, and no-live-backend boundaries before auth integration."
-      activeMetric="Preview-only reset"
+      eyebrow="Preview-only authentication"
+      title="Preview password reset UI"
+      description="No password reset email is sent in Alpha. This static page lets reviewers inspect reset safety copy without generating tokens, sending email, or calling an auth backend."
+      sideTitle="Review access recovery copy without sending Alpha emails."
+      sideDescription="A controlled reset preview for enterprise buyers to review access flows, mock security boundaries, and official-source Instagram intelligence positioning before auth integration."
+      activeMetric="No reset email is sent"
       primaryHrefLabel="Remembered your password?"
       primaryHref="/login"
       secondaryHrefLabel="Need a workspace?"
@@ -20,16 +20,16 @@ export default function Page() {
           type="email"
           placeholder="operator@company.com"
           autoComplete="email"
-          helper="No credentials are submitted in Alpha; this email stays in the static preview."
+          helper="No password reset email is sent in Alpha; this email stays in the static preview."
         />
 
-        <AuthButton>Preview reset workflow only</AuthButton>
+        <AuthButton>Review reset preview UI</AuthButton>
 
-        <AuthNotice title="No live email or backend" tone="slate">
-          Reset delivery is intentionally disabled. This screen only demonstrates the user experience and does not generate tokens, send email, or update passwords. Authentication backend is planned for private beta.
+        <AuthNotice title="No password reset email is sent in Alpha" tone="slate">
+          No password reset email is sent in Alpha. This screen does not generate tokens, send email, update passwords, create sessions, or contact an auth backend.
         </AuthNotice>
 
-        <div className="rounded-2xl border border-slate-200 bg-white p-4 text-sm leading-6 text-slate-600">
+        <div className="rounded-2xl border border-slate-200 bg-slate-50 p-4 text-sm leading-6 text-slate-600 shadow-sm">
           <p className="font-semibold text-slate-950">Recovery checklist</p>
           <ul className="mt-2 space-y-1 text-xs leading-5">
             <li>• Verify the workspace email before production integration.</li>

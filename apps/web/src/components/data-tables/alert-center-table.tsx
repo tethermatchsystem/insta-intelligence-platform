@@ -47,11 +47,11 @@ function Badge({ children, className }: { children: React.ReactNode; className: 
 
 export function AlertCenterTable() {
   return (
-    <section className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">
+    <section className="rounded-3xl border border-slate-200/80 bg-white p-5 shadow-lg shadow-slate-200/60">
       <div className="mb-4">
-        <h2 className="text-base font-semibold text-slate-950">Enterprise alerts table</h2>
+        <h2 className="text-base font-semibold text-slate-950">Enterprise alerts table preview</h2>
         <p className="mt-1 text-sm text-slate-500">
-          Mock alert rows for risk monitoring, opportunity notification, workflow triage, and compliant enrichment gating.
+          Mock alert rows for risk previews, opportunity notification placeholders, workflow triage, and compliant enrichment gating. No alert delivery runs in Alpha, and no backend action runs from this page.
         </p>
       </div>
 

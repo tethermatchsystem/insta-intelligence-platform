@@ -24,9 +24,18 @@ function toneClasses(tone: string) {
   return tones[tone] ?? tones.slate;
 }
 
+const dashboardSafetyPills = [
+  "Alpha preview",
+  "Mock dashboard metrics",
+  "No live Instagram data is collected in Alpha",
+  "No backend action runs from this page",
+  "Requires official source connection",
+  "Requires provider approval where applicable",
+];
+
 function DashboardKpiCard({ label, value, trend, tone }: { label: string; value: string; trend: string; tone: string }) {
   return (
-    <Card className="premium-kpi-card rounded-3xl py-0">
+    <Card className="premium-kpi-card rounded-3xl py-0 shadow-2xl shadow-slate-950/20">
       <CardContent className="p-5">
       <div className="relative">
         <div className="flex items-start justify-between gap-3">
@@ -45,7 +54,7 @@ function DashboardKpiCard({ label, value, trend, tone }: { label: string; value:
 
 function DashboardPanel({ title, subtitle, children }: { title: string; subtitle?: string; children: React.ReactNode }) {
   return (
-    <Card className="premium-card rounded-3xl py-0">
+    <Card className="premium-card rounded-3xl border-white/10 py-0 shadow-2xl shadow-slate-950/10">
       <CardHeader className="p-5 pb-3">
         <CardTitle className="text-base font-semibold text-slate-50">{title}</CardTitle>
         {subtitle ? <CardDescription className="mt-1 text-sm text-slate-400">{subtitle}</CardDescription> : null}
@@ -58,20 +67,28 @@ function DashboardPanel({ title, subtitle, children }: { title: string; subtitle
 export function DashboardOverview() {
   return (
     <div className="space-y-6">
-      <header className="premium-header-surface rounded-[2rem] p-5 sm:p-6">
+      <header className="premium-header-surface overflow-hidden rounded-[2rem] p-5 shadow-2xl shadow-slate-950/20 sm:p-6">
         <div className="flex flex-col gap-5 xl:flex-row xl:items-start xl:justify-between">
           <div>
             <div className="mb-3 flex flex-wrap gap-2">
-              <Badge variant="outline" className="rounded-full bg-emerald-50 px-3 py-1 text-xs font-semibold text-emerald-700 ring-emerald-100">Official-safe workspace</Badge>
-              <Badge variant="outline" className="rounded-full bg-indigo-50 px-3 py-1 text-xs font-semibold text-indigo-700 ring-indigo-100">Mock provider confidence 98.2%</Badge>
-              <Badge variant="secondary" className="rounded-full px-3 py-1 text-xs font-semibold text-slate-700">No live monitoring is running</Badge>
+              <Badge variant="outline" className="rounded-full bg-emerald-50 px-3 py-1 text-xs font-semibold text-emerald-700 ring-emerald-100">Alpha preview</Badge>
+              <Badge variant="outline" className="rounded-full bg-indigo-50 px-3 py-1 text-xs font-semibold text-indigo-700 ring-indigo-100">Mock dashboard metrics</Badge>
+              <Badge variant="secondary" className="rounded-full px-3 py-1 text-xs font-semibold text-slate-700">No backend action runs from this page</Badge>
             </div>
-            <h1 className="text-3xl font-semibold tracking-tight text-slate-50 sm:text-4xl">Dashboard preview</h1>
-            <p className="mt-2 max-w-3xl text-base leading-7 text-slate-300">Mock intelligence snapshot for future connected professional account analytics, mentions, benchmarks, and provider readiness.</p>
+            <h1 className="text-3xl font-semibold tracking-tight text-slate-50 sm:text-4xl">Alpha dashboard preview</h1>
+            <p className="mt-2 max-w-3xl text-base leading-7 text-slate-300">Mock dashboard metrics for future connected professional account analytics, mentions, benchmarks, and provider readiness. No live Instagram data is collected in Alpha.</p>
+            <div className="mt-5 grid gap-2 sm:grid-cols-2 xl:grid-cols-3">
+              {dashboardSafetyPills.map((pill) => (
+                <span key={pill} className="rounded-2xl border border-white/10 bg-white/10 px-3 py-2 text-xs font-semibold leading-5 text-slate-100">
+                  {pill}
+                </span>
+              ))}
+            </div>
           </div>
-          <div className="rounded-3xl border border-white/10 bg-white/10 p-4 text-sm text-slate-300 xl:w-80">
-            <p className="font-semibold text-slate-50">Alpha demo only</p>
-            <p className="mt-1 leading-6">Dashboard data is static preview data. Future source activity requires official Meta APIs or licensed compliant providers only.</p>
+          <div className="rounded-3xl border border-white/10 bg-white/10 p-4 text-sm text-slate-300 shadow-xl shadow-black/10 xl:w-80">
+            <p className="font-semibold text-slate-50">Mock dashboard metrics</p>
+            <p className="mt-1 leading-6">Dashboard data is static preview data. Requires official source connection and provider approval where applicable before any future live workflow exists.</p>
+            <p className="mt-3 rounded-2xl border border-white/10 bg-slate-950/40 p-3 text-xs leading-5 text-slate-300">No backend action runs from this page, and no alert or collection job is executed in Alpha.</p>
           </div>
         </div>
       </header>
@@ -83,7 +100,7 @@ export function DashboardOverview() {
       </section>
 
       <section className="grid gap-6 xl:grid-cols-[minmax(0,1.7fr)_minmax(360px,0.8fr)]">
-        <DashboardPanel title="Audience and engagement preview" subtitle="Mock visual placeholder for followers, engagement, mentions, alert previews, and provider confidence.">
+        <DashboardPanel title="Audience and engagement preview" subtitle="Mock dashboard metrics only for followers, engagement, mentions, alert previews, and provider confidence.">
           <div className="overflow-x-auto rounded-3xl border border-white/10 bg-gradient-to-br from-slate-950 via-slate-900 to-cyan-950/80 p-4 text-white shadow-2xl shadow-black/25 sm:p-5">
             <div className="premium-chart-grid flex h-64 min-w-[520px] items-end gap-4 rounded-2xl border border-white/10 p-4 sm:h-72 sm:p-5">
               {dashboardTrendLabels.map((item) => (
@@ -99,16 +116,17 @@ export function DashboardOverview() {
           </div>
         </DashboardPanel>
 
-        <DashboardPanel title="Official-first notice" subtitle="Future source connections must pass provider and policy gates.">
+        <DashboardPanel title="Official-first Alpha boundary" subtitle="Future source connections must pass provider and policy gates before live use.">
           <div className="space-y-3 text-sm text-slate-600">
-            <p className="rounded-2xl border border-amber-200 bg-amber-50 p-4 text-amber-900">No live monitoring is running in this mock dashboard. Scraping, anti-bot bypass, private account access, and hidden surveillance are not implemented.</p>
-            <p className="rounded-2xl border border-emerald-200 bg-emerald-50 p-4 text-emerald-900">Allowed sources: official Meta APIs, connected professional account analytics, Business Discovery, hashtag/public content APIs, Ad Library, licensed compliant providers, mock providers, and manual CSV import.</p>
+            <p className="rounded-2xl border border-amber-200 bg-amber-50 p-4 text-amber-900">Alpha preview only: no live Instagram data is collected in Alpha, no alert delivery runs, and no backend action runs from this page.</p>
+            <p className="rounded-2xl border border-emerald-200 bg-emerald-50 p-4 text-emerald-900">Requires official source connection. Allowed future sources include official Meta APIs, connected professional account analytics, Business Discovery, hashtag/public content APIs, Ad Library, licensed compliant providers, mock providers, and manual CSV import.</p>
+            <p className="rounded-2xl border border-blue-200 bg-blue-50 p-4 text-blue-900">Requires provider approval where applicable. Scraping, anti-bot bypass, private account access, fake login automation, and hidden surveillance are not implemented.</p>
           </div>
         </DashboardPanel>
       </section>
 
       <section className="grid gap-6 xl:grid-cols-4">
-        <DashboardPanel title="Provider activity disabled in Alpha">
+        <DashboardPanel title="Provider activity preview disabled in Alpha" subtitle="Static provider health cards; no live provider action runs.">
           <div className="space-y-3">
             {providerHealth.map((provider) => (
               <div key={provider.name} className="rounded-2xl border border-slate-100 bg-slate-50 p-3">
@@ -130,7 +148,7 @@ export function DashboardOverview() {
           </ul>
         </DashboardPanel>
 
-        <DashboardPanel title="Collection job previews">
+        <DashboardPanel title="Collection job previews" subtitle="Static job rows only; no backend collection job runs from this page.">
           <div className="space-y-3">
             {recentCollectionJobs.map((job) => (
               <div key={`${job.job}-${job.time}`} className="rounded-2xl border border-slate-100 bg-slate-50 p-3">
@@ -141,7 +159,7 @@ export function DashboardOverview() {
           </div>
         </DashboardPanel>
 
-        <DashboardPanel title="Mock anomaly highlights">
+        <DashboardPanel title="Mock anomaly highlights" subtitle="Preview-only alerts and anomalies for planning; no notification delivery runs.">
           <div className="space-y-3">
             {anomalyHighlights.map((item) => (
               <div key={item.title} className="rounded-2xl border border-slate-100 bg-slate-50 p-3">
@@ -156,7 +174,7 @@ export function DashboardOverview() {
         </DashboardPanel>
       </section>
 
-      <DashboardPanel title="Mock intelligence event preview" subtitle="Static event stream prepared for future official provider ingestion.">
+      <DashboardPanel title="Mock intelligence event preview" subtitle="Static event stream prepared for future official provider ingestion; no live collection or delivery runs in Alpha.">
         <div className="premium-table-wrap rounded-2xl">
           <Table className="min-w-[860px]">
             <TableHeader className="bg-slate-950/70 text-xs uppercase tracking-wide text-slate-400">
@@ -183,7 +201,7 @@ export function DashboardOverview() {
             </TableBody>
           </Table>
         </div>
-        <p className="mt-4 rounded-2xl border border-dashed border-slate-300 bg-slate-50 p-4 text-sm text-slate-500">Private-beta state: official source connections require provider adapters, compliance gates, and backend services before any live monitoring or alert detection can run.</p>
+        <p className="mt-4 rounded-2xl border border-dashed border-slate-300 bg-slate-50 p-4 text-sm text-slate-500">Private-beta state: official source connections require provider adapters, compliance gates, provider approval where applicable, and backend services before any live monitoring, alert detection, notification delivery, or collection job can run.</p>
       </DashboardPanel>
     </div>
   );

@@ -120,7 +120,7 @@ function Badge({ children, className }: { children: React.ReactNode; className: 
 
 function CommentCard({ comment }: { comment: AccountComment }) {
   return (
-    <article className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">
+    <article className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm shadow-slate-200/70">
       <div className="flex flex-col gap-4 xl:flex-row xl:items-start xl:justify-between">
         <div className="flex gap-4">
           <div className={`grid h-12 w-12 shrink-0 place-items-center rounded-2xl font-semibold ring-1 ${toneClasses(comment.linkedPostTone)}`}>
@@ -134,7 +134,10 @@ function CommentCard({ comment }: { comment: AccountComment }) {
             <p className="mt-1 text-xs text-slate-400">{comment.commenterPlaceholder} · {formatTimestamp(comment.commentedAt)}</p>
           </div>
         </div>
-        <Badge className={statusClasses(comment.status)}>{accountCommentStatusLabels[comment.status]}</Badge>
+        <div className="flex shrink-0 flex-wrap gap-2 xl:justify-end">
+          <Badge className={statusClasses(comment.status)}>{accountCommentStatusLabels[comment.status]}</Badge>
+          <Badge className="bg-slate-100 text-slate-700 ring-slate-200">Preview-only</Badge>
+        </div>
       </div>
 
       <p className="mt-4 rounded-3xl bg-slate-50 p-4 text-sm leading-6 text-slate-700">“{comment.commentText}”</p>
@@ -149,8 +152,9 @@ function CommentCard({ comment }: { comment: AccountComment }) {
         </div>
 
         <div className="rounded-3xl border border-slate-100 bg-white p-4">
-          <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-400">Preview recommendation</p>
+          <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-400">Preview-only guidance</p>
           <p className="mt-2 text-sm leading-6 text-slate-600">{comment.suggestedAction}</p>
+          <p className="mt-2 text-xs font-medium text-slate-400">No moderation action or backend response runs from this card.</p>
         </div>
       </div>
 
@@ -161,6 +165,7 @@ function CommentCard({ comment }: { comment: AccountComment }) {
         <Badge className="bg-violet-50 text-violet-700 ring-violet-100">{comment.confidenceScore}% {accountCommentConfidenceLabels[comment.confidence]}</Badge>
         <Badge className="bg-slate-100 text-slate-700 ring-slate-200">{comment.sourceProvider}</Badge>
         <Badge className="bg-cyan-50 text-cyan-700 ring-cyan-100">{accountCommentFreshnessLabels[comment.freshness]}</Badge>
+        <Badge className="bg-slate-100 text-slate-700 ring-slate-200">No content ingestion</Badge>
         <Badge className={policyClasses(comment.policyClassification)}>{formatToken(comment.policyClassification)}</Badge>
       </div>
     </article>

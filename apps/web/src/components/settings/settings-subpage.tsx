@@ -30,9 +30,18 @@ function HeaderBadge({ badge }: { badge: SettingsHeaderBadge }) {
   return <Badge badge={{ label: `${badge.label}: ${badge.value}`, tone: badge.tone }} />;
 }
 
+const settingsSafetyPills = [
+  "Preview-only settings",
+  "No settings are saved in Alpha",
+  "Governance controls are static in this preview",
+  "Private beta activation required",
+  "Official-source provider approval may be required",
+  "No backend action runs from this page",
+];
+
 function Panel({ title, subtitle, children }: { title: string; subtitle?: string; children: React.ReactNode }) {
   return (
-    <section className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">
+    <section className="rounded-3xl border border-slate-200/80 bg-white/95 p-5 shadow-lg shadow-slate-200/60">
       <div className="mb-4">
         <h2 className="text-base font-semibold text-slate-950">{title}</h2>
         {subtitle ? <p className="mt-1 text-sm leading-6 text-slate-500">{subtitle}</p> : null}
@@ -44,7 +53,7 @@ function Panel({ title, subtitle, children }: { title: string; subtitle?: string
 
 function Header({ page }: { page: SettingsSubpageData }) {
   return (
-    <header className="rounded-[2rem] border border-slate-200 bg-white p-6 shadow-sm">
+    <header className="overflow-hidden rounded-[2rem] border border-slate-800 bg-slate-950 p-6 text-white shadow-2xl shadow-slate-200/70">
       <div className="flex flex-col gap-6 xl:flex-row xl:items-start xl:justify-between">
         <div>
           <div className="mb-4 flex flex-wrap gap-2">
@@ -52,13 +61,23 @@ function Header({ page }: { page: SettingsSubpageData }) {
               <HeaderBadge key={`${badge.label}-${badge.value}`} badge={badge} />
             ))}
           </div>
-          <p className="text-sm font-semibold uppercase tracking-wide text-slate-400">{page.eyebrow}</p>
-          <h1 className="mt-2 text-4xl font-semibold tracking-tight text-slate-950">{page.title}</h1>
-          <p className="mt-2 max-w-3xl text-base leading-7 text-slate-600">{page.description}</p>
+          <p className="text-sm font-semibold uppercase tracking-wide text-slate-300">{page.eyebrow}</p>
+          <h1 className="mt-2 text-4xl font-semibold tracking-tight text-white sm:text-5xl">{page.title}</h1>
+          <p className="mt-3 max-w-3xl text-base leading-7 text-slate-300">{page.description}</p>
+          <div className="mt-5 grid gap-2 sm:grid-cols-2 xl:grid-cols-3">
+            {settingsSafetyPills.map((pill) => (
+              <span key={pill} className="rounded-2xl border border-white/10 bg-white/10 px-3 py-2 text-xs font-semibold leading-5 text-slate-100">
+                {pill}
+              </span>
+            ))}
+          </div>
         </div>
-        <div className="rounded-3xl border border-slate-200 bg-slate-50 p-4 text-sm leading-6 text-slate-600 xl:w-[30rem]">
-          <p className="font-semibold text-slate-900">{page.heroNoteTitle}</p>
+        <div className="rounded-3xl border border-white/10 bg-white/10 p-4 text-sm leading-6 text-slate-300 shadow-xl shadow-black/10 xl:w-[30rem]">
+          <p className="font-semibold text-white">{page.heroNoteTitle}</p>
           <p className="mt-1">{page.heroNote}</p>
+          <p className="mt-3 rounded-2xl border border-white/10 bg-slate-950/40 p-3 text-xs leading-5 text-slate-300">
+            Controls shown here are static governance previews. No settings are saved in Alpha, and no backend action runs from this page.
+          </p>
         </div>
       </div>
     </header>
@@ -67,7 +86,7 @@ function Header({ page }: { page: SettingsSubpageData }) {
 
 function KpiCard({ kpi }: { kpi: SettingsSubpageKpi }) {
   return (
-    <article className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">
+    <article className="rounded-3xl border border-slate-200/80 bg-gradient-to-br from-white to-slate-50 p-5 shadow-lg shadow-slate-200/60">
       <p className="text-sm font-medium text-slate-500">{kpi.label}</p>
       <div className="mt-4 flex items-end justify-between gap-3">
         <p className="text-3xl font-semibold tracking-tight text-slate-950">{kpi.value}</p>
@@ -80,7 +99,7 @@ function KpiCard({ kpi }: { kpi: SettingsSubpageKpi }) {
 
 function DetailCard({ card, featured = false }: { card: SettingsSubpageCard; featured?: boolean }) {
   return (
-    <article className={featured ? "rounded-3xl border border-slate-800 bg-slate-950 p-5 text-white shadow-sm" : "rounded-2xl border border-slate-100 bg-slate-50 p-4"}>
+    <article className={featured ? "rounded-3xl border border-slate-800 bg-slate-950 p-5 text-white shadow-2xl shadow-slate-200/70" : "rounded-2xl border border-slate-100 bg-slate-50 p-4 shadow-sm"}>
       {card.badges?.length ? (
         <div className="mb-4 flex flex-wrap gap-2">
           {card.badges.map((badge) => (
@@ -154,6 +173,16 @@ function ComplianceNotice({ page }: { page: SettingsSubpageData }) {
     <Panel title={page.noticeTitle} subtitle="Compliance-safe static UI boundaries for settings administration and governance previews.">
       <div className="space-y-4 text-sm leading-6 text-slate-600">
         <p>{page.noticeBody}</p>
+        <div className="rounded-2xl border border-slate-800 bg-slate-950 p-4 text-white">
+          <p className="text-sm font-semibold">Preview-only settings boundary</p>
+          <div className="mt-3 grid gap-2 sm:grid-cols-2 xl:grid-cols-3">
+            {settingsSafetyPills.map((pill) => (
+              <span key={pill} className="rounded-2xl border border-white/10 bg-white/10 px-3 py-2 text-xs font-semibold leading-5 text-slate-100">
+                {pill}
+              </span>
+            ))}
+          </div>
+        </div>
         <div className="grid gap-3 lg:grid-cols-2">
           {page.noticeBullets.map((item) => (
             <p key={item} className="rounded-2xl border border-slate-200 bg-slate-50 p-4 text-slate-700">{item}</p>

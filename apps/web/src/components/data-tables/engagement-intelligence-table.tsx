@@ -49,10 +49,13 @@ function Badge({ children, className }: { children: React.ReactNode; className: 
 
 export function EngagementIntelligenceTable() {
   return (
-    <section className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">
-      <div className="mb-4">
-        <h2 className="text-base font-semibold text-slate-950">Enterprise engagement table</h2>
-        <p className="mt-1 text-sm text-slate-500">Mock engagement signals prepared for future official and licensed provider summaries.</p>
+    <section className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm shadow-slate-200/70">
+      <div className="mb-4 flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
+        <div>
+          <h2 className="text-base font-semibold text-slate-950">Enterprise engagement table</h2>
+          <p className="mt-1 text-sm text-slate-500">Mock engagement signals prepared for future official and licensed provider summaries. No live engagement monitoring is running.</p>
+        </div>
+        <Badge className="bg-slate-100 text-slate-700 ring-slate-200">Static preview rows</Badge>
       </div>
 
       <div className="overflow-x-auto rounded-2xl border border-slate-200">

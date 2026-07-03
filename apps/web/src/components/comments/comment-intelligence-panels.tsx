@@ -26,7 +26,7 @@ function Badge({ children, className }: { children: React.ReactNode; className: 
 
 function IntelligencePanel({ title, subtitle, items }: { title: string; subtitle: string; items: AccountCommentInsightItem[] }) {
   return (
-    <section className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">
+    <section className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm shadow-slate-200/70">
       <div className="mb-4">
         <h2 className="text-base font-semibold text-slate-950">{title}</h2>
         <p className="mt-1 text-sm text-slate-500">{subtitle}</p>
@@ -35,7 +35,7 @@ function IntelligencePanel({ title, subtitle, items }: { title: string; subtitle
       <div className="space-y-3">
         {items.map((item) => (
           <div key={item.id} className="rounded-2xl border border-slate-100 bg-slate-50 p-3">
-            <div className="flex items-center justify-between gap-3">
+            <div className="flex flex-wrap items-center justify-between gap-3">
               <p className="font-medium text-slate-950">{item.title}</p>
               <Badge className={toneClasses(item.tone)}>{item.value}</Badge>
             </div>

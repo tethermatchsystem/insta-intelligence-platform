@@ -3,12 +3,12 @@ import { AuthButton, AuthField, AuthLink, AuthNotice, AuthPageShell } from "@/co
 export default function Page() {
   return (
     <AuthPageShell
-      eyebrow="Alpha workspace preview"
-      title="Preview mock workspace creation"
-      description="Set up a mock company workspace for official-first Instagram intelligence. This form is static in Alpha; no live account, billing, or backend tenant will be created."
-      sideTitle="Launch compliant intelligence workflows before connecting production auth."
-      sideDescription="Position teams around Meta-approved data sources, consented professional account analytics, provider governance, and audit-ready operations from day one."
-      activeMetric="Official-safe setup"
+      eyebrow="Private beta access preview"
+      title="Preview private beta access request"
+      description="No account is created from this page. This static workspace preview explains the private beta access path without creating users, sessions, billing records, or backend tenants."
+      sideTitle="Plan compliant intelligence workflows before production auth exists."
+      sideDescription="Position teams around official-source Instagram intelligence, consented professional account analytics, provider governance, and audit-ready operations from day one. Private beta access requires approval."
+      activeMetric="No account is created"
       primaryHrefLabel="Already previewing auth?"
       primaryHref="/login"
     >
@@ -19,22 +19,23 @@ export default function Page() {
         </div>
         <div className="grid gap-4">
           <AuthField label="Work email" type="email" placeholder="jordan@northstar.example" autoComplete="email" />
-          <AuthField label="Password" type="password" placeholder="Preview password only" autoComplete="new-password" helper="No credentials are submitted in Alpha. Passwords are not stored or sent from this static preview." />
+          <AuthField label="Password" type="password" placeholder="Preview password only" autoComplete="new-password" helper="No account is created from this page. Passwords are not stored, submitted, or sent from this static Alpha preview." />
         </div>
 
-        <div className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
-          <p className="text-sm font-semibold text-slate-950">Official-first positioning</p>
+        <div className="rounded-2xl border border-slate-200 bg-slate-50 p-4 shadow-sm">
+          <p className="text-sm font-semibold text-slate-950">Official-source Instagram intelligence</p>
           <ul className="mt-3 space-y-2 text-xs leading-5 text-slate-600">
+            <li>• Private beta access requires approval before real onboarding.</li>
             <li>• Connected professional account analytics are treated as official_safe.</li>
             <li>• Business Discovery and public signals remain limited, permission-aware workflows.</li>
             <li>• Licensed provider features require policy review before activation.</li>
           </ul>
         </div>
 
-        <AuthButton>Preview mock workspace creation</AuthButton>
+        <AuthButton>Review workspace request preview</AuthButton>
 
-        <AuthNotice title="Mock-only onboarding" tone="blue">
-          This form does not create users, tenants, sessions, provider credentials, or billing records. Buttons are non-functional placeholders, and authentication backend is planned for private beta.
+        <AuthNotice title="No account is created from this page" tone="blue">
+          No account is created from this page, no tenant is provisioned, no billing record is opened, and no session starts. Authentication backend remains a deferred private-beta item.
         </AuthNotice>
 
         <p className="text-center text-sm text-slate-500">

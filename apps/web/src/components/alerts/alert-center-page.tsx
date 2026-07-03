@@ -81,9 +81,19 @@ function Badge({ children, className }: { children: React.ReactNode; className: 
   return <span className={`rounded-full px-3 py-1 text-xs font-semibold ring-1 ${className}`}>{children}</span>;
 }
 
+const alertSafetyPills = [
+  "Alpha preview",
+  "Preview-only alerts",
+  "No live Instagram data is collected in Alpha",
+  "No alert delivery runs in Alpha",
+  "No backend action runs from this page",
+  "Requires official source connection",
+  "Requires provider approval where applicable",
+];
+
 function AlertsPanel({ title, subtitle, children }: { title: string; subtitle?: string; children: React.ReactNode }) {
   return (
-    <section className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">
+    <section className="rounded-3xl border border-slate-200/80 bg-white/95 p-5 shadow-lg shadow-slate-200/60">
       <div className="mb-4">
         <h2 className="text-base font-semibold text-slate-950">{title}</h2>
         {subtitle ? <p className="mt-1 text-sm text-slate-500">{subtitle}</p> : null}
@@ -95,7 +105,7 @@ function AlertsPanel({ title, subtitle, children }: { title: string; subtitle?: 
 
 function KpiCard({ label, value, delta, tone, description }: (typeof alertKpis)[number]) {
   return (
-    <div className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">
+    <div className="rounded-3xl border border-slate-200/80 bg-gradient-to-br from-white to-slate-50 p-5 shadow-lg shadow-slate-200/60">
       <p className="text-sm font-medium text-slate-500">{label}</p>
       <div className="mt-4 flex items-end justify-between gap-3">
         <p className="text-3xl font-semibold tracking-tight text-slate-950">{value}</p>
@@ -108,23 +118,33 @@ function KpiCard({ label, value, delta, tone, description }: (typeof alertKpis)[
 
 function AlertsHeader() {
   return (
-    <header className="rounded-[2rem] border border-slate-200 bg-white p-6 shadow-sm">
+    <header className="overflow-hidden rounded-[2rem] border border-slate-800 bg-slate-950 p-6 text-white shadow-2xl shadow-slate-200/70">
       <div className="flex flex-col gap-6 xl:flex-row xl:items-start xl:justify-between">
         <div>
           <div className="mb-4 flex flex-wrap gap-2">
             <Badge className="bg-blue-50 text-blue-700 ring-blue-100">{alertCenterProfile.sourceBadge}</Badge>
             <Badge className="bg-emerald-50 text-emerald-700 ring-emerald-100">{alertCenterProfile.confidenceBadge}</Badge>
-            <Badge className="bg-cyan-50 text-cyan-700 ring-cyan-100">Fresh {alertCenterProfile.freshnessBadge}</Badge>
-            <Badge className="bg-slate-100 text-slate-700 ring-slate-200">{alertCenterProfile.integrationBadge}</Badge>
+            <Badge className="bg-cyan-50 text-cyan-700 ring-cyan-100">Alpha preview</Badge>
+            <Badge className="bg-slate-100 text-slate-700 ring-slate-200">No alert delivery runs in Alpha</Badge>
           </div>
-          <p className="text-sm font-semibold uppercase tracking-wide text-slate-400">Risk and opportunity triage</p>
-          <h1 className="mt-2 text-4xl font-semibold tracking-tight text-slate-950">{alertCenterProfile.title}</h1>
-          <p className="mt-2 max-w-3xl text-base leading-7 text-slate-600">{alertCenterProfile.description}</p>
+          <p className="text-sm font-semibold uppercase tracking-wide text-slate-300">Risk and opportunity triage</p>
+          <h1 className="mt-2 text-4xl font-semibold tracking-tight text-white sm:text-5xl">Preview-only alerts</h1>
+          <p className="mt-3 max-w-3xl text-base leading-7 text-slate-300">{alertCenterProfile.description} No live Instagram data is collected in Alpha, and no backend action runs from this page.</p>
+          <div className="mt-5 grid gap-2 sm:grid-cols-2 xl:grid-cols-4">
+            {alertSafetyPills.map((pill) => (
+              <span key={pill} className="rounded-2xl border border-white/10 bg-white/10 px-3 py-2 text-xs font-semibold leading-5 text-slate-100">
+                {pill}
+              </span>
+            ))}
+          </div>
         </div>
-        <div className="rounded-3xl border border-slate-200 bg-slate-50 p-4 text-sm leading-6 text-slate-600 xl:w-[30rem]">
-          <p className="font-semibold text-slate-900">Mock-only alert command center</p>
+        <div className="rounded-3xl border border-white/10 bg-white/10 p-4 text-sm leading-6 text-slate-300 shadow-xl shadow-black/10 xl:w-[30rem]">
+          <p className="font-semibold text-white">Preview-only alert command center</p>
           <p className="mt-1">
-            Premium alerting for connected account signals, public/professional monitoring where applicable, workflow triage, and licensed-provider placeholders only.
+            Premium alerting preview for connected account signals, public/professional monitoring where applicable, workflow triage, and licensed-provider placeholders only.
+          </p>
+          <p className="mt-3 rounded-2xl border border-white/10 bg-slate-950/40 p-3 text-xs leading-5 text-slate-300">
+            Requires official source connection and provider approval where applicable before any real alert, job, notification, email, SMS, or webhook workflow exists.
           </p>
         </div>
       </div>
@@ -134,11 +154,11 @@ function AlertsHeader() {
 
 function FilterPlaceholderBar() {
   return (
-    <section className="rounded-3xl border border-slate-200 bg-white p-4 shadow-sm">
+    <section className="rounded-3xl border border-slate-200/80 bg-white p-4 shadow-lg shadow-slate-200/60">
       <div className="flex flex-col gap-3 xl:flex-row xl:items-center xl:justify-between">
         <div>
-          <p className="text-sm font-semibold text-slate-950">Alert filters</p>
-          <p className="mt-1 text-xs text-slate-500">Static placeholders for priority, alert type, status, source, confidence, and policy-based triage views.</p>
+          <p className="text-sm font-semibold text-slate-950">Alert filter preview</p>
+          <p className="mt-1 text-xs text-slate-500">Static placeholders for priority, alert type, status, source, confidence, and policy-based triage views; no backend action runs from this page.</p>
         </div>
         <div className="flex flex-wrap gap-2">
           {alertFilters.map((filter) => (
@@ -156,7 +176,7 @@ function SignalList({ items }: { items: AlertPanelItem[] }) {
   return (
     <div className="space-y-3">
       {items.map((item) => (
-        <div key={item.id} className="rounded-2xl border border-slate-100 bg-slate-50 p-3">
+        <div key={item.id} className="rounded-2xl border border-slate-100 bg-slate-50 p-3 shadow-sm">
           <div className="flex items-center justify-between gap-3">
             <p className="font-medium text-slate-950">{item.title}</p>
             <Badge className={toneClasses(item.tone)}>{item.value}</Badge>
@@ -171,7 +191,7 @@ function SignalList({ items }: { items: AlertPanelItem[] }) {
 function IntelligencePanels() {
   return (
     <section className="grid gap-6 xl:grid-cols-4">
-      <AlertsPanel title="Alert volume trend placeholder" subtitle="Mock alert volume across risk, opportunity, and workflow triage.">
+      <AlertsPanel title="Alert volume trend placeholder" subtitle="Preview-only alerts across risk, opportunity, and workflow triage; no notification delivery runs.">
         <div className="rounded-3xl bg-gradient-to-br from-slate-950 via-slate-900 to-rose-950 p-5 text-white">
           <div className="flex h-60 items-end gap-3 rounded-2xl border border-white/10 bg-white/5 p-4">
             {alertVolumeTrend.map((point) => (
@@ -204,7 +224,7 @@ function IntelligencePanels() {
 
 function AlertCardItem({ alert }: { alert: AlertCard }) {
   return (
-    <article className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">
+    <article className="rounded-3xl border border-slate-200/80 bg-white p-5 shadow-lg shadow-slate-200/50">
       <div className="flex items-start justify-between gap-4">
         <div>
           <h3 className="text-lg font-semibold text-slate-950">{alert.title}</h3>
@@ -226,6 +246,7 @@ function AlertCardItem({ alert }: { alert: AlertCard }) {
       <div className="mt-4 rounded-2xl border border-slate-100 bg-slate-50 p-3">
         <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-400">Preview guidance</p>
         <p className="mt-2 text-sm leading-6 text-slate-600">{alert.recommendedAction}</p>
+        <p className="mt-3 rounded-xl border border-slate-200 bg-white p-2 text-xs leading-5 text-slate-500">No alert delivery runs in Alpha; this guidance is static and does not trigger jobs, notifications, email, SMS, or webhooks.</p>
       </div>
 
       <div className="mt-4 flex flex-wrap gap-2">
@@ -252,17 +273,18 @@ function AlertCardsQueue() {
 
 function WorkflowSlaPanel() {
   return (
-    <section className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">
+    <section className="rounded-3xl border border-slate-200/80 bg-white p-5 shadow-lg shadow-slate-200/60">
       <div className="flex flex-col gap-4 xl:flex-row xl:items-start xl:justify-between">
         <div>
-          <p className="text-xs font-semibold uppercase tracking-wide text-slate-400">Mock-only workflow and SLA placeholder</p>
-          <h2 className="mt-2 text-lg font-semibold text-slate-950">Workflow triage status</h2>
+          <p className="text-xs font-semibold uppercase tracking-wide text-slate-400">Preview-only workflow and SLA placeholder</p>
+          <h2 className="mt-2 text-lg font-semibold text-slate-950">Workflow triage preview</h2>
           <p className="mt-2 max-w-4xl text-sm leading-6 text-slate-600">{alertWorkflowSla.mockOnlyNotice}</p>
         </div>
         <div className="flex flex-wrap gap-2 xl:justify-end">
           <Badge className="bg-blue-50 text-blue-700 ring-blue-100">{alertWorkflowSla.owner}</Badge>
           <Badge className="bg-emerald-50 text-emerald-700 ring-emerald-100">{alertWorkflowSla.responseStatus}</Badge>
           <Badge className="bg-amber-50 text-amber-700 ring-amber-100">{alertWorkflowSla.escalationStatus}</Badge>
+          <Badge className="bg-slate-100 text-slate-700 ring-slate-200">No backend action runs from this page</Badge>
         </div>
       </div>
 
@@ -283,7 +305,7 @@ function WorkflowSlaPanel() {
 
 function LicensedProviderPanel() {
   return (
-    <section className="rounded-3xl border border-amber-200 bg-amber-50 p-5 shadow-sm">
+    <section className="rounded-3xl border border-amber-200 bg-amber-50 p-5 shadow-lg shadow-amber-100/60">
       <div className="flex flex-col gap-4 xl:flex-row xl:items-start xl:justify-between">
         <div>
           <p className="text-xs font-semibold uppercase tracking-wide text-amber-700">Licensed-provider-only gated placeholder</p>
@@ -293,6 +315,7 @@ function LicensedProviderPanel() {
         <div className="flex flex-wrap gap-2 xl:justify-end">
           <Badge className={policyClasses(gatedAlertEnrichmentPanel.policyClassification)}>{alertPolicyLabels[gatedAlertEnrichmentPanel.policyClassification]}</Badge>
           <Badge className={statusClasses(gatedAlertEnrichmentPanel.status)}>{alertStatusLabels[gatedAlertEnrichmentPanel.status]}</Badge>
+          <Badge className="bg-white text-amber-800 ring-amber-200">Requires provider approval where applicable</Badge>
         </div>
       </div>
 
@@ -313,13 +336,14 @@ function LicensedProviderPanel() {
 
 function ComplianceNotice() {
   return (
-    <AlertsPanel title={alertComplianceNotice.title} subtitle="Connected account alerts, public/professional monitoring, and licensed providers only.">
+    <AlertsPanel title={alertComplianceNotice.title} subtitle="Connected account alerts, public/professional monitoring, and licensed providers only; preview-only alerts in Alpha.">
       <div className="space-y-4 text-sm leading-6 text-slate-600">
         <p>{alertComplianceNotice.description}</p>
         <div className="grid gap-3 lg:grid-cols-2">
-          <p className="rounded-2xl border border-emerald-200 bg-emerald-50 p-4 text-emerald-900">Official APIs and compliant licensed providers only for future live data.</p>
-          <p className="rounded-2xl border border-blue-200 bg-blue-50 p-4 text-blue-900">Connected account and public/professional monitoring framing with source, freshness, confidence, and policy badges.</p>
-          <p className="rounded-2xl border border-amber-200 bg-amber-50 p-4 text-amber-900">Deeper enrichment is licensed-provider-only and unavailable until configured.</p>
+          <p className="rounded-2xl border border-emerald-200 bg-emerald-50 p-4 text-emerald-900">Requires official source connection. Official APIs and compliant licensed providers only for future live data.</p>
+          <p className="rounded-2xl border border-blue-200 bg-blue-50 p-4 text-blue-900">No live Instagram data is collected in Alpha. Connected account and public/professional monitoring are framed with source, freshness, confidence, and policy badges.</p>
+          <p className="rounded-2xl border border-amber-200 bg-amber-50 p-4 text-amber-900">Requires provider approval where applicable. Deeper enrichment is licensed-provider-only and unavailable until configured.</p>
+          <p className="rounded-2xl border border-rose-200 bg-rose-50 p-4 text-rose-900">No alert delivery runs in Alpha, and no backend action runs from this page.</p>
           <p className="rounded-2xl border border-slate-200 bg-slate-50 p-4 text-slate-700">No scraping, private account access, hidden surveillance, or anti-bot bypass.</p>
         </div>
         <ul className="grid gap-2 lg:grid-cols-4">

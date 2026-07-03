@@ -3,12 +3,12 @@ import { AuthButton, AuthField, AuthLink, AuthNotice, AuthPageShell } from "@/co
 export default function Page() {
   return (
     <AuthPageShell
-      eyebrow="Alpha mock access preview"
-      title="Preview mock sign-in"
-      description="Preview mock sign-in for the private Instagram intelligence workspace. This form is static in Alpha and no credentials are submitted."
-      sideTitle="Review official-source Instagram intelligence from one executive workspace."
-      sideDescription="A premium auth preview for connected professional account analytics, policy-gated providers, export controls, and compliance-first workflows."
-      activeMetric="Mock access only"
+      eyebrow="Preview-only authentication"
+      title="Preview-only sign-in"
+      description="No real sign-in runs in Alpha. This static auth page lets reviewers inspect the access experience without submitting credentials, creating sessions, or calling an auth backend."
+      sideTitle="Official-source Instagram intelligence for approved private beta teams."
+      sideDescription="A premium auth preview for connected professional account analytics, policy-gated providers, export controls, and compliance-first workflows. Private beta access requires approval."
+      activeMetric="No real sign-in runs in Alpha"
       primaryHrefLabel="New to the platform?"
       primaryHref="/signup"
       secondaryHrefLabel="Preview reset?"
@@ -23,19 +23,19 @@ export default function Page() {
         <div className="flex items-center justify-between gap-4 text-sm">
           <label className="flex items-center gap-2 text-slate-600">
             <input type="checkbox" className="h-4 w-4 rounded border-slate-300 text-slate-950" />
-            Remember this workspace preview
+            Remember this workspace preview (static only)
           </label>
           <AuthLink href="/forgot-password">Preview reset workflow</AuthLink>
         </div>
 
-        <AuthButton>Preview mock sign-in</AuthButton>
+        <AuthButton>Review preview-only sign-in UI</AuthButton>
 
-        <AuthNotice title="Security and compliance note" tone="emerald">
-          This mock sign-in keeps official-first boundaries visible: no scraping, no fake login automation, no credential capture, and no backend session is created. Authentication backend is planned for private beta.
+        <AuthNotice title="Preview-only authentication" tone="emerald">
+          No real sign-in runs in Alpha. No credentials are captured, no session is created, and no backend authentication request is made. Private beta access requires approval.
         </AuthNotice>
 
         <p className="text-center text-sm text-slate-500">
-          No live account yet? <AuthLink href="/signup">Preview mock workspace creation</AuthLink>
+          Need approved access later? <AuthLink href="/signup">Preview private beta access request</AuthLink>
         </p>
       </div>
     </AuthPageShell>

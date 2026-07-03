@@ -23,6 +23,39 @@ const accountTimelineProfile = {
   confidenceLabel: "Alpha demo only",
 };
 
+const timelinePreviewBadges = [
+  "Preview-only account intelligence",
+  "Mock account timeline",
+  "No live Instagram data is collected in Alpha",
+];
+
+const timelineOperationalCards = [
+  {
+    title: "Timeline ingestion",
+    detail: "Static preview events only. No account connection, provider job, webhook, queue, or backend timeline action runs in Alpha.",
+    badge: "No backend action runs from this page",
+    tone: "slate" as TimelineTone,
+  },
+  {
+    title: "Official source readiness",
+    detail: "Owned comments, posts, mentions, insights, and ads require official Meta sources before any private-beta collection is enabled.",
+    badge: "Requires official source connection",
+    tone: "green" as TimelineTone,
+  },
+  {
+    title: "Provider approval boundary",
+    detail: "Relationship-change placeholders remain licensed-provider-only and gated until provider approval and policy review exist.",
+    badge: "Requires provider approval where applicable",
+    tone: "amber" as TimelineTone,
+  },
+];
+
+const timelineSafetyChecks = [
+  "No account connection runs in Alpha",
+  "No backend action runs from this page",
+  "No scraping, private account access, hidden surveillance, or anti-bot bypass",
+];
+
 function formatToken(value: string) {
   return value
     .split("_")
@@ -100,7 +133,7 @@ function Badge({ children, className }: { children: React.ReactNode; className: 
 
 function TimelinePanel({ title, subtitle, children }: { title: string; subtitle?: string; children: React.ReactNode }) {
   return (
-    <section className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">
+    <section className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm shadow-slate-200/70">
       <div className="mb-4">
         <h2 className="text-base font-semibold text-slate-950">{title}</h2>
         {subtitle ? <p className="mt-1 text-sm text-slate-500">{subtitle}</p> : null}
@@ -112,9 +145,9 @@ function TimelinePanel({ title, subtitle, children }: { title: string; subtitle?
 
 function KpiCard({ label, value, delta, tone, description }: (typeof accountTimelineKpis)[number]) {
   return (
-    <div className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">
+    <div className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm shadow-slate-200/70 transition hover:-translate-y-0.5 hover:shadow-md hover:shadow-slate-200/80">
       <p className="text-sm font-medium text-slate-500">{label}</p>
-      <div className="mt-4 flex items-end justify-between gap-3">
+      <div className="mt-4 flex flex-wrap items-end justify-between gap-3">
         <p className="text-3xl font-semibold tracking-tight text-slate-950">{value}</p>
         <Badge className={toneClasses(tone)}>{delta}</Badge>
       </div>
@@ -125,18 +158,23 @@ function KpiCard({ label, value, delta, tone, description }: (typeof accountTime
 
 function FilterPlaceholderBar() {
   return (
-    <section className="rounded-3xl border border-slate-200 bg-white p-4 shadow-sm">
-      <div className="flex flex-col gap-3 xl:flex-row xl:items-center xl:justify-between">
+    <section className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm shadow-slate-200/70">
+      <div className="flex flex-col gap-4 xl:flex-row xl:items-start xl:justify-between">
         <div>
-          <p className="text-sm font-semibold text-slate-950">Timeline filters</p>
-          <p className="mt-1 text-xs text-slate-500">Static placeholders for future event type, policy, and freshness filters.</p>
+          <p className="text-sm font-semibold text-slate-950">Static timeline filters</p>
+          <p className="mt-1 max-w-2xl text-xs leading-5 text-slate-500">Static placeholders for future event type, policy, and freshness filters. No live query runs, no saved view changes are persisted, and no backend action runs from this page.</p>
         </div>
-        <div className="flex flex-wrap gap-2">
-          {accountTimelineFilters.map((group) => (
-            <Badge key={group.id} className="bg-slate-100 text-slate-700 ring-slate-200">
-              {group.label}: {group.options[0]?.label}
-            </Badge>
-          ))}
+        <div className="flex w-full flex-col gap-2 xl:w-auto xl:items-end">
+          <button disabled className="w-full cursor-not-allowed rounded-2xl border border-slate-200 bg-slate-50 px-4 py-2 text-sm font-semibold text-slate-400 xl:w-auto">
+            Timeline ingestion disabled in Alpha
+          </button>
+          <div className="flex flex-wrap gap-2">
+            {accountTimelineFilters.map((group) => (
+              <Badge key={group.id} className="bg-slate-100 text-slate-700 ring-slate-200">
+                {group.label}: {group.options[0]?.label}
+              </Badge>
+            ))}
+          </div>
         </div>
       </div>
     </section>
@@ -147,7 +185,7 @@ function TimelineEventCard({ event }: { event: (typeof accountTimelineEvents)[nu
   const confidenceText = event.confidence.score === null ? accountTimelineConfidenceValues[event.confidence.label] : `${event.confidence.score}% ${event.confidence.label}`;
 
   return (
-    <article className="relative rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">
+    <article className="relative rounded-3xl border border-slate-200 bg-white p-5 shadow-sm shadow-slate-200/70">
       <div className="absolute -left-[1.7rem] top-6 h-4 w-4 rounded-full border-4 border-white bg-slate-950 shadow-sm" />
       <div className="flex flex-col gap-4 xl:flex-row xl:items-start xl:justify-between">
         <div>
@@ -155,7 +193,10 @@ function TimelineEventCard({ event }: { event: (typeof accountTimelineEvents)[nu
           <h3 className="mt-2 text-lg font-semibold text-slate-950">{event.title}</h3>
           <p className="mt-2 max-w-3xl text-sm leading-6 text-slate-600">{event.description}</p>
         </div>
-        <Badge className={statusClasses(event.status)}>{statusLabel(event.status)}</Badge>
+        <div className="flex shrink-0 flex-wrap gap-2 xl:justify-end">
+          <Badge className={statusClasses(event.status)}>{statusLabel(event.status)}</Badge>
+          <Badge className="bg-slate-100 text-slate-700 ring-slate-200">Preview-only</Badge>
+        </div>
       </div>
       <div className="mt-4 flex flex-wrap gap-2">
         <Badge className={directionClasses(event.direction)}>{formatToken(event.direction)}</Badge>
@@ -175,10 +216,10 @@ function ComplianceNotice() {
       <div className="space-y-4 text-sm leading-6 text-slate-600">
         <p>{accountTimelineComplianceNotice.description}</p>
         <div className="grid gap-3 lg:grid-cols-2">
-          <p className="rounded-2xl border border-emerald-200 bg-emerald-50 p-4 text-emerald-900">Use official APIs and licensed providers only for live implementation.</p>
-          <p className="rounded-2xl border border-amber-200 bg-amber-50 p-4 text-amber-900">Arbitrary recent follows/unfollows are licensed-provider-only placeholders.</p>
+          <p className="rounded-2xl border border-emerald-200 bg-emerald-50 p-4 text-emerald-900">Use official APIs and licensed providers only for live implementation. No live Instagram data is collected in Alpha.</p>
+          <p className="rounded-2xl border border-amber-200 bg-amber-50 p-4 text-amber-900">Arbitrary recent follows/unfollows are licensed-provider-only placeholders and require provider approval where applicable.</p>
           <p className="rounded-2xl border border-slate-200 bg-slate-50 p-4 text-slate-700">No scraping, fake login automation, credential automation, or anti-bot bypass.</p>
-          <p className="rounded-2xl border border-slate-200 bg-slate-50 p-4 text-slate-700">No private account access or hidden surveillance workflows are represented.</p>
+          <p className="rounded-2xl border border-slate-200 bg-slate-50 p-4 text-slate-700">No private account access, hidden surveillance workflows, account connection, provider job, or backend action runs from this page.</p>
         </div>
         <ul className="grid gap-2 lg:grid-cols-3">
           {accountTimelineComplianceNotice.bullets.map((item) => (
@@ -229,22 +270,29 @@ function TimelineHeader() {
   const activeProvider = accountTimelineProviderBadges.find((provider) => provider.id === accountTimelineProfile.providerId) ?? accountTimelineProviderBadges[0];
 
   return (
-    <header className="rounded-[2rem] border border-slate-200 bg-white p-6 shadow-sm">
-      <div className="flex flex-col gap-6 xl:flex-row xl:items-start xl:justify-between">
-        <div>
-          <div className="mb-4 flex flex-wrap gap-2">
-            <Badge className="bg-cyan-50 text-cyan-700 ring-cyan-100">Timeline ingestion disabled in Alpha</Badge>
-            <Badge className={toneClasses(activeProvider.tone)}>{activeProvider.label}</Badge>
-            <Badge className="bg-violet-50 text-violet-700 ring-violet-100">{accountTimelineProfile.confidenceLabel}</Badge>
-            <Badge className="bg-slate-100 text-slate-700 ring-slate-200">No live timeline collection is running</Badge>
+    <header className="overflow-hidden rounded-[2rem] border border-slate-200 bg-white shadow-sm shadow-slate-200/70">
+      <div className="bg-gradient-to-br from-slate-950 via-slate-900 to-indigo-950 p-5 text-white sm:p-7">
+        <div className="flex flex-col gap-6 xl:flex-row xl:items-start xl:justify-between">
+          <div className="min-w-0">
+            <div className="mb-4 flex flex-wrap gap-2">
+              {timelinePreviewBadges.map((badge) => (
+                <Badge key={badge} className="bg-white/10 text-slate-100 ring-white/10">{badge}</Badge>
+              ))}
+              <Badge className="bg-cyan-400/10 text-cyan-100 ring-cyan-300/20">Timeline ingestion disabled in Alpha</Badge>
+            </div>
+            <p className="text-sm font-semibold uppercase tracking-wide text-slate-400">Timeline preview</p>
+            <h1 className="mt-2 break-words text-3xl font-semibold tracking-tight text-white sm:text-4xl">{accountTimelineProfile.name} timeline preview</h1>
+            <p className="mt-2 text-base text-slate-300">{accountTimelineProfile.handle} · {accountTimelineProfile.accountType}</p>
           </div>
-          <p className="text-sm font-semibold uppercase tracking-wide text-slate-400">Timeline preview</p>
-          <h1 className="mt-2 text-4xl font-semibold tracking-tight text-slate-950">{accountTimelineProfile.name} timeline preview</h1>
-          <p className="mt-2 text-base text-slate-600">{accountTimelineProfile.handle} · {accountTimelineProfile.accountType}</p>
-        </div>
-        <div className="rounded-3xl border border-slate-200 bg-slate-50 p-4 text-sm leading-6 text-slate-600 xl:w-[28rem]">
-          <p className="font-semibold text-slate-900">Mock activity timeline</p>
-          <p className="mt-1">Preview events only. Requires official source connection before any real timeline ingestion.</p>
+          <div className="rounded-3xl border border-white/10 bg-white/10 p-4 text-sm leading-6 text-slate-200 shadow-sm shadow-slate-950/20 xl:w-[28rem]">
+            <p className="font-semibold text-white">Mock activity timeline</p>
+            <p className="mt-1">Preview events only. Requires official source connection before any real timeline ingestion.</p>
+            <div className="mt-4 flex flex-wrap gap-2">
+              <Badge className="bg-blue-400/10 text-blue-100 ring-blue-300/20">{activeProvider.label}</Badge>
+              <Badge className="bg-violet-400/10 text-violet-100 ring-violet-300/20">{accountTimelineProfile.confidenceLabel}</Badge>
+              <Badge className="bg-slate-400/10 text-slate-100 ring-slate-300/20">No live timeline collection is running</Badge>
+            </div>
+          </div>
         </div>
       </div>
     </header>
@@ -256,6 +304,16 @@ export function AccountTimelinePage() {
     <div className="space-y-6">
       <TimelineHeader />
 
+      <section className="grid gap-4 lg:grid-cols-3">
+        {timelineOperationalCards.map((card) => (
+          <div key={card.title} className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm shadow-slate-200/70">
+            <Badge className={toneClasses(card.tone)}>{card.badge}</Badge>
+            <h2 className="mt-4 text-base font-semibold text-slate-950">{card.title}</h2>
+            <p className="mt-2 text-sm leading-6 text-slate-600">{card.detail}</p>
+          </div>
+        ))}
+      </section>
+
       <section className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
         {accountTimelineKpis.map((kpi) => (
           <KpiCard key={kpi.id} {...kpi} />
@@ -266,7 +324,14 @@ export function AccountTimelinePage() {
 
       <section className="grid gap-6 xl:grid-cols-[minmax(0,1.5fr)_minmax(340px,0.7fr)]">
         <TimelinePanel title="Mock activity timeline" subtitle="Preview events only. No live timeline collection is running.">
-          <div className="relative ml-6 space-y-4 border-l border-slate-200 pl-6">
+          <div className="mb-4 grid gap-2 sm:grid-cols-3">
+            {timelineSafetyChecks.map((item) => (
+              <p key={item} className="rounded-2xl border border-slate-100 bg-slate-50 px-3 py-2 text-xs font-medium leading-5 text-slate-600">
+                {item}
+              </p>
+            ))}
+          </div>
+          <div className="relative ml-4 space-y-4 border-l border-slate-200 pl-5 sm:ml-6 sm:pl-6">
             {accountTimelineEvents.map((event) => (
               <TimelineEventCard key={event.id} event={event} />
             ))}

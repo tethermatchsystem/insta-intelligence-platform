@@ -37,16 +37,23 @@ function Badge({ children, className }: { children: React.ReactNode; className: 
 
 export function DataSourceReadinessTable() {
   return (
-    <section className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">
-      <div className="mb-4">
-        <h2 className="text-base font-semibold text-slate-950">Enterprise data source table</h2>
-        <p className="mt-1 text-sm text-slate-500">
-          Mock provider rows for official APIs, owned webhooks, coverage, freshness, permissions, and compliance status.
-        </p>
+    <section className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm shadow-slate-200/70">
+      <div className="mb-4 flex flex-col gap-3 lg:flex-row lg:items-start lg:justify-between">
+        <div>
+          <h2 className="text-base font-semibold text-slate-950">Enterprise data source table</h2>
+          <p className="mt-1 max-w-3xl text-sm text-slate-500">
+            Mock provider rows for official APIs, owned webhooks, coverage, freshness, permissions, and compliance status. Preview-only data sources; no provider connection or backend action runs from this table.
+          </p>
+        </div>
+        <div className="flex flex-wrap gap-2 lg:justify-end">
+          <Badge className="bg-amber-50 text-amber-700 ring-amber-100">Preview-only data sources</Badge>
+          <Badge className="bg-slate-100 text-slate-700 ring-slate-200">No provider connection</Badge>
+        </div>
       </div>
 
       <div className="overflow-x-auto rounded-2xl border border-slate-200">
         <table className="w-full min-w-[1180px] text-left text-sm">
+          <caption className="sr-only">Preview-only enterprise data source table with no Alpha provider connection.</caption>
           <thead className="bg-slate-50 text-xs uppercase tracking-wide text-slate-500">
             <tr>
               <th className="px-4 py-3">Source</th>

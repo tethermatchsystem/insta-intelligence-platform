@@ -48,16 +48,23 @@ function Badge({ children, className }: { children: React.ReactNode; className: 
 
 export function ExportCenterTable() {
   return (
-    <section className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">
-      <div className="mb-4">
-        <h2 className="text-base font-semibold text-slate-950">Enterprise export table</h2>
-        <p className="mt-1 text-sm text-slate-500">
-          Mock export rows for CSV, JSON, executive packages, audit deliveries, and licensed-provider gating.
-        </p>
+    <section className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm shadow-slate-200/70">
+      <div className="mb-4 flex flex-col gap-3 lg:flex-row lg:items-start lg:justify-between">
+        <div>
+          <h2 className="text-base font-semibold text-slate-950">Enterprise export table</h2>
+          <p className="mt-1 max-w-3xl text-sm text-slate-500">
+            Mock export rows for CSV, JSON, executive packages, audit deliveries, and licensed-provider gating. Preview-only exports; no export file is created and no backend action runs from this table.
+          </p>
+        </div>
+        <div className="flex flex-wrap gap-2 lg:justify-end">
+          <Badge className="bg-amber-50 text-amber-700 ring-amber-100">Preview-only exports</Badge>
+          <Badge className="bg-slate-100 text-slate-700 ring-slate-200">No backend export job</Badge>
+        </div>
       </div>
 
       <div className="overflow-x-auto rounded-2xl border border-slate-200">
         <table className="w-full min-w-[1220px] text-left text-sm">
+          <caption className="sr-only">Preview-only enterprise export table with no Alpha file creation.</caption>
           <thead className="bg-slate-50 text-xs uppercase tracking-wide text-slate-500">
             <tr>
               <th className="px-4 py-3">Export</th>

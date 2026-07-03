@@ -59,9 +59,21 @@ function Badge({ children, className }: { children: React.ReactNode; className: 
   return <span className={`rounded-full px-3 py-1 text-xs font-semibold ring-1 ${className}`}>{children}</span>;
 }
 
+const settingsSafetyPills = [
+  "Preview-only settings",
+  "No settings are saved in Alpha",
+  "No backend action runs from this page",
+];
+
+const governanceSafetyPills = [
+  "Governance controls are static in this preview",
+  "Private beta activation required",
+  "Official-source provider approval may be required",
+];
+
 function SettingsPanel({ title, subtitle, children }: { title: string; subtitle?: string; children: React.ReactNode }) {
   return (
-    <section className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">
+    <section className="rounded-3xl border border-slate-200/80 bg-white/95 p-5 shadow-lg shadow-slate-200/60">
       <div className="mb-4">
         <h2 className="text-base font-semibold text-slate-950">{title}</h2>
         {subtitle ? <p className="mt-1 text-sm leading-6 text-slate-500">{subtitle}</p> : null}
@@ -73,7 +85,7 @@ function SettingsPanel({ title, subtitle, children }: { title: string; subtitle?
 
 function SettingsHeader() {
   return (
-    <header className="rounded-[2rem] border border-slate-200 bg-white p-6 shadow-sm">
+    <header className="overflow-hidden rounded-[2rem] border border-slate-800 bg-slate-950 p-6 text-white shadow-2xl shadow-slate-200/70">
       <div className="flex flex-col gap-6 xl:flex-row xl:items-start xl:justify-between">
         <div>
           <div className="mb-4 flex flex-wrap gap-2">
@@ -83,16 +95,26 @@ function SettingsHeader() {
               </Badge>
             ))}
           </div>
-          <p className="text-sm font-semibold uppercase tracking-wide text-slate-400">Workspace settings</p>
-          <h1 className="mt-2 text-4xl font-semibold tracking-tight text-slate-950">Enterprise Settings</h1>
-          <p className="mt-2 max-w-3xl text-base leading-7 text-slate-600">
-            Configure workspace profile, access controls, notifications, integrations, security placeholders, and governance defaults for a premium official-first Instagram intelligence workspace.
+          <p className="text-sm font-semibold uppercase tracking-wide text-slate-300">Workspace settings</p>
+          <h1 className="mt-2 text-4xl font-semibold tracking-tight text-white sm:text-5xl">Enterprise Settings</h1>
+          <p className="mt-3 max-w-3xl text-base leading-7 text-slate-300">
+            Review workspace profile, access controls, notifications, source preferences, security placeholders, and governance defaults for a premium official-first Instagram intelligence workspace.
           </p>
+          <div className="mt-5 grid gap-2 sm:grid-cols-3">
+            {settingsSafetyPills.map((pill) => (
+              <span key={pill} className="rounded-2xl border border-white/10 bg-white/10 px-3 py-2 text-xs font-semibold leading-5 text-slate-100">
+                {pill}
+              </span>
+            ))}
+          </div>
         </div>
-        <div className="rounded-3xl border border-slate-200 bg-slate-50 p-4 text-sm leading-6 text-slate-600 xl:w-[30rem]">
-          <p className="font-semibold text-slate-900">Mock-only settings surface</p>
+        <div className="rounded-3xl border border-white/10 bg-white/10 p-4 text-sm leading-6 text-slate-300 shadow-xl shadow-black/10 xl:w-[30rem]">
+          <p className="font-semibold text-white">Preview-only settings surface</p>
           <p className="mt-1">
-            This page uses static frontend data only. There are no live backend writes, no live integrations, no scraping, no private account access, no hidden surveillance, and no anti-bot bypass workflows.
+            No settings are saved in Alpha. Governance controls are static in this preview, and no backend action runs from this page.
+          </p>
+          <p className="mt-3 rounded-2xl border border-white/10 bg-slate-950/40 p-3 text-xs leading-5 text-slate-300">
+            Private beta activation required before real settings saves, auth/session changes, audit writes, source/provider activation, or notification delivery exists.
           </p>
         </div>
       </div>
@@ -102,7 +124,7 @@ function SettingsHeader() {
 
 function KpiCard({ label, value, change, description, tone }: (typeof settingsMockData.kpiCards)[number]) {
   return (
-    <div className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">
+    <div className="rounded-3xl border border-slate-200/80 bg-gradient-to-br from-white to-slate-50 p-5 shadow-lg shadow-slate-200/60">
       <p className="text-sm font-medium text-slate-500">{label}</p>
       <div className="mt-4 flex items-end justify-between gap-3">
         <p className="text-3xl font-semibold tracking-tight text-slate-950">{value}</p>
@@ -136,7 +158,7 @@ function SettingsOverviewStrip() {
   ];
 
   return (
-    <section className="rounded-3xl border border-slate-200 bg-slate-950 p-5 text-white shadow-sm">
+    <section className="rounded-3xl border border-slate-800 bg-slate-950 p-5 text-white shadow-2xl shadow-slate-200/70">
       <div className="flex flex-col gap-4 xl:flex-row xl:items-start xl:justify-between">
         <div>
           <p className="text-xs font-semibold uppercase tracking-wide text-slate-400">Premium settings overview</p>
@@ -145,7 +167,11 @@ function SettingsOverviewStrip() {
             A static settings experience for reviewing workspace configuration, role governance, source preferences, sessions, and compliance defaults before any future backend implementation.
           </p>
         </div>
-        <Badge className="bg-white/10 text-white ring-white/20">No live backend actions</Badge>
+        <div className="flex flex-wrap gap-2 xl:max-w-md xl:justify-end">
+          {governanceSafetyPills.map((pill) => (
+            <Badge key={pill} className="bg-white/10 text-white ring-white/20">{pill}</Badge>
+          ))}
+        </div>
       </div>
 
       <div className="mt-5 grid gap-3 lg:grid-cols-3">
@@ -227,7 +253,7 @@ function PlaceholderChecklist() {
   return (
     <section className="grid gap-4 xl:grid-cols-5">
       {placeholders.map((item) => (
-        <article key={item.title} className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">
+        <article key={item.title} className="rounded-3xl border border-slate-200/80 bg-white p-5 shadow-lg shadow-slate-200/50">
           <Badge className={toneClasses(item.tone)}>{item.badge}</Badge>
           <h2 className="mt-4 text-base font-semibold text-slate-950">{item.title}</h2>
           <p className="mt-2 text-sm leading-6 text-slate-600">{item.body}</p>
@@ -239,7 +265,7 @@ function PlaceholderChecklist() {
 
 function RoleCard({ role }: { role: RolePermission }) {
   return (
-    <article className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">
+    <article className="rounded-3xl border border-slate-200/80 bg-white p-5 shadow-md shadow-slate-200/60">
       <div className="flex items-start justify-between gap-4">
         <div>
           <h3 className="text-lg font-semibold text-slate-950">{role.role}</h3>
@@ -404,13 +430,13 @@ function ComplianceNotice() {
   const notice = settingsMockData.complianceNotice;
 
   return (
-    <SettingsPanel title={notice.title} subtitle="Official APIs, connected professional accounts, manual imports, and licensed compliant providers only.">
+    <SettingsPanel title={notice.title} subtitle="Official APIs, connected professional accounts, manual imports, and licensed compliant providers only; Official-source provider approval may be required.">
       <div className="space-y-4 text-sm leading-6 text-slate-600">
         <p>{notice.body}</p>
         <div className="grid gap-3 lg:grid-cols-2">
           <p className="rounded-2xl border border-emerald-200 bg-emerald-50 p-4 text-emerald-900">Official Meta APIs and connected professional account analytics are the preferred data paths.</p>
           <p className="rounded-2xl border border-blue-200 bg-blue-50 p-4 text-blue-900">Manual CSV imports require consent and workspace attestation before use.</p>
-          <p className="rounded-2xl border border-amber-200 bg-amber-50 p-4 text-amber-900">Licensed providers remain disabled by default until legal, provenance, and policy checks are complete.</p>
+          <p className="rounded-2xl border border-amber-200 bg-amber-50 p-4 text-amber-900">Official-source provider approval may be required. Licensed providers remain disabled by default until legal, provenance, and policy checks are complete.</p>
           <p className="rounded-2xl border border-slate-200 bg-slate-50 p-4 text-slate-700">No scraping, private account access, hidden surveillance, fake login automation, credential automation, or anti-bot bypass.</p>
         </div>
         <ul className="grid gap-2 lg:grid-cols-4">
