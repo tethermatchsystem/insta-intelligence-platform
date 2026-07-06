@@ -56,7 +56,7 @@ function SummaryPanel({ title, subtitle, children }: { title: string; subtitle: 
 export function FollowingSummaryPanels() {
   return (
     <section className="grid gap-6 xl:grid-cols-4">
-      <SummaryPanel title="Following category mix" subtitle="Aggregate category distribution placeholder.">
+      <SummaryPanel title="Followed-entity category mix" subtitle="Mock public-entity category distribution.">
         <div className="rounded-3xl bg-gradient-to-br from-slate-950 via-slate-900 to-indigo-950 p-5 text-white">
           <div className="flex h-60 items-end gap-3 rounded-2xl border border-white/10 bg-white/5 p-4">
             {followingCategoryMix.map((point) => (
@@ -72,15 +72,15 @@ export function FollowingSummaryPanels() {
         </div>
       </SummaryPanel>
 
-      <SummaryPanel title="Relationship clusters" subtitle="Category-level relationship intelligence.">
+      <SummaryPanel title="Market relationship clusters" subtitle="Brand, creator, publisher, and community map.">
         <SummaryList items={relationshipClusters} />
       </SummaryPanel>
 
-      <SummaryPanel title="Brand/creator affinity" subtitle="Affinity placeholders, not identity tracking.">
+      <SummaryPanel title="Relevance and relationship type" subtitle="Mock relevance placeholders, not identity tracking.">
         <SummaryList items={brandCreatorAffinity} />
       </SummaryPanel>
 
-      <SummaryPanel title="Activity/change windows" subtitle="Snapshot windows and gated latest changes.">
+      <SummaryPanel title="Restricted change windows" subtitle="Snapshot windows; latest identity changes stay gated.">
         <SummaryList items={changeWindows} />
       </SummaryPanel>
     </section>

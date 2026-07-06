@@ -56,12 +56,31 @@ function Badge({ children, className }: { children: React.ReactNode; className: 
 
 export function MentionMonitoringTable() {
   return (
-    <section className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">
-      <div className="mb-4">
-        <h2 className="text-base font-semibold text-slate-950">Enterprise mention preview table</h2>
-        <p className="mt-1 text-sm text-slate-500">
-          Mock mention intelligence rows for Alpha preview sentiment, response triage, opportunity detection, and compliant enrichment gating.
-        </p>
+    <section className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm shadow-slate-200/70">
+      <div className="mb-4 flex flex-col gap-3 xl:flex-row xl:items-start xl:justify-between">
+        <div>
+          <h2 className="text-base font-semibold text-slate-950">Enterprise mention triage table</h2>
+          <p className="mt-1 max-w-3xl text-sm leading-6 text-slate-500">
+            Static mock mention rows for sentiment review, brand-safety triage, opportunity grouping, response planning, and compliant enrichment gating. No live query, monitor, response, refresh, or export runs from this table.
+          </p>
+        </div>
+        <div className="flex flex-wrap gap-2 xl:justify-end">
+          <Badge className="bg-emerald-50 text-emerald-700 ring-emerald-100">Preview-only mention intelligence</Badge>
+          <Badge className="bg-slate-100 text-slate-700 ring-slate-200">Mock mention signals</Badge>
+          <Badge className="bg-amber-50 text-amber-700 ring-amber-100">No backend action</Badge>
+        </div>
+      </div>
+
+      <div className="mb-4 flex flex-wrap gap-2 rounded-2xl border border-slate-200 bg-slate-50 p-3 text-xs font-medium text-slate-600">
+        <button className="cursor-not-allowed rounded-full bg-white px-3 py-1 text-slate-400 ring-1 ring-slate-200" type="button" disabled>
+          Sort disabled in Alpha
+        </button>
+        <button className="cursor-not-allowed rounded-full bg-white px-3 py-1 text-slate-400 ring-1 ring-slate-200" type="button" disabled>
+          Response action disabled
+        </button>
+        <span className="rounded-full bg-white px-3 py-1 ring-1 ring-slate-200">Public, owned, or approved-source data only</span>
+        <span className="rounded-full bg-white px-3 py-1 ring-1 ring-slate-200">No private DM access</span>
+        <span className="rounded-full bg-white px-3 py-1 ring-1 ring-slate-200">No mention monitoring runs in Alpha</span>
       </div>
 
       <div className="overflow-x-auto rounded-2xl border border-slate-200">
@@ -81,7 +100,7 @@ export function MentionMonitoringTable() {
           </thead>
           <tbody className="divide-y divide-slate-100 bg-white">
             {mentionTableRows.map((row) => (
-              <tr key={row.id} className="hover:bg-slate-50/70">
+              <tr key={row.id} className="cursor-default bg-white">
                 <td className="max-w-md px-4 py-4 font-medium leading-6 text-slate-950">{row.mention}</td>
                 <td className="px-4 py-4 text-slate-600">{row.source}</td>
                 <td className="px-4 py-4">

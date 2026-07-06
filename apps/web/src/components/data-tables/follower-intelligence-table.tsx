@@ -40,10 +40,15 @@ function Badge({ children, className }: { children: React.ReactNode; className: 
 
 export function FollowerIntelligenceTable() {
   return (
-    <section className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">
-      <div className="mb-4">
-        <h2 className="text-base font-semibold text-slate-950">Enterprise followers table</h2>
-        <p className="mt-1 text-sm text-slate-500">Audience summary rows and gated identity-level placeholder signals prepared for compliant future providers.</p>
+    <section className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm shadow-slate-200/70">
+      <div className="mb-4 flex flex-col gap-3 xl:flex-row xl:items-start xl:justify-between">
+        <div>
+          <h2 className="text-base font-semibold text-slate-950">Audience composition preview table</h2>
+          <p className="mt-1 max-w-3xl text-sm leading-6 text-slate-500">
+            Static follower quality, geography, creator/business mix, and readiness rows prepared for future official-source audience summaries.
+          </p>
+        </div>
+        <Badge className="bg-amber-50 text-amber-700 ring-amber-100">No live follower tracking</Badge>
       </div>
 
       <div className="overflow-x-auto rounded-2xl border border-slate-200">
@@ -62,7 +67,7 @@ export function FollowerIntelligenceTable() {
           </thead>
           <tbody className="divide-y divide-slate-100 bg-white">
             {accountFollowerTableRows.map((row) => (
-              <tr key={row.id} className="hover:bg-slate-50/70">
+              <tr key={row.id} className="cursor-default">
                 <td className="px-4 py-4 font-medium text-slate-950">{row.signal}</td>
                 <td className="px-4 py-4"><Badge className={directionClasses(row.direction)}>{accountFollowerDirectionLabels[row.direction]}</Badge></td>
                 <td className="px-4 py-4 text-slate-600">{row.count}</td>
@@ -76,6 +81,9 @@ export function FollowerIntelligenceTable() {
           </tbody>
         </table>
       </div>
+      <p className="mt-4 rounded-2xl border border-slate-200 bg-slate-50 p-3 text-xs leading-5 text-slate-600">
+        Preview-only audience intelligence: no live Instagram data is collected in Alpha, no backend action runs from this page, and gated identity-level follower signals require official source connection plus provider approval where applicable.
+      </p>
     </section>
   );
 }

@@ -27,7 +27,7 @@ function Badge({ children, className }: { children: React.ReactNode; className: 
 
 function DiscoveryPanel({ title, subtitle, children }: { title: string; subtitle: string; children: React.ReactNode }) {
   return (
-    <section className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">
+    <section className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm shadow-violet-100/70">
       <div className="mb-4">
         <h2 className="text-base font-semibold text-slate-950">{title}</h2>
         <p className="mt-1 text-sm text-slate-500">{subtitle}</p>
@@ -41,7 +41,7 @@ function SignalList({ items }: { items: CreatorDiscoveryPanelItem[] }) {
   return (
     <div className="space-y-3">
       {items.map((item) => (
-        <div key={item.id} className="rounded-2xl border border-slate-100 bg-slate-50 p-3">
+        <div key={item.id} className="rounded-2xl border border-slate-100 bg-gradient-to-br from-slate-50 to-white p-3">
           <div className="flex items-center justify-between gap-3">
             <p className="font-medium text-slate-950">{item.title}</p>
             <Badge className={toneClasses(item.tone)}>{item.value}</Badge>
@@ -56,12 +56,16 @@ function SignalList({ items }: { items: CreatorDiscoveryPanelItem[] }) {
 export function CreatorDiscoveryPanels() {
   return (
     <section className="grid gap-6 xl:grid-cols-4">
-      <DiscoveryPanel title="Creator category mix" subtitle="Mock category distribution for Alpha creator previews.">
-        <div className="rounded-3xl bg-gradient-to-br from-slate-950 via-slate-900 to-indigo-950 p-5 text-white">
-          <div className="flex h-60 items-end gap-3 rounded-2xl border border-white/10 bg-white/5 p-4">
+      <DiscoveryPanel title="Niche/category match" subtitle="Mock category distribution for shortlist planning; no creator search runs in Alpha.">
+        <div className="rounded-3xl bg-gradient-to-br from-slate-950 via-violet-950 to-fuchsia-950 p-5 text-white">
+          <div className="mb-4 flex flex-wrap items-center justify-between gap-2">
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-fuchsia-200">Candidate mix preview</p>
+            <Badge className="bg-white/90 text-violet-700 ring-white/50">Static snapshot</Badge>
+          </div>
+          <div className="flex h-56 items-end gap-3 rounded-2xl border border-white/10 bg-white/5 p-4">
             {creatorCategoryMix.map((point) => (
               <div key={point.label} className="flex flex-1 flex-col items-center gap-3">
-                <div className="w-full rounded-t-2xl bg-white/80 shadow-lg shadow-indigo-950/30" style={{ height: `${point.height}%` }} />
+                <div className="w-full rounded-t-2xl bg-gradient-to-t from-fuchsia-300 to-white shadow-lg shadow-fuchsia-950/30" style={{ height: `${point.height}%` }} />
                 <div className="text-center">
                   <p className="text-xs text-slate-300">{point.label}</p>
                   <p className="text-sm font-semibold">{point.value}</p>
@@ -69,18 +73,21 @@ export function CreatorDiscoveryPanels() {
               </div>
             ))}
           </div>
+          <p className="mt-4 rounded-2xl border border-white/10 bg-white/10 p-3 text-xs leading-5 text-slate-200">
+            Mock creator fit signals only. Public or approved-source data only; no live Instagram data is collected in Alpha.
+          </p>
         </div>
       </DiscoveryPanel>
 
-      <DiscoveryPanel title="Audience preview segments" subtitle="Connected overlap previews and mock public-signal placeholders.">
+      <DiscoveryPanel title="Audience quality preview" subtitle="Connected overlap previews and mock public-signal placeholders, not private audience access.">
         <SignalList items={audienceFitSegments} />
       </DiscoveryPanel>
 
-      <DiscoveryPanel title="Brand safety overview" subtitle="Review workflow placeholders without surveillance.">
+      <DiscoveryPanel title="Brand safety readiness" subtitle="Review workflow placeholders without private access, hidden surveillance, or scraping.">
         <SignalList items={brandSafetyOverview} />
       </DiscoveryPanel>
 
-      <DiscoveryPanel title="Planning opportunity preview" subtitle="Mock opportunities for campaign planning only.">
+      <DiscoveryPanel title="Partnership planning preview" subtitle="Mock opportunities only; no outreach, export, or backend action runs in Alpha.">
         <SignalList items={growthOpportunities} />
       </DiscoveryPanel>
     </section>

@@ -40,10 +40,16 @@ function Badge({ children, className }: { children: React.ReactNode; className: 
 
 export function CreatorDiscoveryTable() {
   return (
-    <section className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">
-      <div className="mb-4">
-        <h2 className="text-base font-semibold text-slate-950">Enterprise creator preview table</h2>
-        <p className="mt-1 text-sm text-slate-500">Mock creator profile rows for Alpha preview, source review, and compliant enrichment gating.</p>
+    <section className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm shadow-violet-100/70">
+      <div className="mb-4 flex flex-col gap-3 xl:flex-row xl:items-start xl:justify-between">
+        <div>
+          <h2 className="text-base font-semibold text-slate-950">Creator shortlist preview table</h2>
+          <p className="mt-1 max-w-3xl text-sm leading-6 text-slate-500">Mock creator candidate rows for fit review, brand safety readiness, audience quality preview, and compliant enrichment gating. Rows are static and not selectable.</p>
+        </div>
+        <div className="flex flex-wrap gap-2">
+          <Badge className="bg-violet-50 text-violet-700 ring-violet-100">Preview-only creator discovery</Badge>
+          <Badge className="bg-amber-50 text-amber-700 ring-amber-100">No creator search runs in Alpha</Badge>
+        </div>
       </div>
 
       <div className="overflow-x-auto rounded-2xl border border-slate-200">
@@ -63,7 +69,7 @@ export function CreatorDiscoveryTable() {
           </thead>
           <tbody className="divide-y divide-slate-100 bg-white">
             {creatorDiscoveryTableRows.map((row) => (
-              <tr key={row.id} className="hover:bg-slate-50/70">
+              <tr key={row.id} className="cursor-default bg-white">
                 <td className="px-4 py-4 font-medium text-slate-950">{row.creator}</td>
                 <td className="px-4 py-4"><Badge className={categoryClasses(row.category)}>{creatorDiscoveryCategoryLabels[row.category]}</Badge></td>
                 <td className="px-4 py-4 text-slate-600">{row.audience}</td>
@@ -78,6 +84,9 @@ export function CreatorDiscoveryTable() {
           </tbody>
         </table>
       </div>
+      <p className="mt-4 rounded-2xl border border-slate-200 bg-slate-50 p-3 text-xs leading-5 text-slate-600">
+        Preview-only creator discovery: public or approved-source data only, no live Instagram data is collected in Alpha, no creator search runs in Alpha, and no shortlist, outreach, export, provider, or backend action runs from this page.
+      </p>
     </section>
   );
 }

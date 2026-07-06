@@ -56,7 +56,7 @@ function SummaryPanel({ title, subtitle, children }: { title: string; subtitle: 
 export function FollowerSummaryPanels() {
   return (
     <section className="grid gap-6 xl:grid-cols-4">
-      <SummaryPanel title="Follower growth trend" subtitle="Snapshot-based aggregate growth placeholder.">
+      <SummaryPanel title="Mock follower growth" subtitle="Static aggregate growth placeholder; no live follower tracking.">
         <div className="rounded-3xl bg-gradient-to-br from-slate-950 via-slate-900 to-indigo-950 p-5 text-white">
           <div className="flex h-60 items-end gap-3 rounded-2xl border border-white/10 bg-white/5 p-4">
             {followerGrowthTrend.map((point) => (
@@ -72,15 +72,15 @@ export function FollowerSummaryPanels() {
         </div>
       </SummaryPanel>
 
-      <SummaryPanel title="Audience segments" subtitle="Aggregated segment placeholders only.">
+      <SummaryPanel title="Creator/business mix" subtitle="Audience composition buckets for preview only.">
         <SummaryList items={audienceSegments} />
       </SummaryPanel>
 
-      <SummaryPanel title="Geography, device, and age" subtitle="Demographic summary placeholders.">
+      <SummaryPanel title="Geography, language, and age" subtitle="Mock demographic readiness placeholders.">
         <SummaryList items={audienceDemographics} />
       </SummaryPanel>
 
-      <SummaryPanel title="Activity windows" subtitle="Aggregate audience timing placeholders.">
+      <SummaryPanel title="Audience readiness windows" subtitle="Static planning windows, not live monitoring.">
         <SummaryList items={activityWindows} />
       </SummaryPanel>
     </section>

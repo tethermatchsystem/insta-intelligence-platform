@@ -66,7 +66,8 @@ function Badge({ children, className }: { children: React.ReactNode; className: 
 
 function CreatorCard({ creator }: { creator: CreatorDiscoveryCard }) {
   return (
-    <article className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">
+    <article className="relative overflow-hidden rounded-3xl border border-slate-200 bg-white p-5 shadow-sm shadow-violet-100/70">
+      <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-violet-500 via-fuchsia-400 to-cyan-400" />
       <div className="flex items-start justify-between gap-4">
         <div className="flex gap-4">
           <div className={`grid h-14 w-14 shrink-0 place-items-center rounded-2xl text-base font-semibold ring-1 ${toneClasses(creator.tone)}`}>
@@ -83,24 +84,32 @@ function CreatorCard({ creator }: { creator: CreatorDiscoveryCard }) {
       <p className="mt-4 text-sm leading-6 text-slate-600">{creator.niche}</p>
 
       <div className="mt-4 grid grid-cols-3 gap-3">
-        <div className="rounded-2xl bg-slate-50 p-3">
+        <div className="rounded-2xl border border-slate-100 bg-slate-50 p-3">
           <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-400">Audience preview</p>
           <p className="mt-1 text-sm font-semibold text-slate-950">{creator.audienceSize}</p>
         </div>
-        <div className="rounded-2xl bg-slate-50 p-3">
+        <div className="rounded-2xl border border-slate-100 bg-slate-50 p-3">
           <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-400">Engagement preview</p>
           <p className="mt-1 text-sm font-semibold text-slate-950">{creator.engagementEstimate}</p>
         </div>
-        <div className="rounded-2xl bg-slate-50 p-3">
+        <div className="rounded-2xl border border-slate-100 bg-slate-50 p-3">
           <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-400">Preview score</p>
           <p className="mt-1 text-sm font-semibold text-slate-950">{creator.fitScore}%</p>
         </div>
       </div>
 
+      <div className="mt-4 rounded-full bg-violet-100 p-1" aria-label={`${creator.name} mock fit score`}>
+        <div className="h-2 rounded-full bg-gradient-to-r from-violet-500 to-fuchsia-400" style={{ width: `${creator.fitScore}%` }} />
+      </div>
+
       <div className="mt-4 rounded-2xl border border-slate-100 bg-slate-50 p-3">
-        <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-400">Alpha demo next step</p>
+        <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-400">Preview partnership planning note</p>
         <p className="mt-2 text-sm leading-6 text-slate-600">{creator.recommendedAction}</p>
       </div>
+
+      <p className="mt-4 rounded-2xl border border-violet-100 bg-violet-50 p-3 text-xs leading-5 text-violet-900">
+        Static candidate card: no shortlist save, no outreach, no provider action, and no backend action runs in Alpha.
+      </p>
 
       <div className="mt-4 flex flex-wrap gap-2">
         <Badge className={categoryClasses(creator.category)}>{creatorDiscoveryCategoryLabels[creator.category]}</Badge>
@@ -115,7 +124,7 @@ function CreatorCard({ creator }: { creator: CreatorDiscoveryCard }) {
 
 function GatedEnrichmentPanel() {
   return (
-    <section className="rounded-3xl border border-amber-200 bg-amber-50 p-5 shadow-sm">
+    <section className="rounded-3xl border border-amber-200 bg-gradient-to-br from-amber-50 via-white to-orange-50 p-5 shadow-sm shadow-amber-100/70">
       <div className="flex flex-col gap-4 xl:flex-row xl:items-start xl:justify-between">
         <div>
           <p className="text-xs font-semibold uppercase tracking-wide text-amber-700">Licensed-provider-only gated placeholder</p>
@@ -139,6 +148,9 @@ function GatedEnrichmentPanel() {
           <li key={reason} className="rounded-2xl border border-amber-200 bg-white/70 p-3 text-xs leading-5 text-amber-900">{reason}</li>
         ))}
       </ul>
+      <p className="mt-4 rounded-2xl border border-amber-200 bg-white/70 p-3 text-xs leading-5 text-amber-900">
+        Requires provider approval where applicable. No creator search, shortlist save, outreach, export, provider activation, or backend action runs from this page.
+      </p>
     </section>
   );
 }
@@ -146,6 +158,14 @@ function GatedEnrichmentPanel() {
 export function CreatorCards() {
   return (
     <div className="space-y-6">
+      <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+        <div>
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-violet-700">Candidate review cards</p>
+          <h2 className="mt-1 text-lg font-semibold text-slate-950">Mock creator candidate shortlist</h2>
+          <p className="mt-1 max-w-3xl text-sm leading-6 text-slate-500">Preview-only creator profiles for fit review, source/provenance labeling, and partnership planning posture.</p>
+        </div>
+        <Badge className="bg-violet-50 text-violet-700 ring-violet-100">No creator search runs in Alpha</Badge>
+      </div>
       <section className="grid gap-4 xl:grid-cols-2 2xl:grid-cols-4">
         {creatorDiscoveryCards.map((creator) => (
           <CreatorCard key={creator.id} creator={creator} />

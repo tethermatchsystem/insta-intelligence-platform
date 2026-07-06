@@ -49,12 +49,30 @@ function Badge({ children, className }: { children: React.ReactNode; className: 
 
 export function HashtagIntelligenceTable() {
   return (
-    <section className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">
-      <div className="mb-4">
-        <h2 className="text-base font-semibold text-slate-950">Enterprise hashtag preview table</h2>
-        <p className="mt-1 text-sm text-slate-500">
-          Mock hashtag intelligence rows for Alpha preview trends, campaign planning, and compliant enrichment gating.
-        </p>
+    <section className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm shadow-slate-200/70">
+      <div className="mb-4 flex flex-col gap-3 xl:flex-row xl:items-start xl:justify-between">
+        <div>
+          <h2 className="text-base font-semibold text-slate-950">Enterprise topic planning table</h2>
+          <p className="mt-1 max-w-3xl text-sm leading-6 text-slate-500">
+            Static mock hashtag rows for topic cluster review, campaign tag readiness, preview velocity, and compliant enrichment gating. No live query, monitor, refresh, or export runs from this table.
+          </p>
+        </div>
+        <div className="flex flex-wrap gap-2 xl:justify-end">
+          <Badge className="bg-violet-50 text-violet-700 ring-violet-100">Preview-only hashtag intelligence</Badge>
+          <Badge className="bg-slate-100 text-slate-700 ring-slate-200">Mock topic signals</Badge>
+          <Badge className="bg-amber-50 text-amber-700 ring-amber-100">No backend action</Badge>
+        </div>
+      </div>
+
+      <div className="mb-4 flex flex-wrap gap-2 rounded-2xl border border-slate-200 bg-slate-50 p-3 text-xs font-medium text-slate-600">
+        <button className="cursor-not-allowed rounded-full bg-white px-3 py-1 text-slate-400 ring-1 ring-slate-200" type="button" disabled>
+          Sort disabled in Alpha
+        </button>
+        <button className="cursor-not-allowed rounded-full bg-white px-3 py-1 text-slate-400 ring-1 ring-slate-200" type="button" disabled>
+          Saved view disabled
+        </button>
+        <span className="rounded-full bg-white px-3 py-1 ring-1 ring-slate-200">Public, owned, or approved-source data only</span>
+        <span className="rounded-full bg-white px-3 py-1 ring-1 ring-slate-200">No hashtag monitoring runs in Alpha</span>
       </div>
 
       <div className="overflow-x-auto rounded-2xl border border-slate-200">
@@ -74,7 +92,7 @@ export function HashtagIntelligenceTable() {
           </thead>
           <tbody className="divide-y divide-slate-100 bg-white">
             {hashtagTableRows.map((row) => (
-              <tr key={row.id} className="hover:bg-slate-50/70">
+              <tr key={row.id} className="cursor-default bg-white">
                 <td className="px-4 py-4 font-medium text-slate-950">{row.hashtag}</td>
                 <td className="px-4 py-4">
                   <Badge className={topicClasses(row.topic)}>{hashtagTopicLabels[row.topic]}</Badge>
