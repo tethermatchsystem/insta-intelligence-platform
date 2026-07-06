@@ -14,13 +14,15 @@ export function FeatureGateNotice({ status = "licensed_provider_only" }: { statu
     <SystemState
       variant="restricted"
       title={`Compliance-gated module: ${formatStatus(status)}`}
-      description="This surface is blocked until the workspace has owned account access, official API permission, or an approved licensed provider. The placeholder does not expose private Instagram data or automate credentials."
+      description="This preview remains blocked until official-source eligibility, owned or consented account scope, policy review, and provider approval are satisfied where required. No provider activation, OAuth, live sync, download, or backend action is available in Alpha."
+      stateRole="Restricted state for provider approval, licensed-provider-only, official-source, or disabled-by-default features; it communicates the boundary without revealing or collecting restricted data."
+      safetyNote="No private account access, scraping, hidden surveillance, fake login automation, credential automation, or anti-bot bypass is available."
       badges={[
         { label: status, tone: isRestricted ? "danger" : "warning" },
-        { label: "Placeholder-only", tone: "neutral" },
-        { label: "Provider review required", tone: "info" },
+        { label: "Preview-only state", tone: "neutral" },
+        { label: "Provider approval may be required", tone: "info" },
       ]}
-      checks={["Requires policy approval before activation", "No scraping, fake login automation, or anti-bot bypass", "No private account access or hidden surveillance"]}
+      checks={["Official-source connection required before future live use", "Licensed-provider-only where required; private beta activation required", "No backend action, OAuth, provider job, download, export, or database write runs from this state"]}
     />
   );
 }

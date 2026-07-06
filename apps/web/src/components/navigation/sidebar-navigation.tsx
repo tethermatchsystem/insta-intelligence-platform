@@ -105,9 +105,10 @@ export function SidebarNavigation() {
                         key={item.href}
                         href={item.href}
                         aria-current={active ? "page" : undefined}
+                        aria-label={`${item.label}. ${item.description}. Static Alpha preview route.`}
                         title={`${item.label}: ${item.description}`}
                         className={[
-                          "group relative flex items-center justify-between gap-3 overflow-hidden rounded-2xl px-3 py-2.5 text-sm transition duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300/60",
+                          "group relative flex items-center justify-between gap-3 overflow-hidden rounded-2xl px-3 py-2.5 text-sm transition duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300/70 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950",
                           active
                             ? "bg-cyan-300/20 text-white shadow-lg shadow-cyan-950/20 ring-1 ring-cyan-200/25 before:absolute before:inset-y-2 before:left-0 before:w-1 before:rounded-r-full before:bg-cyan-300"
                             : "text-slate-400 hover:bg-white/10 hover:text-slate-100 hover:ring-1 hover:ring-white/10",
@@ -144,8 +145,12 @@ export function SidebarNavigation() {
         </div>
       </aside>
 
-      <nav aria-label="Mobile app navigation" className="fixed inset-x-0 bottom-0 z-40 border-t border-white/10 bg-slate-950/90 px-3 py-2 shadow-2xl shadow-black/40 backdrop-blur-2xl lg:hidden">
-        <div className="mx-auto flex max-w-[1600px] gap-2 overflow-x-auto pb-1">
+      <nav aria-label="Mobile app navigation" className="fixed inset-x-0 bottom-0 z-40 border-t border-white/10 bg-slate-950/95 px-3 py-2 shadow-2xl shadow-black/40 backdrop-blur-2xl lg:hidden">
+        <div className="mx-auto mb-1 flex max-w-[1600px] items-center justify-between gap-3 px-1 text-[10px] leading-4 text-slate-500">
+          <span className="font-semibold uppercase tracking-[0.18em] text-cyan-200/70">Alpha nav</span>
+          <span>Swipe routes · preview only</span>
+        </div>
+        <div className="mx-auto flex max-w-[1600px] snap-x gap-2 overflow-x-auto overscroll-x-contain pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
           {mobileItems.map((item) => {
             const active = isActiveRoute(pathname, item.href);
 
@@ -154,8 +159,9 @@ export function SidebarNavigation() {
                 key={item.href}
                 href={item.href}
                 aria-current={active ? "page" : undefined}
+                aria-label={`${item.label}. ${item.description}. Static preview route; no backend action runs from mobile navigation.`}
                 className={[
-                  "min-w-[8.5rem] rounded-2xl px-3 py-2 text-xs transition",
+                  "min-w-[8.25rem] snap-start rounded-2xl px-3 py-2 text-xs transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300/70 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950",
                   active ? "bg-cyan-300/20 text-white shadow-sm ring-1 ring-cyan-200/25" : "bg-white/5 text-slate-300 hover:bg-white/10",
                 ].join(" ")}
               >
@@ -165,7 +171,7 @@ export function SidebarNavigation() {
             );
           })}
         </div>
-        <p className="mt-1 px-1 text-[10px] leading-4 text-slate-500">Navigation links are normal routes only. No live sync, provider lookup, scraping, or backend action runs from mobile nav.</p>
+        <p className="mt-1 line-clamp-2 px-1 text-[10px] leading-4 text-slate-500">Navigation links are normal routes only. No live sync, provider lookup, scraping, or backend action runs from mobile nav.</p>
       </nav>
     </>
   );

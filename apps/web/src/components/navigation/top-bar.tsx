@@ -8,13 +8,13 @@ const commandSuggestions = ["Routes", "Accounts", "Reports", "Providers"];
 
 export function TopBar() {
   return (
-    <header className="sticky top-0 z-20 border-b border-white/10 bg-slate-950/75 px-3 py-3 shadow-2xl shadow-black/10 backdrop-blur-2xl sm:px-6 lg:px-8">
-      <div className="mx-auto flex w-full max-w-[1600px] flex-col gap-3 2xl:flex-row 2xl:items-center 2xl:justify-between">
+    <header className="sticky top-0 z-20 border-b border-white/10 bg-slate-950/80 px-3 py-2 shadow-2xl shadow-black/10 backdrop-blur-2xl sm:px-6 sm:py-3 lg:px-8">
+      <div className="mx-auto flex w-full max-w-[1600px] flex-col gap-2 2xl:flex-row 2xl:items-center 2xl:justify-between">
         <div className="flex min-w-0 flex-wrap items-center gap-3">
-          <Badge variant="outline" className="h-9 rounded-2xl border-white/10 bg-white/10 px-3 text-xs font-semibold text-slate-300 shadow-sm lg:hidden">
+          <Badge variant="outline" className="min-h-8 whitespace-normal rounded-2xl border-white/10 bg-white/10 px-3 py-1 text-left text-[11px] font-semibold leading-4 text-slate-300 shadow-sm lg:hidden">
             Mobile nav below · static preview
           </Badge>
-          <div className="min-w-0 rounded-2xl border border-white/10 bg-white/10 px-4 py-2 shadow-sm backdrop-blur">
+          <div className="min-w-0 rounded-2xl border border-white/10 bg-white/10 px-3 py-2 shadow-sm backdrop-blur sm:px-4">
             <p className="flex items-center gap-1.5 text-[11px] uppercase tracking-[0.2em] text-cyan-200/70">
               <Sparkles className="h-3 w-3" aria-hidden="true" /> Static Alpha workspace
             </p>
@@ -26,7 +26,7 @@ export function TopBar() {
           </Badge>
         </div>
 
-        <div className="grid w-full min-w-0 gap-3 xl:grid-cols-[minmax(320px,1fr)_auto_auto] 2xl:w-[900px]">
+        <div className="grid w-full min-w-0 gap-2 sm:gap-3 xl:grid-cols-[minmax(320px,1fr)_auto_auto] 2xl:w-[900px]">
           <div className="rounded-3xl border border-cyan-200/10 bg-white/[0.07] p-2 shadow-sm ring-1 ring-white/[0.03]">
             <div className="mb-2 flex flex-wrap items-center justify-between gap-2 px-2">
               <p className="flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.2em] text-cyan-200/75">
@@ -40,11 +40,12 @@ export function TopBar() {
               <Input
                 readOnly
                 aria-readonly="true"
-                className="h-11 cursor-not-allowed rounded-2xl border-white/10 bg-slate-950/40 pl-11 pr-4 text-slate-300 shadow-inner shadow-black/10 placeholder:text-slate-500 focus-visible:ring-cyan-300/40"
+                aria-label="Preview-only global search; no live query is running"
+                className="h-10 cursor-not-allowed rounded-2xl border-white/10 bg-slate-950/40 pl-11 pr-4 text-sm text-slate-300 shadow-inner shadow-black/10 placeholder:text-slate-500 focus-visible:border-cyan-300/50 focus-visible:ring-cyan-300/50 sm:h-11"
                 placeholder="Future route/account/report/provider search — preview only"
               />
             </label>
-            <div id="global-command-helper" className="mt-2 flex flex-wrap gap-1.5 px-2 text-[11px] text-slate-500">
+            <div id="global-command-helper" className="mt-2 flex max-h-16 flex-wrap gap-1.5 overflow-hidden px-2 text-[11px] text-slate-500 sm:max-h-none">
               {commandSuggestions.map((suggestion) => (
                 <span key={suggestion} className="rounded-full border border-white/10 bg-white/[0.04] px-2 py-0.5">
                   {suggestion} placeholder
@@ -55,11 +56,11 @@ export function TopBar() {
           </div>
 
           <div className="grid gap-2 sm:grid-cols-2 xl:grid-cols-1">
-            <Button type="button" variant="outline" disabled className="h-auto min-h-11 justify-start rounded-2xl border-white/10 bg-white/[0.06] px-4 py-2 text-left text-sm font-medium text-slate-400 shadow-sm disabled:cursor-not-allowed disabled:opacity-70">
+            <Button type="button" variant="outline" disabled aria-label="Range preview disabled; static date window is not applied globally" className="h-auto min-h-10 justify-start whitespace-normal rounded-2xl border-white/10 bg-white/[0.06] px-3 py-2 text-left text-sm font-medium leading-5 text-slate-400 shadow-sm disabled:cursor-not-allowed disabled:opacity-75 sm:min-h-11 sm:px-4">
               <Calendar className="mr-2 h-4 w-4 shrink-0" aria-hidden="true" />
               <span className="min-w-0">
-                <span className="block truncate text-slate-300">Range preview</span>
-                <span className="block truncate text-[11px] font-normal text-slate-500">Static date window · not applied globally</span>
+                <span className="block text-slate-300">Range preview</span>
+                <span className="block text-[11px] font-normal text-slate-500">Static date window · not applied globally</span>
               </span>
             </Button>
             <div className="flex min-h-11 items-center gap-2 rounded-2xl border border-white/10 bg-white/[0.06] px-3 py-2 text-sm font-medium text-slate-300 shadow-sm opacity-80" aria-label="Static analyst persona preview; no session or permission logic is applied">
@@ -74,7 +75,7 @@ export function TopBar() {
             </div>
           </div>
 
-          <div className="rounded-3xl border border-white/10 bg-white/[0.06] px-4 py-3 text-xs text-slate-400 shadow-sm xl:w-48">
+          <div className="hidden rounded-3xl border border-white/10 bg-white/[0.06] px-4 py-3 text-xs text-slate-400 shadow-sm md:block xl:w-48">
             <p className="flex items-center gap-1.5 font-semibold text-slate-200">
               <UserRound className="h-3.5 w-3.5 text-cyan-200" aria-hidden="true" /> Alpha QA context
             </p>

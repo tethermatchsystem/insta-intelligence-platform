@@ -1,11 +1,11 @@
-import { type ReactNode } from "react";
+import { type ReactNode, useId } from "react";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/lib/utils";
 
-export type SystemStateVariant = "empty" | "loading" | "error" | "restricted" | "placeholder";
+export type SystemStateVariant = "empty" | "loading" | "error" | "restricted" | "unavailable" | "placeholder";
 
 export type SystemStateBadgeTone = "success" | "warning" | "info" | "neutral" | "danger" | "purple" | "cyan";
 
@@ -23,34 +23,95 @@ type SystemStateProps = {
   checks?: string[];
   children?: ReactNode;
   compact?: boolean;
+  stateRole?: string;
+  safetyNote?: string;
 };
 
-const variantCopy: Record<SystemStateVariant, { eyebrow: string; accent: string; icon: string }> = {
+const variantCopy: Record<SystemStateVariant, { eyebrow: string; accent: string; icon: string; role: string; safetyNote: string }> = {
   empty: {
-    eyebrow: "Empty state",
+    eyebrow: "Alpha preview empty state",
     accent: "from-slate-950 via-slate-900 to-indigo-950",
     icon: "∅",
+    role: "Explains what future official-source or approved-provider data may appear here without creating fake actions.",
+    safetyNote: "No backend action runs from this empty state.",
   },
   loading: {
-    eyebrow: "Loading state",
+    eyebrow: "Skeleton placeholder state",
     accent: "from-slate-950 via-slate-900 to-blue-950",
     icon: "↻",
+    role: "Shows layout placeholders only; it does not imply live sync, provider lookup, or data collection.",
+    safetyNote: "No provider query or live Instagram data collection is running.",
   },
   error: {
-    eyebrow: "Error state",
+    eyebrow: "Route boundary state",
     accent: "from-rose-950 via-slate-950 to-slate-900",
     icon: "!",
+    role: "Keeps route-boundary failures calm and enterprise-safe without exposing stack traces or fake support workflows.",
+    safetyNote: "No backend write, notification, provider action, or OAuth flow is triggered.",
   },
   restricted: {
-    eyebrow: "Restricted state",
+    eyebrow: "Compliance-gated state",
     accent: "from-amber-950 via-slate-950 to-slate-900",
     icon: "⊘",
+    role: "Marks features that require official-source eligibility, provider approval, or licensed-provider-only review.",
+    safetyNote: "No scraping, private account access, hidden surveillance, or anti-bot bypass is available.",
+  },
+  unavailable: {
+    eyebrow: "Unavailable provider state",
+    accent: "from-slate-950 via-slate-900 to-emerald-950",
+    icon: "◇",
+    role: "Frames future provider/source availability without opening OAuth, provider activation, or backend setup.",
+    safetyNote: "Official-source connection and private beta activation are required before live behavior exists.",
   },
   placeholder: {
-    eyebrow: "Placeholder-only state",
+    eyebrow: "Preview-only state",
     accent: "from-slate-950 via-slate-900 to-cyan-950",
     icon: "◇",
+    role: "Provides static Alpha context for a future workflow while keeping the current UI mock-only.",
+    safetyNote: "No live Instagram data is collected in Alpha.",
   },
+};
+
+const defaultBadges: Record<SystemStateVariant, SystemStateBadge[]> = {
+  empty: [
+    { label: "Alpha preview", tone: "info" },
+    { label: "Preview-only state", tone: "neutral" },
+    { label: "No live provider action", tone: "warning" },
+  ],
+  loading: [
+    { label: "Skeleton placeholder", tone: "info" },
+    { label: "No live sync", tone: "warning" },
+    { label: "Static Alpha shell", tone: "neutral" },
+  ],
+  error: [
+    { label: "Route boundary", tone: "danger" },
+    { label: "No backend action", tone: "warning" },
+    { label: "Preview-safe recovery", tone: "neutral" },
+  ],
+  restricted: [
+    { label: "Official-source required", tone: "warning" },
+    { label: "Provider approval may be required", tone: "info" },
+    { label: "Licensed-provider-only where required", tone: "purple" },
+  ],
+  unavailable: [
+    { label: "Provider unavailable", tone: "warning" },
+    { label: "Private beta activation required", tone: "info" },
+    { label: "No OAuth started", tone: "neutral" },
+  ],
+  placeholder: [
+    { label: "Preview-only state", tone: "info" },
+    { label: "No live integration", tone: "warning" },
+    { label: "Official-source first", tone: "success" },
+  ],
+};
+
+const defaultChecks: Record<SystemStateVariant, string[]> = {
+  empty: ["Future data requires official-source connection or approved provider coverage", "No backend action runs from this state", "Public, owned, consented, or approved-source data only"],
+  loading: ["Skeleton placeholder only", "No live sync or provider fetch is implied", "No jobs, downloads, notifications, or database writes run"],
+  error: ["Route recovery only re-renders the current UI", "No stack trace or live incident workflow is exposed", "No provider, OAuth, notification, or backend action is triggered"],
+  restricted: ["Official-source connection required", "Provider approval may be required", "No scraping, private account access, hidden surveillance, or anti-bot bypass"],
+  unavailable: ["Private beta activation required before live provider behavior", "No OAuth or provider activation runs from this state", "No backend route, provider job, or database write exists here"],
+  placeholder: ["Alpha preview only", "No live Instagram data is collected in Alpha", "No backend action runs from this state"],
 };
 
 function badgeClasses(tone: SystemStateBadgeTone = "neutral") {
@@ -69,44 +130,52 @@ function badgeClasses(tone: SystemStateBadgeTone = "neutral") {
 
 export function SystemStateBadge({ badge }: { badge: SystemStateBadge }) {
   return (
-    <Badge variant="outline" className={cn("h-6 rounded-full border-transparent px-3 font-semibold ring-1", badgeClasses(badge.tone))}>
+    <Badge variant="outline" className={cn("min-h-6 max-w-full whitespace-normal break-words rounded-full border-transparent px-3 py-1 text-left font-semibold leading-4 ring-1", badgeClasses(badge.tone))}>
       {badge.label}
     </Badge>
   );
 }
 
-export function SystemState({ variant = "placeholder", eyebrow, title, description, badges = [], checks = [], children, compact = false }: SystemStateProps) {
+export function SystemState({ variant = "placeholder", eyebrow, title, description, badges = [], checks = [], children, compact = false, stateRole, safetyNote }: SystemStateProps) {
   const copy = variantCopy[variant];
-  const safeBadges = badges.length
-    ? badges
-    : [
-        { label: "Mock-only", tone: "neutral" as const },
-        { label: "No live integration", tone: "warning" as const },
-      ];
+  const safeBadges = badges.length ? badges : defaultBadges[variant];
+  const safeChecks = checks.length ? checks : defaultChecks[variant];
+  const titleId = useId();
+  const descriptionId = `${titleId}-description`;
 
   return (
-    <Card className={cn("overflow-hidden rounded-3xl border-slate-200 bg-white/95 py-0 shadow-sm shadow-slate-200/70", compact ? "p-3" : "p-4") }>
-      <div className={`rounded-3xl bg-gradient-to-br ${copy.accent} p-5 text-white`}>
+    <Card role="region" aria-labelledby={titleId} aria-describedby={description ? descriptionId : undefined} className={cn("overflow-hidden rounded-3xl border-white/10 bg-slate-950/80 py-0 shadow-2xl shadow-black/20 ring-1 ring-white/[0.03]", compact ? "p-2 sm:p-3" : "p-3 sm:p-4") }>
+      <div className={`rounded-3xl bg-gradient-to-br ${copy.accent} p-4 text-white shadow-inner shadow-white/[0.02] sm:p-5`}>
         <div className="flex flex-col gap-5 lg:flex-row lg:items-start lg:justify-between">
-          <div className="max-w-3xl">
+          <div className="max-w-3xl min-w-0">
             <div className="mb-4 flex flex-wrap gap-2">
               {safeBadges.map((badge) => (
                 <SystemStateBadge key={badge.label} badge={badge} />
               ))}
             </div>
-            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-slate-300">{eyebrow ?? copy.eyebrow}</p>
-            <h2 className={compact ? "mt-2 text-xl font-semibold tracking-tight" : "mt-3 text-2xl font-semibold tracking-tight"}>{title}</h2>
-            {description ? <p className="mt-3 text-sm leading-6 text-slate-300">{description}</p> : null}
+            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-300 sm:tracking-[0.22em]">{eyebrow ?? copy.eyebrow}</p>
+            <h2 id={titleId} className={compact ? "mt-2 text-xl font-semibold tracking-tight" : "mt-3 text-xl font-semibold tracking-tight sm:text-2xl"}>{title}</h2>
+            {description ? <p id={descriptionId} className="mt-3 text-sm leading-6 text-slate-300">{description}</p> : null}
+            <p className="mt-3 max-w-2xl text-xs leading-5 text-slate-400">{stateRole ?? copy.role}</p>
           </div>
-          <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl border border-white/10 bg-white/10 text-2xl font-black text-white shadow-2xl shadow-black/10">
-            {copy.icon}
+          <div className="w-full shrink-0 rounded-3xl border border-white/10 bg-white/[0.07] p-4 text-sm text-slate-300 shadow-2xl shadow-black/10 lg:w-72">
+            <div className="flex items-center gap-3">
+              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-white/10 bg-white/10 text-2xl font-black text-white">
+                {copy.icon}
+              </div>
+              <div className="min-w-0">
+                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-400">State boundary</p>
+                <p className="mt-1 text-sm font-semibold text-slate-100">{variant === "loading" ? "Skeleton only" : variant === "error" ? "Local recovery" : "Preview-safe"}</p>
+              </div>
+            </div>
+            <p className="mt-3 text-xs leading-5 text-slate-400">{safetyNote ?? copy.safetyNote}</p>
           </div>
         </div>
 
-        {checks.length ? (
-          <div className="mt-5 grid gap-3 lg:grid-cols-3">
-            {checks.map((check) => (
-              <Alert key={check} className="rounded-2xl border-white/10 bg-white/10 px-3 py-3 text-slate-200">
+        {safeChecks.length ? (
+          <div className="mt-5 grid gap-3 sm:grid-cols-2 xl:grid-cols-3" role="list" aria-label="Preview-only safety checks">
+            {safeChecks.map((check) => (
+              <Alert key={check} role="listitem" className="rounded-2xl border-white/10 bg-white/10 px-3 py-3 text-slate-200">
                 <AlertDescription className="text-xs leading-5 text-slate-200">{check}</AlertDescription>
               </Alert>
             ))}
@@ -119,21 +188,21 @@ export function SystemState({ variant = "placeholder", eyebrow, title, descripti
   );
 }
 
-export function LoadingSkeletonState({ title = "Preparing enterprise workspace", description = "Loading mock-safe analytics surfaces without opening live provider, auth, or backend connections." }: { title?: string; description?: string }) {
+export function LoadingSkeletonState({ title = "Preparing static Alpha preview", description = "Rendering skeleton placeholders only. No live sync, provider query, backend fetch, or Instagram data collection is running." }: { title?: string; description?: string }) {
   return (
     <SystemState
       variant="loading"
       title={title}
       description={description}
       badges={[
-        { label: "Static shell", tone: "info" },
-        { label: "No live backend", tone: "warning" },
-        { label: "Official-first", tone: "success" },
+        { label: "Alpha preview", tone: "info" },
+        { label: "Skeleton placeholder only", tone: "neutral" },
+        { label: "No live sync", tone: "warning" },
       ]}
-      checks={["Rendering route segment", "Keeping provider writes disabled", "Preserving compliance-safe data boundaries"]}
+      checks={["No backend fetch is implied by this loading state", "No provider query, OAuth, job, or database write runs", "No live Instagram data is collected in Alpha"]}
     >
       <div className="grid gap-3 md:grid-cols-3">
-        {["Header", "KPI cards", "Enterprise table"].map((item) => (
+        {["Shell placeholder", "Metric placeholders", "Table placeholder"].map((item) => (
           <Card key={item} className="rounded-2xl border-white/10 bg-white/10 py-0 p-4 shadow-none ring-1 ring-white/10">
             <CardContent className="px-0">
               <Skeleton className="h-3 w-24 bg-white/20" />
