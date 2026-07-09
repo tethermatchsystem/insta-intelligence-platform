@@ -24,27 +24,27 @@ function toneClasses(tone: AccountEngagementTone) {
 }
 
 const engagementPreviewBadges = [
-  "Preview-only content intelligence",
-  "Mock engagement metrics",
+  "Analytics cockpit preview",
+  "Mock trend and breakdown signals",
   "No live Instagram data is collected in Alpha",
 ];
 
 const engagementOperationalCards = [
   {
-    title: "Engagement analysis boundary",
-    detail: "Engagement trends, anomaly cards, and table rows are static Alpha previews. No content ingestion or monitoring job runs in Alpha.",
+    title: "Trend analysis boundary",
+    detail: "Trend panels, anomaly cards, and comparison rows are static Alpha previews. No content ingestion, monitoring job, or backend calculation runs in Alpha.",
     badge: "No content ingestion runs in Alpha",
     tone: "slate" as AccountEngagementTone,
   },
   {
-    title: "Official source readiness",
-    detail: "Future engagement summaries require connected professional account permissions and approved official-source coverage.",
+    title: "Official metric source path",
+    detail: "Future engagement summaries require connected professional account permissions, approved official-source coverage, provenance, and freshness rollups.",
     badge: "Requires official source connection",
     tone: "green" as AccountEngagementTone,
   },
   {
-    title: "Action safety",
-    detail: "Engagement filters, anomaly guidance, and review panels do not trigger jobs, notifications, database writes, or backend actions.",
+    title: "Decision support only",
+    detail: "Use this cockpit to understand what changed, where to compare, and which content patterns would deserve future official-source analysis.",
     badge: "No backend action runs from this page",
     tone: "amber" as AccountEngagementTone,
   },
@@ -54,6 +54,54 @@ const engagementSafetyChecks = [
   "Mock engagement metrics only",
   "Requires provider approval where applicable",
   "No scraping, private account access, hidden surveillance, or anti-bot bypass",
+];
+
+const cockpitLenses = [
+  {
+    title: "Trend lens",
+    value: "What changed?",
+    detail: "Use static movement cards to identify mock changes in reach, saves, comments, and share behavior.",
+    tone: "cyan" as AccountEngagementTone,
+  },
+  {
+    title: "Breakdown lens",
+    value: "Where did it happen?",
+    detail: "Separate content format, audience action, and source-readiness signals without running a live query.",
+    tone: "purple" as AccountEngagementTone,
+  },
+  {
+    title: "Benchmark lens",
+    value: "Is it meaningful?",
+    detail: "Compare static account baselines and mock benchmark deltas before future approved analytics rollups.",
+    tone: "blue" as AccountEngagementTone,
+  },
+];
+
+const whatChangedInsights = [
+  {
+    title: "Saves lifted in mock Reels",
+    detail: "Use this as a planning cue for future format analysis once official insights are connected.",
+    badge: "Static trend insight",
+    tone: "green" as AccountEngagementTone,
+  },
+  {
+    title: "Comment rate softened after promo content",
+    detail: "Review content mix and response context; no moderation or alert workflow is triggered in Alpha.",
+    badge: "Review context",
+    tone: "amber" as AccountEngagementTone,
+  },
+  {
+    title: "Benchmark view remains placeholder-only",
+    detail: "Future comparisons require approved source coverage and backend analytics before any real benchmark claim.",
+    badge: "Requires backend analytics",
+    tone: "slate" as AccountEngagementTone,
+  },
+];
+
+const engagementNextSteps = [
+  "Review the mock trend lens before deciding which content format should be analyzed later.",
+  "Use benchmark sections as planning context only; no live peer comparison runs in Alpha.",
+  "Keep monitoring, notifications, and database writes disabled until backend analytics and policy gates exist.",
 ];
 
 function Badge({ children, className }: { children: React.ReactNode; className: string }) {
@@ -74,14 +122,14 @@ function EngagementPanel({ title, subtitle, children }: { title: string; subtitl
 
 function KpiCard({ label, value, delta, tone, description }: (typeof accountEngagementKpis)[number]) {
   return (
-    <div className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm shadow-slate-200/70 transition hover:-translate-y-0.5 hover:shadow-md hover:shadow-slate-200/80">
+    <div className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm shadow-slate-200/70">
       <p className="text-sm font-medium text-slate-500">{label}</p>
       <div className="mt-4 flex flex-wrap items-end justify-between gap-3">
         <p className="text-3xl font-semibold tracking-tight text-slate-950">{value}</p>
         <Badge className={toneClasses(tone)}>{delta}</Badge>
       </div>
       <p className="mt-3 text-xs leading-5 text-slate-500">{description}</p>
-      <p className="mt-3 text-xs font-medium text-slate-400">Static Alpha preview · mock engagement metric</p>
+      <p className="mt-3 text-xs font-medium text-slate-400">Supports analytics cockpit decisions · mock engagement metric</p>
     </div>
   );
 }
@@ -89,7 +137,7 @@ function KpiCard({ label, value, delta, tone, description }: (typeof accountEnga
 function EngagementHeader() {
   return (
     <header className="overflow-hidden rounded-[2rem] border border-slate-200 bg-white shadow-sm shadow-slate-200/70">
-      <div className="bg-gradient-to-br from-slate-950 via-slate-900 to-indigo-950 p-5 text-white sm:p-7">
+      <div className="bg-gradient-to-br from-slate-950 via-slate-900 to-cyan-950 p-5 text-white sm:p-7">
         <div className="flex flex-col gap-6 xl:flex-row xl:items-start xl:justify-between">
           <div className="min-w-0">
             <div className="mb-4 flex flex-wrap gap-2">
@@ -98,15 +146,18 @@ function EngagementHeader() {
               ))}
               <Badge className="bg-cyan-400/10 text-cyan-100 ring-cyan-300/20">Engagement monitoring disabled in Alpha</Badge>
             </div>
-            <p className="text-sm font-semibold uppercase tracking-wide text-slate-400">Engagement preview</p>
-            <h1 className="mt-2 break-words text-3xl font-semibold tracking-tight text-white sm:text-4xl">{accountEngagementProfile.name} engagement preview</h1>
+            <p className="text-sm font-semibold uppercase tracking-wide text-slate-400">Analytics cockpit</p>
+            <h1 className="mt-2 break-words text-3xl font-semibold tracking-tight text-white sm:text-4xl">{accountEngagementProfile.name} engagement cockpit preview</h1>
             <p className="mt-2 text-base text-slate-300">{accountEngagementProfile.handle} · {accountEngagementProfile.accountType}</p>
+            <p className="mt-4 max-w-3xl text-sm leading-6 text-slate-300">
+              Review mock trends, breakdowns, benchmarks, and what-changed insights for planning. This page is an analytics cockpit, not a media library, moderation inbox, or ad creative gallery.
+            </p>
           </div>
           <div className="rounded-3xl border border-white/10 bg-white/10 p-4 text-sm leading-6 text-slate-200 shadow-sm shadow-slate-950/20 xl:w-[29rem]">
-            <p className="font-semibold text-white">Mock engagement intelligence</p>
-            <p className="mt-1">Engagement monitoring is disabled in Alpha. No live engagement monitoring is running; official source connection is required before any future engagement workflow.</p>
+            <p className="font-semibold text-white">Mock trend and benchmark boundary</p>
+            <p className="mt-1">Engagement monitoring is disabled in Alpha. No live trend calculation, benchmark query, notification, or backend analytics job is running.</p>
             <button disabled className="mt-4 w-full cursor-not-allowed rounded-2xl border border-white/10 bg-white/10 px-4 py-2 text-sm font-semibold text-slate-300">
-              Engagement monitoring disabled in Alpha
+              Analytics jobs disabled in Alpha
             </button>
             <div className="mt-4 flex flex-wrap gap-2">
               <Badge className="bg-blue-400/10 text-blue-100 ring-blue-300/20">{accountEngagementProfile.sourceBadge}</Badge>
@@ -123,11 +174,11 @@ function EngagementHeader() {
 
 function FilterPlaceholderBar() {
   return (
-    <section className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm shadow-slate-200/70">
+    <section className="rounded-3xl border border-cyan-100 bg-cyan-50/60 p-5 shadow-sm shadow-cyan-100/70">
       <div className="flex flex-col gap-4 xl:flex-row xl:items-start xl:justify-between">
         <div>
-          <p className="text-sm font-semibold text-slate-950">Static engagement filters</p>
-          <p className="mt-1 max-w-2xl text-xs leading-5 text-slate-500">Static placeholders for preview engagement signals and anomaly queues. No live engagement monitoring runs, no queue state is saved, and no backend action runs from this page.</p>
+          <p className="text-sm font-semibold text-slate-950">Static cockpit controls</p>
+          <p className="mt-1 max-w-2xl text-xs leading-5 text-slate-600">Static placeholders for trend windows, breakdown lenses, and benchmark views. No live engagement monitoring runs, no query state is saved, and no backend action runs from this page.</p>
         </div>
         <div className="flex w-full flex-col gap-2 xl:w-auto xl:items-end">
           <button disabled className="w-full cursor-not-allowed rounded-2xl border border-slate-200 bg-slate-50 px-4 py-2 text-sm font-semibold text-slate-400 xl:w-auto">
@@ -143,6 +194,51 @@ function FilterPlaceholderBar() {
         </div>
       </div>
     </section>
+  );
+}
+
+function AnalyticsCockpitSection() {
+  return (
+    <section className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_minmax(320px,0.72fr)]">
+      <EngagementPanel title="Cockpit lenses" subtitle="Three different ways to interpret mock engagement signals before any future backend analytics work.">
+        <div className="grid gap-3 md:grid-cols-3">
+          {cockpitLenses.map((lens) => (
+            <div key={lens.title} className="rounded-3xl border border-slate-100 bg-slate-50 p-4">
+              <Badge className={toneClasses(lens.tone)}>{lens.value}</Badge>
+              <h3 className="mt-4 text-sm font-semibold text-slate-950">{lens.title}</h3>
+              <p className="mt-2 text-xs leading-5 text-slate-600">{lens.detail}</p>
+            </div>
+          ))}
+        </div>
+      </EngagementPanel>
+
+      <EngagementPanel title="What should the user do next?" subtitle="Preview guidance only; no analytics action is executed.">
+        <ol className="space-y-3">
+          {engagementNextSteps.map((step, index) => (
+            <li key={step} className="flex gap-3 rounded-2xl border border-slate-100 bg-slate-50 p-3 text-sm leading-6 text-slate-700">
+              <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-cyan-100 text-xs font-bold text-cyan-700">{index + 1}</span>
+              <span>{step}</span>
+            </li>
+          ))}
+        </ol>
+      </EngagementPanel>
+    </section>
+  );
+}
+
+function WhatChangedSection() {
+  return (
+    <EngagementPanel title="What changed?" subtitle="Static insight blocks that explain the decision each mock metric supports.">
+      <div className="grid gap-3 lg:grid-cols-3">
+        {whatChangedInsights.map((insight) => (
+          <div key={insight.title} className="rounded-3xl border border-slate-100 bg-slate-50 p-4">
+            <Badge className={toneClasses(insight.tone)}>{insight.badge}</Badge>
+            <h3 className="mt-4 text-sm font-semibold text-slate-950">{insight.title}</h3>
+            <p className="mt-2 text-xs leading-5 text-slate-600">{insight.detail}</p>
+          </div>
+        ))}
+      </div>
+    </EngagementPanel>
   );
 }
 
@@ -189,6 +285,7 @@ export function AccountEngagementPage() {
       </section>
 
       <FilterPlaceholderBar />
+      <AnalyticsCockpitSection />
       <section className="grid gap-2 sm:grid-cols-3">
         {engagementSafetyChecks.map((item) => (
           <p key={item} className="rounded-2xl border border-slate-200 bg-white px-3 py-2 text-xs font-medium leading-5 text-slate-600 shadow-sm shadow-slate-200/60">
@@ -196,6 +293,7 @@ export function AccountEngagementPage() {
           </p>
         ))}
       </section>
+      <WhatChangedSection />
       <EngagementAnalyticsPanels />
       <EngagementIntelligenceCards />
       <ComplianceNotice />

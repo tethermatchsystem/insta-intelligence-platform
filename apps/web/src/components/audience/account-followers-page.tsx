@@ -27,6 +27,106 @@ function Badge({ children, className }: { children: React.ReactNode; className: 
   return <span className={`rounded-full px-3 py-1 text-xs font-semibold ring-1 ${className}`}>{children}</span>;
 }
 
+const audienceSegmentLenses = [
+  {
+    segment: "Creator studios",
+    share: "34%",
+    decision: "Lead with production workflow education",
+    detail: "Largest mock audience cohort for content-production, studio operations, and campaign planning themes.",
+    tone: "purple" as AccountFollowerTone,
+  },
+  {
+    segment: "Creative operators",
+    share: "27%",
+    decision: "Package repeatable launch playbooks",
+    detail: "Marketing and social teams are represented as aggregated planning personas, not individual follower identities.",
+    tone: "blue" as AccountFollowerTone,
+  },
+  {
+    segment: "Commerce teams",
+    share: "18%",
+    decision: "Use product bundles and proof points",
+    detail: "Retail and product teams are a preview segment for audience-fit discussion and future official summaries.",
+    tone: "green" as AccountFollowerTone,
+  },
+  {
+    segment: "Emerging makers",
+    share: "Mock 11%",
+    decision: "Validate before targeting",
+    detail: "Static segment placeholder for Alpha storytelling; future real data requires connected or authorized sources.",
+    tone: "amber" as AccountFollowerTone,
+  },
+];
+
+const sourceReadinessSteps = [
+  {
+    label: "Official source coverage",
+    value: "Connection required",
+    detail: "Future real audience summaries must come from connected or authorized professional account sources.",
+    tone: "amber" as AccountFollowerTone,
+  },
+  {
+    label: "Aggregate segment rollups",
+    value: "Preview-safe path",
+    detail: "Segment, growth, geography, language, and profile-type views stay aggregate and mock-only in Alpha.",
+    tone: "green" as AccountFollowerTone,
+  },
+  {
+    label: "Identity-level follower collection",
+    value: "Disabled",
+    detail: "Recent follower identity tracking is not active and remains provider-gated where legally allowed.",
+    tone: "rose" as AccountFollowerTone,
+  },
+];
+
+const geoProfileSignals = [
+  {
+    label: "Market cluster",
+    value: "Mock North America",
+    bar: "76%",
+    detail: "Static geography signal for audience planning; no live follower location lookup runs.",
+  },
+  {
+    label: "Language readiness",
+    value: "EN / ES preview",
+    bar: "62%",
+    detail: "Preview-only language grouping for future localized content decisions.",
+  },
+  {
+    label: "Profile-type mix",
+    value: "Creators + operators",
+    bar: "68%",
+    detail: "Modeled profile-type mix for audience-quality discussion, not identity-level monitoring.",
+  },
+];
+
+const followerQualitySignals = [
+  {
+    label: "Relevance fit",
+    value: "Strong",
+    detail: "Mock content-fit assessment for deciding which audience segments deserve deeper official-source review.",
+    tone: "green" as AccountFollowerTone,
+  },
+  {
+    label: "Audience hygiene",
+    value: "Needs source proof",
+    detail: "Quality labels are static placeholders until authorized account data and provenance exist.",
+    tone: "amber" as AccountFollowerTone,
+  },
+  {
+    label: "Private identity exposure",
+    value: "Blocked",
+    detail: "No individual follower identities, private-account access, or hidden monitoring are represented.",
+    tone: "rose" as AccountFollowerTone,
+  },
+];
+
+const followerNextSteps = [
+  "Pick the two mock segments that matter most for content planning before looking at any table row.",
+  "Use geography, language, and profile-type signals as readiness questions for future authorized sources.",
+  "Keep follower identity collection, exports, monitoring, and backend actions disabled until policy/provider gates exist.",
+];
+
 function FollowersPanel({ title, subtitle, children }: { title: string; subtitle?: string; children: React.ReactNode }) {
   return (
     <section className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm shadow-slate-200/70">
@@ -41,13 +141,15 @@ function FollowersPanel({ title, subtitle, children }: { title: string; subtitle
 
 function KpiCard({ label, value, delta, tone, description }: (typeof accountFollowerKpis)[number]) {
   return (
-    <div className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm shadow-slate-200/70">
-      <p className="text-sm font-medium text-slate-500">{label}</p>
+    <div className="rounded-[1.75rem] border border-cyan-100 bg-gradient-to-br from-white via-white to-cyan-50/70 p-5 shadow-sm shadow-cyan-100/70">
+      <p className="text-xs font-semibold uppercase tracking-[0.18em] text-cyan-700">Audience decision metric</p>
+      <p className="mt-2 text-sm font-medium text-slate-500">{label}</p>
       <div className="mt-4 flex items-end justify-between gap-3">
         <p className="text-3xl font-semibold tracking-tight text-slate-950">{value}</p>
         <Badge className={toneClasses(tone)}>{delta}</Badge>
       </div>
       <p className="mt-3 text-xs leading-5 text-slate-500">{description}</p>
+      <p className="mt-3 text-xs font-medium text-slate-400">Supports audience segment review · mock follower metric</p>
     </div>
   );
 }
@@ -65,15 +167,18 @@ function FollowersHeader() {
             <Badge className="bg-amber-50 text-amber-700 ring-amber-100">{accountFollowersProfile.gatedBadge}</Badge>
             <Badge className="bg-rose-50 text-rose-700 ring-rose-100">Restricted preview</Badge>
           </div>
-          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-cyan-200">Audience composition and follower quality preview</p>
-          <h1 className="mt-2 text-4xl font-semibold tracking-tight text-white">{accountFollowersProfile.name} follower quality preview</h1>
+          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-cyan-200">Audience intelligence and segment atlas</p>
+          <h1 className="mt-2 text-4xl font-semibold tracking-tight text-white">{accountFollowersProfile.name} audience intelligence preview</h1>
           <p className="mt-3 max-w-4xl text-base leading-7 text-slate-200">
-            {accountFollowersProfile.handle} · {accountFollowersProfile.accountType}. Mock follower growth, geography, language, creator/business mix, and readiness signals only.
+            {accountFollowersProfile.handle} · {accountFollowersProfile.accountType}. Mock follower segments, growth/source readiness, geography, language, profile-type mix, and follower-quality signals only.
+          </p>
+          <p className="mt-3 max-w-4xl text-sm leading-6 text-cyan-100/90">
+            This page should answer who the audience appears to be, which segments matter, and what authorized source coverage would be required later. It is not a live follower tracker.
           </p>
         </div>
         <div className="rounded-3xl border border-white/10 bg-white/10 p-4 text-sm leading-6 text-slate-200 xl:w-[29rem]">
-          <p className="font-semibold text-white">Mock audience metrics · No live tracking</p>
-          <p className="mt-1 text-slate-300">Follower preview uses static Alpha mock data. No live follower collection or follower tracking runs in Alpha; official source connection and licensed provider review are required before any future collection workflow.</p>
+          <p className="font-semibold text-white">Audience source boundary · No live tracking</p>
+          <p className="mt-1 text-slate-300">Follower preview uses static Alpha mock data. No live follower collection or follower tracking runs in Alpha; future real data requires connected/authorized account sources and licensed provider review where applicable.</p>
         </div>
       </div>
     </header>
@@ -81,14 +186,14 @@ function FollowersHeader() {
 }
 
 function FilterPlaceholderBar() {
-  const disabledControls = ["Segment preview", "Geo/language preview", "Quality score preview", "Export disabled", "Monitor disabled"];
+  const disabledControls = ["Segment atlas preview", "Geo/language lens", "Quality score preview", "Source readiness", "Export disabled", "Monitor disabled"];
 
   return (
-    <section className="rounded-3xl border border-slate-200 bg-white p-4 shadow-sm shadow-slate-200/70">
+    <section className="rounded-3xl border border-cyan-100 bg-cyan-50/60 p-4 shadow-sm shadow-cyan-100/70">
       <div className="flex flex-col gap-3 xl:flex-row xl:items-center xl:justify-between">
         <div>
-          <p className="text-sm font-semibold text-slate-950">Audience readiness filters</p>
-          <p className="mt-1 text-xs leading-5 text-slate-500">Static placeholders for audience composition, quality, geography, language, and gated provider views; no live follower collection is running.</p>
+          <p className="text-sm font-semibold text-slate-950">Static audience segment controls</p>
+          <p className="mt-1 text-xs leading-5 text-slate-600">Static placeholders for audience composition, quality, geography, language, and gated provider views; no live follower collection is running.</p>
         </div>
         <div className="flex flex-wrap gap-2">
           {accountFollowerFilters.map((filter) => (
@@ -105,6 +210,100 @@ function FilterPlaceholderBar() {
           </span>
         ))}
       </div>
+    </section>
+  );
+}
+
+function AudienceSegmentAtlas() {
+  return (
+    <section className="grid gap-6 xl:grid-cols-[minmax(0,1.18fr)_minmax(320px,0.82fr)]">
+      <FollowersPanel title="Audience segment atlas" subtitle="Start with audience strategy: each card explains a mock segment, the decision it supports, and the compliance boundary.">
+        <div className="grid gap-3 lg:grid-cols-2">
+          {audienceSegmentLenses.map((segment) => (
+            <article key={segment.segment} className="rounded-3xl border border-cyan-100 bg-gradient-to-br from-cyan-50/80 via-white to-white p-4">
+              <div className="flex items-start justify-between gap-3">
+                <div>
+                  <p className="text-xs font-semibold uppercase tracking-[0.18em] text-cyan-700">Audience segment</p>
+                  <h3 className="mt-2 text-base font-semibold text-slate-950">{segment.segment}</h3>
+                </div>
+                <Badge className={toneClasses(segment.tone)}>{segment.share}</Badge>
+              </div>
+              <p className="mt-3 text-sm leading-6 text-slate-600">{segment.detail}</p>
+              <p className="mt-3 rounded-2xl border border-cyan-100 bg-white/80 p-3 text-xs leading-5 text-slate-600">
+                <span className="font-semibold text-slate-950">Next decision:</span> {segment.decision}
+              </p>
+            </article>
+          ))}
+        </div>
+      </FollowersPanel>
+
+      <FollowersPanel title="What should the user do next?" subtitle="Preview guidance only; no follower action is executed.">
+        <ol className="space-y-3">
+          {followerNextSteps.map((step, index) => (
+            <li key={step} className="flex gap-3 rounded-2xl border border-slate-100 bg-slate-50 p-3 text-sm leading-6 text-slate-700">
+              <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-cyan-100 text-xs font-bold text-cyan-700">{index + 1}</span>
+              <span>{step}</span>
+            </li>
+          ))}
+        </ol>
+      </FollowersPanel>
+    </section>
+  );
+}
+
+function GeographyAndQualitySignals() {
+  return (
+    <section className="grid gap-6 xl:grid-cols-[0.88fr_1.12fr]">
+      <FollowersPanel title="Growth and source readiness" subtitle="A preview checklist for moving from Alpha mock segments to approved audience summaries later.">
+        <div className="space-y-3">
+          {sourceReadinessSteps.map((step, index) => (
+            <div key={step.label} className="flex gap-3 rounded-2xl border border-slate-100 bg-slate-50 p-4">
+              <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-cyan-100 text-xs font-bold text-cyan-700">{index + 1}</span>
+              <div>
+                <div className="flex flex-wrap items-center gap-2">
+                  <p className="text-sm font-semibold text-slate-950">{step.label}</p>
+                  <Badge className={toneClasses(step.tone)}>{step.value}</Badge>
+                </div>
+                <p className="mt-2 text-xs leading-5 text-slate-600">{step.detail}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </FollowersPanel>
+
+      <FollowersPanel title="Geography, profile-type, and follower-quality matrix" subtitle="Static mock signals for audience planning; no individual follower identity lookup runs.">
+        <div className="grid gap-4 lg:grid-cols-2">
+          <div className="space-y-3">
+            {geoProfileSignals.map((signal) => (
+              <div key={signal.label} className="rounded-2xl border border-cyan-100 bg-cyan-50/50 p-4">
+                <div className="flex items-center justify-between gap-3">
+                  <p className="text-xs font-semibold uppercase tracking-[0.18em] text-cyan-700">{signal.label}</p>
+                  <p className="text-sm font-semibold text-slate-950">{signal.value}</p>
+                </div>
+                <div className="mt-3 h-2 rounded-full bg-white">
+                  <div className="h-2 rounded-full bg-cyan-500" style={{ width: signal.bar }} />
+                </div>
+                <p className="mt-2 text-xs leading-5 text-slate-600">{signal.detail}</p>
+              </div>
+            ))}
+          </div>
+
+          <div className="rounded-3xl border border-slate-100 bg-slate-50 p-4">
+            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-400">Follower-quality preview</p>
+            <div className="mt-4 space-y-3">
+              {followerQualitySignals.map((signal) => (
+                <div key={signal.label} className="rounded-2xl border border-white bg-white p-3">
+                  <div className="flex flex-wrap items-center justify-between gap-2">
+                    <p className="text-sm font-semibold text-slate-950">{signal.label}</p>
+                    <Badge className={toneClasses(signal.tone)}>{signal.value}</Badge>
+                  </div>
+                  <p className="mt-2 text-xs leading-5 text-slate-600">{signal.detail}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </FollowersPanel>
     </section>
   );
 }
@@ -142,6 +341,8 @@ export function AccountFollowersPage() {
       </section>
 
       <FilterPlaceholderBar />
+      <AudienceSegmentAtlas />
+      <GeographyAndQualitySignals />
       <FollowerSummaryPanels />
       <FollowerIntelligenceCards />
       <ComplianceNotice />

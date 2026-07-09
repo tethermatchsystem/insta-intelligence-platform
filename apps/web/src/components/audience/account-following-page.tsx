@@ -27,6 +27,74 @@ function Badge({ children, className }: { children: React.ReactNode; className: 
   return <span className={`rounded-full px-3 py-1 text-xs font-semibold ring-1 ${className}`}>{children}</span>;
 }
 
+const ecosystemLanes = [
+  {
+    lane: "Partners",
+    value: "196 mock relationships",
+    cue: "Co-marketing and collaboration targets",
+    examples: ["Launch partners", "Retail collaborators", "Studio vendors"],
+    detail: "Static partner lane for approved public-entity context; no private relationship tracking runs.",
+    tone: "green" as AccountFollowingTone,
+  },
+  {
+    lane: "Creators",
+    value: "488 mock relationships",
+    cue: "Influence and content adjacency",
+    examples: ["Studio educators", "Workflow creators", "Production teams"],
+    detail: "Creator lane shows category-level adjacency only, not individual monitoring or outreach automation.",
+    tone: "purple" as AccountFollowingTone,
+  },
+  {
+    lane: "Brands",
+    value: "308 mock relationships",
+    cue: "Commerce and category context",
+    examples: ["Product brands", "Tools", "Retail operators"],
+    detail: "Brand lane helps explain market context using static Alpha summaries and future official-source gates.",
+    tone: "blue" as AccountFollowingTone,
+  },
+  {
+    lane: "Media + competitors",
+    value: "218 mock relationships",
+    cue: "Industry signal watchlist",
+    examples: ["Publishers", "Trend sources", "Adjacent competitors"],
+    detail: "Competitive and media labels stay as mock public-entity categories, not surveillance or private-access signals.",
+    tone: "amber" as AccountFollowingTone,
+  },
+];
+
+const industrySignalBands = [
+  {
+    label: "Partner proximity",
+    value: "High",
+    detail: "Static relationship-map signal for identifying partnership themes before any provider integration exists.",
+    tone: "green" as AccountFollowingTone,
+  },
+  {
+    label: "Creator ecosystem pull",
+    value: "Strong",
+    detail: "Mock creator and media adjacency for brand ecosystem planning, not identity-level following surveillance.",
+    tone: "purple" as AccountFollowingTone,
+  },
+  {
+    label: "Competitor lens",
+    value: "Gated preview",
+    detail: "Competitor and industry signals are category placeholders and require provider/policy review before real use.",
+    tone: "amber" as AccountFollowingTone,
+  },
+];
+
+const relationshipBoundaries = [
+  "Public or approved entity categories only in Alpha mock UI.",
+  "No latest-following identity feed, hidden monitoring, outreach automation, or export workflow runs.",
+  "Future enrichment requires official source connection and licensed provider review where applicable.",
+];
+
+const followingNextSteps = [
+  "Choose the ecosystem lane that best explains the account’s current brand posture: partners, creators, brands, media, or competitors.",
+  "Use the map to frame partner and industry questions before reviewing category-level rows.",
+  "Keep live following collection, exports, monitoring, and identity-level change tracking disabled until policy/provider gates exist.",
+];
+
 function FollowingPanel({ title, subtitle, children }: { title: string; subtitle?: string; children: React.ReactNode }) {
   return (
     <section className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm shadow-slate-200/70">
@@ -41,13 +109,15 @@ function FollowingPanel({ title, subtitle, children }: { title: string; subtitle
 
 function KpiCard({ label, value, delta, tone, description }: (typeof accountFollowingKpis)[number]) {
   return (
-    <div className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm shadow-slate-200/70">
-      <p className="text-sm font-medium text-slate-500">{label}</p>
+    <div className="rounded-[1.75rem] border border-violet-100 bg-gradient-to-br from-white via-white to-violet-50/70 p-5 shadow-sm shadow-violet-100/70">
+      <p className="text-xs font-semibold uppercase tracking-[0.18em] text-violet-700">Ecosystem map metric</p>
+      <p className="mt-2 text-sm font-medium text-slate-500">{label}</p>
       <div className="mt-4 flex items-end justify-between gap-3">
         <p className="text-3xl font-semibold tracking-tight text-slate-950">{value}</p>
         <Badge className={toneClasses(tone)}>{delta}</Badge>
       </div>
       <p className="mt-3 text-xs leading-5 text-slate-500">{description}</p>
+      <p className="mt-3 text-xs font-medium text-slate-400">Supports relationship-map review · mock following metric</p>
     </div>
   );
 }
@@ -65,15 +135,18 @@ function FollowingHeader() {
             <Badge className="bg-amber-50 text-amber-700 ring-amber-100">{accountFollowingProfile.gatedBadge}</Badge>
             <Badge className="bg-rose-50 text-rose-700 ring-rose-100">Restricted relationship intelligence</Badge>
           </div>
-          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-violet-200">Brand relationship map preview</p>
-          <h1 className="mt-2 text-4xl font-semibold tracking-tight text-white">{accountFollowingProfile.name} followed-entity map</h1>
+          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-violet-200">Relationship map and brand ecosystem lens</p>
+          <h1 className="mt-2 text-4xl font-semibold tracking-tight text-white">{accountFollowingProfile.name} brand ecosystem preview</h1>
           <p className="mt-3 max-w-4xl text-base leading-7 text-slate-200">
             {accountFollowingProfile.handle} · {accountFollowingProfile.accountType}. Mock followed public entities by category, market, relevance, and relationship type only.
           </p>
+          <p className="mt-3 max-w-4xl text-sm leading-6 text-violet-100/90">
+            This page should answer which public or approved entities shape the account’s brand ecosystem. It is not an audience-composition page and it does not enable unauthorized private tracking.
+          </p>
         </div>
         <div className="rounded-3xl border border-white/10 bg-white/10 p-4 text-sm leading-6 text-slate-200 xl:w-[29rem]">
-          <p className="font-semibold text-white">Mock relationship signals · No hidden surveillance</p>
-          <p className="mt-1 text-slate-300">Following preview uses static Alpha mock data. No live following collection runs in Alpha; official source connection and licensed provider review are required before any future relationship workflow.</p>
+          <p className="font-semibold text-white">Relationship map boundary · No hidden surveillance</p>
+          <p className="mt-1 text-slate-300">Following preview uses static Alpha mock data. No live following collection or identity-level relationship tracking runs in Alpha; official source connection and licensed provider review are required before any future relationship workflow.</p>
         </div>
       </div>
     </header>
@@ -81,14 +154,14 @@ function FollowingHeader() {
 }
 
 function FilterPlaceholderBar() {
-  const disabledControls = ["Category map preview", "Market preview", "Relevance preview", "Export disabled", "Monitor disabled"];
+  const disabledControls = ["Relationship board", "Partner lens", "Creator/media lens", "Competitor lens", "Export disabled", "Monitor disabled"];
 
   return (
-    <section className="rounded-3xl border border-slate-200 bg-white p-4 shadow-sm shadow-slate-200/70">
+    <section className="rounded-3xl border border-violet-100 bg-violet-50/60 p-4 shadow-sm shadow-violet-100/70">
       <div className="flex flex-col gap-3 xl:flex-row xl:items-center xl:justify-between">
         <div>
-          <p className="text-sm font-semibold text-slate-950">Relationship map filters</p>
-          <p className="mt-1 text-xs leading-5 text-slate-500">Static placeholders for followed public-entity categories, market, relevance, and gated provider views; no live following collection is running.</p>
+          <p className="text-sm font-semibold text-slate-950">Static ecosystem map controls</p>
+          <p className="mt-1 text-xs leading-5 text-slate-600">Static placeholders for followed public-entity categories, partner lanes, creator/media groups, market relevance, and gated provider views; no live following collection is running.</p>
         </div>
         <div className="flex flex-wrap gap-2">
           {accountFollowingFilters.map((filter) => (
@@ -105,6 +178,89 @@ function FilterPlaceholderBar() {
           </span>
         ))}
       </div>
+    </section>
+  );
+}
+
+function RelationshipEcosystemMap() {
+  return (
+    <section className="grid gap-6 xl:grid-cols-[minmax(0,1.25fr)_minmax(320px,0.75fr)]">
+      <FollowingPanel title="Relationship ecosystem board" subtitle="A brand-map view of public or approved entity categories: partners, creators, brands, media, competitors, and industry signals.">
+        <div className="rounded-[2rem] border border-violet-200 bg-gradient-to-br from-slate-950 via-violet-950 to-indigo-950 p-5 text-white shadow-sm shadow-violet-950/20">
+          <div className="mb-5 flex flex-wrap items-start justify-between gap-3">
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-violet-200">Brand ecosystem lens</p>
+              <h3 className="mt-2 text-xl font-semibold">Catalyst Studio relationship map</h3>
+            </div>
+            <Badge className="bg-white/15 text-violet-100 ring-white/20">Static Alpha board</Badge>
+          </div>
+
+          <div className="grid gap-3 lg:grid-cols-2">
+            {ecosystemLanes.map((lane) => (
+              <article key={lane.lane} className="rounded-3xl border border-white/10 bg-white/10 p-4">
+                <div className="flex flex-wrap items-start justify-between gap-3">
+                  <div>
+                    <p className="text-xs font-semibold uppercase tracking-[0.18em] text-violet-200">{lane.lane}</p>
+                    <h4 className="mt-2 text-base font-semibold text-white">{lane.cue}</h4>
+                  </div>
+                  <Badge className={toneClasses(lane.tone)}>{lane.value}</Badge>
+                </div>
+                <p className="mt-3 text-xs leading-5 text-violet-100/85">{lane.detail}</p>
+                <div className="mt-4 flex flex-wrap gap-2">
+                  {lane.examples.map((example) => (
+                    <span key={example} className="rounded-full border border-white/10 bg-white/10 px-3 py-1 text-xs font-semibold text-violet-100">
+                      {example}
+                    </span>
+                  ))}
+                </div>
+              </article>
+            ))}
+          </div>
+
+          <p className="mt-4 rounded-2xl border border-white/10 bg-white/10 p-3 text-xs leading-5 text-violet-100/85">
+            This board is a relationship-map preview, not an audience list. It does not collect live following data or expose private relationships.
+          </p>
+        </div>
+      </FollowingPanel>
+
+      <FollowingPanel title="What should the user do next?" subtitle="Preview guidance only; no relationship action is executed.">
+        <ol className="space-y-3">
+          {followingNextSteps.map((step, index) => (
+            <li key={step} className="flex gap-3 rounded-2xl border border-violet-100 bg-violet-50/60 p-3 text-sm leading-6 text-slate-700">
+              <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-violet-100 text-xs font-bold text-violet-700">{index + 1}</span>
+              <span>{step}</span>
+            </li>
+          ))}
+        </ol>
+      </FollowingPanel>
+    </section>
+  );
+}
+
+function EcosystemSignalPanels() {
+  return (
+    <section className="grid gap-6 xl:grid-cols-[1fr_0.8fr]">
+      <FollowingPanel title="Industry signal lanes" subtitle="Static mock ecosystem signals; no private relationship surveillance or live following lookup runs.">
+        <div className="grid gap-3 lg:grid-cols-3">
+          {industrySignalBands.map((signal) => (
+            <div key={signal.label} className="rounded-3xl border border-violet-100 bg-violet-50/50 p-4">
+              <Badge className={toneClasses(signal.tone)}>{signal.value}</Badge>
+              <p className="mt-4 text-sm font-semibold text-slate-950">{signal.label}</p>
+              <p className="mt-2 text-xs leading-5 text-slate-600">{signal.detail}</p>
+            </div>
+          ))}
+        </div>
+      </FollowingPanel>
+
+      <FollowingPanel title="Source and compliance boundaries" subtitle="Relationship intelligence stays category-level and provider-gated in Alpha.">
+        <ul className="space-y-3">
+          {relationshipBoundaries.map((boundary) => (
+            <li key={boundary} className="rounded-2xl border border-slate-100 bg-slate-50 p-3 text-xs leading-5 text-slate-600">
+              {boundary}
+            </li>
+          ))}
+        </ul>
+      </FollowingPanel>
     </section>
   );
 }
@@ -142,6 +298,8 @@ export function AccountFollowingPage() {
       </section>
 
       <FilterPlaceholderBar />
+      <RelationshipEcosystemMap />
+      <EcosystemSignalPanels />
       <FollowingSummaryPanels />
       <FollowingIntelligenceCards />
       <ComplianceNotice />

@@ -24,27 +24,27 @@ function toneClasses(tone: AccountAdTone) {
 }
 
 const adsPreviewBadges = [
-  "Preview-only ad intelligence",
-  "Mock ad metrics",
+  "Creative intelligence gallery",
+  "Mock ad and creative signals",
   "No live Instagram data is collected in Alpha",
 ];
 
 const adsOperationalCards = [
   {
-    title: "Ad monitoring boundary",
-    detail: "Ad trend panels, creative previews, and table rows are static Alpha previews. No ad monitoring runs in Alpha.",
+    title: "Creative monitoring boundary",
+    detail: "Creative cards, placement labels, objective chips, and table rows are static Alpha previews. No ad monitoring, download, or backend action runs in Alpha.",
     badge: "No ad monitoring runs in Alpha",
     tone: "slate" as AccountAdTone,
   },
   {
-    title: "Official source readiness",
-    detail: "Owned ad summaries require Meta Marketing API connection; public ad visibility requires Meta Ad Library review before private beta use.",
+    title: "Meta source readiness",
+    detail: "Future owned ad summaries require Meta Marketing API connection; allowed public ad visibility requires Meta Ad Library review before private beta use.",
     badge: "Requires official source connection",
     tone: "green" as AccountAdTone,
   },
   {
-    title: "Provider approval boundary",
-    detail: "Any licensed provider enrichment remains review-only and gated until provider approval and policy review are complete.",
+    title: "Creative review decision",
+    detail: "Use this preview to compare mock creative themes, placements, objectives, and readiness signals without implying unauthorized competitor private data.",
     badge: "Requires provider approval where applicable",
     tone: "amber" as AccountAdTone,
   },
@@ -54,6 +54,33 @@ const adsSafetyChecks = [
   "No ad monitoring runs in Alpha",
   "No backend action runs from this page",
   "No scraping, private account access, hidden surveillance, or anti-bot bypass",
+];
+
+const creativeGalleryLanes = [
+  {
+    title: "Creative board",
+    value: "Mock assets",
+    detail: "Review static creative cards, message hooks, placement labels, and objective tags before any future source-backed workflow.",
+    tone: "purple" as AccountAdTone,
+  },
+  {
+    title: "Placement lens",
+    value: "Safe context",
+    detail: "Separate owned ad previews from allowed public Ad Library visibility and avoid unauthorized private competitor claims.",
+    tone: "blue" as AccountAdTone,
+  },
+  {
+    title: "Approval path",
+    value: "Meta review",
+    detail: "Future activation requires Meta Marketing API, Meta Ad Library review, private-beta ads service, and audit-backed provider gates.",
+    tone: "green" as AccountAdTone,
+  },
+];
+
+const creativeNextSteps = [
+  "Review mock creative cards for message, placement, and objective differences.",
+  "Keep owned-ad and allowed-public Ad Library concepts separate from private competitor data.",
+  "Do not enable monitoring, downloads, spend queries, or provider enrichment until backend and approval gates exist.",
 ];
 
 function Badge({ children, className }: { children: React.ReactNode; className: string }) {
@@ -74,14 +101,14 @@ function AdsPanel({ title, subtitle, children }: { title: string; subtitle?: str
 
 function KpiCard({ label, value, delta, tone, description }: (typeof accountAdKpis)[number]) {
   return (
-    <div className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm shadow-slate-200/70 transition hover:-translate-y-0.5 hover:shadow-md hover:shadow-slate-200/80">
+    <div className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm shadow-slate-200/70">
       <p className="text-sm font-medium text-slate-500">{label}</p>
       <div className="mt-4 flex flex-wrap items-end justify-between gap-3">
         <p className="text-3xl font-semibold tracking-tight text-slate-950">{value}</p>
         <Badge className={toneClasses(tone)}>{delta}</Badge>
       </div>
       <p className="mt-3 text-xs leading-5 text-slate-500">{description}</p>
-      <p className="mt-3 text-xs font-medium text-slate-400">Static Alpha preview · mock ad metric</p>
+      <p className="mt-3 text-xs font-medium text-slate-400">Supports creative review decisions · mock ad metric</p>
     </div>
   );
 }
@@ -89,7 +116,7 @@ function KpiCard({ label, value, delta, tone, description }: (typeof accountAdKp
 function AdsHeader() {
   return (
     <header className="overflow-hidden rounded-[2rem] border border-slate-200 bg-white shadow-sm shadow-slate-200/70">
-      <div className="bg-gradient-to-br from-slate-950 via-slate-900 to-indigo-950 p-5 text-white sm:p-7">
+      <div className="bg-gradient-to-br from-slate-950 via-slate-900 to-amber-950 p-5 text-white sm:p-7">
         <div className="flex flex-col gap-6 xl:flex-row xl:items-start xl:justify-between">
           <div className="min-w-0">
             <div className="mb-4 flex flex-wrap gap-2">
@@ -98,15 +125,18 @@ function AdsHeader() {
               ))}
               <Badge className="bg-cyan-400/10 text-cyan-100 ring-cyan-300/20">Ad monitoring disabled in Alpha</Badge>
             </div>
-            <p className="text-sm font-semibold uppercase tracking-wide text-slate-400">Ads preview</p>
-            <h1 className="mt-2 break-words text-3xl font-semibold tracking-tight text-white sm:text-4xl">{accountAdsProfile.name} ads preview</h1>
+            <p className="text-sm font-semibold uppercase tracking-wide text-slate-400">Creative intelligence gallery</p>
+            <h1 className="mt-2 break-words text-3xl font-semibold tracking-tight text-white sm:text-4xl">{accountAdsProfile.name} ad creative gallery preview</h1>
             <p className="mt-2 text-base text-slate-300">{accountAdsProfile.handle} · {accountAdsProfile.accountType}</p>
+            <p className="mt-4 max-w-3xl text-sm leading-6 text-slate-300">
+              Review mock creative cards, objectives, placement labels, approval gates, and source-safe ad insights. This page is a creative intelligence gallery, not a private competitor tracker or live ad monitoring tool.
+            </p>
           </div>
           <div className="rounded-3xl border border-white/10 bg-white/10 p-4 text-sm leading-6 text-slate-200 shadow-sm shadow-slate-950/20 xl:w-[29rem]">
-            <p className="font-semibold text-white">Mock ad intelligence</p>
-            <p className="mt-1">Ad monitoring is disabled in Alpha. Future workflows require Meta Marketing API connection, Meta Ad Library review, and a private-beta ads service.</p>
+            <p className="font-semibold text-white">Meta API / Ad Library boundary</p>
+            <p className="mt-1">Ad monitoring is disabled in Alpha. Future workflows require Meta Marketing API connection, Meta Ad Library review, a private-beta ads service, and policy-gated provenance.</p>
             <button disabled className="mt-4 w-full cursor-not-allowed rounded-2xl border border-white/10 bg-white/10 px-4 py-2 text-sm font-semibold text-slate-300">
-              Ad monitoring disabled in Alpha
+              Creative monitoring disabled in Alpha
             </button>
             <div className="mt-4 flex flex-wrap gap-2">
               <Badge className="bg-blue-400/10 text-blue-100 ring-blue-300/20">{accountAdsProfile.sourceBadge}</Badge>
@@ -123,11 +153,11 @@ function AdsHeader() {
 
 function FilterPlaceholderBar() {
   return (
-    <section className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm shadow-slate-200/70">
+    <section className="rounded-3xl border border-amber-100 bg-amber-50/60 p-5 shadow-sm shadow-amber-100/70">
       <div className="flex flex-col gap-4 xl:flex-row xl:items-start xl:justify-between">
         <div>
-          <p className="text-sm font-semibold text-slate-950">Static ads filters</p>
-          <p className="mt-1 max-w-2xl text-xs leading-5 text-slate-500">Static placeholders for preview ad signals, future Meta Ad Library review, authorized owned-ad views, and private-beta ads service checks. No live ad query or backend action runs from this page.</p>
+          <p className="text-sm font-semibold text-slate-950">Static creative gallery controls</p>
+          <p className="mt-1 max-w-2xl text-xs leading-5 text-slate-600">Static placeholders for creative format, placement, objective, future Meta Ad Library review, authorized owned-ad views, and private-beta ads service checks. No live ad query or backend action runs from this page.</p>
         </div>
         <div className="flex w-full flex-col gap-2 xl:w-auto xl:items-end">
           <button disabled className="w-full cursor-not-allowed rounded-2xl border border-slate-200 bg-slate-50 px-4 py-2 text-sm font-semibold text-slate-400 xl:w-auto">
@@ -142,6 +172,35 @@ function FilterPlaceholderBar() {
           </div>
         </div>
       </div>
+    </section>
+  );
+}
+
+function CreativeGalleryBriefing() {
+  return (
+    <section className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_minmax(320px,0.72fr)]">
+      <AdsPanel title="Creative gallery lanes" subtitle="Each lane explains a different ad-review decision for the static Alpha demo.">
+        <div className="grid gap-3 md:grid-cols-3">
+          {creativeGalleryLanes.map((lane) => (
+            <div key={lane.title} className="rounded-3xl border border-slate-100 bg-slate-50 p-4">
+              <Badge className={toneClasses(lane.tone)}>{lane.value}</Badge>
+              <h3 className="mt-4 text-sm font-semibold text-slate-950">{lane.title}</h3>
+              <p className="mt-2 text-xs leading-5 text-slate-600">{lane.detail}</p>
+            </div>
+          ))}
+        </div>
+      </AdsPanel>
+
+      <AdsPanel title="What should the user do next?" subtitle="Preview guidance only; no ad action is executed.">
+        <ol className="space-y-3">
+          {creativeNextSteps.map((step, index) => (
+            <li key={step} className="flex gap-3 rounded-2xl border border-slate-100 bg-slate-50 p-3 text-sm leading-6 text-slate-700">
+              <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-amber-100 text-xs font-bold text-amber-700">{index + 1}</span>
+              <span>{step}</span>
+            </li>
+          ))}
+        </ol>
+      </AdsPanel>
     </section>
   );
 }
@@ -189,6 +248,7 @@ export function AccountAdsPage() {
       </section>
 
       <FilterPlaceholderBar />
+      <CreativeGalleryBriefing />
       <section className="grid gap-2 sm:grid-cols-3">
         {adsSafetyChecks.map((item) => (
           <p key={item} className="rounded-2xl border border-slate-200 bg-white px-3 py-2 text-xs font-medium leading-5 text-slate-600 shadow-sm shadow-slate-200/60">

@@ -39,27 +39,27 @@ function policyClasses(policy: AccountCommentPolicyClassification) {
 }
 
 const commentPreviewBadges = [
-  "Preview-only content intelligence",
-  "Mock comment metrics",
+  "Moderation inbox preview",
+  "Mock sentiment/status queue",
   "No live Instagram data is collected in Alpha",
 ];
 
 const commentOperationalCards = [
   {
-    title: "Comment ingestion boundary",
-    detail: "Comment streams, sentiment labels, and moderation recommendations are static Alpha previews. No content ingestion or backend action runs from this page.",
+    title: "Inbox ingestion boundary",
+    detail: "Comment queue lanes, sentiment labels, and moderation recommendations are static Alpha previews. No ingestion, reply send, queue update, or backend action runs from this page.",
     badge: "No content ingestion runs in Alpha",
     tone: "slate" as AccountCommentTone,
   },
   {
-    title: "Official source readiness",
-    detail: "Owned comment intelligence requires official source connection before any private-beta moderation or response workflow can run.",
+    title: "Owned-comment source path",
+    detail: "Future moderation workflows require owned or connected professional account comments through approved official sources before private-beta actions can run.",
     badge: "Requires official source connection",
     tone: "green" as AccountCommentTone,
   },
   {
-    title: "Provider approval boundary",
-    detail: "Advanced moderation or enrichment remains gated until provider approval and policy review exist where applicable.",
+    title: "Reply-needed decision",
+    detail: "Use this preview to decide which mock comments would need owner review, sentiment triage, escalation, or a future response workflow.",
     badge: "Requires provider approval where applicable",
     tone: "amber" as AccountCommentTone,
   },
@@ -69,6 +69,33 @@ const commentSafetyChecks = [
   "No content ingestion runs in Alpha",
   "No backend action runs from this page",
   "No scraping, private account access, hidden surveillance, or anti-bot bypass",
+];
+
+const moderationQueueLanes = [
+  {
+    title: "Needs owner review",
+    count: "7 mock items",
+    detail: "Questions, complaints, or high-context comments that would need a human response plan later.",
+    tone: "amber" as AccountCommentTone,
+  },
+  {
+    title: "Positive signal",
+    count: "18 mock items",
+    detail: "Advocacy, praise, and reusable testimonial-style comments for future content planning.",
+    tone: "green" as AccountCommentTone,
+  },
+  {
+    title: "Risk or escalation",
+    count: "3 mock items",
+    detail: "Brand-safety or support-sensitive comments requiring future moderation policy review.",
+    tone: "rose" as AccountCommentTone,
+  },
+];
+
+const moderationNextSteps = [
+  "Review mock reply-needed items without sending or saving a response.",
+  "Separate owned-comment moderation from post media-library review.",
+  "Keep escalation, assignment, and response actions disabled until backend moderation workflows exist.",
 ];
 
 function Badge({ children, className }: { children: React.ReactNode; className: string }) {
@@ -89,14 +116,14 @@ function CommentsPanel({ title, subtitle, children }: { title: string; subtitle?
 
 function KpiCard({ label, value, delta, tone, description }: (typeof accountCommentKpis)[number]) {
   return (
-    <div className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm shadow-slate-200/70 transition hover:-translate-y-0.5 hover:shadow-md hover:shadow-slate-200/80">
+    <div className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm shadow-slate-200/70">
       <p className="text-sm font-medium text-slate-500">{label}</p>
       <div className="mt-4 flex flex-wrap items-end justify-between gap-3">
         <p className="text-3xl font-semibold tracking-tight text-slate-950">{value}</p>
         <Badge className={toneClasses(tone)}>{delta}</Badge>
       </div>
       <p className="mt-3 text-xs leading-5 text-slate-500">{description}</p>
-      <p className="mt-3 text-xs font-medium text-slate-400">Static Alpha preview · mock comment metric</p>
+      <p className="mt-3 text-xs font-medium text-slate-400">Supports moderation triage · mock comment metric</p>
     </div>
   );
 }
@@ -104,7 +131,7 @@ function KpiCard({ label, value, delta, tone, description }: (typeof accountComm
 function CommentsHeader() {
   return (
     <header className="overflow-hidden rounded-[2rem] border border-slate-200 bg-white shadow-sm shadow-slate-200/70">
-      <div className="bg-gradient-to-br from-slate-950 via-slate-900 to-indigo-950 p-5 text-white sm:p-7">
+      <div className="bg-gradient-to-br from-slate-950 via-slate-900 to-rose-950 p-5 text-white sm:p-7">
         <div className="flex flex-col gap-6 xl:flex-row xl:items-start xl:justify-between">
           <div className="min-w-0">
             <div className="mb-4 flex flex-wrap gap-2">
@@ -113,15 +140,18 @@ function CommentsHeader() {
               ))}
               <Badge className="bg-cyan-400/10 text-cyan-100 ring-cyan-300/20">Comment monitoring disabled in Alpha</Badge>
             </div>
-            <p className="text-sm font-semibold uppercase tracking-wide text-slate-400">Comment preview</p>
-            <h1 className="mt-2 break-words text-3xl font-semibold tracking-tight text-white sm:text-4xl">{accountCommentsProfile.name} comment preview</h1>
+            <p className="text-sm font-semibold uppercase tracking-wide text-slate-400">Moderation inbox</p>
+            <h1 className="mt-2 break-words text-3xl font-semibold tracking-tight text-white sm:text-4xl">{accountCommentsProfile.name} moderation inbox preview</h1>
             <p className="mt-2 text-base text-slate-300">{accountCommentsProfile.handle} · {accountCommentsProfile.accountType}</p>
+            <p className="mt-4 max-w-3xl text-sm leading-6 text-slate-300">
+              Triage mock owned comments by sentiment, reply need, urgency, and compliance-safe moderation status. This page is an inbox workflow, not a media library or analytics dashboard.
+            </p>
           </div>
           <div className="rounded-3xl border border-white/10 bg-white/10 p-4 text-sm leading-6 text-slate-200 shadow-sm shadow-slate-950/20 xl:w-[29rem]">
-            <p className="font-semibold text-white">Mock comment intelligence</p>
-            <p className="mt-1">Comment monitoring is disabled in Alpha. Preview sentiment requires official source connection and a future private-beta moderation service.</p>
+            <p className="font-semibold text-white">Owned-comment moderation boundary</p>
+            <p className="mt-1">Comment monitoring and response sending are disabled in Alpha. Future inbox workflows require official source connection and a private-beta moderation service.</p>
             <button disabled className="mt-4 w-full cursor-not-allowed rounded-2xl border border-white/10 bg-white/10 px-4 py-2 text-sm font-semibold text-slate-300">
-              Comment ingestion disabled in Alpha
+              Reply and moderation actions disabled
             </button>
             <div className="mt-4 flex flex-wrap gap-2">
               <Badge className="bg-blue-400/10 text-blue-100 ring-blue-300/20">{accountCommentsProfile.sourceBadge}</Badge>
@@ -138,11 +168,11 @@ function CommentsHeader() {
 
 function FilterPlaceholderBar() {
   return (
-    <section className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm shadow-slate-200/70">
+    <section className="rounded-3xl border border-rose-100 bg-rose-50/60 p-5 shadow-sm shadow-rose-100/70">
       <div className="flex flex-col gap-4 xl:flex-row xl:items-start xl:justify-between">
         <div>
-          <p className="text-sm font-semibold text-slate-950">Static comment filters</p>
-          <p className="mt-1 max-w-2xl text-xs leading-5 text-slate-500">Static placeholders for future moderation views, queues, and saved filters. No live query runs, no queue state is saved, and no backend action runs from this page.</p>
+          <p className="text-sm font-semibold text-slate-950">Static inbox queue controls</p>
+          <p className="mt-1 max-w-2xl text-xs leading-5 text-slate-600">Static placeholders for future moderation queues, reply-needed views, and saved triage filters. No live query runs, no queue state is saved, and no backend action runs from this page.</p>
         </div>
         <div className="flex w-full flex-col gap-2 xl:w-auto xl:items-end">
           <button disabled className="w-full cursor-not-allowed rounded-2xl border border-slate-200 bg-slate-50 px-4 py-2 text-sm font-semibold text-slate-400 xl:w-auto">
@@ -179,6 +209,35 @@ function ProviderSourcePanel() {
         ))}
       </div>
     </CommentsPanel>
+  );
+}
+
+function ModerationInboxSection() {
+  return (
+    <section className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_minmax(320px,0.72fr)]">
+      <CommentsPanel title="Moderation queue lanes" subtitle="Queue-style preview lanes for mock owned comments; no state changes are saved.">
+        <div className="grid gap-3 md:grid-cols-3">
+          {moderationQueueLanes.map((lane) => (
+            <div key={lane.title} className="rounded-3xl border border-slate-100 bg-slate-50 p-4">
+              <Badge className={toneClasses(lane.tone)}>{lane.count}</Badge>
+              <h3 className="mt-4 text-sm font-semibold text-slate-950">{lane.title}</h3>
+              <p className="mt-2 text-xs leading-5 text-slate-600">{lane.detail}</p>
+            </div>
+          ))}
+        </div>
+      </CommentsPanel>
+
+      <CommentsPanel title="What should the user do next?" subtitle="Preview moderation guidance only; no reply is sent.">
+        <ol className="space-y-3">
+          {moderationNextSteps.map((step, index) => (
+            <li key={step} className="flex gap-3 rounded-2xl border border-slate-100 bg-slate-50 p-3 text-sm leading-6 text-slate-700">
+              <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-rose-100 text-xs font-bold text-rose-700">{index + 1}</span>
+              <span>{step}</span>
+            </li>
+          ))}
+        </ol>
+      </CommentsPanel>
+    </section>
   );
 }
 
@@ -225,9 +284,10 @@ export function AccountCommentsPage() {
       </section>
 
       <FilterPlaceholderBar />
+      <ModerationInboxSection />
 
       <section className="grid gap-6 xl:grid-cols-[minmax(0,1.45fr)_minmax(340px,0.75fr)]">
-        <CommentsPanel title="Comment preview stream" subtitle="Mock owned comments with preview sentiment, intent, urgency, confidence, source, and recommendation metadata.">
+        <CommentsPanel title="Moderation inbox stream" subtitle="Mock owned comments with preview sentiment, reply-needed status, urgency, confidence, source, and recommendation metadata.">
           <div className="mb-4 grid gap-2 sm:grid-cols-3">
             {commentSafetyChecks.map((item) => (
               <p key={item} className="rounded-2xl border border-slate-100 bg-slate-50 px-3 py-2 text-xs font-medium leading-5 text-slate-600">

@@ -94,6 +94,91 @@ function StaticPreviewControls() {
   );
 }
 
+function AffinityRestrictedWidgets() {
+  const affinityCategories = [
+    {
+      label: "Education intent",
+      value: "Mock 41%",
+      detail: "Owned-media planning category for tutorials, workflow explainers, and campaign education themes.",
+    },
+    {
+      label: "Launch interest",
+      value: "Mock 28%",
+      detail: "Static category preview for product launch and studio content strategy conversations.",
+    },
+    {
+      label: "Creator format fit",
+      value: "Mock 19%",
+      detail: "Preview-only engagement signal for format planning; no individual like trail is queried.",
+    },
+  ];
+
+  const eligibleSources = [
+    "Owned media aggregate engagement from connected professional account sources.",
+    "Authorized connected account metrics with provenance, audit records, and policy enforcement.",
+    "Licensed-provider-only enrichment only after approval where applicable; disabled in Alpha.",
+  ];
+
+  const disabledActions = [
+    "Open liker identities",
+    "Track personal like history",
+    "Export like trails",
+    "Start monitor",
+    "Generate report",
+    "Run backfill",
+  ];
+
+  return (
+    <section className="grid gap-6 xl:grid-cols-[1.1fr_0.9fr]">
+      <section className="rounded-3xl border border-violet-200 bg-white p-5 shadow-sm shadow-violet-100/70">
+        <div className="mb-5 flex flex-col gap-3 xl:flex-row xl:items-start xl:justify-between">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-violet-700">Authorized affinity preview</p>
+            <h2 className="mt-2 text-lg font-semibold text-slate-950">Mock affinity categories</h2>
+            <p className="mt-1 max-w-3xl text-sm leading-6 text-slate-500">
+              These widgets are category-level placeholders for future authorized owned-media aggregate engagement signals.
+            </p>
+          </div>
+          <Badge tone="amber">Aggregate only</Badge>
+        </div>
+
+        <div className="grid gap-3 md:grid-cols-3">
+          {affinityCategories.map((category) => (
+            <article key={category.label} className="rounded-3xl border border-violet-100 bg-violet-50/50 p-4">
+              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-violet-700">{category.label}</p>
+              <p className="mt-3 text-2xl font-semibold tracking-tight text-slate-950">{category.value}</p>
+              <p className="mt-2 text-xs leading-5 text-slate-600">{category.detail}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="rounded-3xl border border-amber-200 bg-gradient-to-br from-amber-50 via-white to-rose-50 p-5 shadow-sm shadow-amber-100/70">
+        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-amber-700">Eligible sources and disabled actions</p>
+        <h2 className="mt-2 text-lg font-semibold text-slate-950">Restricted by design, not broken</h2>
+        <div className="mt-5 space-y-3">
+          {eligibleSources.map((source) => (
+            <p key={source} className="rounded-2xl border border-emerald-200 bg-emerald-50 p-3 text-xs leading-5 text-emerald-900">
+              {source}
+            </p>
+          ))}
+        </div>
+
+        <div className="mt-5 border-t border-amber-200 pt-4">
+          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-rose-700">Disabled placeholders</p>
+          <div className="mt-3 flex flex-wrap gap-2" aria-label="Disabled like affinity actions">
+            {disabledActions.map((action) => (
+              <span key={action} aria-disabled="true" className="rounded-full border border-rose-200 bg-rose-50 px-3 py-1 text-xs font-semibold text-rose-700">
+                {action}: disabled
+              </span>
+            ))}
+          </div>
+        </div>
+      </section>
+    </section>
+  );
+}
+
 function AffinityWorkspace({ panels, events }: { panels: RestrictedIdentityPreviewPanel[]; events: RestrictedIdentityPreviewEvent[] }) {
   return (
     <section className="grid gap-6 xl:grid-cols-[0.95fr_1.05fr]">
@@ -266,18 +351,31 @@ function SignalTable({ signals }: { signals: RestrictedIdentityPreviewSignal[] }
   );
 }
 
-function ComplianceBoundaryCard({ policyGate }: { policyGate: string }) {
-  const boundaries = [
-    "Restricted preview",
-    "Preview-only audience intelligence",
-    "Mock audience metrics",
-    "Mock relationship signals",
-    "Requires official source connection",
-    "Requires provider approval where applicable",
-    "Licensed-provider-only where required",
-    "No follower tracking runs in Alpha",
-    "No identity-level monitoring runs in Alpha",
-  ];
+function ComplianceBoundaryCard({ policyGate, variant }: { policyGate: string; variant: RestrictedIdentityPreviewVariant }) {
+  const boundaries =
+    variant === "affinity"
+      ? [
+          "Restricted affinity preview",
+          "Authorized aggregate engagement only",
+          "Mock affinity categories",
+          "Identity-level like history blocked",
+          "Requires official source connection",
+          "Requires provider approval where applicable",
+          "Licensed-provider-only where required",
+          "No liker identity trails in Alpha",
+          "No private-user tracking runs in Alpha",
+        ]
+      : [
+          "Restricted preview",
+          "Preview-only audience intelligence",
+          "Mock audience metrics",
+          "Mock relationship signals",
+          "Requires official source connection",
+          "Requires provider approval where applicable",
+          "Licensed-provider-only where required",
+          "No follower tracking runs in Alpha",
+          "No identity-level monitoring runs in Alpha",
+        ];
 
   return (
     <section className="rounded-3xl border border-amber-200 bg-gradient-to-br from-amber-50 via-white to-rose-50 p-5 shadow-sm shadow-amber-100/70">
@@ -313,6 +411,11 @@ export function RestrictedIdentityPreviewPage({
   events,
   previewPath,
 }: RestrictedIdentityPreviewPageProps) {
+  const classificationCopy =
+    variant === "affinity"
+      ? "No live Instagram data is collected in Alpha. No personal like history, liker identity trails, or identity-level engagement monitoring runs in Alpha."
+      : "No live Instagram data is collected in Alpha. No follower tracking runs in Alpha. No identity-level monitoring runs in Alpha.";
+
   return (
     <div className="space-y-6">
       <header className="rounded-[2rem] border border-white/10 bg-gradient-to-br from-slate-950 via-amber-950 to-rose-950 p-6 text-white shadow-sm shadow-slate-950/30">
@@ -330,9 +433,7 @@ export function RestrictedIdentityPreviewPage({
           </div>
           <div className="rounded-3xl border border-white/10 bg-white/10 p-4 text-sm leading-6 text-slate-200 xl:w-[30rem]">
             <p className="font-semibold text-white">{classification}</p>
-            <p className="mt-1 text-slate-300">
-              No live Instagram data is collected in Alpha. No follower tracking runs in Alpha. No identity-level monitoring runs in Alpha.
-            </p>
+            <p className="mt-1 text-slate-300">{classificationCopy}</p>
           </div>
         </div>
       </header>
@@ -344,6 +445,8 @@ export function RestrictedIdentityPreviewPage({
       </section>
 
       <StaticPreviewControls />
+
+      {variant === "affinity" ? <AffinityRestrictedWidgets /> : null}
 
       <VariantWorkspace variant={variant} panels={panels} events={events} />
 
@@ -365,7 +468,7 @@ export function RestrictedIdentityPreviewPage({
           </ol>
         </section>
 
-        <ComplianceBoundaryCard policyGate={policyGate} />
+        <ComplianceBoundaryCard policyGate={policyGate} variant={variant} />
       </section>
 
       <SignalTable signals={signals} />

@@ -78,27 +78,27 @@ function postStatusLabel(status: AccountPostStatus) {
 }
 
 const postPreviewBadges = [
-  "Preview-only content intelligence",
-  "Mock post metrics",
+  "Media library preview",
+  "Mock post-level performance",
   "No live Instagram data is collected in Alpha",
 ];
 
 const postOperationalCards = [
   {
-    title: "Content ingestion boundary",
-    detail: "Post cards and metrics are static Alpha previews. No content ingestion, refresh job, download, or backend action runs from this page.",
+    title: "Library ingestion boundary",
+    detail: "Media cards, post status, and performance signals are static Alpha previews. No content ingestion, refresh job, download, or backend action runs from this page.",
     badge: "No content ingestion runs in Alpha",
     tone: "slate" as AccountPostTone,
   },
   {
-    title: "Official source readiness",
-    detail: "Owned media, captions, comments, and insights require approved official sources before any private-beta collection is enabled.",
+    title: "Connected-account source path",
+    detail: "Future post media, captions, comments, and insights require connected professional account permissions and approved official-source coverage.",
     badge: "Requires official source connection",
     tone: "green" as AccountPostTone,
   },
   {
-    title: "Provider approval boundary",
-    detail: "Any non-official enrichment remains gated and review-only until provider approval and policy review are complete.",
+    title: "Content review decision",
+    detail: "Use this preview to decide which content assets should be highlighted, investigated, or queued for future official-source analysis.",
     badge: "Requires provider approval where applicable",
     tone: "amber" as AccountPostTone,
   },
@@ -108,6 +108,33 @@ const postSafetyChecks = [
   "No content ingestion runs in Alpha",
   "No backend action runs from this page",
   "No scraping, private account access, hidden surveillance, or anti-bot bypass",
+];
+
+const contentLibraryShelves = [
+  {
+    title: "Asset shelf",
+    value: "Media cards",
+    detail: "Review mock thumbnails, formats, captions, and publish context before opening any future source-backed workflow.",
+    tone: "blue" as AccountPostTone,
+  },
+  {
+    title: "Performance shelf",
+    value: "Post signals",
+    detail: "Compare static likes, saves, shares, comments, and engagement rate to decide what should be analyzed later.",
+    tone: "purple" as AccountPostTone,
+  },
+  {
+    title: "Source shelf",
+    value: "Official-ready",
+    detail: "Track connected-account readiness, confidence, freshness, and provider gating without running collection in Alpha.",
+    tone: "green" as AccountPostTone,
+  },
+];
+
+const contentLibraryNextSteps = [
+  "Review mock top-performing assets before future official-source collection.",
+  "Separate media format decisions from moderation or ad creative decisions.",
+  "Keep post-level actions disabled until backend ingestion, provenance, and audit records exist.",
 ];
 
 function Badge({ children, className }: { children: React.ReactNode; className: string }) {
@@ -128,14 +155,14 @@ function PostsPanel({ title, subtitle, children }: { title: string; subtitle?: s
 
 function KpiCard({ label, value, delta, tone, description }: (typeof accountPostKpis)[number]) {
   return (
-    <div className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm shadow-slate-200/70 transition hover:-translate-y-0.5 hover:shadow-md hover:shadow-slate-200/80">
+    <div className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm shadow-slate-200/70">
       <p className="text-sm font-medium text-slate-500">{label}</p>
       <div className="mt-4 flex flex-wrap items-end justify-between gap-3">
         <p className="text-3xl font-semibold tracking-tight text-slate-950">{value}</p>
         <Badge className={toneClasses(tone)}>{delta}</Badge>
       </div>
       <p className="mt-3 text-xs leading-5 text-slate-500">{description}</p>
-      <p className="mt-3 text-xs font-medium text-slate-400">Static Alpha preview · mock post metric</p>
+      <p className="mt-3 text-xs font-medium text-slate-400">Supports content-library review · mock post metric</p>
     </div>
   );
 }
@@ -143,7 +170,7 @@ function KpiCard({ label, value, delta, tone, description }: (typeof accountPost
 function PostsHeader() {
   return (
     <header className="overflow-hidden rounded-[2rem] border border-slate-200 bg-white shadow-sm shadow-slate-200/70">
-      <div className="bg-gradient-to-br from-slate-950 via-slate-900 to-indigo-950 p-5 text-white sm:p-7">
+      <div className="bg-gradient-to-br from-slate-950 via-slate-900 to-blue-950 p-5 text-white sm:p-7">
         <div className="flex flex-col gap-6 xl:flex-row xl:items-start xl:justify-between">
           <div className="min-w-0">
             <div className="mb-4 flex flex-wrap gap-2">
@@ -152,15 +179,18 @@ function PostsHeader() {
               ))}
               <Badge className="bg-cyan-400/10 text-cyan-100 ring-cyan-300/20">Content ingestion disabled in Alpha</Badge>
             </div>
-            <p className="text-sm font-semibold uppercase tracking-wide text-slate-400">Post preview</p>
-            <h1 className="mt-2 break-words text-3xl font-semibold tracking-tight text-white sm:text-4xl">{accountPostsProfile.name} post preview</h1>
+            <p className="text-sm font-semibold uppercase tracking-wide text-slate-400">Media/content library</p>
+            <h1 className="mt-2 break-words text-3xl font-semibold tracking-tight text-white sm:text-4xl">{accountPostsProfile.name} content library preview</h1>
             <p className="mt-2 text-base text-slate-300">{accountPostsProfile.handle} · {accountPostsProfile.accountType}</p>
+            <p className="mt-4 max-w-3xl text-sm leading-6 text-slate-300">
+              Review mock owned-media cards, publishing context, official-source readiness, and post-level performance signals. This page is a content library preview, not a moderation inbox, analytics cockpit, or ad monitoring workflow.
+            </p>
           </div>
           <div className="rounded-3xl border border-white/10 bg-white/10 p-4 text-sm leading-6 text-slate-200 shadow-sm shadow-slate-950/20 xl:w-[29rem]">
-            <p className="font-semibold text-white">Mock post intelligence</p>
-            <p className="mt-1">Post collection is disabled in Alpha. Preview performance only; future workflows require official source connection and provider approval where applicable.</p>
+            <p className="font-semibold text-white">Connected account / official data source path</p>
+            <p className="mt-1">Post collection is disabled in Alpha. Future media-library workflows require connected professional account permissions, official-source coverage, and provider approval where applicable.</p>
             <button disabled className="mt-4 w-full cursor-not-allowed rounded-2xl border border-white/10 bg-white/10 px-4 py-2 text-sm font-semibold text-slate-300">
-              Content ingestion disabled in Alpha
+              Media collection disabled in Alpha
             </button>
             <div className="mt-4 flex flex-wrap gap-2">
               <Badge className="bg-blue-400/10 text-blue-100 ring-blue-300/20">{accountPostsProfile.sourceBadge}</Badge>
@@ -177,11 +207,11 @@ function PostsHeader() {
 
 function FilterPlaceholderBar() {
   return (
-    <section className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm shadow-slate-200/70">
+    <section className="rounded-3xl border border-blue-100 bg-blue-50/60 p-5 shadow-sm shadow-blue-100/70">
       <div className="flex flex-col gap-4 xl:flex-row xl:items-start xl:justify-between">
         <div>
-          <p className="text-sm font-semibold text-slate-950">Static post filters</p>
-          <p className="mt-1 max-w-2xl text-xs leading-5 text-slate-500">Static placeholders for future media filtering and saved views. No live query runs, no saved view changes are persisted, and no backend action runs from this page.</p>
+          <p className="text-sm font-semibold text-slate-950">Static library shelves</p>
+          <p className="mt-1 max-w-2xl text-xs leading-5 text-slate-600">Static placeholders for future media filtering, format shelves, and saved content views. No live query runs, no saved view changes are persisted, and no backend action runs from this page.</p>
         </div>
         <div className="flex w-full flex-col gap-2 xl:w-auto xl:items-end">
           <button disabled className="w-full cursor-not-allowed rounded-2xl border border-slate-200 bg-slate-50 px-4 py-2 text-sm font-semibold text-slate-400 xl:w-auto">
@@ -211,15 +241,18 @@ function MetricPill({ label, value }: { label: string; value: string }) {
 
 function MediaCard({ post }: { post: AccountPost }) {
   return (
-    <article className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm shadow-slate-200/70 transition hover:-translate-y-0.5 hover:shadow-md hover:shadow-slate-200/80">
-      <div className={`flex h-48 items-end justify-between bg-gradient-to-br p-4 ${toneClasses(post.thumbnailTone)}`}>
-        <div className="rounded-2xl bg-white/85 px-3 py-2 text-xs font-semibold text-slate-900 shadow-sm">Mock thumbnail · preview-only</div>
+    <article className="overflow-hidden rounded-[1.75rem] border border-slate-200 bg-white shadow-sm shadow-slate-200/70">
+      <div className={`flex h-52 items-start justify-between bg-gradient-to-br p-4 ${toneClasses(post.thumbnailTone)}`}>
+        <div className="rounded-2xl bg-white/85 px-3 py-2 text-xs font-semibold text-slate-900 shadow-sm">Media asset · mock thumbnail</div>
         <Badge className={mediaTypeClasses(post.mediaType)}>{formatToken(post.mediaType)}</Badge>
       </div>
       <div className="space-y-4 p-5">
         <div>
           <h3 className="text-base font-semibold text-slate-950">{post.title}</h3>
           <p className="mt-2 text-sm leading-6 text-slate-600">{post.captionPreview}</p>
+        </div>
+        <div className="rounded-2xl border border-blue-100 bg-blue-50 p-3 text-xs leading-5 text-blue-900">
+          Content-library decision: review this asset’s format, source readiness, and static performance signals before any future official-source ingestion workflow.
         </div>
         <div className="grid grid-cols-2 gap-3">
           <MetricPill label="Preview likes" value={post.metrics.likes} />
@@ -280,6 +313,35 @@ function PerformanceSection() {
   );
 }
 
+function LibraryWorkflowSection() {
+  return (
+    <section className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_minmax(320px,0.72fr)]">
+      <PostsPanel title="Content library shelves" subtitle="Each shelf explains a different media-review decision for the Alpha demo.">
+        <div className="grid gap-3 md:grid-cols-3">
+          {contentLibraryShelves.map((shelf) => (
+            <div key={shelf.title} className="rounded-3xl border border-slate-100 bg-slate-50 p-4">
+              <Badge className={toneClasses(shelf.tone)}>{shelf.value}</Badge>
+              <h3 className="mt-4 text-sm font-semibold text-slate-950">{shelf.title}</h3>
+              <p className="mt-2 text-xs leading-5 text-slate-600">{shelf.detail}</p>
+            </div>
+          ))}
+        </div>
+      </PostsPanel>
+
+      <PostsPanel title="What should the user do next?" subtitle="Preview guidance only; no action is executed.">
+        <ol className="space-y-3">
+          {contentLibraryNextSteps.map((step, index) => (
+            <li key={step} className="flex gap-3 rounded-2xl border border-slate-100 bg-slate-50 p-3 text-sm leading-6 text-slate-700">
+              <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-blue-100 text-xs font-bold text-blue-700">{index + 1}</span>
+              <span>{step}</span>
+            </li>
+          ))}
+        </ol>
+      </PostsPanel>
+    </section>
+  );
+}
+
 function ComplianceNotice() {
   return (
     <PostsPanel title={accountPostsComplianceNotice.title} subtitle="Official APIs and licensed providers only.">
@@ -303,12 +365,12 @@ function ComplianceNotice() {
 
 function PostsTable() {
   return (
-    <PostsPanel title="Enterprise post preview table" subtitle="Static mock post rows only. No live post collection is running.">
+    <PostsPanel title="Media inventory ledger" subtitle="Static mock post rows for inventory review. No live post collection is running.">
       <div className="overflow-x-auto rounded-2xl border border-slate-200">
         <table className="w-full min-w-[980px] text-left text-sm">
           <thead className="bg-slate-50 text-xs uppercase tracking-wide text-slate-500">
             <tr>
-              <th className="px-4 py-3">Post</th>
+              <th className="px-4 py-3">Media asset</th>
               <th className="px-4 py-3">Type</th>
               <th className="px-4 py-3">Published</th>
               <th className="px-4 py-3">Engagement</th>
@@ -360,9 +422,10 @@ export function AccountPostsPage() {
       </section>
 
       <FilterPlaceholderBar />
+      <LibraryWorkflowSection />
 
       <section className="grid gap-6 xl:grid-cols-[minmax(0,1.5fr)_minmax(340px,0.7fr)]">
-        <PostsPanel title="Post preview grid" subtitle="Mock post cards for connected professional account media. No live post collection is running.">
+        <PostsPanel title="Media asset grid" subtitle="Mock content-library cards for connected professional account media. No live post collection is running.">
           <div className="mb-4 grid gap-2 sm:grid-cols-3">
             {postSafetyChecks.map((item) => (
               <p key={item} className="rounded-2xl border border-slate-100 bg-slate-50 px-3 py-2 text-xs font-medium leading-5 text-slate-600">
