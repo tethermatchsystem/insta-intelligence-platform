@@ -1,5 +1,5 @@
-import { AccountOverviewPage } from "@/components/accounts/account-overview-page";
+import { AccountDossierPage } from "@/components/accounts/account-overview-page";
 
 export default function Page() {
-  return <AccountOverviewPage />;
+  return <AccountDossierPage />;
 }

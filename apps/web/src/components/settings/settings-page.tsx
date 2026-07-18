@@ -1,3 +1,4 @@
+import Link from "next/link";
 import {
   settingsMockData,
   type IntegrationPreference,
@@ -56,7 +57,7 @@ function channelClasses(channel: NotificationRule["channel"]) {
 }
 
 function Badge({ children, className }: { children: React.ReactNode; className: string }) {
-  return <span className={`rounded-full px-3 py-1 text-xs font-semibold ring-1 ${className}`}>{children}</span>;
+  return <span className={`inline-flex h-auto max-w-full items-start justify-start whitespace-normal break-words rounded-full px-3 py-1 text-left text-xs font-semibold leading-4 ring-1 ${className}`}>{children}</span>;
 }
 
 const settingsSafetyPills = [
@@ -70,6 +71,72 @@ const governanceSafetyPills = [
   "Private beta activation required",
   "Official-source provider approval may be required",
 ];
+
+const governanceStatusCards = [
+  {
+    label: "Workspace readiness",
+    value: "Profile review staged",
+    detail: "Workspace identity, region, residency, owner, and source-governance posture are available for static review only.",
+    tone: "info" as SettingsBadgeTone,
+  },
+  {
+    label: "Team and security",
+    value: "Access review needed",
+    detail: "Team access, SSO/MFA placeholders, sessions, and invitation controls are mock-only and do not touch authentication.",
+    tone: "warning" as SettingsBadgeTone,
+  },
+  {
+    label: "Compliance posture",
+    value: "Official-first defaults",
+    detail: "Governance defaults prefer official Meta APIs, connected professional accounts, consented imports, and licensed-provider review where applicable.",
+    tone: "success" as SettingsBadgeTone,
+  },
+  {
+    label: "Commercial and sources",
+    value: "Shortcuts only",
+    detail: "Billing and data-source routes can be reviewed as previews, but no payment, provider connection, export, or sync action runs.",
+    tone: "neutral" as SettingsBadgeTone,
+  },
+];
+
+const governanceShortcutCards = [
+  {
+    title: "Compliance shortcut",
+    category: "Policy and audit readiness",
+    routeLabel: "/settings/compliance",
+    detail: "Review feature classification, official-source posture, licensed-provider gates, and audit requirements before future activation.",
+    safeNextStep: "Document policy questions; do not enable restricted features from Alpha settings.",
+    tone: "success" as SettingsBadgeTone,
+  },
+  {
+    title: "Data-source shortcut",
+    category: "Provider connection readiness",
+    routeLabel: "/data-sources",
+    detail: "Review official Meta API, webhook, manual import, and licensed-provider readiness without connecting OAuth or sync jobs.",
+    safeNextStep: "Confirm official-source eligibility and token/security boundaries before future provider work.",
+    tone: "info" as SettingsBadgeTone,
+  },
+  {
+    title: "Billing shortcut",
+    category: "Commercial administration",
+    routeLabel: "/billing",
+    detail: "Review plan packaging, usage meters, invoice placeholders, and procurement notes without checkout or payment backend behavior.",
+    safeNextStep: "Align commercial assumptions; do not open payment, invoice, or subscription workflows in Alpha.",
+    tone: "warning" as SettingsBadgeTone,
+  },
+];
+
+const settingsGovernanceLinks = [
+  { label: "Workspace", href: "/settings/workspace", detail: "Review workspace profile and data-residency assumptions." },
+  { label: "Team", href: "/settings/team", detail: "Review member access and invitation boundaries." },
+  { label: "Roles", href: "/settings/roles", detail: "Review role policy and least-privilege assumptions." },
+  { label: "Audit logs", href: "/settings/audit-logs", detail: "Review mock evidence ledger and audit-shape requirements." },
+  { label: "Compliance", href: "/settings/compliance", detail: "Review policy gates and source classifications." },
+  { label: "Data Sources", href: "/data-sources", detail: "Review provider readiness without connecting sources." },
+  { label: "Billing", href: "/billing", detail: "Review commercial packaging without payments or checkout." },
+];
+
+const disabledGovernanceHubActions = ["Save settings", "Send invite", "Change role", "Connect provider", "Open billing portal", "Enable restricted feature"];
 
 function SettingsPanel({ title, subtitle, children }: { title: string; subtitle?: string; children: React.ReactNode }) {
   return (
@@ -95,8 +162,8 @@ function SettingsHeader() {
               </Badge>
             ))}
           </div>
-          <p className="text-sm font-semibold uppercase tracking-wide text-slate-300">Workspace settings</p>
-          <h1 className="mt-2 text-4xl font-semibold tracking-tight text-white sm:text-5xl">Enterprise Settings</h1>
+          <p className="text-sm font-semibold uppercase tracking-wide text-slate-300">Admin command center / governance hub</p>
+          <h1 className="mt-2 text-4xl font-semibold tracking-tight text-white sm:text-5xl">Enterprise governance hub</h1>
           <p className="mt-3 max-w-3xl text-base leading-7 text-slate-300">
             Review workspace profile, access controls, notifications, source preferences, security placeholders, and governance defaults for a premium official-first Instagram intelligence workspace.
           </p>
@@ -189,6 +256,90 @@ function SettingsOverviewStrip() {
   );
 }
 
+function AdminCommandCenter() {
+  return (
+    <section className="grid gap-6 xl:grid-cols-[1.2fr_0.8fr]">
+      <section className="rounded-3xl border border-blue-200 bg-white p-5 shadow-lg shadow-blue-100/60">
+        <div className="mb-5 flex flex-col gap-3 xl:flex-row xl:items-start xl:justify-between">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-wide text-blue-700">Governance status board</p>
+            <h2 className="mt-2 text-lg font-semibold text-slate-950">Admin command center for safe Alpha review</h2>
+            <p className="mt-1 max-w-4xl text-sm leading-6 text-slate-500">
+              Use this hub to review workspace readiness, team/security posture, compliance shortcuts, and commercial/source dependencies. It is not a live settings editor and does not write admin changes.
+            </p>
+          </div>
+          <Badge className="bg-amber-50 text-amber-700 ring-amber-100">All actions disabled</Badge>
+        </div>
+
+        <div className="grid gap-3 md:grid-cols-2">
+          {governanceStatusCards.map((item) => (
+            <article key={item.label} className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
+              <div className="flex flex-wrap items-start justify-between gap-3">
+                <div>
+                  <p className="text-xs font-semibold uppercase tracking-wide text-slate-400">{item.label}</p>
+                  <h3 className="mt-2 text-base font-semibold text-slate-950">{item.value}</h3>
+                </div>
+                <Badge className={toneClasses(item.tone)}>Preview</Badge>
+              </div>
+              <p className="mt-3 text-xs leading-5 text-slate-600">{item.detail}</p>
+            </article>
+          ))}
+        </div>
+
+        <div className="mt-5 rounded-3xl border border-blue-100 bg-blue-50/70 p-4">
+          <div className="flex flex-col gap-2 xl:flex-row xl:items-start xl:justify-between">
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-wide text-blue-700">Settings governance routes</p>
+              <h3 className="mt-1 text-sm font-semibold text-slate-950">Continue through existing admin preview pages</h3>
+              <p className="mt-1 max-w-3xl text-xs leading-5 text-slate-600">These are route links only. They do not save settings, change roles, connect providers, open billing, export logs, or run backend actions.</p>
+            </div>
+            <Link href="/settings" className="w-fit rounded-full border border-blue-200 bg-white px-3 py-1.5 text-xs font-semibold text-blue-800 transition hover:bg-blue-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400">
+              Governance hub
+            </Link>
+          </div>
+          <div className="mt-4 grid gap-2 md:grid-cols-2 xl:grid-cols-4">
+            {settingsGovernanceLinks.map((link) => (
+              <Link key={link.href} href={link.href} className="rounded-2xl border border-blue-100 bg-white p-3 text-xs leading-5 text-slate-600 shadow-sm transition hover:border-blue-200 hover:bg-blue-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400">
+                <span className="block text-sm font-semibold text-slate-950">{link.label}</span>
+                <span className="mt-1 block">{link.detail}</span>
+              </Link>
+            ))}
+          </div>
+        </div>
+
+        <div className="mt-5 grid gap-3 xl:grid-cols-3">
+          {governanceShortcutCards.map((shortcut) => (
+            <article key={shortcut.title} className="rounded-2xl border border-slate-200 bg-white p-4">
+              <div className="flex flex-wrap items-center justify-between gap-2">
+                <Badge className={toneClasses(shortcut.tone)}>{shortcut.category}</Badge>
+                <Link href={shortcut.routeLabel} className="rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-600 transition hover:bg-slate-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-400">{shortcut.routeLabel}</Link>
+              </div>
+              <h3 className="mt-4 text-sm font-semibold text-slate-950">{shortcut.title}</h3>
+              <p className="mt-2 text-xs leading-5 text-slate-600">{shortcut.detail}</p>
+              <p className="mt-3 rounded-2xl border border-slate-200 bg-slate-50 p-3 text-xs leading-5 text-slate-500">{shortcut.safeNextStep}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="rounded-3xl border border-amber-200 bg-gradient-to-br from-amber-50 via-white to-blue-50 p-5 shadow-lg shadow-amber-100/60">
+        <p className="text-xs font-semibold uppercase tracking-wide text-amber-700">What can the admin safely do next?</p>
+        <h2 className="mt-2 text-lg font-semibold text-slate-950">Review readiness, then plan backend governance</h2>
+        <p className="mt-2 text-sm leading-6 text-slate-600">
+          Safely review owners, policy posture, workspace readiness, team/security summaries, and adjacent billing/data-source dependencies. Real settings saves, auth changes, provider connections, billing actions, and restricted feature activation remain disabled.
+        </p>
+        <div className="mt-5 flex flex-wrap gap-2" aria-label="Disabled governance hub actions">
+          {disabledGovernanceHubActions.map((action) => (
+            <span key={action} aria-disabled="true" className="rounded-full border border-rose-200 bg-rose-50 px-3 py-1 text-xs font-semibold text-rose-700">
+              {action}: disabled
+            </span>
+          ))}
+        </div>
+      </section>
+    </section>
+  );
+}
+
 function WorkspaceProfilePanel() {
   const profile = settingsMockData.workspaceProfile;
   const profileRows = [
@@ -266,9 +417,9 @@ function PlaceholderChecklist() {
 function RoleCard({ role }: { role: RolePermission }) {
   return (
     <article className="rounded-3xl border border-slate-200/80 bg-white p-5 shadow-md shadow-slate-200/60">
-      <div className="flex items-start justify-between gap-4">
-        <div>
-          <h3 className="text-lg font-semibold text-slate-950">{role.role}</h3>
+      <div className="flex flex-wrap items-start justify-between gap-3">
+        <div className="min-w-0">
+          <h3 className="break-words text-lg font-semibold text-slate-950">{role.role}</h3>
           <p className="mt-1 text-sm text-slate-500">{role.seats} seats assigned</p>
         </div>
         <Badge className={role.approvalRequired ? "bg-amber-50 text-amber-700 ring-amber-100" : "bg-emerald-50 text-emerald-700 ring-emerald-100"}>
@@ -462,6 +613,7 @@ export function SettingsPage() {
       </section>
 
       <SettingsOverviewStrip />
+      <AdminCommandCenter />
       <WorkspaceProfilePanel />
       <PlaceholderChecklist />
       <RolesSection />

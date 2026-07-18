@@ -1,3 +1,4 @@
+import { AccountContextNavigation } from "@/components/accounts/account-context-navigation";
 import type { ReactNode } from "react";
 
 export type RestrictedIdentityPreviewMetric = {
@@ -24,6 +25,13 @@ export type RestrictedIdentityPreviewEvent = {
   label: string;
   state: string;
   detail: string;
+  source?: string;
+  confidence?: string;
+  reviewStatus?: string;
+  reviewPriority?: string;
+  churnReason?: string;
+  relationshipRisk?: string;
+  safeGuidance?: string;
 };
 
 export type RestrictedIdentityPreviewVariant = "affinity" | "newRelationships" | "churn";
@@ -63,27 +71,62 @@ function MetricCard({ metric }: { metric: RestrictedIdentityPreviewMetric }) {
   );
 }
 
-function StaticPreviewControls() {
-  const controls = [
-    ["Account", "demo-account only"],
-    ["Date range", "Static Alpha snapshot"],
-    ["Provider", "Not connected"],
-    ["Export", "Disabled in Alpha"],
-    ["Monitor", "No identity-level monitoring"],
-    ["Backend", "No action runs"],
-  ];
+function StaticPreviewControls({ variant }: { variant: RestrictedIdentityPreviewVariant }) {
+  const copy =
+    variant === "affinity"
+      ? {
+          title: "Static restricted preview controls",
+          description:
+            "These labels are disabled placeholders. They do not filter live provider data, start jobs, download files, save monitors, or create backend actions.",
+          aria: "like affinity",
+          controls: [
+            ["Account", "demo-account only"],
+            ["Date range", "Static Alpha snapshot"],
+            ["Provider", "Not connected"],
+            ["Export", "Disabled in Alpha"],
+            ["Monitor", "No identity-level monitoring"],
+            ["Backend", "No action runs"],
+          ],
+        }
+      : variant === "newRelationships"
+        ? {
+            title: "Disabled follow-change review controls",
+            description:
+              "These controls describe the safe review path for a mock follow-change log. They do not detect recent follows, open identities, start monitoring, or activate provider collection.",
+            aria: "recent follows change-log",
+            controls: [
+              ["Account", "demo-account only"],
+              ["Change window", "Static mock delta"],
+              ["Eligible source", "Authorized/licensed only"],
+              ["Review status", "Policy gate required"],
+              ["Export / alert", "Disabled in Alpha"],
+              ["Backend", "No action runs"],
+            ],
+          }
+        : {
+            title: "Disabled churn review controls",
+            description:
+              "These controls frame a static relationship-loss review. They do not monitor unfollows, identify removed relationships, trigger outreach, or activate backend jobs.",
+            aria: "recent unfollows churn review",
+            controls: [
+              ["Account", "demo-account only"],
+              ["Churn window", "Static mock review"],
+              ["Reason labels", "Mock only"],
+              ["Priority queue", "Disabled in Alpha"],
+              ["Winback / export", "Disabled"],
+              ["Backend", "No action runs"],
+            ],
+          };
 
   return (
     <section className="rounded-3xl border border-slate-200 bg-white p-4 shadow-sm shadow-slate-200/70">
       <div className="flex flex-col gap-4 xl:flex-row xl:items-center xl:justify-between">
         <div>
-          <p className="text-sm font-semibold text-slate-950">Static restricted preview controls</p>
-          <p className="mt-1 max-w-3xl text-xs leading-5 text-slate-500">
-            These labels are disabled placeholders. They do not filter live provider data, start jobs, download files, save monitors, or create backend actions.
-          </p>
+          <p className="text-sm font-semibold text-slate-950">{copy.title}</p>
+          <p className="mt-1 max-w-3xl text-xs leading-5 text-slate-500">{copy.description}</p>
         </div>
-        <div className="flex flex-wrap gap-2" aria-label="Disabled restricted preview controls">
-          {controls.map(([label, value]) => (
+        <div className="flex flex-wrap gap-2" aria-label={`Disabled ${copy.aria} controls`}>
+          {copy.controls.map(([label, value]) => (
             <span key={label} aria-disabled="true" className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-xs font-semibold text-slate-500">
               {label}: {value}
             </span>
@@ -221,11 +264,16 @@ function AffinityWorkspace({ panels, events }: { panels: RestrictedIdentityPrevi
 }
 
 function ChangeLogWorkspace({ panels, events }: { panels: RestrictedIdentityPreviewPanel[]; events: RestrictedIdentityPreviewEvent[] }) {
+  const disabledActions = ["Open identity delta", "Start live follow monitor", "Export change log", "Create alert", "Run provider sync", "Schedule backfill"];
+
   return (
     <section className="grid gap-6 xl:grid-cols-[0.75fr_1.25fr]">
-      <div className="rounded-3xl border border-emerald-200 bg-emerald-50 p-5 shadow-sm shadow-emerald-100/70">
-        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-emerald-700">Disabled provider gate</p>
-        <h2 className="mt-2 text-lg font-semibold text-emerald-950">New relationship event controls</h2>
+      <div className="rounded-3xl border border-emerald-200 bg-gradient-to-br from-emerald-50 via-white to-sky-50 p-5 shadow-sm shadow-emerald-100/70">
+        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-emerald-700">Eligible source gate</p>
+        <h2 className="mt-2 text-lg font-semibold text-emerald-950">Follow-change intelligence remains approval-gated</h2>
+        <p className="mt-2 text-sm leading-6 text-emerald-900/80">
+          This preview shows how a future approved follow-change log could explain source eligibility, confidence, and review status without running live identity-level detection in Alpha.
+        </p>
         <div className="mt-5 space-y-3">
           {panels.map((panel) => (
             <div key={panel.label} className="rounded-2xl border border-emerald-200 bg-white/75 p-4">
@@ -235,27 +283,65 @@ function ChangeLogWorkspace({ panels, events }: { panels: RestrictedIdentityPrev
             </div>
           ))}
         </div>
+        <div className="mt-5 rounded-2xl border border-emerald-200 bg-emerald-950 p-4 text-emerald-50">
+          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-emerald-200">Safest next step</p>
+          <p className="mt-2 text-sm leading-6">
+            Treat every row as sample schema only. A real workflow would first need official source eligibility, licensed-provider approval where applicable, provenance records, and a disabled-by-default policy gate.
+          </p>
+        </div>
       </div>
 
       <div className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm shadow-slate-200/70">
         <div className="mb-5 flex flex-wrap items-start justify-between gap-3">
           <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">Restricted change-log placeholder</p>
-            <h2 className="mt-2 text-lg font-semibold text-slate-950">Mock new relationship events</h2>
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-emerald-700">Restricted follow-change log</p>
+            <h2 className="mt-2 text-lg font-semibold text-slate-950">Mock recent-follow delta rows</h2>
+            <p className="mt-1 max-w-3xl text-sm leading-6 text-slate-500">
+              Static examples only. Source and confidence labels describe review requirements, not live Instagram facts.
+            </p>
           </div>
-          <Badge tone="rose">Disabled by default</Badge>
+          <Badge tone="rose">Live detection disabled</Badge>
         </div>
         <div className="space-y-3">
           {events.map((event, index) => (
-            <div key={event.label} className="flex gap-3 rounded-2xl border border-slate-200 bg-slate-50 p-4">
-              <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-emerald-100 text-xs font-semibold text-emerald-800">{index + 1}</span>
-              <div>
-                <p className="text-sm font-semibold text-slate-950">{event.label}</p>
-                <p className="mt-1 text-xs font-semibold uppercase tracking-wide text-emerald-700">{event.state}</p>
-                <p className="mt-2 text-xs leading-5 text-slate-500">{event.detail}</p>
+            <div key={event.label} className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
+              <div className="flex flex-wrap items-start justify-between gap-3">
+                <div className="flex gap-3">
+                  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-emerald-100 text-xs font-semibold text-emerald-800">F{index + 1}</span>
+                  <div>
+                    <p className="text-sm font-semibold text-slate-950">{event.label}</p>
+                    <p className="mt-1 text-xs font-semibold uppercase tracking-wide text-emerald-700">{event.state}</p>
+                  </div>
+                </div>
+                <Badge tone="amber">{event.reviewStatus ?? "Needs review"}</Badge>
+              </div>
+              <p className="mt-3 text-xs leading-5 text-slate-500">{event.detail}</p>
+              <div className="mt-4 grid gap-2 md:grid-cols-3">
+                <div className="rounded-2xl border border-slate-200 bg-white p-3">
+                  <p className="text-[0.68rem] font-semibold uppercase tracking-[0.16em] text-slate-400">Source label</p>
+                  <p className="mt-1 text-xs leading-5 text-slate-700">{event.source ?? "Authorized or licensed source required"}</p>
+                </div>
+                <div className="rounded-2xl border border-slate-200 bg-white p-3">
+                  <p className="text-[0.68rem] font-semibold uppercase tracking-[0.16em] text-slate-400">Confidence</p>
+                  <p className="mt-1 text-xs leading-5 text-slate-700">{event.confidence ?? "Mock confidence only"}</p>
+                </div>
+                <div className="rounded-2xl border border-slate-200 bg-white p-3">
+                  <p className="text-[0.68rem] font-semibold uppercase tracking-[0.16em] text-slate-400">Review status</p>
+                  <p className="mt-1 text-xs leading-5 text-slate-700">{event.reviewStatus ?? "Policy review required"}</p>
+                </div>
               </div>
             </div>
           ))}
+        </div>
+        <div className="mt-5 border-t border-slate-200 pt-4">
+          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-rose-700">Disabled action placeholders</p>
+          <div className="mt-3 flex flex-wrap gap-2" aria-label="Disabled recent follow actions">
+            {disabledActions.map((action) => (
+              <span key={action} aria-disabled="true" className="rounded-full border border-rose-200 bg-rose-50 px-3 py-1 text-xs font-semibold text-rose-700">
+                {action}: disabled
+              </span>
+            ))}
+          </div>
         </div>
       </div>
     </section>
@@ -263,13 +349,18 @@ function ChangeLogWorkspace({ panels, events }: { panels: RestrictedIdentityPrev
 }
 
 function ChurnWorkspace({ panels, events }: { panels: RestrictedIdentityPreviewPanel[]; events: RestrictedIdentityPreviewEvent[] }) {
+  const disabledActions = ["Open removed identity", "Start churn monitor", "Export lost relationships", "Trigger winback automation", "Create alert", "Run unfollow backfill"];
+
   return (
     <section className="grid gap-6 xl:grid-cols-[1.2fr_0.8fr]">
       <div className="rounded-3xl border border-rose-200 bg-gradient-to-br from-slate-950 via-rose-950 to-slate-950 p-5 text-white shadow-sm shadow-rose-950/20">
         <div className="mb-5 flex flex-wrap items-start justify-between gap-3">
           <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-rose-200">Churn placeholder</p>
-            <h2 className="mt-2 text-lg font-semibold">Mock lost relationship events</h2>
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-rose-200">Relationship-loss review preview</p>
+            <h2 className="mt-2 text-lg font-semibold">Mock removed-relationship rows</h2>
+            <p className="mt-2 max-w-3xl text-sm leading-6 text-rose-100/80">
+              These rows frame churn review questions for an account owner. They do not identify unfollowers, monitor private relationships, or trigger outreach.
+            </p>
           </div>
           <Badge tone="rose">No identity-level monitoring</Badge>
         </div>
@@ -278,17 +369,44 @@ function ChurnWorkspace({ panels, events }: { panels: RestrictedIdentityPreviewP
             <div key={event.label} className="rounded-2xl border border-white/10 bg-white/10 p-4">
               <div className="flex flex-wrap items-center justify-between gap-3">
                 <p className="text-sm font-semibold">{event.label}</p>
-                <span className="rounded-full bg-white/15 px-3 py-1 text-xs font-semibold text-rose-100">{event.state}</span>
+                <span className="rounded-full bg-white/15 px-3 py-1 text-xs font-semibold text-rose-100">{event.reviewPriority ?? event.state}</span>
               </div>
               <p className="mt-2 text-xs leading-5 text-rose-100/85">{event.detail}</p>
+              <div className="mt-4 grid gap-2 md:grid-cols-3">
+                <div className="rounded-2xl border border-white/10 bg-white/10 p-3">
+                  <p className="text-[0.68rem] font-semibold uppercase tracking-[0.16em] text-rose-200">Mock churn reason</p>
+                  <p className="mt-1 text-xs leading-5 text-rose-50">{event.churnReason ?? "Reason unavailable in Alpha"}</p>
+                </div>
+                <div className="rounded-2xl border border-white/10 bg-white/10 p-3">
+                  <p className="text-[0.68rem] font-semibold uppercase tracking-[0.16em] text-rose-200">Relationship risk</p>
+                  <p className="mt-1 text-xs leading-5 text-rose-50">{event.relationshipRisk ?? "Review-only placeholder"}</p>
+                </div>
+                <div className="rounded-2xl border border-white/10 bg-white/10 p-3">
+                  <p className="text-[0.68rem] font-semibold uppercase tracking-[0.16em] text-rose-200">Owner guidance</p>
+                  <p className="mt-1 text-xs leading-5 text-rose-50">{event.safeGuidance ?? "Use aggregate account-health signals only."}</p>
+                </div>
+              </div>
             </div>
           ))}
+        </div>
+        <div className="mt-5 border-t border-white/10 pt-4">
+          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-rose-200">Disabled action placeholders</p>
+          <div className="mt-3 flex flex-wrap gap-2" aria-label="Disabled recent unfollow actions">
+            {disabledActions.map((action) => (
+              <span key={action} aria-disabled="true" className="rounded-full border border-white/10 bg-white/10 px-3 py-1 text-xs font-semibold text-rose-100">
+                {action}: disabled
+              </span>
+            ))}
+          </div>
         </div>
       </div>
 
       <div className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm shadow-slate-200/70">
-        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">Retention readiness</p>
-        <h2 className="mt-2 text-lg font-semibold text-slate-950">Provider approval blockers</h2>
+        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-rose-700">Account-owner action guidance</p>
+        <h2 className="mt-2 text-lg font-semibold text-slate-950">What can be safely reviewed next?</h2>
+        <p className="mt-2 text-sm leading-6 text-slate-500">
+          Keep the review at the policy, source, and aggregate account-health level until a future authorized/licensed path is approved.
+        </p>
         <div className="mt-5 space-y-3">
           {panels.map((panel) => (
             <div key={panel.label} className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
@@ -365,24 +483,43 @@ function ComplianceBoundaryCard({ policyGate, variant }: { policyGate: string; v
           "No liker identity trails in Alpha",
           "No private-user tracking runs in Alpha",
         ]
+      : variant === "newRelationships"
+        ? [
+            "Restricted follow-change log preview",
+            "Authorized-source-only or licensed-provider-only",
+            "Disabled by default in Alpha",
+            "No live recent-follow detection",
+            "No arbitrary relationship monitoring",
+            "No private account access",
+            "No export, alert, sync, or backfill",
+            "Requires feature-policy gate",
+            "Requires provenance and audit records before future use",
+          ]
       : [
-          "Restricted preview",
-          "Preview-only audience intelligence",
-          "Mock audience metrics",
-          "Mock relationship signals",
-          "Requires official source connection",
-          "Requires provider approval where applicable",
-          "Licensed-provider-only where required",
-          "No follower tracking runs in Alpha",
-          "No identity-level monitoring runs in Alpha",
+          "Restricted churn review preview",
+          "Authorized-source-only or licensed-provider-only",
+          "Disabled by default in Alpha",
+          "No live recent-unfollow detection",
+          "No hidden relationship-loss monitoring",
+          "No private account access",
+          "No winback automation or alerts",
+          "Requires feature-policy gate",
+          "Requires provenance and audit records before future use",
         ];
+
+  const title =
+    variant === "affinity"
+      ? "Restricted preview only — future provider approval required"
+      : variant === "newRelationships"
+        ? "Follow-change intelligence is restricted until an approved source path exists"
+        : "Churn and relationship-loss review is restricted until an approved source path exists";
 
   return (
     <section className="rounded-3xl border border-amber-200 bg-gradient-to-br from-amber-50 via-white to-rose-50 p-5 shadow-sm shadow-amber-100/70">
       <div className="flex flex-col gap-4 xl:flex-row xl:items-start xl:justify-between">
         <div>
           <p className="text-xs font-semibold uppercase tracking-[0.18em] text-amber-700">Compliance boundary</p>
-          <h2 className="mt-2 text-lg font-semibold text-slate-950">Restricted preview only — future provider approval required</h2>
+          <h2 className="mt-2 text-lg font-semibold text-slate-950">{title}</h2>
           <p className="mt-2 max-w-4xl text-sm leading-6 text-slate-600">{policyGate}</p>
         </div>
         <Badge tone="rose">No backend action runs from this page</Badge>
@@ -414,7 +551,10 @@ export function RestrictedIdentityPreviewPage({
   const classificationCopy =
     variant === "affinity"
       ? "No live Instagram data is collected in Alpha. No personal like history, liker identity trails, or identity-level engagement monitoring runs in Alpha."
+      : variant === "newRelationships"
+        ? "No live Instagram data is collected in Alpha. No recent-follow detection, identity-level follow log, export, alert, sync, or monitor runs in Alpha."
       : "No live Instagram data is collected in Alpha. No follower tracking runs in Alpha. No identity-level monitoring runs in Alpha.";
+  const activeAccountSection = variant === "affinity" ? "Likes" : variant === "newRelationships" ? "Recent follows" : "Recent unfollows";
 
   return (
     <div className="space-y-6">
@@ -438,13 +578,15 @@ export function RestrictedIdentityPreviewPage({
         </div>
       </header>
 
+      <AccountContextNavigation activeLabel={activeAccountSection} />
+
       <section className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
         {metrics.map((metric) => (
           <MetricCard key={metric.label} metric={metric} />
         ))}
       </section>
 
-      <StaticPreviewControls />
+      <StaticPreviewControls variant={variant} />
 
       {variant === "affinity" ? <AffinityRestrictedWidgets /> : null}
 

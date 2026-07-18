@@ -1,7 +1,7 @@
+import Link from "next/link";
 import { ReportLibraryTable } from "@/components/data-tables/report-library-table";
 import {
   executiveSummaryPreview,
-  exportReadiness,
   gatedReportEnrichmentPanel,
   reportCards,
   reportComplianceNotice,
@@ -77,6 +77,64 @@ const alphaReportSafetyBadges = [
   "Requires provider approval where applicable",
 ];
 
+const reportStudioSourceReadiness: ReportPanelItem[] = [
+  {
+    id: "executive-kpi-source",
+    title: "Executive KPI source-readiness",
+    value: "Mock ready",
+    detail: "Static readiness label for owned and connected professional account summary metrics. No live source query runs.",
+    tone: "green",
+  },
+  {
+    id: "benchmark-source-review",
+    title: "Benchmark source review",
+    value: "Policy review",
+    detail: "Future benchmark sections require official-source or approved licensed-provider paths before any live enrichment is evaluated.",
+    tone: "amber",
+  },
+  {
+    id: "identity-enrichment-blocked",
+    title: "Identity-level enrichment",
+    value: "Disabled",
+    detail: "Restricted identity-level enrichment, private access, scraping, hidden surveillance, and report backfills stay disabled in Alpha.",
+    tone: "rose",
+  },
+];
+
+const reportStudioTemplates = [
+  {
+    name: "Executive performance narrative",
+    owner: "CMO / leadership review",
+    period: "Monthly board-ready period",
+    reviewStatus: "Mock ready for editorial review",
+    sourceReadiness: "Owned account summary sources only",
+    safeNextStep: "Review narrative sections and confirm official-source eligibility before any future generation workflow.",
+  },
+  {
+    name: "Client campaign recap",
+    owner: "Agency account lead",
+    period: "Campaign flight preview",
+    reviewStatus: "Needs compliance review",
+    sourceReadiness: "Connected account metrics plus policy-approved public/professional context",
+    safeNextStep: "Confirm source boundaries, client approval, and policy classification before moving beyond static preview.",
+  },
+  {
+    name: "Compliance evidence packet",
+    owner: "Trust and compliance reviewer",
+    period: "Audit window placeholder",
+    reviewStatus: "Disabled generation placeholder",
+    sourceReadiness: "Audit/provenance schema required before future use",
+    safeNextStep: "Document required audit fields; do not generate, schedule, store, or deliver a report in Alpha.",
+  },
+];
+
+const disabledReportStudioActions = ["Generate report", "Schedule delivery", "Create PDF", "Email stakeholders", "Save report job", "Run licensed enrichment"];
+
+const reportOutputLinks = [
+  { label: "Review export packaging", href: "/exports", detail: "Continue to governed output packages after report template review." },
+  { label: "Return to dashboard", href: "/dashboard", detail: "Back to the workspace intelligence overview." },
+];
+
 function Badge({ children, className }: { children: React.ReactNode; className: string }) {
   return <span className={`rounded-full px-3 py-1 text-xs font-semibold ring-1 ${className}`}>{children}</span>;
 }
@@ -118,7 +176,7 @@ function ReportsHeader() {
             <Badge className="bg-cyan-400/10 text-cyan-100 ring-cyan-300/20">Static {reportsProfile.freshnessBadge}</Badge>
             <Badge className="bg-slate-100/10 text-slate-200 ring-white/15">{reportsProfile.integrationBadge}</Badge>
           </div>
-          <p className="text-sm font-semibold uppercase tracking-wide text-cyan-200">Executive insight packaging</p>
+          <p className="text-sm font-semibold uppercase tracking-wide text-cyan-200">Report studio / executive library</p>
           <h1 className="mt-2 text-4xl font-semibold tracking-tight text-white md:text-5xl">{reportsProfile.title}</h1>
           <p className="mt-3 max-w-3xl text-base leading-7 text-slate-300">{reportsProfile.description}</p>
           <div className="mt-5 flex flex-wrap gap-2">
@@ -132,7 +190,7 @@ function ReportsHeader() {
         <div className="rounded-3xl border border-white/10 bg-white/5 p-4 text-sm leading-6 text-slate-300 xl:w-[31rem]">
           <p className="font-semibold text-white">Alpha reporting boundary</p>
           <p className="mt-1">
-            Mock report previews for connected account summaries, public/professional intelligence, client export previews, and licensed-provider placeholders only.
+            Mock report studio previews for executive templates, editorial review status, source-readiness checks, and licensed-provider placeholders only.
           </p>
           <div className="mt-4 grid gap-2 sm:grid-cols-2">
             <span className="rounded-2xl border border-white/10 bg-slate-950/40 p-3 text-xs font-medium text-slate-200">Generation disabled in Alpha</span>
@@ -188,10 +246,96 @@ function SignalList({ items }: { items: ReportPanelItem[] }) {
   );
 }
 
+function ReportStudioPreview() {
+  return (
+    <section className="grid gap-6 xl:grid-cols-[1.25fr_0.75fr]">
+      <section className="rounded-3xl border border-violet-200 bg-white p-5 shadow-sm shadow-violet-100/70">
+        <div className="mb-5 flex flex-col gap-3 xl:flex-row xl:items-start xl:justify-between">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-wide text-violet-700">Executive report library</p>
+            <h2 className="mt-2 text-lg font-semibold text-slate-950">Report templates awaiting safe review</h2>
+            <p className="mt-1 max-w-4xl text-sm leading-6 text-slate-500">
+              Static templates show audience, owner, reporting period, review status, and source-readiness. They do not generate reports, create files, schedule delivery, or run backend jobs.
+            </p>
+          </div>
+          <Badge className="bg-amber-50 text-amber-700 ring-amber-100">Generation disabled</Badge>
+        </div>
+
+        <div className="space-y-3">
+          {reportStudioTemplates.map((template) => (
+            <article key={template.name} className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
+              <div className="flex flex-col gap-3 lg:flex-row lg:items-start lg:justify-between">
+                <div>
+                  <h3 className="text-base font-semibold text-slate-950">{template.name}</h3>
+                  <p className="mt-1 text-sm leading-6 text-slate-600">{template.safeNextStep}</p>
+                </div>
+                <Badge className="bg-violet-50 text-violet-700 ring-violet-100">{template.reviewStatus}</Badge>
+              </div>
+              <div className="mt-4 grid gap-3 md:grid-cols-3">
+                <div className="rounded-2xl border border-slate-200 bg-white p-3">
+                  <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-400">Audience / owner</p>
+                  <p className="mt-1 text-xs leading-5 text-slate-600">{template.owner}</p>
+                </div>
+                <div className="rounded-2xl border border-slate-200 bg-white p-3">
+                  <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-400">Reporting period</p>
+                  <p className="mt-1 text-xs leading-5 text-slate-600">{template.period}</p>
+                </div>
+                <div className="rounded-2xl border border-slate-200 bg-white p-3">
+                  <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-400">Source-readiness</p>
+                  <p className="mt-1 text-xs leading-5 text-slate-600">{template.sourceReadiness}</p>
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="rounded-3xl border border-amber-200 bg-gradient-to-br from-amber-50 via-white to-violet-50 p-5 shadow-sm shadow-amber-100/70">
+        <p className="text-xs font-semibold uppercase tracking-wide text-amber-700">What can the user safely do next?</p>
+        <h2 className="mt-2 text-lg font-semibold text-slate-950">Review templates, not generated output</h2>
+        <p className="mt-2 text-sm leading-6 text-slate-600">
+          Safely review template structure, audience ownership, reporting period, source-readiness, and compliance notes. Live report generation, file creation, scheduling, delivery, and licensed enrichment remain disabled.
+        </p>
+        <div className="mt-5 flex flex-wrap gap-2" aria-label="Disabled report studio actions">
+          {disabledReportStudioActions.map((action) => (
+            <span key={action} aria-disabled="true" className="rounded-full border border-rose-200 bg-rose-50 px-3 py-1 text-xs font-semibold text-rose-700">
+              {action}: disabled
+            </span>
+          ))}
+        </div>
+      </section>
+    </section>
+  );
+}
+
+function ReportOutputJourney() {
+  return (
+    <section className="rounded-3xl border border-violet-200 bg-gradient-to-br from-violet-50 via-white to-cyan-50 p-5 shadow-sm shadow-violet-100/70">
+      <div className="flex flex-col gap-4 xl:flex-row xl:items-start xl:justify-between">
+        <div>
+          <p className="text-xs font-semibold uppercase tracking-wide text-violet-700">Output journey</p>
+          <h2 className="mt-2 text-lg font-semibold text-slate-950">Reports remain templates; exports remain packaging previews</h2>
+          <p className="mt-2 max-w-4xl text-sm leading-6 text-slate-600">
+            Use these links to move between existing preview routes only. They do not generate reports, create files, schedule delivery, download exports, email stakeholders, or run backend jobs.
+          </p>
+        </div>
+        <div className="grid gap-2 sm:grid-cols-2 xl:w-[34rem]">
+          {reportOutputLinks.map((link) => (
+            <Link key={link.href} href={link.href} className="rounded-2xl border border-violet-100 bg-white p-3 text-sm text-slate-600 transition hover:border-violet-200 hover:bg-violet-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-400">
+              <span className="block font-semibold text-slate-950">{link.label}</span>
+              <span className="mt-1 block text-xs leading-5 text-slate-500">{link.detail}</span>
+            </Link>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function ReportLibraryPanels() {
   return (
     <section className="grid gap-4 lg:grid-cols-2 2xl:grid-cols-4">
-      <ReportsPanel title="Scheduled delivery preview" subtitle="Scheduled delivery requires backend; this is a static cadence placeholder only.">
+      <ReportsPanel title="Executive review cadence" subtitle="Editorial review cadence only; scheduled generation and delivery require backend and remain disabled.">
         <div className="rounded-3xl bg-gradient-to-br from-slate-950 via-slate-900 to-violet-950 p-5 text-white">
           <div className="mb-4 flex flex-wrap items-center justify-between gap-2">
             <p className="text-xs font-semibold uppercase tracking-wide text-slate-300">Static schedule model</p>
@@ -211,12 +355,12 @@ function ReportLibraryPanels() {
         </div>
       </ReportsPanel>
 
-      <ReportsPanel title="Report type mix" subtitle="Mock report templates, client export previews, and benchmark placeholders only.">
+      <ReportsPanel title="Template portfolio mix" subtitle="Mock executive, campaign, benchmark, and compliance report templates only.">
         <SignalList items={reportTypeMix} />
       </ReportsPanel>
 
-      <ReportsPanel title="Export preview readiness" subtitle="Preview-only export status; export jobs require backend and no file is created.">
-        <SignalList items={exportReadiness} />
+      <ReportsPanel title="Source-readiness for reports" subtitle="Preview-only source checks for report sections; no live query, generation, or storage runs.">
+        <SignalList items={reportStudioSourceReadiness} />
       </ReportsPanel>
 
       <ReportsPanel title="Review and compliance queue" subtitle="Source, policy, and client-readiness review placeholders with no audit write.">
@@ -400,6 +544,8 @@ export function ReportsPage() {
       </section>
 
       <FilterPlaceholderBar />
+      <ReportOutputJourney />
+      <ReportStudioPreview />
       <ReportLibraryPanels />
       <ReportCardsGrid />
       <ExecutiveSummaryPreviewPanel />

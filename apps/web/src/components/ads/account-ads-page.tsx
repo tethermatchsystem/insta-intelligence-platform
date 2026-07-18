@@ -1,3 +1,4 @@
+import { AccountContextNavigation } from "@/components/accounts/account-context-navigation";
 import { AdCreativeCards } from "@/components/ads/ad-creative-cards";
 import { AdsIntelligencePanels } from "@/components/ads/ads-intelligence-panels";
 import { AdIntelligenceTable } from "@/components/data-tables/ad-intelligence-table";
@@ -230,6 +231,7 @@ export function AccountAdsPage() {
   return (
     <div className="space-y-6">
       <AdsHeader />
+      <AccountContextNavigation activeLabel="Ads" />
 
       <section className="grid gap-4 lg:grid-cols-3">
         {adsOperationalCards.map((card) => (

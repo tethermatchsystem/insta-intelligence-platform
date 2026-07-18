@@ -1,3 +1,4 @@
+import { AccountContextNavigation } from "@/components/accounts/account-context-navigation";
 import { FollowerIntelligenceCards } from "@/components/audience/follower-intelligence-cards";
 import { FollowerSummaryPanels } from "@/components/audience/follower-summary-panels";
 import { FollowerIntelligenceTable } from "@/components/data-tables/follower-intelligence-table";
@@ -333,6 +334,7 @@ export function AccountFollowersPage() {
   return (
     <div className="space-y-6">
       <FollowersHeader />
+      <AccountContextNavigation activeLabel="Followers" />
 
       <section className="grid gap-4 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-6">
         {accountFollowerKpis.map((kpi) => (

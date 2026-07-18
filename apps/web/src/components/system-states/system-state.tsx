@@ -29,72 +29,81 @@ type SystemStateProps = {
 
 const variantCopy: Record<SystemStateVariant, { eyebrow: string; accent: string; icon: string; role: string; safetyNote: string }> = {
   empty: {
-    eyebrow: "Alpha preview empty state",
+    eyebrow: "Source readiness placeholder",
     accent: "from-slate-950 via-slate-900 to-indigo-950",
     icon: "∅",
-    role: "Explains what future official-source or approved-provider data may appear here without creating fake actions.",
-    safetyNote: "No backend action runs from this empty state.",
+    role: "Explains what official-source, owned, consented, imported, or approved-provider data may appear here after authorized source readiness.",
+    safetyNote: "Next-step labels are static guidance only; no connection, invite, policy change, sync, or backend write runs from this state.",
   },
   loading: {
-    eyebrow: "Skeleton placeholder state",
+    eyebrow: "Alpha skeleton preview",
     accent: "from-slate-950 via-slate-900 to-blue-950",
     icon: "↻",
-    role: "Shows layout placeholders only; it does not imply live sync, provider lookup, or data collection.",
-    safetyNote: "No provider query or live Instagram data collection is running.",
+    role: "Shows layout and source-readiness placeholders only; it does not imply live backend fetching, provider lookup, or data collection.",
+    safetyNote: "No backend fetch, provider query, OAuth flow, job, or live Instagram data collection is running.",
   },
   error: {
-    eyebrow: "Route boundary state",
+    eyebrow: "Compliance-safe boundary state",
     accent: "from-rose-950 via-slate-950 to-slate-900",
     icon: "!",
-    role: "Keeps route-boundary failures calm and enterprise-safe without exposing stack traces or fake support workflows.",
-    safetyNote: "No backend write, notification, provider action, or OAuth flow is triggered.",
+    role: "Frames unavailable sources, missing permissions, or Alpha-disabled provider jobs with calm recovery copy instead of scary technical failures.",
+    safetyNote: "No backend write, notification, provider action, OAuth flow, reset, export, or fake live incident workflow is triggered.",
   },
   restricted: {
-    eyebrow: "Compliance-gated state",
+    eyebrow: "Compliance gate boundary",
     accent: "from-amber-950 via-slate-950 to-slate-900",
     icon: "⊘",
-    role: "Marks features that require official-source eligibility, provider approval, or licensed-provider-only review.",
-    safetyNote: "No scraping, private account access, hidden surveillance, or anti-bot bypass is available.",
+    role: "Marks features that require official-source eligibility, authorized account scope, policy approval, or licensed-provider-only review before future activation.",
+    safetyNote: "Real actions remain disabled. No scraping, private account access, hidden surveillance, fake login automation, or anti-bot bypass is available.",
   },
   unavailable: {
-    eyebrow: "Unavailable provider state",
+    eyebrow: "Source unavailable preview",
     accent: "from-slate-950 via-slate-900 to-emerald-950",
     icon: "◇",
-    role: "Frames future provider/source availability without opening OAuth, provider activation, or backend setup.",
-    safetyNote: "Official-source connection and private beta activation are required before live behavior exists.",
+    role: "Explains that a source, permission, or provider pathway is not connected in Alpha without opening OAuth, activation, or backend setup.",
+    safetyNote: "Official-source connection, authorized scope, and private beta activation are required before live behavior exists.",
   },
   placeholder: {
-    eyebrow: "Preview-only state",
+    eyebrow: "Alpha preview boundary",
     accent: "from-slate-950 via-slate-900 to-cyan-950",
     icon: "◇",
-    role: "Provides static Alpha context for a future workflow while keeping the current UI mock-only.",
-    safetyNote: "No live Instagram data is collected in Alpha.",
+    role: "Provides static Alpha context for a future workflow while keeping the current UI mock-only and official-source-safe.",
+    safetyNote: "No live Instagram data is collected, synced, exported, or written in Alpha.",
   },
+};
+
+const boundaryLabels: Record<SystemStateVariant, string> = {
+  empty: "Source readiness",
+  loading: "Skeleton preview",
+  error: "Safe recovery copy",
+  restricted: "Policy gated",
+  unavailable: "Source not connected",
+  placeholder: "Static preview",
 };
 
 const defaultBadges: Record<SystemStateVariant, SystemStateBadge[]> = {
   empty: [
     { label: "Alpha preview", tone: "info" },
-    { label: "Preview-only state", tone: "neutral" },
-    { label: "No live provider action", tone: "warning" },
+    { label: "Authorized source required", tone: "success" },
+    { label: "Actions disabled", tone: "warning" },
   ],
   loading: [
-    { label: "Skeleton placeholder", tone: "info" },
-    { label: "No live sync", tone: "warning" },
-    { label: "Static Alpha shell", tone: "neutral" },
+    { label: "Preview skeleton", tone: "info" },
+    { label: "No backend fetch", tone: "warning" },
+    { label: "Source-readiness placeholder", tone: "neutral" },
   ],
   error: [
-    { label: "Route boundary", tone: "danger" },
-    { label: "No backend action", tone: "warning" },
+    { label: "Source or permission boundary", tone: "danger" },
+    { label: "No live failure simulated", tone: "warning" },
     { label: "Preview-safe recovery", tone: "neutral" },
   ],
   restricted: [
     { label: "Official-source required", tone: "warning" },
-    { label: "Provider approval may be required", tone: "info" },
+    { label: "Real actions disabled", tone: "neutral" },
     { label: "Licensed-provider-only where required", tone: "purple" },
   ],
   unavailable: [
-    { label: "Provider unavailable", tone: "warning" },
+    { label: "Source not connected", tone: "warning" },
     { label: "Private beta activation required", tone: "info" },
     { label: "No OAuth started", tone: "neutral" },
   ],
@@ -106,12 +115,12 @@ const defaultBadges: Record<SystemStateVariant, SystemStateBadge[]> = {
 };
 
 const defaultChecks: Record<SystemStateVariant, string[]> = {
-  empty: ["Future data requires official-source connection or approved provider coverage", "No backend action runs from this state", "Public, owned, consented, or approved-source data only"],
-  loading: ["Skeleton placeholder only", "No live sync or provider fetch is implied", "No jobs, downloads, notifications, or database writes run"],
-  error: ["Route recovery only re-renders the current UI", "No stack trace or live incident workflow is exposed", "No provider, OAuth, notification, or backend action is triggered"],
-  restricted: ["Official-source connection required", "Provider approval may be required", "No scraping, private account access, hidden surveillance, or anti-bot bypass"],
-  unavailable: ["Private beta activation required before live provider behavior", "No OAuth or provider activation runs from this state", "No backend route, provider job, or database write exists here"],
-  placeholder: ["Alpha preview only", "No live Instagram data is collected in Alpha", "No backend action runs from this state"],
+  empty: ["Future rows require authorized source readiness or approved provider coverage", "Safe next steps are guidance only: connect later, review source, invite team, or configure policy", "Controls remain disabled and no backend action runs from this state"],
+  loading: ["Skeletons are visual placeholders only", "No live sync, provider fetch, OAuth, or source lookup is implied", "No jobs, downloads, notifications, or database writes run"],
+  error: ["Treat this as source not connected, permission unavailable, or Alpha-disabled provider job copy", "No stack trace, fake incident, live support workflow, or alert is exposed", "No provider, OAuth, notification, export, or backend action is triggered"],
+  restricted: ["Official-source connection or authorized account scope is required", "Licensed-provider-only features require approval where applicable", "No scraping, private account access, hidden surveillance, fake login, or anti-bot bypass"],
+  unavailable: ["Source, permission, or provider pathway is not connected in Alpha", "No OAuth, provider activation, or connection job runs from this state", "No backend route, provider job, or database write exists here"],
+  placeholder: ["Alpha preview only", "No live Instagram data is collected, synced, exported, or written in Alpha", "No backend action runs from this state"],
 };
 
 function badgeClasses(tone: SystemStateBadgeTone = "neutral") {
@@ -130,7 +139,7 @@ function badgeClasses(tone: SystemStateBadgeTone = "neutral") {
 
 export function SystemStateBadge({ badge }: { badge: SystemStateBadge }) {
   return (
-    <Badge variant="outline" className={cn("min-h-6 max-w-full whitespace-normal break-words rounded-full border-transparent px-3 py-1 text-left font-semibold leading-4 ring-1", badgeClasses(badge.tone))}>
+    <Badge variant="outline" className={cn("h-auto min-h-6 max-w-full items-start justify-start overflow-visible whitespace-normal break-words rounded-full border-transparent px-3 py-1 text-left font-semibold leading-4 ring-1", badgeClasses(badge.tone))}>
       {badge.label}
     </Badge>
   );
@@ -138,13 +147,14 @@ export function SystemStateBadge({ badge }: { badge: SystemStateBadge }) {
 
 export function SystemState({ variant = "placeholder", eyebrow, title, description, badges = [], checks = [], children, compact = false, stateRole, safetyNote }: SystemStateProps) {
   const copy = variantCopy[variant];
+  const boundaryLabel = boundaryLabels[variant];
   const safeBadges = badges.length ? badges : defaultBadges[variant];
   const safeChecks = checks.length ? checks : defaultChecks[variant];
   const titleId = useId();
   const descriptionId = `${titleId}-description`;
 
   return (
-    <Card role="region" aria-labelledby={titleId} aria-describedby={description ? descriptionId : undefined} className={cn("overflow-hidden rounded-3xl border-white/10 bg-slate-950/80 py-0 shadow-2xl shadow-black/20 ring-1 ring-white/[0.03]", compact ? "p-2 sm:p-3" : "p-3 sm:p-4") }>
+    <Card role="region" aria-labelledby={titleId} aria-describedby={description ? descriptionId : undefined} className={cn("overflow-hidden rounded-3xl border-white/10 bg-slate-950/80 py-0 shadow-2xl shadow-black/20 ring-1 ring-white/[0.03]", compact ? "p-2 sm:p-3" : "p-3 sm:p-4")}>
       <div className={`rounded-3xl bg-gradient-to-br ${copy.accent} p-4 text-white shadow-inner shadow-white/[0.02] sm:p-5`}>
         <div className="flex flex-col gap-5 lg:flex-row lg:items-start lg:justify-between">
           <div className="max-w-3xl min-w-0">
@@ -165,10 +175,13 @@ export function SystemState({ variant = "placeholder", eyebrow, title, descripti
               </div>
               <div className="min-w-0">
                 <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-400">State boundary</p>
-                <p className="mt-1 text-sm font-semibold text-slate-100">{variant === "loading" ? "Skeleton only" : variant === "error" ? "Local recovery" : "Preview-safe"}</p>
+                <p className="mt-1 text-sm font-semibold text-slate-100">{boundaryLabel}</p>
               </div>
             </div>
             <p className="mt-3 text-xs leading-5 text-slate-400">{safetyNote ?? copy.safetyNote}</p>
+            <p className="mt-3 rounded-2xl border border-white/10 bg-white/10 px-3 py-2 text-[11px] font-semibold leading-4 text-cyan-100">
+              Alpha preview only · real actions disabled
+            </p>
           </div>
         </div>
 
@@ -188,7 +201,7 @@ export function SystemState({ variant = "placeholder", eyebrow, title, descripti
   );
 }
 
-export function LoadingSkeletonState({ title = "Preparing static Alpha preview", description = "Rendering skeleton placeholders only. No live sync, provider query, backend fetch, or Instagram data collection is running." }: { title?: string; description?: string }) {
+export function LoadingSkeletonState({ title = "Preparing source-readiness preview", description = "Rendering skeleton placeholders only. No live sync, provider query, backend fetch, OAuth flow, or Instagram data collection is running." }: { title?: string; description?: string }) {
   return (
     <SystemState
       variant="loading"
@@ -197,9 +210,9 @@ export function LoadingSkeletonState({ title = "Preparing static Alpha preview",
       badges={[
         { label: "Alpha preview", tone: "info" },
         { label: "Skeleton placeholder only", tone: "neutral" },
-        { label: "No live sync", tone: "warning" },
+        { label: "No backend fetch", tone: "warning" },
       ]}
-      checks={["No backend fetch is implied by this loading state", "No provider query, OAuth, job, or database write runs", "No live Instagram data is collected in Alpha"]}
+      checks={["No backend fetch is implied by this loading state", "No provider query, OAuth, job, export, or database write runs", "No live Instagram data is collected in Alpha"]}
     >
       <div className="grid gap-3 md:grid-cols-3">
         {["Shell placeholder", "Metric placeholders", "Table placeholder"].map((item) => (

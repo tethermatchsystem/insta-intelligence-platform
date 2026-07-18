@@ -172,6 +172,108 @@ function FilterPlaceholderBar() {
   );
 }
 
+function AlertRuleCenterPreview() {
+  const ruleCards = [
+    {
+      rule: "Brand-safety risk spike",
+      trigger: "Mock negative mention velocity crosses review threshold",
+      destination: "Compliance inbox placeholder",
+      severity: "High",
+      approval: "Approval required",
+      readiness: "No delivery configured",
+      guidance: "Review threshold wording and owner expectations; no email, Slack, push, webhook, or job runs.",
+      tone: "rose" as AlertTone,
+    },
+    {
+      rule: "Campaign opportunity pulse",
+      trigger: "Mock positive topic/mention signal reaches planning threshold",
+      destination: "Campaign review queue placeholder",
+      severity: "Medium",
+      approval: "Draft preview",
+      readiness: "Notification disabled",
+      guidance: "Review whether the trigger is useful for campaign planning without sending notifications.",
+      tone: "green" as AlertTone,
+    },
+    {
+      rule: "Competitor public ad change",
+      trigger: "Meta Ad Library-style public visibility placeholder changes state",
+      destination: "Analyst review board placeholder",
+      severity: "Medium",
+      approval: "Source review needed",
+      readiness: "Provider/official source required",
+      guidance: "Keep public/allowed-source framing and do not start competitor tracking or hidden monitoring.",
+      tone: "blue" as AlertTone,
+    },
+    {
+      rule: "Compliance gate reminder",
+      trigger: "Restricted or licensed-provider-only feature remains pending review",
+      destination: "Governance owner placeholder",
+      severity: "Review",
+      approval: "Policy owner review",
+      readiness: "Workflow disabled",
+      guidance: "Review owner and approval language; no legal routing or policy enforcement runs.",
+      tone: "amber" as AlertTone,
+    },
+  ];
+
+  const disabledActions = ["Enable rule", "Send test notification", "Connect Slack", "Send email", "Register webhook", "Save alert policy", "Push notification"];
+
+  return (
+    <section className="grid gap-4 xl:grid-cols-[1.35fr_0.65fr]">
+      <article className="rounded-[2rem] border border-rose-200 bg-gradient-to-br from-white via-rose-50 to-amber-50 p-5 shadow-lg shadow-rose-100/60">
+        <div className="flex flex-col gap-3 xl:flex-row xl:items-start xl:justify-between">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-wide text-rose-700">Alert rule center</p>
+            <h2 className="mt-2 text-xl font-semibold text-slate-950">Rule cards with trigger conditions and destination readiness</h2>
+            <p className="mt-2 max-w-4xl text-sm leading-6 text-slate-600">
+              Static rule cards distinguish Alerts from signal review pages. They show trigger conditions, destination readiness, severity, approval state, and owner guidance without sending notifications, registering webhooks, connecting Slack/email, creating jobs, or saving policies.
+            </p>
+          </div>
+          <Badge className="bg-white text-rose-700 ring-rose-200">Delivery disabled</Badge>
+        </div>
+
+        <div className="mt-5 grid gap-3 xl:grid-cols-2">
+          {ruleCards.map((rule) => (
+            <article key={rule.rule} className="rounded-3xl border border-white/80 bg-white/90 p-4 shadow-sm shadow-rose-100/70">
+              <div className="flex flex-wrap items-start justify-between gap-3">
+                <div>
+                  <p className="text-xs font-semibold uppercase tracking-wide text-slate-400">{rule.rule}</p>
+                  <h3 className="mt-2 text-base font-semibold text-slate-950">{rule.trigger}</h3>
+                </div>
+                <Badge className={toneClasses(rule.tone)}>{rule.severity}</Badge>
+              </div>
+              <div className="mt-4 grid gap-2 md:grid-cols-2">
+                <p className="rounded-2xl border border-slate-100 bg-slate-50 p-3 text-xs leading-5 text-slate-600"><span className="font-semibold text-slate-950">Destination:</span> {rule.destination}</p>
+                <p className="rounded-2xl border border-slate-100 bg-slate-50 p-3 text-xs leading-5 text-slate-600"><span className="font-semibold text-slate-950">Approval:</span> {rule.approval}</p>
+                <p className="rounded-2xl border border-slate-100 bg-slate-50 p-3 text-xs leading-5 text-slate-600 md:col-span-2"><span className="font-semibold text-slate-950">Readiness:</span> {rule.readiness}</p>
+              </div>
+              <p className="mt-3 rounded-2xl border border-rose-100 bg-rose-50 p-3 text-xs leading-5 text-rose-900">{rule.guidance}</p>
+            </article>
+          ))}
+        </div>
+      </article>
+
+      <article className="rounded-3xl border border-amber-200 bg-gradient-to-br from-amber-50 via-white to-rose-50 p-5 shadow-lg shadow-amber-100/60">
+        <p className="text-xs font-semibold uppercase tracking-wide text-amber-700">What can the user safely configure next?</p>
+        <h2 className="mt-2 text-lg font-semibold text-slate-950">Review rule readiness, do not deliver notifications</h2>
+        <p className="mt-2 text-sm leading-6 text-slate-600">
+          Safely review rule names, trigger conditions, destination readiness, severity, approval state, owner guidance, and compliance notes. Real alert delivery, webhooks, emails, Slack, push notifications, exports, downloads, policy saves, and background jobs remain disabled.
+        </p>
+        <div className="mt-5 flex flex-wrap gap-2" aria-label="Disabled alert rule actions">
+          {disabledActions.map((action) => (
+            <span key={action} aria-disabled="true" className="rounded-full border border-rose-200 bg-rose-50 px-3 py-1 text-xs font-semibold text-rose-700">
+              {action}: disabled
+            </span>
+          ))}
+        </div>
+        <p className="mt-5 rounded-2xl border border-slate-200 bg-white/80 p-4 text-xs leading-5 text-slate-600">
+          Alpha boundary: no real alert delivery, webhook, email, Slack, SMS, push notification, provider sync, database write, or compliance enforcement runs from this page.
+        </p>
+      </article>
+    </section>
+  );
+}
+
 function SignalList({ items }: { items: AlertPanelItem[] }) {
   return (
     <div className="space-y-3">
@@ -368,6 +470,7 @@ export function AlertCenterPage() {
       </section>
 
       <FilterPlaceholderBar />
+      <AlertRuleCenterPreview />
       <IntelligencePanels />
       <AlertCardsQueue />
       <WorkflowSlaPanel />

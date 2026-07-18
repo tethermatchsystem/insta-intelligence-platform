@@ -1,3 +1,4 @@
+import { AccountContextNavigation } from "@/components/accounts/account-context-navigation";
 import { FollowingIntelligenceCards } from "@/components/audience/following-intelligence-cards";
 import { FollowingSummaryPanels } from "@/components/audience/following-summary-panels";
 import { FollowingIntelligenceTable } from "@/components/data-tables/following-intelligence-table";
@@ -290,6 +291,7 @@ export function AccountFollowingPage() {
   return (
     <div className="space-y-6">
       <FollowingHeader />
+      <AccountContextNavigation activeLabel="Following" />
 
       <section className="grid gap-4 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-6">
         {accountFollowingKpis.map((kpi) => (

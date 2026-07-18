@@ -142,6 +142,95 @@ function FilterPlaceholderBar() {
   );
 }
 
+function CreatorFitEvaluationWorkspace() {
+  const fitCards = [
+    {
+      creator: "Mina Studio",
+      lane: "Premium beauty educator",
+      fit: "91% mock fit",
+      audience: "Owned/public audience quality preview only",
+      safety: "Brand-safety review ready",
+      collaboration: "Brief alignment can be reviewed next",
+      source: "Public or approved-source preview",
+      tone: "purple" as CreatorDiscoveryTone,
+    },
+    {
+      creator: "Urban Wellness Lab",
+      lane: "Fitness launch partner",
+      fit: "84% mock fit",
+      audience: "Category overlap placeholder",
+      safety: "Manual claims review required",
+      collaboration: "Collaboration terms not configured",
+      source: "Official-source connection required",
+      tone: "blue" as CreatorDiscoveryTone,
+    },
+    {
+      creator: "Retail Story Co.",
+      lane: "Commerce storyteller",
+      fit: "78% mock fit",
+      audience: "Aggregate engagement preview only",
+      safety: "Disclosure checklist pending",
+      collaboration: "Save/outreach disabled in Alpha",
+      source: "Licensed provider approval where applicable",
+      tone: "green" as CreatorDiscoveryTone,
+    },
+  ];
+
+  const disabledActions = ["Save creator", "Send outreach", "Open contact details", "Export shortlist", "Request provider enrichment", "Create collaboration brief"];
+
+  return (
+    <section className="grid gap-4 xl:grid-cols-[1.35fr_0.65fr]">
+      <article className="rounded-[2rem] border border-violet-200 bg-gradient-to-br from-white via-violet-50 to-fuchsia-50 p-5 shadow-sm shadow-violet-100/70">
+        <div className="flex flex-col gap-3 xl:flex-row xl:items-start xl:justify-between">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-violet-700">Creator fit evaluation workspace</p>
+            <h2 className="mt-2 text-xl font-semibold text-slate-950">Candidate fit cards with audience and brand-safety preview</h2>
+            <p className="mt-2 max-w-4xl text-sm leading-6 text-slate-600">
+              Static creator-fit cards help teams compare niche match, audience-quality posture, brand-safety readiness, collaboration readiness, and source eligibility. No creator search, contact lookup, private creator data, save, outreach, export, or provider action runs in Alpha.
+            </p>
+          </div>
+          <Badge className="bg-white text-violet-700 ring-violet-200">Evaluation only</Badge>
+        </div>
+
+        <div className="mt-5 grid gap-3 xl:grid-cols-3">
+          {fitCards.map((card) => (
+            <article key={card.creator} className="rounded-3xl border border-white/80 bg-white/85 p-4 shadow-sm shadow-violet-100/70">
+              <div className="flex flex-wrap items-start justify-between gap-3">
+                <div>
+                  <p className="text-xs font-semibold uppercase tracking-wide text-slate-400">{card.lane}</p>
+                  <h3 className="mt-2 text-lg font-semibold text-slate-950">{card.creator}</h3>
+                </div>
+                <Badge className={toneClasses(card.tone)}>{card.fit}</Badge>
+              </div>
+              <div className="mt-4 grid gap-2">
+                <p className="rounded-2xl border border-slate-100 bg-slate-50 p-3 text-xs leading-5 text-slate-600"><span className="font-semibold text-slate-950">Audience:</span> {card.audience}</p>
+                <p className="rounded-2xl border border-slate-100 bg-slate-50 p-3 text-xs leading-5 text-slate-600"><span className="font-semibold text-slate-950">Brand safety:</span> {card.safety}</p>
+                <p className="rounded-2xl border border-slate-100 bg-slate-50 p-3 text-xs leading-5 text-slate-600"><span className="font-semibold text-slate-950">Collaboration:</span> {card.collaboration}</p>
+                <p className="rounded-2xl border border-violet-100 bg-violet-50 p-3 text-xs leading-5 text-violet-900"><span className="font-semibold">Eligibility/source:</span> {card.source}</p>
+              </div>
+            </article>
+          ))}
+        </div>
+      </article>
+
+      <article className="rounded-3xl border border-amber-200 bg-gradient-to-br from-amber-50 via-white to-violet-50 p-5 shadow-sm shadow-amber-100/70">
+        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-amber-700">What can the user safely review next?</p>
+        <h2 className="mt-2 text-lg font-semibold text-slate-950">Review fit and readiness, do not contact creators</h2>
+        <p className="mt-2 text-sm leading-6 text-slate-600">
+          Safely review candidate fit, audience-quality posture, brand-safety notes, collaboration readiness, and source eligibility. Real creator search, shortlist saving, outreach, contact access, exports, downloads, provider enrichment, and CRM handoff remain disabled.
+        </p>
+        <div className="mt-5 flex flex-wrap gap-2" aria-label="Disabled creator evaluation actions">
+          {disabledActions.map((action) => (
+            <span key={action} aria-disabled="true" className="rounded-full border border-rose-200 bg-rose-50 px-3 py-1 text-xs font-semibold text-rose-700">
+              {action}: disabled
+            </span>
+          ))}
+        </div>
+      </article>
+    </section>
+  );
+}
+
 function CreatorShortlistWorkspace() {
   const stages = [
     { label: "Candidate review", value: "Mock profile pool", detail: "Static public/approved-source creator candidates for QA and sales preview.", meta: "Public or approved-source data only", readiness: 72 },
@@ -271,6 +360,7 @@ export function CreatorDiscoveryPage() {
       </section>
 
       <FilterPlaceholderBar />
+      <CreatorFitEvaluationWorkspace />
       <CreatorShortlistWorkspace />
       <CreatorReviewBoard />
       <CreatorDiscoveryPanels />

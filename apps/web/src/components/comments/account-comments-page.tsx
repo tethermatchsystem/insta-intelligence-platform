@@ -1,3 +1,4 @@
+import { AccountContextNavigation } from "@/components/accounts/account-context-navigation";
 import { AccountCommentIntelligencePanels } from "@/components/comments/comment-intelligence-panels";
 import { CommentStream } from "@/components/comments/comment-stream";
 import { CommentIntelligenceTable } from "@/components/data-tables/comment-intelligence-table";
@@ -266,6 +267,7 @@ export function AccountCommentsPage() {
   return (
     <div className="space-y-6">
       <CommentsHeader />
+      <AccountContextNavigation activeLabel="Comments" />
 
       <section className="grid gap-4 lg:grid-cols-3">
         {commentOperationalCards.map((card) => (

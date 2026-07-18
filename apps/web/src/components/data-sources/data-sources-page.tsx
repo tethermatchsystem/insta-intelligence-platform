@@ -12,7 +12,6 @@ import {
   dataSourcesProfile,
   dataSourceStatusLabels,
   dataSourceTypeLabels,
-  freshnessSyncCadence,
   gatedLicensedProviderPanel,
   officialApiReadiness,
   permissionScopesPlaceholder,
@@ -84,6 +83,75 @@ const alphaDataSourceSafetyBadges = [
   "Requires provider approval where applicable",
 ];
 
+const providerControlRoomCards = [
+  {
+    provider: "Instagram Graph API",
+    role: "Connected professional account insights",
+    readiness: "Mock scope review ready",
+    tokenBoundary: "Token storage and OAuth exchange are not implemented in Alpha.",
+    syncStatus: "Static freshness preview only",
+    safeNextStep: "Review required official scopes and connected-account ownership before any future OAuth work.",
+  },
+  {
+    provider: "Meta Marketing API",
+    role: "Campaign, ad account, and paid-performance context",
+    readiness: "Policy review placeholder",
+    tokenBoundary: "No ad account token, permission grant, or live API request exists.",
+    syncStatus: "No spend or campaign sync runs",
+    safeNextStep: "Define ad-account access, least-privilege scopes, and audit needs before private-beta integration.",
+  },
+  {
+    provider: "Meta Ad Library API",
+    role: "Official public ad transparency source",
+    readiness: "Official-safe preview",
+    tokenBoundary: "No live request or caching layer is active from this page.",
+    syncStatus: "Static public-source readiness",
+    safeNextStep: "Validate allowed query patterns and provenance fields before adding any backend adapter.",
+  },
+  {
+    provider: "Owned webhooks",
+    role: "Owned/connected account event delivery",
+    readiness: "Webhook endpoint deferred",
+    tokenBoundary: "No webhook secret, callback URL, or subscription handshake is configured.",
+    syncStatus: "No delivery subscription runs",
+    safeNextStep: "Document webhook verification, consent, and retention boundaries before implementation.",
+  },
+  {
+    provider: "Licensed-provider adapters",
+    role: "Restricted enrichment only after approval",
+    readiness: "Disabled by default",
+    tokenBoundary: "No licensed provider credential, contract, or adapter is active.",
+    syncStatus: "No enrichment sync runs",
+    safeNextStep: "Complete provider approval, policy classification, and provenance design before any restricted adapter work.",
+  },
+];
+
+const providerSecurityBoundaries: DataSourcePanelItem[] = [
+  {
+    id: "token-security-boundary",
+    title: "Token/security boundary",
+    value: "No tokens stored",
+    detail: "OAuth exchange, token storage, webhook secrets, credential rotation, and provider secrets are not implemented in Alpha.",
+    tone: "amber",
+  },
+  {
+    id: "sync-status-boundary",
+    title: "Sync status boundary",
+    value: "Static only",
+    detail: "Sync state, freshness, rate limits, and provider health are mock labels only. No provider request, queue, or cache write runs.",
+    tone: "blue",
+  },
+  {
+    id: "restricted-provider-boundary",
+    title: "Restricted adapter boundary",
+    value: "Approval required",
+    detail: "Licensed-provider adapters stay disabled by default and require policy gates, provenance, and provider approval where applicable.",
+    tone: "rose",
+  },
+];
+
+const disabledProviderActions = ["Connect provider", "Start OAuth", "Sync now", "Rotate token", "Enable webhook", "Run licensed adapter"];
+
 function Badge({ children, className }: { children: React.ReactNode; className: string }) {
   return <span className={`rounded-full px-3 py-1 text-xs font-semibold ring-1 ${className}`}>{children}</span>;
 }
@@ -125,7 +193,7 @@ function DataSourcesHeader() {
             <Badge className="bg-cyan-400/10 text-cyan-100 ring-cyan-300/20">{dataSourcesProfile.freshnessBadge}</Badge>
             <Badge className="bg-slate-100/10 text-slate-200 ring-white/15">{dataSourcesProfile.integrationBadge}</Badge>
           </div>
-          <p className="text-sm font-semibold uppercase tracking-wide text-cyan-200">Provider preview</p>
+          <p className="text-sm font-semibold uppercase tracking-wide text-cyan-200">Provider connection control room</p>
           <h1 className="mt-2 text-4xl font-semibold tracking-tight text-white md:text-5xl">{dataSourcesProfile.title}</h1>
           <p className="mt-3 max-w-3xl text-base leading-7 text-slate-300">{dataSourcesProfile.description}</p>
           <div className="mt-5 flex flex-wrap gap-2">
@@ -195,10 +263,69 @@ function SignalList({ items }: { items: DataSourcePanelItem[] }) {
   );
 }
 
+function ProviderControlRoomPreview() {
+  return (
+    <section className="grid gap-6 xl:grid-cols-[1.25fr_0.75fr]">
+      <section className="rounded-3xl border border-emerald-200 bg-white p-5 shadow-sm shadow-emerald-100/70">
+        <div className="mb-5 flex flex-col gap-3 xl:flex-row xl:items-start xl:justify-between">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-wide text-emerald-700">Provider connection control room</p>
+            <h2 className="mt-2 text-lg font-semibold text-slate-950">Official and licensed provider readiness</h2>
+            <p className="mt-1 max-w-4xl text-sm leading-6 text-slate-500">
+              Static provider cards show connection readiness, token/security boundaries, sync status previews, and safe next steps. No OAuth, provider sync, webhook subscription, token storage, or adapter execution runs in Alpha.
+            </p>
+          </div>
+          <Badge className="bg-rose-50 text-rose-700 ring-rose-100">Connect and sync disabled</Badge>
+        </div>
+
+        <div className="grid gap-3 xl:grid-cols-2">
+          {providerControlRoomCards.map((provider) => (
+            <article key={provider.provider} className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
+              <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+                <div>
+                  <h3 className="text-base font-semibold text-slate-950">{provider.provider}</h3>
+                  <p className="mt-1 text-sm leading-6 text-slate-600">{provider.role}</p>
+                </div>
+                <Badge className="bg-emerald-50 text-emerald-700 ring-emerald-100">{provider.readiness}</Badge>
+              </div>
+              <div className="mt-4 grid gap-3 md:grid-cols-2">
+                <div className="rounded-2xl border border-slate-200 bg-white p-3">
+                  <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-400">Token/security boundary</p>
+                  <p className="mt-1 text-xs leading-5 text-slate-600">{provider.tokenBoundary}</p>
+                </div>
+                <div className="rounded-2xl border border-slate-200 bg-white p-3">
+                  <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-400">Sync status preview</p>
+                  <p className="mt-1 text-xs leading-5 text-slate-600">{provider.syncStatus}</p>
+                </div>
+              </div>
+              <p className="mt-3 rounded-2xl border border-slate-200 bg-white p-3 text-xs leading-5 text-slate-600">{provider.safeNextStep}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="rounded-3xl border border-amber-200 bg-gradient-to-br from-emerald-50 via-white to-amber-50 p-5 shadow-sm shadow-emerald-100/70">
+        <p className="text-xs font-semibold uppercase tracking-wide text-amber-700">What can the user safely do next?</p>
+        <h2 className="mt-2 text-lg font-semibold text-slate-950">Review integration readiness only</h2>
+        <p className="mt-2 text-sm leading-6 text-slate-600">
+          Safely review required scopes, security boundaries, sync expectations, and provider approval needs. Real provider connections, OAuth, webhooks, syncs, token writes, and licensed adapters remain disabled.
+        </p>
+        <div className="mt-5 flex flex-wrap gap-2" aria-label="Disabled provider connection actions">
+          {disabledProviderActions.map((action) => (
+            <span key={action} aria-disabled="true" className="rounded-full border border-rose-200 bg-rose-50 px-3 py-1 text-xs font-semibold text-rose-700">
+              {action}: disabled
+            </span>
+          ))}
+        </div>
+      </section>
+    </section>
+  );
+}
+
 function ProviderReadinessPanels() {
   return (
     <section className="grid gap-4 lg:grid-cols-2 2xl:grid-cols-4">
-      <DataSourcesPanel title="Official API preview readiness" subtitle="Mock readiness across Instagram Graph API, Meta APIs, owned webhooks, and manual import paths.">
+      <DataSourcesPanel title="Official API connection readiness" subtitle="Mock readiness across Instagram Graph API, Meta APIs, owned webhooks, and manual import paths.">
         <div className="rounded-3xl bg-gradient-to-br from-slate-950 via-slate-900 to-emerald-950 p-5 text-white">
           <div className="mb-4 flex flex-wrap items-center justify-between gap-2">
             <p className="text-xs font-semibold uppercase tracking-wide text-slate-300">Static readiness model</p>
@@ -222,8 +349,8 @@ function ProviderReadinessPanels() {
         <SignalList items={coverageByDomain} />
       </DataSourcesPanel>
 
-      <DataSourcesPanel title="Freshness preview cadence" subtitle="Mock freshness windows only; real provider freshness requires private-beta backend enforcement.">
-        <SignalList items={freshnessSyncCadence} />
+      <DataSourcesPanel title="Token and sync security boundaries" subtitle="Preview-only security and sync controls; no token, webhook, provider request, or cache write exists.">
+        <SignalList items={providerSecurityBoundaries} />
       </DataSourcesPanel>
 
       <DataSourcesPanel title="Permission and scopes placeholder" subtitle="Official scopes only; no private access, fake login automation, or OAuth flow runs in Alpha.">
@@ -377,6 +504,7 @@ export function DataSourcesPage() {
       </section>
 
       <FilterPlaceholderBar />
+      <ProviderControlRoomPreview />
       <ProviderReadinessPanels />
       <DataSourceCardsGrid />
       <LicensedProviderPanel />

@@ -242,6 +242,100 @@ function FilterPlaceholderBar() {
   );
 }
 
+function TopicOpportunityMap() {
+  const topicClusters = [
+    {
+      cluster: "Tutorial authority",
+      opportunity: "High-fit education tags",
+      health: "Healthy",
+      readiness: "Campaign brief ready",
+      risk: "Low review risk",
+      guidance: "Review owned tutorial content alignment before any future approved-source monitoring.",
+      tone: "purple" as HashtagTone,
+    },
+    {
+      cluster: "Commerce discovery",
+      opportunity: "Shoppable story tags",
+      health: "Moderate saturation",
+      readiness: "Trend-readiness preview",
+      risk: "Claims review needed",
+      guidance: "Validate commerce claims and avoid implying unauthorized collection or hidden monitoring.",
+      tone: "green" as HashtagTone,
+    },
+    {
+      cluster: "Regional seasonality",
+      opportunity: "MENA weekend planning",
+      health: "Emerging topic pocket",
+      readiness: "Market review required",
+      risk: "Context-sensitive",
+      guidance: "Route regional tags through analyst review and official/approved-source eligibility checks.",
+      tone: "cyan" as HashtagTone,
+    },
+    {
+      cluster: "Provider-gated discovery",
+      opportunity: "Licensed enrichment only",
+      health: "Unavailable in Alpha",
+      readiness: "Approval required",
+      risk: "Provider/legal gate",
+      guidance: "Keep deeper monitoring disabled until source provenance, rate limits, and provider approval are documented.",
+      tone: "amber" as HashtagTone,
+    },
+  ];
+
+  const disabledActions = ["Start hashtag monitor", "Refresh trend data", "Save opportunity map", "Export tag list", "Activate provider", "Create topic review job"];
+
+  return (
+    <section className="grid gap-4 xl:grid-cols-[1.35fr_0.65fr]">
+      <article className="rounded-[2rem] border border-violet-200 bg-gradient-to-br from-white via-violet-50 to-cyan-50 p-5 shadow-sm shadow-violet-100/70">
+        <div className="flex flex-col gap-3 xl:flex-row xl:items-start xl:justify-between">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-wide text-violet-700">Topic opportunity map</p>
+            <h2 className="mt-2 text-xl font-semibold text-slate-950">Topic clusters, hashtag health, opportunity, and risk</h2>
+            <p className="mt-2 max-w-4xl text-sm leading-6 text-slate-600">
+              Static map cards separate hashtag planning from mentions and alerts. They help teams review topic clusters, health, opportunity/risk posture, trend-readiness, and source eligibility while keeping unauthorized collection, live monitoring, refresh jobs, and provider collection disabled.
+            </p>
+          </div>
+          <Badge className="bg-white text-violet-700 ring-violet-200">Opportunity map only</Badge>
+        </div>
+
+        <div className="mt-5 grid gap-3 md:grid-cols-2">
+          {topicClusters.map((cluster) => (
+            <article key={cluster.cluster} className="rounded-3xl border border-white/80 bg-white/85 p-4 shadow-sm shadow-violet-100/70">
+              <div className="flex flex-wrap items-start justify-between gap-3">
+                <div>
+                  <p className="text-xs font-semibold uppercase tracking-wide text-slate-400">{cluster.cluster}</p>
+                  <h3 className="mt-2 text-base font-semibold text-slate-950">{cluster.opportunity}</h3>
+                </div>
+                <Badge className={toneClasses(cluster.tone)}>{cluster.readiness}</Badge>
+              </div>
+              <div className="mt-4 grid gap-2 md:grid-cols-2">
+                <p className="rounded-2xl border border-slate-100 bg-slate-50 p-3 text-xs leading-5 text-slate-600"><span className="font-semibold text-slate-950">Health:</span> {cluster.health}</p>
+                <p className="rounded-2xl border border-slate-100 bg-slate-50 p-3 text-xs leading-5 text-slate-600"><span className="font-semibold text-slate-950">Risk:</span> {cluster.risk}</p>
+              </div>
+              <p className="mt-3 rounded-2xl border border-violet-100 bg-violet-50 p-3 text-xs leading-5 text-violet-900">{cluster.guidance}</p>
+            </article>
+          ))}
+        </div>
+      </article>
+
+      <article className="rounded-3xl border border-amber-200 bg-gradient-to-br from-amber-50 via-white to-violet-50 p-5 shadow-sm shadow-amber-100/70">
+        <p className="text-xs font-semibold uppercase tracking-wide text-amber-700">What can the user safely review next?</p>
+        <h2 className="mt-2 text-lg font-semibold text-slate-950">Review opportunities, do not monitor tags</h2>
+        <p className="mt-2 text-sm leading-6 text-slate-600">
+          Safely review cluster fit, hashtag health, opportunity/risk, trend-readiness, and source approval notes. Real monitoring, unauthorized collection, refresh, exports, downloads, provider activation, and background jobs remain disabled.
+        </p>
+        <div className="mt-5 flex flex-wrap gap-2" aria-label="Disabled hashtag opportunity actions">
+          {disabledActions.map((action) => (
+            <span key={action} aria-disabled="true" className="rounded-full border border-rose-200 bg-rose-50 px-3 py-1 text-xs font-semibold text-rose-700">
+              {action}: disabled
+            </span>
+          ))}
+        </div>
+      </article>
+    </section>
+  );
+}
+
 function SignalList({ items }: { items: HashtagPanelItem[] }) {
   return (
     <div className="space-y-3">
@@ -465,6 +559,7 @@ export function HashtagIntelligencePage() {
       </section>
 
       <FilterPlaceholderBar />
+      <TopicOpportunityMap />
       <AnalyticsPanels />
       <TopicPlanningWorkspace />
       <HashtagCardsGrid />

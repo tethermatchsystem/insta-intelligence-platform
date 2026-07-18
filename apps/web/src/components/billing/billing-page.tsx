@@ -40,6 +40,53 @@ const alphaBillingSafetyBadges = [
   "Requires official source connection",
 ];
 
+const commercialAdminSummary = [
+  {
+    label: "Billing owner",
+    value: "Finance admin preview",
+    detail: "Static owner label for commercial review. No team role, billing contact, or payment record is saved.",
+    tone: "info" as BillingTone,
+  },
+  {
+    label: "Subscription posture",
+    value: "Private beta plan",
+    detail: "Plan packaging is mock-only and cannot be upgraded, downgraded, renewed, canceled, or enforced from Alpha UI.",
+    tone: "purple" as BillingTone,
+  },
+  {
+    label: "Payment boundary",
+    value: "Processor disconnected",
+    detail: "No checkout, card collection, invoice payment, billing portal, tax calculation, or payment processor session exists.",
+    tone: "warning" as BillingTone,
+  },
+];
+
+const billingUsageMeters = [
+  {
+    label: "Report studio credits",
+    used: "18",
+    limit: "50",
+    percent: 36,
+    note: "Mock entitlement meter for future executive report generation; no quota enforcement runs.",
+  },
+  {
+    label: "Export packages",
+    used: "7",
+    limit: "25",
+    percent: 28,
+    note: "Static packaging meter only; no export files, downloads, or object storage writes exist.",
+  },
+  {
+    label: "Provider review credits",
+    used: "0",
+    limit: "Approval required",
+    percent: 0,
+    note: "Licensed-provider costs remain disabled until procurement, provider approval, and policy review are complete.",
+  },
+];
+
+const disabledBillingAdminActions = ["Upgrade plan", "Open checkout", "Update payment method", "Download invoice", "Apply credits", "Change subscription"];
+
 function Badge({ children, className }: { children: React.ReactNode; className: string }) {
   return <span className={`rounded-full px-3 py-1 text-xs font-semibold ring-1 ${className}`}>{children}</span>;
 }
@@ -69,8 +116,8 @@ function BillingHeader() {
               </Badge>
             ))}
           </div>
-          <p className="text-sm font-semibold uppercase tracking-wide text-cyan-200">Billing preview</p>
-          <h1 className="mt-2 text-4xl font-semibold tracking-tight text-white md:text-5xl">Billing preview</h1>
+          <p className="text-sm font-semibold uppercase tracking-wide text-cyan-200">Subscription, usage, and commercial admin</p>
+          <h1 className="mt-2 text-4xl font-semibold tracking-tight text-white md:text-5xl">Billing and usage admin preview</h1>
           <p className="mt-3 max-w-3xl text-base leading-7 text-slate-300">
             Review mock plan packaging, usage preview, invoice preview, provider credit placeholders, and client/workspace billing planning. No payment method is collected in Alpha and no subscription changes are saved in Alpha.
           </p>
@@ -110,6 +157,72 @@ function KpiCards() {
           <p className="mt-3 text-xs leading-5 text-slate-500">{kpi.description}</p>
         </div>
       ))}
+    </section>
+  );
+}
+
+function CommercialAdminPreview() {
+  return (
+    <section className="grid gap-6 xl:grid-cols-[1.2fr_0.8fr]">
+      <section className="rounded-3xl border border-violet-200 bg-white p-5 shadow-sm shadow-violet-100/70">
+        <div className="mb-5 flex flex-col gap-3 xl:flex-row xl:items-start xl:justify-between">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-wide text-violet-700">Commercial admin workspace</p>
+            <h2 className="mt-2 text-lg font-semibold text-slate-950">Subscription owner, usage posture, and payment boundary</h2>
+            <p className="mt-1 max-w-4xl text-sm leading-6 text-slate-500">
+              Static billing operations cards show who would review the account commercially, what usage meters would mean, and which payment/security controls are intentionally unavailable in Alpha.
+            </p>
+          </div>
+          <Badge className="bg-rose-50 text-rose-700 ring-rose-100">Payment actions disabled</Badge>
+        </div>
+
+        <div className="grid gap-3 lg:grid-cols-3">
+          {commercialAdminSummary.map((item) => (
+            <article key={item.label} className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
+              <p className="text-xs font-semibold uppercase tracking-wide text-slate-400">{item.label}</p>
+              <p className="mt-2 text-lg font-semibold text-slate-950">{item.value}</p>
+              <Badge className={`${toneClasses(item.tone)} mt-3 inline-flex`}>Alpha preview</Badge>
+              <p className="mt-3 text-xs leading-5 text-slate-600">{item.detail}</p>
+            </article>
+          ))}
+        </div>
+
+        <div className="mt-5 grid gap-3 lg:grid-cols-3">
+          {billingUsageMeters.map((meter) => (
+            <article key={meter.label} className="rounded-2xl border border-slate-200 bg-white p-4">
+              <div className="flex items-start justify-between gap-3">
+                <div>
+                  <h3 className="text-sm font-semibold text-slate-950">{meter.label}</h3>
+                  <p className="mt-1 text-xs text-slate-500">{meter.used} of {meter.limit} mock allowance</p>
+                </div>
+                <Badge className="bg-blue-50 text-blue-700 ring-blue-100">{meter.percent}%</Badge>
+              </div>
+              <div className="mt-4 h-2 rounded-full bg-slate-200">
+                <div className="h-2 rounded-full bg-violet-600" style={{ width: `${meter.percent}%` }} />
+              </div>
+              <p className="mt-3 text-xs leading-5 text-slate-500">{meter.note}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="rounded-3xl border border-amber-200 bg-gradient-to-br from-violet-50 via-white to-amber-50 p-5 shadow-sm shadow-amber-100/70">
+        <p className="text-xs font-semibold uppercase tracking-wide text-amber-700">What can the user safely do next?</p>
+        <h2 className="mt-2 text-lg font-semibold text-slate-950">Review commercial assumptions only</h2>
+        <p className="mt-2 text-sm leading-6 text-slate-600">
+          Safely review plan packaging, owner responsibilities, mock usage meters, invoice placeholders, and procurement/security notes. Real checkout, payment updates, invoice downloads, billing portals, and subscription writes remain disabled.
+        </p>
+        <div className="mt-5 flex flex-wrap gap-2" aria-label="Disabled billing administration actions">
+          {disabledBillingAdminActions.map((action) => (
+            <span key={action} aria-disabled="true" className="rounded-full border border-rose-200 bg-rose-50 px-3 py-1 text-xs font-semibold text-rose-700">
+              {action}: disabled
+            </span>
+          ))}
+        </div>
+        <div className="mt-5 rounded-2xl border border-amber-200 bg-white/70 p-4 text-xs leading-5 text-amber-900">
+          No payment processor, checkout session, invoice generator, customer portal, tax engine, subscription backend, or provider billing integration is connected in Alpha.
+        </div>
+      </section>
     </section>
   );
 }
@@ -197,8 +310,8 @@ function InvoiceCards() {
     <section className="space-y-4">
       <div className="flex flex-col gap-3 lg:flex-row lg:items-end lg:justify-between">
         <div>
-          <p className="text-xs font-semibold uppercase tracking-wide text-slate-400">Invoice previews</p>
-          <h2 className="mt-1 text-xl font-semibold text-slate-950">Static invoice and payment records</h2>
+          <p className="text-xs font-semibold uppercase tracking-wide text-slate-400">Invoice and payment placeholders</p>
+          <h2 className="mt-1 text-xl font-semibold text-slate-950">Static invoice records and payment boundary</h2>
           <p className="mt-1 max-w-3xl text-sm leading-6 text-slate-500">
             Mock invoice cards for review only. No invoice is generated or downloaded in Alpha, and no payment processor is connected.
           </p>
@@ -345,6 +458,7 @@ export function BillingPage() {
     <div className="space-y-8">
       <BillingHeader />
       <KpiCards />
+      <CommercialAdminPreview />
       <CurrentPlanPanel />
       <UsageQuotaPanels />
       <InvoiceCards />

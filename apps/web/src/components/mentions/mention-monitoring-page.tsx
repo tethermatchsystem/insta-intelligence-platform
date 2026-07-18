@@ -252,6 +252,100 @@ function FilterPlaceholderBar() {
   );
 }
 
+function BrandSignalInbox() {
+  const inboxQueues = [
+    {
+      queue: "External praise",
+      source: "Public/owned mention preview",
+      sentiment: "Positive",
+      risk: "Low",
+      owner: "Community reviewer",
+      guidance: "Review UGC opportunity and response tone; no reply is sent in Alpha.",
+      tone: "green" as MentionTone,
+    },
+    {
+      queue: "Product question",
+      source: "Approved-source placeholder",
+      sentiment: "Mixed",
+      risk: "Medium",
+      owner: "Support reviewer",
+      guidance: "Review handoff notes without creating tickets, notifications, or response jobs.",
+      tone: "blue" as MentionTone,
+    },
+    {
+      queue: "Brand-safety hold",
+      source: "Provider-gated context",
+      sentiment: "Review required",
+      risk: "High",
+      owner: "Compliance reviewer",
+      guidance: "Hold until source provenance and policy posture are verified. No escalation delivery runs.",
+      tone: "rose" as MentionTone,
+    },
+    {
+      queue: "Campaign opportunity",
+      source: "Owned/public planning signal",
+      sentiment: "Positive",
+      risk: "Low",
+      owner: "Campaign reviewer",
+      guidance: "Review campaign fit and owner assignment; no workflow or outreach is created.",
+      tone: "purple" as MentionTone,
+    },
+  ];
+
+  const disabledActions = ["Send response", "Escalate mention", "Create support ticket", "Assign owner", "Export inbox", "Start mention monitor"];
+
+  return (
+    <section className="grid gap-4 xl:grid-cols-[1.35fr_0.65fr]">
+      <article className="rounded-[2rem] border border-emerald-200 bg-gradient-to-br from-white via-emerald-50 to-cyan-50 p-5 shadow-sm shadow-emerald-100/70">
+        <div className="flex flex-col gap-3 xl:flex-row xl:items-start xl:justify-between">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-wide text-emerald-700">Brand-signal inbox</p>
+            <h2 className="mt-2 text-xl font-semibold text-slate-950">External mention queues with source, sentiment, risk, and owner guidance</h2>
+            <p className="mt-2 max-w-4xl text-sm leading-6 text-slate-600">
+              This inbox frames mentions as external brand signals, not owned account comments moderation. Static queues show source/provenance labels, sentiment/risk state, owner review guidance, and response-readiness notes without live monitoring, private DM access, scraping, or escalation delivery.
+            </p>
+          </div>
+          <Badge className="bg-white text-emerald-700 ring-emerald-200">Inbox preview only</Badge>
+        </div>
+
+        <div className="mt-5 grid gap-3 md:grid-cols-2">
+          {inboxQueues.map((queue) => (
+            <article key={queue.queue} className="rounded-3xl border border-white/80 bg-white/85 p-4 shadow-sm shadow-emerald-100/70">
+              <div className="flex flex-wrap items-start justify-between gap-3">
+                <div>
+                  <p className="text-xs font-semibold uppercase tracking-wide text-slate-400">{queue.queue}</p>
+                  <h3 className="mt-2 text-base font-semibold text-slate-950">{queue.source}</h3>
+                </div>
+                <Badge className={toneClasses(queue.tone)}>{queue.sentiment}</Badge>
+              </div>
+              <div className="mt-4 grid gap-2 md:grid-cols-2">
+                <p className="rounded-2xl border border-slate-100 bg-slate-50 p-3 text-xs leading-5 text-slate-600"><span className="font-semibold text-slate-950">Risk:</span> {queue.risk}</p>
+                <p className="rounded-2xl border border-slate-100 bg-slate-50 p-3 text-xs leading-5 text-slate-600"><span className="font-semibold text-slate-950">Owner:</span> {queue.owner}</p>
+              </div>
+              <p className="mt-3 rounded-2xl border border-emerald-100 bg-emerald-50 p-3 text-xs leading-5 text-emerald-900">{queue.guidance}</p>
+            </article>
+          ))}
+        </div>
+      </article>
+
+      <article className="rounded-3xl border border-amber-200 bg-gradient-to-br from-amber-50 via-white to-emerald-50 p-5 shadow-sm shadow-amber-100/70">
+        <p className="text-xs font-semibold uppercase tracking-wide text-amber-700">What can the user safely review next?</p>
+        <h2 className="mt-2 text-lg font-semibold text-slate-950">Review brand-signal queues, do not respond or escalate</h2>
+        <p className="mt-2 text-sm leading-6 text-slate-600">
+          Safely review source/provenance, sentiment, risk state, queue ownership, and response guidance. Real response sending, escalation routing, ticket creation, owner assignment, exports, downloads, provider enrichment, and mention monitoring remain disabled.
+        </p>
+        <div className="mt-5 flex flex-wrap gap-2" aria-label="Disabled mention inbox actions">
+          {disabledActions.map((action) => (
+            <span key={action} aria-disabled="true" className="rounded-full border border-rose-200 bg-rose-50 px-3 py-1 text-xs font-semibold text-rose-700">
+              {action}: disabled
+            </span>
+          ))}
+        </div>
+      </article>
+    </section>
+  );
+}
+
 function SignalList({ items }: { items: MentionPanelItem[] }) {
   return (
     <div className="space-y-3">
@@ -476,6 +570,7 @@ export function MentionMonitoringPage() {
       </section>
 
       <FilterPlaceholderBar />
+      <BrandSignalInbox />
       <IntelligencePanels />
       <MentionTriageWorkspace />
       <MentionCardsStream />

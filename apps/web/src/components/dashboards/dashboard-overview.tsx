@@ -1,3 +1,4 @@
+import Link from "next/link";
 import {
   anomalyHighlights,
   complianceCoverage,
@@ -31,6 +32,17 @@ const dashboardSafetyPills = [
   "No backend action runs from this page",
   "Requires official source connection",
   "Requires provider approval where applicable",
+];
+
+const dashboardJourneyLinks = [
+  { label: "Review accounts", href: "/accounts", detail: "Open the connected-account preview hub." },
+  { label: "Open creators", href: "/creators", detail: "Review creator discovery planning." },
+  { label: "Review competitors", href: "/competitors", detail: "Continue to public benchmark preview." },
+  { label: "Explore hashtags", href: "/hashtags", detail: "Inspect public topic planning." },
+  { label: "Open mention triage", href: "/mentions", detail: "Inspect owned/public mention planning." },
+  { label: "Review alert previews", href: "/alerts", detail: "Continue to static alert-rule review." },
+  { label: "Open reports", href: "/reports", detail: "Move from insights to report templates." },
+  { label: "Review exports", href: "/exports", detail: "Check governed output packaging previews." },
 ];
 
 function DashboardKpiCard({ label, value, trend, tone }: { label: string; value: string; trend: string; tone: string }) {
@@ -92,6 +104,26 @@ export function DashboardOverview() {
           </div>
         </div>
       </header>
+
+      <section className="rounded-3xl border border-cyan-200/30 bg-slate-950/70 p-5 shadow-2xl shadow-slate-950/10">
+        <div className="flex flex-col gap-4 xl:flex-row xl:items-start xl:justify-between">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-cyan-200">Continue Alpha review</p>
+            <h2 className="mt-2 text-lg font-semibold text-white">Choose the next preview route</h2>
+            <p className="mt-2 max-w-3xl text-sm leading-6 text-slate-300">
+              These are normal route links only. They do not run live queries, provider sync, alerts, reports, exports, or backend actions.
+            </p>
+          </div>
+          <div className="grid gap-2 sm:grid-cols-2 xl:w-[34rem]">
+            {dashboardJourneyLinks.map((link) => (
+              <Link key={link.href} href={link.href} className="rounded-2xl border border-white/10 bg-white/10 p-3 text-sm text-slate-200 transition hover:bg-white/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300">
+                <span className="block font-semibold text-white">{link.label}</span>
+                <span className="mt-1 block text-xs leading-5 text-slate-400">{link.detail}</span>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
 
       <section className="grid gap-4 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-6">
         {dashboardKpis.map((kpi) => (

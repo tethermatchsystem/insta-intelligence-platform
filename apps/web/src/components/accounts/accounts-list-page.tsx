@@ -63,6 +63,8 @@ const accountSafetyBoundaries = [
   "No scraping, private account access, hidden surveillance, or anti-bot bypass",
 ];
 
+const demoAccountHandle = "@examplebrand";
+
 function AccountKpiCard({ label, value, detail, tone }: { label: string; value: string; detail: string; tone: string }) {
   return (
     <Card className="rounded-3xl border-slate-200 bg-white/95 py-0 shadow-sm shadow-slate-200/70 transition hover:-translate-y-0.5 hover:shadow-md hover:shadow-slate-200/80">
@@ -190,10 +192,32 @@ export function AccountsListPage() {
               </TableRow>
             </TableHeader>
             <TableBody className="divide-y divide-slate-100 bg-white">
-              {accountRows.map((row) => (
+              {accountRows.map((row) => {
+                const isDemoAccount = row.handle === demoAccountHandle;
+
+                return (
                 <TableRow key={row.handle} className="hover:bg-slate-50/70">
-                  <TableCell className="px-5 py-4 font-medium text-slate-950">{row.account}</TableCell>
-                  <TableCell className="px-5 py-4 text-slate-600">{row.handle}</TableCell>
+                  <TableCell className="px-5 py-4 font-medium text-slate-950">
+                    {isDemoAccount ? (
+                      <Link href="/accounts/demo-account" className="underline decoration-slate-300 underline-offset-4 hover:text-indigo-700 hover:decoration-indigo-500" aria-label="Open Example Brand demo account dossier preview">
+                        {row.account}
+                      </Link>
+                    ) : (
+                      <div className="space-y-1">
+                        <p>{row.account}</p>
+                        <p className="text-xs font-normal text-slate-400">Static row only · no dossier route in Alpha</p>
+                      </div>
+                    )}
+                  </TableCell>
+                  <TableCell className="px-5 py-4 text-slate-600">
+                    {isDemoAccount ? (
+                      <Link href="/accounts/demo-account" className="underline decoration-slate-200 underline-offset-4 hover:text-indigo-700 hover:decoration-indigo-500" aria-label="Open @examplebrand demo account dossier preview">
+                        {row.handle}
+                      </Link>
+                    ) : (
+                      <span>{row.handle}</span>
+                    )}
+                  </TableCell>
                   <TableCell className="px-5 py-4 text-slate-600">{row.type}</TableCell>
                   <TableCell className="px-5 py-4 text-slate-600">{row.followers}</TableCell>
                   <TableCell className="px-5 py-4 text-slate-600">{row.engagement}</TableCell>
@@ -207,7 +231,8 @@ export function AccountsListPage() {
                   </TableCell>
                   <TableCell className="px-5 py-4"><Badge variant="outline" className={`rounded-full px-2.5 py-1 text-xs font-semibold ring-1 ${statusClasses(row.status)}`}>{row.status}</Badge></TableCell>
                 </TableRow>
-              ))}
+                );
+              })}
             </TableBody>
           </Table>
         </div>

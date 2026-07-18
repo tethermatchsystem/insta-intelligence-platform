@@ -1,3 +1,4 @@
+import { AccountContextNavigation } from "@/components/accounts/account-context-navigation";
 import { EngagementAnalyticsPanels } from "@/components/engagement/engagement-analytics-panels";
 import { EngagementIntelligenceCards } from "@/components/engagement/engagement-intelligence-cards";
 import { EngagementIntelligenceTable } from "@/components/data-tables/engagement-intelligence-table";
@@ -267,6 +268,7 @@ export function AccountEngagementPage() {
   return (
     <div className="space-y-6">
       <EngagementHeader />
+      <AccountContextNavigation activeLabel="Engagement" />
 
       <section className="grid gap-4 lg:grid-cols-3">
         {engagementOperationalCards.map((card) => (

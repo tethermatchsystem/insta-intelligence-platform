@@ -93,7 +93,7 @@ function adVisibilityClasses(visibility: PublicAdVisibility) {
 }
 
 function Badge({ children, className }: { children: React.ReactNode; className: string }) {
-  return <span className={`rounded-full px-3 py-1 text-xs font-semibold ring-1 ${className}`}>{children}</span>;
+  return <span className={`inline-flex h-auto max-w-full items-start justify-start whitespace-normal break-words rounded-full px-3 py-1 text-left text-xs font-semibold leading-4 ring-1 ${className}`}>{children}</span>;
 }
 
 function CompetitorsPanel({ title, subtitle, children }: { title: string; subtitle?: string; children: React.ReactNode }) {
@@ -193,6 +193,111 @@ function FilterPlaceholderBar() {
       <p className="mt-3 rounded-2xl border border-blue-100 bg-blue-50 px-3 py-2 text-xs leading-5 text-blue-900">
         Preview filters only: no competitor monitoring runs in Alpha, no provider request is sent, and no backend action runs from this page.
       </p>
+    </section>
+  );
+}
+
+function CompetitorBenchmarkCommandBoard() {
+  const benchmarkLanes = [
+    {
+      lane: "Positioning gap",
+      metric: "Owned vs peer narrative",
+      detail: "Compare category positioning, value props, and public profile posture with mock/public/approved-source context only.",
+      tone: "blue" as CompetitorTone,
+    },
+    {
+      lane: "Content cadence",
+      metric: "+4.2 posts/week",
+      detail: "Static cadence comparison for planning; no live competitor refresh, scraping, or background monitor is running.",
+      tone: "cyan" as CompetitorTone,
+    },
+    {
+      lane: "Public ads signal",
+      metric: "Meta Ad Library style",
+      detail: "Public ad visibility preview is framed for allowed-source review and does not collect hidden campaign data.",
+      tone: "green" as CompetitorTone,
+    },
+    {
+      lane: "Enrichment gate",
+      metric: "Licensed-provider only",
+      detail: "Deeper competitor enrichment remains unavailable until legal, provenance, rate-limit, and provider approval checks are complete.",
+      tone: "amber" as CompetitorTone,
+    },
+  ];
+
+  const positioningRows = [
+    { axis: "Message territory", owned: "Performance-led intelligence", peer: "Creator commerce storytelling", action: "Review category narrative gaps before campaign planning." },
+    { axis: "Content proof", owned: "Connected account reporting", peer: "Public case-study posts", action: "Compare public/allowed content themes only." },
+    { axis: "Ad visibility", owned: "Owned campaign preview", peer: "Public Ad Library placeholder", action: "Use official public ad archive paths where available." },
+  ];
+
+  const disabledActions = ["Start competitor tracking", "Add hidden monitor", "Refresh competitor data", "Export benchmark", "Activate provider", "Save peer-set changes"];
+
+  return (
+    <section className="space-y-4">
+      <section className="grid gap-4 xl:grid-cols-[1.25fr_0.75fr]">
+        <article className="rounded-[2rem] border border-blue-200 bg-gradient-to-br from-white via-blue-50 to-cyan-50 p-5 shadow-sm shadow-blue-100/70">
+          <div className="flex flex-col gap-3 xl:flex-row xl:items-start xl:justify-between">
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-blue-700">Competitor benchmark command board</p>
+              <h2 className="mt-2 text-xl font-semibold text-slate-950">Benchmark lanes for positioning, cadence, and public ads signals</h2>
+              <p className="mt-2 max-w-4xl text-sm leading-6 text-slate-600">
+                This board separates competitor intelligence from creator discovery: it compares peer positioning, public/allowed content cadence, and Meta Ad Library-style visibility without private tracking, hidden surveillance, scraping, or live provider collection.
+              </p>
+            </div>
+            <Badge className="bg-white text-blue-700 ring-blue-200">Benchmark review only</Badge>
+          </div>
+          <div className="mt-5 grid gap-3 md:grid-cols-2 2xl:grid-cols-4">
+            {benchmarkLanes.map((lane) => (
+              <article key={lane.lane} className="rounded-3xl border border-white/80 bg-white/85 p-4 shadow-sm shadow-blue-100/70">
+                <div className="flex flex-wrap items-start justify-between gap-3">
+                  <p className="text-sm font-semibold text-slate-950">{lane.lane}</p>
+                  <Badge className={toneClasses(lane.tone)}>{lane.metric}</Badge>
+                </div>
+                <p className="mt-3 text-xs leading-5 text-slate-600">{lane.detail}</p>
+              </article>
+            ))}
+          </div>
+        </article>
+
+        <article className="rounded-3xl border border-amber-200 bg-gradient-to-br from-amber-50 via-white to-blue-50 p-5 shadow-sm shadow-amber-100/70">
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-amber-700">What can the user safely review next?</p>
+          <h2 className="mt-2 text-lg font-semibold text-slate-950">Review peer assumptions, do not track competitors</h2>
+          <p className="mt-2 text-sm leading-6 text-slate-600">
+            Safely review benchmark lanes, public/allowed-source notes, positioning gaps, content cadence, and public ads signal previews. Real tracking, hidden monitoring, scraping, refresh jobs, exports, downloads, provider activation, and peer-set writes remain disabled.
+          </p>
+          <div className="mt-5 flex flex-wrap gap-2" aria-label="Disabled competitor benchmark actions">
+            {disabledActions.map((action) => (
+              <span key={action} aria-disabled="true" className="rounded-full border border-rose-200 bg-rose-50 px-3 py-1 text-xs font-semibold text-rose-700">
+                {action}: disabled
+              </span>
+            ))}
+          </div>
+        </article>
+      </section>
+
+      <section className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm shadow-blue-100/70">
+        <div className="mb-4 flex flex-col gap-3 xl:flex-row xl:items-start xl:justify-between">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-blue-700">Positioning comparison</p>
+            <h2 className="mt-2 text-lg font-semibold text-slate-950">Owned brand vs public peer narrative</h2>
+            <p className="mt-1 max-w-4xl text-sm leading-6 text-slate-500">Static comparison rows support benchmark decisions only. They do not imply competitor scraping, credential access, hidden surveillance, or private account access.</p>
+          </div>
+          <Badge className="bg-cyan-50 text-cyan-700 ring-cyan-100">Public/allowed-source framing</Badge>
+        </div>
+        <div className="grid gap-3 lg:grid-cols-3">
+          {positioningRows.map((row) => (
+            <article key={row.axis} className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
+              <p className="text-xs font-semibold uppercase tracking-wide text-slate-400">{row.axis}</p>
+              <div className="mt-3 grid gap-2 text-xs leading-5 text-slate-600">
+                <p><span className="font-semibold text-slate-950">Owned:</span> {row.owned}</p>
+                <p><span className="font-semibold text-slate-950">Peer:</span> {row.peer}</p>
+                <p className="rounded-xl border border-blue-100 bg-blue-50 p-2 text-blue-900">{row.action}</p>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
     </section>
   );
 }
@@ -324,14 +429,14 @@ function CompetitorCardItem({ competitor }: { competitor: CompetitorCard }) {
   return (
     <article className="relative overflow-hidden rounded-3xl border border-slate-200 bg-white p-5 shadow-sm shadow-blue-100/70">
       <div className="absolute inset-y-0 left-0 w-1 bg-gradient-to-b from-blue-500 via-cyan-400 to-emerald-400" />
-      <div className="flex items-start justify-between gap-4">
-        <div className="flex gap-4">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+        <div className="flex min-w-0 gap-4">
           <div className={`grid h-14 w-14 shrink-0 place-items-center rounded-2xl text-base font-semibold ring-1 ${toneClasses(competitor.tone)}`}>
             {competitor.logoInitials}
           </div>
-          <div>
-            <h3 className="text-lg font-semibold text-slate-950">{competitor.name}</h3>
-            <p className="mt-1 text-sm text-slate-500">{competitor.handle}</p>
+          <div className="min-w-0">
+            <h3 className="break-words text-lg font-semibold text-slate-950">{competitor.name}</h3>
+            <p className="mt-1 break-words text-sm text-slate-500">{competitor.handle}</p>
           </div>
         </div>
         <Badge className={statusClasses(competitor.status)}>{competitorStatusLabels[competitor.status]}</Badge>
@@ -343,7 +448,7 @@ function CompetitorCardItem({ competitor }: { competitor: CompetitorCard }) {
         <Badge className={adVisibilityClasses(competitor.adVisibility)}>{adVisibilityLabels[competitor.adVisibility]}</Badge>
       </div>
 
-      <div className="mt-4 grid grid-cols-3 gap-3">
+      <div className="mt-4 grid gap-3 sm:grid-cols-3 2xl:grid-cols-1">
         <div className="rounded-2xl border border-slate-100 bg-slate-50 p-3">
           <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-400">Audience preview</p>
           <p className="mt-1 text-sm font-semibold text-slate-950">{competitor.audienceSizeEstimate}</p>
@@ -467,6 +572,7 @@ export function CompetitorIntelligencePage() {
       </section>
 
       <FilterPlaceholderBar />
+      <CompetitorBenchmarkCommandBoard />
       <PeerSetWorkspace />
       <BenchmarkPanels />
       <CompetitorCardsGrid />

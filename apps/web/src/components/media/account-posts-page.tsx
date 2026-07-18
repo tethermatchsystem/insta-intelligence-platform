@@ -1,3 +1,4 @@
+import { AccountContextNavigation } from "@/components/accounts/account-context-navigation";
 import {
   accountPostConfidenceLabels,
   accountPostFilters,
@@ -404,6 +405,7 @@ export function AccountPostsPage() {
   return (
     <div className="space-y-6">
       <PostsHeader />
+      <AccountContextNavigation activeLabel="Posts" />
 
       <section className="grid gap-4 lg:grid-cols-3">
         {postOperationalCards.map((card) => (

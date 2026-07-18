@@ -1,7 +1,7 @@
+import Link from "next/link";
 import { ExportCenterTable } from "@/components/data-tables/export-center-table";
 import {
   deliveryAuditPreview,
-  deliveryReadiness,
   exportCards,
   exportComplianceNotice,
   exportComplianceQueue,
@@ -88,6 +88,67 @@ const alphaExportSafetyBadges = [
   "Requires provider approval where applicable",
 ];
 
+const exportPackagingReadiness: ExportPanelItem[] = [
+  {
+    id: "package-manifest",
+    title: "Package manifest readiness",
+    value: "Mock staged",
+    detail: "Static package manifest for selected fields, source labels, freshness labels, and policy badges. No object storage or file is created.",
+    tone: "blue",
+  },
+  {
+    id: "destination-approval",
+    title: "Destination approval",
+    value: "Review required",
+    detail: "Delivery destination, recipient, and approval state are preview labels only; no delivery, email, webhook, or download action runs.",
+    tone: "amber",
+  },
+  {
+    id: "licensed-payload-blocked",
+    title: "Licensed-provider payloads",
+    value: "Disabled",
+    detail: "Licensed-provider-only enrichment packages require approval and remain disabled by default in Alpha.",
+    tone: "rose",
+  },
+];
+
+const exportDeliveryQueue = [
+  {
+    packageName: "Audience health CSV package",
+    packageType: "CSV dataset",
+    destination: "Workspace analyst review",
+    fileFormat: "CSV preview",
+    approvalState: "Source review needed",
+    deliveryStatus: "Queued mock only",
+    safeNextStep: "Review fields, policy labels, and intended destination before any future export job is designed.",
+  },
+  {
+    packageName: "Executive ZIP evidence bundle",
+    packageType: "ZIP bundle",
+    destination: "Client success handoff",
+    fileFormat: "PDF + JSON manifest preview",
+    approvalState: "Compliance approval blocked",
+    deliveryStatus: "Delivery disabled",
+    safeNextStep: "Confirm audience, retention, and source provenance requirements; do not generate or download files in Alpha.",
+  },
+  {
+    packageName: "Ad Library audit package",
+    packageType: "Audit delivery",
+    destination: "Compliance reviewer",
+    fileFormat: "JSON package preview",
+    approvalState: "Mock approved for review",
+    deliveryStatus: "Static delivery placeholder",
+    safeNextStep: "Validate official-source boundaries and audit fields before future backend packaging work.",
+  },
+];
+
+const disabledExportQueueActions = ["Build export", "Download file", "Send delivery", "Write to storage", "Create signed URL", "Run scheduled export"];
+
+const exportOutputLinks = [
+  { label: "Review report templates", href: "/reports", detail: "Return to report previews before packaging decisions." },
+  { label: "Return to dashboard", href: "/dashboard", detail: "Back to the workspace intelligence overview." },
+];
+
 function Badge({ children, className }: { children: React.ReactNode; className: string }) {
   return <span className={`rounded-full px-3 py-1 text-xs font-semibold ring-1 ${className}`}>{children}</span>;
 }
@@ -129,7 +190,7 @@ function ExportsHeader() {
             <Badge className="bg-cyan-400/10 text-cyan-100 ring-cyan-300/20">Static {exportsProfile.freshnessBadge}</Badge>
             <Badge className="bg-slate-100/10 text-slate-200 ring-white/15">{exportsProfile.integrationBadge}</Badge>
           </div>
-          <p className="text-sm font-semibold uppercase tracking-wide text-cyan-200">Audit-ready data delivery</p>
+          <p className="text-sm font-semibold uppercase tracking-wide text-cyan-200">Export packaging / delivery queue</p>
           <h1 className="mt-2 text-4xl font-semibold tracking-tight text-white md:text-5xl">{exportsProfile.title}</h1>
           <p className="mt-3 max-w-3xl text-base leading-7 text-slate-300">{exportsProfile.description}</p>
           <div className="mt-5 flex flex-wrap gap-2">
@@ -143,7 +204,7 @@ function ExportsHeader() {
         <div className="rounded-3xl border border-white/10 bg-white/5 p-4 text-sm leading-6 text-slate-300 xl:w-[31rem]">
           <p className="font-semibold text-white">Alpha export boundary</p>
           <p className="mt-1">
-            Preview-only export packaging for CSV, JSON, executive bundles, audit placeholders, and licensed-provider placeholders only.
+            Preview-only export packaging for manifests, destinations, approval states, file formats, delivery status labels, and licensed-provider placeholders only.
           </p>
           <div className="mt-4 grid gap-2 sm:grid-cols-2">
             <span className="rounded-2xl border border-white/10 bg-slate-950/40 p-3 text-xs font-medium text-slate-200">Download disabled in Alpha</span>
@@ -199,10 +260,100 @@ function SignalList({ items }: { items: ExportPanelItem[] }) {
   );
 }
 
+function ExportPackagingQueuePreview() {
+  return (
+    <section className="grid gap-6 xl:grid-cols-[1.25fr_0.75fr]">
+      <section className="rounded-3xl border border-cyan-200 bg-white p-5 shadow-sm shadow-cyan-100/70">
+        <div className="mb-5 flex flex-col gap-3 xl:flex-row xl:items-start xl:justify-between">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-wide text-cyan-700">Packaging and delivery queue</p>
+            <h2 className="mt-2 text-lg font-semibold text-slate-950">Mock export packages awaiting approval</h2>
+            <p className="mt-1 max-w-4xl text-sm leading-6 text-slate-500">
+              Static queue rows show package type, destination readiness, file format, approval state, and delivery status. No export package, download, signed URL, delivery, or storage write is created in Alpha.
+            </p>
+          </div>
+          <Badge className="bg-rose-50 text-rose-700 ring-rose-100">Downloads disabled</Badge>
+        </div>
+
+        <div className="space-y-3">
+          {exportDeliveryQueue.map((item) => (
+            <article key={item.packageName} className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
+              <div className="flex flex-col gap-3 lg:flex-row lg:items-start lg:justify-between">
+                <div>
+                  <h3 className="text-base font-semibold text-slate-950">{item.packageName}</h3>
+                  <p className="mt-1 text-sm leading-6 text-slate-600">{item.safeNextStep}</p>
+                </div>
+                <Badge className="bg-cyan-50 text-cyan-700 ring-cyan-100">{item.deliveryStatus}</Badge>
+              </div>
+              <div className="mt-4 grid gap-3 md:grid-cols-4">
+                <div className="rounded-2xl border border-slate-200 bg-white p-3">
+                  <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-400">Package type</p>
+                  <p className="mt-1 text-xs leading-5 text-slate-600">{item.packageType}</p>
+                </div>
+                <div className="rounded-2xl border border-slate-200 bg-white p-3">
+                  <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-400">Destination</p>
+                  <p className="mt-1 text-xs leading-5 text-slate-600">{item.destination}</p>
+                </div>
+                <div className="rounded-2xl border border-slate-200 bg-white p-3">
+                  <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-400">File format</p>
+                  <p className="mt-1 text-xs leading-5 text-slate-600">{item.fileFormat}</p>
+                </div>
+                <div className="rounded-2xl border border-slate-200 bg-white p-3">
+                  <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-400">Approval state</p>
+                  <p className="mt-1 text-xs leading-5 text-slate-600">{item.approvalState}</p>
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="rounded-3xl border border-amber-200 bg-gradient-to-br from-cyan-50 via-white to-amber-50 p-5 shadow-sm shadow-cyan-100/70">
+        <p className="text-xs font-semibold uppercase tracking-wide text-amber-700">What can the user safely do next?</p>
+        <h2 className="mt-2 text-lg font-semibold text-slate-950">Review package readiness, not files</h2>
+        <p className="mt-2 text-sm leading-6 text-slate-600">
+          Safely review fields, policy labels, destination intent, approval state, and delivery readiness. Real exports, downloads, object storage writes, signed URLs, and scheduled delivery remain disabled.
+        </p>
+        <div className="mt-5 flex flex-wrap gap-2" aria-label="Disabled export delivery actions">
+          {disabledExportQueueActions.map((action) => (
+            <span key={action} aria-disabled="true" className="rounded-full border border-rose-200 bg-rose-50 px-3 py-1 text-xs font-semibold text-rose-700">
+              {action}: disabled
+            </span>
+          ))}
+        </div>
+      </section>
+    </section>
+  );
+}
+
+function ExportOutputJourney() {
+  return (
+    <section className="rounded-3xl border border-cyan-200 bg-gradient-to-br from-cyan-50 via-white to-violet-50 p-5 shadow-sm shadow-cyan-100/70">
+      <div className="flex flex-col gap-4 xl:flex-row xl:items-start xl:justify-between">
+        <div>
+          <p className="text-xs font-semibold uppercase tracking-wide text-cyan-700">Output journey</p>
+          <h2 className="mt-2 text-lg font-semibold text-slate-950">Exports package reviewed outputs; reports stay template previews</h2>
+          <p className="mt-2 max-w-4xl text-sm leading-6 text-slate-600">
+            Use these links to move between existing preview routes only. They do not build files, create signed URLs, download packages, send deliveries, generate reports, or run backend jobs.
+          </p>
+        </div>
+        <div className="grid gap-2 sm:grid-cols-2 xl:w-[34rem]">
+          {exportOutputLinks.map((link) => (
+            <Link key={link.href} href={link.href} className="rounded-2xl border border-cyan-100 bg-white p-3 text-sm text-slate-600 transition hover:border-cyan-200 hover:bg-cyan-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400">
+              <span className="block font-semibold text-slate-950">{link.label}</span>
+              <span className="mt-1 block text-xs leading-5 text-slate-500">{link.detail}</span>
+            </Link>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function ExportPanels() {
   return (
     <section className="grid gap-4 lg:grid-cols-2 2xl:grid-cols-4">
-      <ExportsPanel title="Scheduled export preview" subtitle="Export jobs require backend; this is a static cadence placeholder only.">
+      <ExportsPanel title="Delivery queue cadence" subtitle="Queue cadence placeholder only; export jobs, storage writes, downloads, and delivery require backend and remain disabled.">
         <div className="rounded-3xl bg-gradient-to-br from-slate-950 via-slate-900 to-cyan-950 p-5 text-white">
           <div className="mb-4 flex flex-wrap items-center justify-between gap-2">
             <p className="text-xs font-semibold uppercase tracking-wide text-slate-300">Static schedule model</p>
@@ -222,12 +373,12 @@ function ExportPanels() {
         </div>
       </ExportsPanel>
 
-      <ExportsPanel title="Preview-only file format mix" subtitle="CSV, JSON, executive bundle, and audit package placeholders with no file creation.">
+      <ExportsPanel title="Package format mix" subtitle="CSV, JSON, executive bundle, and audit package placeholders with no file creation.">
         <SignalList items={exportFormatMix} />
       </ExportsPanel>
 
-      <ExportsPanel title="Delivery preview readiness" subtitle="Mock stakeholder delivery status; export jobs require backend and no delivery is sent.">
-        <SignalList items={deliveryReadiness} />
+      <ExportsPanel title="Package readiness gates" subtitle="Manifest, destination, approval, and provider payload readiness with no file creation.">
+        <SignalList items={exportPackagingReadiness} />
       </ExportsPanel>
 
       <ExportsPanel title="Compliance review queue" subtitle="Source, policy, and audit-readiness review placeholders with no audit write.">
@@ -413,6 +564,8 @@ export function ExportsPage() {
       </section>
 
       <FilterPlaceholderBar />
+      <ExportOutputJourney />
+      <ExportPackagingQueuePreview />
       <ExportPanels />
       <ExportCardsGrid />
       <DeliveryAuditPanel />
